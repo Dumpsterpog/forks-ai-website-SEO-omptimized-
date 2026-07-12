@@ -1,26 +1,29 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Brand tokens — ported verbatim from the old app's src/index.css @theme
+   block, which is the authoritative Tailwind v4 config (tailwind.config.js
+   is legacy and unused under v4 without an explicit @config directive).
+   Fonts are self-hosted via next/font instead of a Google Fonts <link>. */
+@theme {
+  --color-background: #f6f7f9;
+  --color-foreground: #16181d;
+  --color-accent: #00e0ff;
+  --color-bg: #eeeee8;
+  --color-ink: #111111;
+  --color-yellow: #f0d44a;
+  --color-green: #5cb85c;
+  --color-muted: #555555;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-mono: var(--font-jetbrains), monospace;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* SAGE — used elsewhere in the FORKSAI brand (dashboard), kept for parity */
+  --color-sage: #8fba55;
+  --color-sage-hover: #9fca63;
+  --color-sage-dim: rgba(143, 186, 85, 0.08);
+  --color-sage-border: rgba(143, 186, 85, 0.2);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
 }
