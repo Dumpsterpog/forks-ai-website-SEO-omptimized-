@@ -1,5 +1,7 @@
 "use client";
 
+import { goToDashboard } from "@/lib/goToDashboard";
+
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { onAuthStateChanged } from "firebase/auth";
@@ -109,7 +111,7 @@ export default function LandingPage() {
     const unsub = onAuthStateChanged(auth, (user) => {
       // Cross-zone hard navigation: /dashboard is served by the existing
       // Vite app via the multi-zone fallback rewrite, not this Next.js app.
-      if (user) window.location.href = "/dashboard";
+      if (user) goToDashboard();
     });
     return unsub;
   }, []);
@@ -178,7 +180,7 @@ export default function LandingPage() {
           onClose={() => setShowAuth(false)}
           onSuccess={() => {
             setShowAuth(false);
-            window.location.href = "/dashboard";
+            goToDashboard();
           }}
         />
       )}

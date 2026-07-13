@@ -17,6 +17,17 @@ const nextConfig = {
       ],
     };
   },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "Link", value: '</llms.txt>; rel="alternate"; type="text/markdown"' },
+          { key: "Vary", value: "Accept" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

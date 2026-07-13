@@ -1,5 +1,7 @@
 "use client";
 
+import { goToDashboard } from "@/lib/goToDashboard";
+
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -38,7 +40,7 @@ export default function AISummarizerPage() {
   }, []);
 
   const handleCTA = () => {
-    if (user) (window.location.href = "/dashboard");
+    if (user) goToDashboard();
     else setShowAuth(true);
   };
 
@@ -55,7 +57,7 @@ export default function AISummarizerPage() {
       <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.028]"
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "160px" }} />
 
-      {showAuth && <AuthModal auth={auth} onClose={() => setShowAuth(false)} onSuccess={() => { setShowAuth(false); (window.location.href = "/dashboard"); }} />}
+      {showAuth && <AuthModal auth={auth} onClose={() => setShowAuth(false)} onSuccess={() => { setShowAuth(false); goToDashboard(); }} />}
 
       {/* NAV */}
       <motion.header
@@ -75,7 +77,7 @@ export default function AISummarizerPage() {
                 Get started free
               </button>
             ) : (
-              <button onClick={() => (window.location.href = "/dashboard")}
+              <button onClick={() => goToDashboard()}
                 className="text-xs font-semibold px-5 py-2 rounded-full bg-[#b5ff4d] text-black hover:bg-[#c8ff6e] transition-colors">
                 Dashboard
               </button>

@@ -1,5 +1,7 @@
 "use client";
 
+import { goToDashboard } from "@/lib/goToDashboard";
+
 import { useState, useEffect, useRef } from "react";
 import { onAuthStateChanged, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "@/lib/firebase";
@@ -418,7 +420,7 @@ export default function NotesSummarizerPage() {
   return (
     <>
       <style>{css}</style>
-      {showAuth && <AuthModal onClose={() => setShowAuth(false)} onSuccess={() => { setShowAuth(false); window.location.href = '/dashboard'; }} />}
+      {showAuth && <AuthModal onClose={() => setShowAuth(false)} onSuccess={() => { setShowAuth(false); goToDashboard(); }} />}
 
       <nav className={`nav${scrolled ? " scrolled" : ""}`}>
         <a className="nav-logo" href="/"><img src="/forks-logo.png" alt="FORKSAI" style={{ height:24, width:"auto" }} />FORKSAI</a>

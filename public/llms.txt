@@ -1,0 +1,129 @@
+# FORKSAI
+
+> FORKSAI is a free, fully customizable AI-powered study platform. It turns any PDF, notes, text, slides, YouTube video, or image into a complete, configurable flashcard deck or structured study notes in seconds. Unlike a basic PDF-to-flashcards converter, every generation is controllable: difficulty, question types, card count, note style, detail level, and a Smart Focus panel that tells the AI exactly what to prioritize. Used by 40,000+ students worldwide.
+
+## What is FORKSAI?
+
+FORKSAI is an AI study tool built for students, medical learners, and working professionals. It is more than a one-click PDF-to-flashcards generator: it ships with a full configuration panel for both the AI Flashcard Generator and the AI Notes Summarizer, so you control exactly what gets created and how. Upload any PDF, paste notes, drop a YouTube link, or upload an image, and receive a structured, exam-ready flashcard deck or formatted study notes in under 30 seconds. No manual card creation required.
+
+FORKSAI is available at https://forksai.app and works entirely in the browser with no download or installation required.
+
+## Core Features
+
+### PDF to Flashcards
+Upload any PDF (textbooks, lecture slides, research papers, study guides) and FORKSAI's AI extracts key concepts, definitions, and facts to create a complete flashcard deck. Supports files of any length.
+
+### Customizable AI Flashcard Generator (Configuration Panel)
+FORKSAI is not a fixed one-click generator — it gives you a full configuration panel before every flashcard generation, so the deck matches exactly how you want to study:
+- **Difficulty level** - choose Easy, Medium, or Hard so the AI writes simpler recall cards or deeper analytical ones.
+- **Question types** - control the style of cards generated (definitions, concept questions, question-and-answer pairs, and more).
+- **Number of cards** - set how many flashcards the AI should create from your material.
+- **Smart Focus tags** - tell the AI which topics, chapters, or concepts to prioritize, so the deck centers on what you actually need.
+- **Multiple input sources** - generate from a PDF upload, pasted notes or text, a YouTube video URL, a PowerPoint (PPTX) file, or an image (handwritten or printed) via built-in OCR.
+This makes FORKSAI a configurable, customizable AI flashcard maker rather than a generic PDF-to-flashcards tool.
+
+### AI Notes Summarizer and PDF to Notes (Configuration Panel)
+FORKSAI also includes an AI Notes Summarizer that turns any PDF or text into clean, structured study notes — and it is fully configurable:
+- **Note style** - choose Structured, Cornell, Narrative, or Outline formatting to match how you revise.
+- **Detail level** - pick from concise summaries to in-depth, detailed notes.
+- **Focus area** - direct the AI to emphasize specific topics or sections.
+- **Rich-text editor** - refine, format, and edit the generated notes (fonts, sizes, formatting, undo/redo) before saving or turning them into flashcards.
+The AI Notes Summarizer and the AI Flashcard Generator share the same source material, so you can study the same content two ways.
+
+### 9 Built-in Study Modes
+- **AI Flashcards** - Generate a deck from any PDF or notes in seconds
+- **Spaced Repetition** - FSRS-5 algorithm schedules reviews at the optimal time for long-term retention
+- **Weak Spot Trainer** - Automatically identifies and drills concepts you keep getting wrong
+- **Exam Simulator** - Full timed mock exams built from your own material
+- **Explain Back Mode** - Type your explanation and receive instant AI feedback on accuracy
+- **Memory Sprint** - High-speed recall rounds to lock in key facts
+- **Podcast Mode** - Turn your notes into an AI-narrated study podcast you can listen to anywhere (Premium)
+- **Interactive Mind Maps** - Visualize how concepts connect across your entire deck
+- **Live Study Rooms** - Study any flashcard deck in real time with classmates
+
+### Medical Encyclopedia (Premium)
+Instant AI summaries for every medical term. Built specifically for pre-med students, nursing students, and USMLE preparation.
+
+### AI Flashcard Generation from Notes
+Paste class notes, lecture notes, or any text and receive a complete flashcard deck in seconds. Works for any subject and any level.
+
+### Live Study Rooms
+Join or create collaborative study rooms where multiple students study the same flashcard deck in real time.
+
+## Who Uses FORKSAI?
+
+- University and college students studying for exams
+- Medical students preparing for USMLE Step 1 and Step 2
+- NEET and JEE aspirants (India competitive exams)
+- Nursing students and pre-med students
+- Language learners building vocabulary
+- Professionals upskilling or preparing for certifications
+
+## Pricing
+
+FORKSAI offers a free tier and three Premium plans:
+
+### Free Plan ($0)
+- Basic study modes (flashcards, spaced repetition, mind maps, study rooms)
+- Create and manage unlimited flashcard decks
+- Progress tracking and analytics
+- No AI flashcard generation
+
+### Premium Day Pass ($1.99 per day)
+- 1 AI flashcard generation
+- AI Podcast Mode
+- Medical Encyclopedia
+- Full PDF support
+- Priority support
+
+### Premium Monthly ($7.99 per month)
+- 100 AI flashcard generations per month
+- AI Podcast Mode
+- Medical Encyclopedia
+- Full PDF support
+- Early access to new features
+- Priority support
+
+### Premium Yearly ($23.99 per year)
+- 100 AI flashcard generations per month
+- All Premium Monthly features
+- Best value (saves approximately 75% compared to monthly billing)
+
+## Frequently Asked Questions
+
+**What makes FORKSAI different from Quizlet?**
+FORKSAI generates flashcards automatically from your own material using AI. Quizlet requires you to create cards manually or search existing public sets. FORKSAI produces personalized, subject-specific decks in seconds.
+
+**How is FORKSAI different from Anki?**
+Anki requires significant manual setup. FORKSAI generates a complete deck from your PDF or notes in under 30 seconds, with built-in spaced repetition using the FSRS-5 algorithm — the same modern algorithm used by Anki.
+
+**Does FORKSAI work for medical students?**
+Yes. The Medical Encyclopedia feature provides AI summaries for medical terms. FORKSAI is widely used for USMLE, NEET, nursing, anatomy, pharmacology, and clinical medicine preparation.
+
+**Is FORKSAI free?**
+Yes. The free plan includes all core study modes, unlimited deck creation, and progress tracking. AI flashcard generation requires a Premium plan.
+
+**What file types does FORKSAI support?**
+FORKSAI accepts PDF files, plain text and pasted notes, PowerPoint (PPTX) presentations, images (handwritten or printed, read via built-in OCR), and YouTube video URLs. The AI works with textbooks, lecture slides, research papers, and any text-based study material.
+
+**Can I customize the flashcards FORKSAI generates?**
+Yes. Before each generation, FORKSAI's configuration panel lets you set the difficulty (Easy, Medium, Hard), the question types, the number of cards, and Smart Focus tags that tell the AI which topics to prioritize. It is a fully customizable AI flashcard generator, not a fixed one-click tool.
+
+**Does FORKSAI have a notes summarizer?**
+Yes. The AI Notes Summarizer (PDF to Notes) turns any PDF or text into structured study notes. You can choose the note style (Structured, Cornell, Narrative, or Outline), the level of detail, and the focus area, then refine the result in a built-in rich-text editor.
+
+## Company Information
+
+- **Website**: https://forksai.app
+- **Support**: support@forksai.app
+- **Founded**: 2024
+- **Users**: 40,000+ students worldwide
+
+## Key Pages
+
+- Homepage: https://forksai.app/
+- Pricing: https://forksai.app/#pricing
+- AI Flashcard Generator: https://forksai.app/ai-flashcards
+- AI Notes Summarizer: https://forksai.app/ai-summarizer
+- PDF to Flashcards: https://forksai.app/pdf-to-flashcards
+- Blog: https://forksai.app/blogs

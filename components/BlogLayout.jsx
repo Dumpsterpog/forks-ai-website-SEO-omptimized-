@@ -1,5 +1,7 @@
 "use client";
 
+import { goToDashboard } from "@/lib/goToDashboard";
+
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase";
@@ -33,7 +35,7 @@ export default function BlogLayout({
         <AuthModal
           auth={auth}
           onClose={() => setShowAuth(false)}
-          onSuccess={() => { setShowAuth(false); window.location.href = "/dashboard"; }}
+          onSuccess={() => { setShowAuth(false); goToDashboard(); }}
         />
       )}
 
@@ -111,7 +113,7 @@ export default function BlogLayout({
           <h4 className="font-serif font-black text-2xl text-[#111] mb-2">{ctaHeading}</h4>
           <p className="text-[#555] text-sm leading-relaxed mb-6 max-w-md mx-auto">{ctaDesc}</p>
           <button
-            onClick={() => user ? (window.location.href = "/dashboard") : setShowAuth(true)}
+            onClick={() => user ? goToDashboard() : setShowAuth(true)}
             className="font-black text-sm text-[#111] border-2 border-black rounded-xl px-6 py-3 shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5"
             style={{ background: "#F0D44A" }}
           >

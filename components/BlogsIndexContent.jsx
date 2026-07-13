@@ -1,5 +1,7 @@
 "use client";
 
+import { goToDashboard } from "@/lib/goToDashboard";
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Search, Clock, User } from "lucide-react";
@@ -143,7 +145,7 @@ export default function BlogsIndexContent() {
         <AuthModal
           auth={auth}
           onClose={() => setShowAuth(false)}
-          onSuccess={() => { setShowAuth(false); window.location.href = "/dashboard"; }}
+          onSuccess={() => { setShowAuth(false); goToDashboard(); }}
         />
       )}
 
