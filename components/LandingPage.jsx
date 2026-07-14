@@ -4,7 +4,7 @@ import { goToDashboard } from "@/lib/goToDashboard";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
 import AuthModal from "@/components/AuthModal";
@@ -108,6 +108,21 @@ export default function LandingPage() {
   const [showEarnPrompt, setShowEarnPrompt] = useState(false);
 
   useEffect(() => {
+    // The dashboard (dashboard.forksai.app) is a separate origin, so Firebase
+    // Auth sessions are separate too. Logging out there redirects here with
+    // ?loggedOut=1 (see Sidebar.jsx confirmLogout) so this origin's stale
+    // session gets cleared as well - otherwise the onAuthStateChanged handler
+    // below would see the still-valid user and immediately bridge them right
+    // back into the dashboard they just logged out of.
+    const params = new URLSearchParams(window.location.search);
+    const justLoggedOut = params.get("loggedOut") === "1";
+
+    if (justLoggedOut) {
+      window.history.replaceState({}, "", window.location.pathname);
+      signOut(auth).catch((err) => console.error("Post-logout sign-out failed", err));
+      return;
+    }
+
     const unsub = onAuthStateChanged(auth, (user) => {
       // Cross-zone hard navigation: /dashboard is served by the existing
       // Vite app via the multi-zone fallback rewrite, not this Next.js app.
