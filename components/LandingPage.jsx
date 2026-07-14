@@ -176,7 +176,16 @@ export default function LandingPage() {
     });
   };
 
-  const goSignup = () => setShowAuth(true);
+  // Signup no longer opens the in-page AuthModal - it sends the visitor
+  // straight to dashboard.forksai.app. goToDashboard() already handles the
+  // "not signed in yet" case with a plain redirect (no bridge token needed),
+  // and the dashboard's own ProtectedRoute now shows onboarding in place for
+  // anyone who lands there with no session, ending in a Google sign-in step
+  // right before their first deck gets created - so auth happens as late as
+  // possible instead of gating every onboarding question behind it up front.
+  // Login is unchanged: a returning user with an existing account still gets
+  // the fast in-page AuthModal + bridge handoff, skipping onboarding entirely.
+  const goSignup = () => goToDashboard();
   const goLogin  = () => setShowAuth(true);
   const dismissEarnPrompt = () => {
     localStorage.setItem("forksai_earn_prompt_v1", "1");
