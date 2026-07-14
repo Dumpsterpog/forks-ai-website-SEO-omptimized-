@@ -7,7 +7,6 @@ import Image from "next/image";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
-import AuthModal from "@/components/AuthModal";
 import {
   Zap, FileText, Headphones, BookOpen, Users, Brain,
   Map, ChevronDown, Check, ArrowRight, Clock,
@@ -104,7 +103,6 @@ function FaqItem({ q, a }) {
 /* ─── Main ──────────────────────────────────────────────────── */
 export default function LandingPage() {
   const [cycle, setCycle] = useState("monthly");
-  const [showAuth, setShowAuth] = useState(false);
   const [showEarnPrompt, setShowEarnPrompt] = useState(false);
 
   useEffect(() => {
@@ -176,17 +174,17 @@ export default function LandingPage() {
     });
   };
 
-  // Signup no longer opens the in-page AuthModal - it sends the visitor
-  // straight to dashboard.forksai.app. goToDashboard() already handles the
-  // "not signed in yet" case with a plain redirect (no bridge token needed),
-  // and the dashboard's own ProtectedRoute now shows onboarding in place for
-  // anyone who lands there with no session, ending in a Google sign-in step
-  // right before their first deck gets created - so auth happens as late as
-  // possible instead of gating every onboarding question behind it up front.
-  // Login is unchanged: a returning user with an existing account still gets
-  // the fast in-page AuthModal + bridge handoff, skipping onboarding entirely.
+  // Neither Signup nor Login opens an in-page modal anymore - both just
+  // send the visitor straight to dashboard.forksai.app. goToDashboard()
+  // already handles the "not signed in yet" case with a plain redirect (no
+  // bridge token needed): an already-authenticated returning user lands on
+  // an already-authenticated dashboard immediately, and a brand-new visitor
+  // gets the dashboard's own onboarding-in-place flow (ProtectedRoute),
+  // ending in a Google sign-in step right before their first deck gets
+  // created - so auth happens as late as possible either way, instead of
+  // gating it behind a popup on this page.
   const goSignup = () => goToDashboard();
-  const goLogin  = () => setShowAuth(true);
+  const goLogin  = () => goToDashboard();
   const dismissEarnPrompt = () => {
     localStorage.setItem("forksai_earn_prompt_v1", "1");
     setShowEarnPrompt(false);
@@ -196,18 +194,6 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen font-sans" style={{ background: PAGE_BG, color: "#111111" }}>
-
-      {/* Auth modal */}
-      {showAuth && (
-        <AuthModal
-          auth={auth}
-          onClose={() => setShowAuth(false)}
-          onSuccess={() => {
-            setShowAuth(false);
-            goToDashboard();
-          }}
-        />
-      )}
 
       {/* Earn while you study prompt */}
       <AnimatePresence>
