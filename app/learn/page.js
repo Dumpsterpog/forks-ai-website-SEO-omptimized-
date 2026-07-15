@@ -29,6 +29,7 @@ const schema = {
   browserRequirements: "Requires JavaScript",
 };
 
+
 export default function Page() {
   return (
     <>
