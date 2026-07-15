@@ -236,6 +236,7 @@ function AuthModal({ onClose, onSuccess }) {
     setError(""); setLoading(true);
     try {
       const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
       const result   = await signInWithPopup(auth, provider);
       const u        = result.user;
       onSuccess({ name: u.displayName || u.email.split("@")[0], email: u.email, uid: u.uid, photoURL: u.photoURL });
