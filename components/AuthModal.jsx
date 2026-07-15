@@ -45,6 +45,11 @@ const getStrength = (password) => {
 
 export default function AuthModal({ auth, onClose, onSuccess }) {
   const provider = new GoogleAuthProvider();
+  // Without this, Google silently reuses whichever Google account is
+  // already active in the browser instead of showing the account picker -
+  // that's what made it look like login was "stuck" on the last account
+  // with no way to switch.
+  provider.setCustomParameters({ prompt: "select_account" });
 
   const [mode,            setMode]            = useState("login");
   const [email,           setEmail]           = useState("");
