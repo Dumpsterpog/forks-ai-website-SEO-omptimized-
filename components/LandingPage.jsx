@@ -355,7 +355,8 @@ export default function LandingPage() {
           {/* 1 - Flashcard card · no offset */}
           <div>
             <motion.div style={{ x: lx1, y: ly1 }}>
-              <div className="bg-white border-2 border-black rounded-xl shadow-[3px_3px_0_#111] p-3 w-36 text-left" style={{ transform: "rotate(-4deg)" }}>
+              <div className="relative bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_6px_14px_rgba(0,0,0,0.18)] p-3 pt-4 w-36 text-left" style={{ transform: "rotate(-4deg)" }}>
+                <span className="absolute -top-2 left-4 w-9 h-4 rounded-[1px] opacity-90" style={{ background: ACCENT, transform: "rotate(-8deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
                 <div className="text-[8px] font-bold text-[#555] uppercase tracking-widest mb-1.5">Flashcard</div>
                 <div className="text-[10px] font-bold text-[#111] leading-tight mb-2">What is the powerhouse of the cell?</div>
                 <div className="h-px bg-black/10 mb-1.5" />
@@ -379,7 +380,8 @@ export default function LandingPage() {
           {/* 3 - Last quiz · slight push */}
           <div style={{ marginLeft: 10 }}>
             <motion.div style={{ x: lx3, y: ly3 }}>
-              <div className="bg-white border-2 border-black rounded-xl shadow-[3px_3px_0_#111] px-4 py-3" style={{ transform: "rotate(3deg)" }}>
+              <div className="relative bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_6px_14px_rgba(0,0,0,0.18)] px-4 pt-5 pb-3" style={{ transform: "rotate(3deg)" }}>
+                <span className="absolute -top-2 right-5 w-9 h-4 rounded-[1px] opacity-90" style={{ background: FEATURE_BG, transform: "rotate(7deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
                 <div className="text-[9px] font-bold text-[#555] uppercase tracking-widest mb-0.5">Last quiz</div>
                 <div className="text-2xl font-black text-[#111] leading-none">94%</div>
               </div>
@@ -402,9 +404,8 @@ export default function LandingPage() {
           <div style={{ marginLeft: 24 }}>
             <motion.div style={{ x: lx5, y: ly5 }}>
               <div className="flex items-center gap-2 bg-white border-2 border-black rounded-full px-3 py-1.5 shadow-[2px_2px_0_#111]" style={{ transform: "rotate(1.5deg)" }}>
-                <span className="relative flex w-5 h-5 rounded-full items-center justify-center shrink-0" style={{ background: FEATURE_BG }}>
-                  <span className="absolute inline-flex h-full w-full rounded-full opacity-40 animate-ping" style={{ background: FEATURE_BG }} />
-                  <Users size={10} className="text-white relative" strokeWidth={2.5} />
+                <span className="flex w-5 h-5 rounded-full items-center justify-center shrink-0" style={{ background: FEATURE_BG }}>
+                  <Users size={10} className="text-white" strokeWidth={2.5} />
                 </span>
                 <span className="text-[10px] font-bold text-[#111]">4 studying live</span>
               </div>
@@ -414,7 +415,8 @@ export default function LandingPage() {
           {/* 6 - Weak spots card · far push */}
           <div style={{ marginLeft: 68 }}>
             <motion.div style={{ x: lx6, y: ly6 }}>
-              <div className="bg-white border-2 border-black rounded-xl shadow-[3px_3px_0_#111] px-3 py-2.5 text-left" style={{ transform: "rotate(-3deg)" }}>
+              <div className="relative bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_6px_14px_rgba(0,0,0,0.18)] px-3 pt-4 pb-2.5 text-left" style={{ transform: "rotate(-3deg)" }}>
+                <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-9 h-4 rounded-[1px] opacity-90" style={{ background: "#7C3AED", transform: "rotate(-6deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
                 <div className="text-[8px] font-bold text-[#555] uppercase tracking-widest mb-1">Weak spots</div>
                 <div className="flex gap-1">
                   {["Krebs", "Meiosis", "Ohm's"].map(t => (
@@ -444,7 +446,8 @@ export default function LandingPage() {
           {/* 2 - Day streak · 40 px toward center */}
           <div style={{ marginRight: 40 }}>
             <motion.div style={{ x: rx2, y: ry2 }}>
-              <div className="bg-white border-2 border-black rounded-xl shadow-[3px_3px_0_#111] px-4 py-3" style={{ transform: "rotate(-3deg)" }}>
+              <div className="relative bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_6px_14px_rgba(0,0,0,0.18)] px-4 pt-5 pb-3" style={{ transform: "rotate(-3deg)" }}>
+                <span className="absolute -top-2 left-5 w-9 h-4 rounded-[1px] opacity-90" style={{ background: ACCENT, transform: "rotate(6deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
                 <div className="text-lg font-black text-[#111] leading-none">🔥 7</div>
                 <div className="text-[9px] font-bold text-[#555] uppercase tracking-widest mt-1">Day streak</div>
               </div>
@@ -454,7 +457,8 @@ export default function LandingPage() {
           {/* 3 - Spaced rep card · slight push */}
           <div style={{ marginRight: 10 }}>
             <motion.div style={{ x: rx3, y: ry3 }}>
-              <div className="bg-white border-2 border-black rounded-xl shadow-[3px_3px_0_#111] p-3 w-36 text-left" style={{ transform: "rotate(2deg)" }}>
+              <div className="relative bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_6px_14px_rgba(0,0,0,0.18)] p-3 pt-4 w-36 text-left" style={{ transform: "rotate(2deg)" }}>
+                <span className="absolute -top-2 right-4 w-9 h-4 rounded-[1px] opacity-90" style={{ background: "#7C3AED", transform: "rotate(-7deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
                 <div className="text-[8px] font-bold text-[#555] uppercase tracking-widest mb-1.5">Spaced rep</div>
                 <div className="text-[10px] font-bold text-[#111] leading-tight mb-2">Mitochondria review</div>
                 <span className="text-[8px] font-bold text-white px-1.5 py-0.5 rounded" style={{ background: FEATURE_BG }}>Due in 2d</span>
@@ -489,7 +493,8 @@ export default function LandingPage() {
           {/* 6 - Score trend card · far push */}
           <div style={{ marginRight: 68 }}>
             <motion.div style={{ x: rx6, y: ry6 }}>
-              <div className="bg-white border-2 border-black rounded-xl shadow-[3px_3px_0_#111] px-3 py-2.5 text-left" style={{ transform: "rotate(-1.5deg)" }}>
+              <div className="relative bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_6px_14px_rgba(0,0,0,0.18)] px-3 pt-4 pb-2.5 text-left" style={{ transform: "rotate(-1.5deg)" }}>
+                <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-9 h-4 rounded-[1px] opacity-90" style={{ background: ACCENT, transform: "rotate(5deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
                 <div className="text-[8px] font-bold text-[#555] uppercase tracking-widest mb-1.5">Quiz progress</div>
                 <div className="flex items-center gap-1">
                   {["72%", "85%", "94%"].map((v, i) => (
@@ -629,15 +634,33 @@ export default function LandingPage() {
       {/* ── FEATURE CARDS ROW ──────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-6 pb-20">
         <div className="grid md:grid-cols-3 gap-5">
-          {FEATURES.map(({ icon: Icon, title, desc }, i) => (
-            <div key={i} className="bg-white border-2 border-black rounded-xl shadow-[4px_4px_0_#111] p-6">
-              <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-5" style={{ background: FEATURE_BG }}>
-                <Icon size={20} className="text-white" strokeWidth={2.5} />
+          {FEATURES.map(({ icon: Icon, title, desc }, i) => {
+            const badgeBg = [ACCENT, "#111", FEATURE_BG][i % 3];
+            const iconColor = badgeBg === "#111" ? ACCENT : badgeBg === ACCENT ? "#111" : "#fff";
+            const tapeBg = [FEATURE_BG, ACCENT, "#7C3AED"][i % 3];
+            const cardTilt = [-2, 1.5, -1][i % 3];
+            const tapeTilt = [-6, 7, -5][i % 3];
+            return (
+              <div
+                key={i}
+                className="relative bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_6px_14px_rgba(0,0,0,0.18)] p-6 pt-8 transition-transform hover:-translate-y-1"
+                style={{ transform: `rotate(${cardTilt}deg)` }}
+              >
+                <span
+                  className="absolute -top-2.5 left-8 w-12 h-5 rounded-[1px] opacity-90"
+                  style={{ background: tapeBg, transform: `rotate(${tapeTilt}deg)`, boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }}
+                />
+                <div
+                  className="w-12 h-12 rounded-lg border-2 border-black flex items-center justify-center mb-5"
+                  style={{ background: badgeBg }}
+                >
+                  <Icon size={21} color={iconColor} strokeWidth={2.5} />
+                </div>
+                <h3 className="font-bold text-[#111] text-base mb-2 leading-snug">{title}</h3>
+                <p className="text-[#555] text-sm leading-relaxed">{desc}</p>
               </div>
-              <h3 className="font-bold text-[#111] text-base mb-2 leading-snug">{title}</h3>
-              <p className="text-[#555] text-sm leading-relaxed">{desc}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -645,7 +668,10 @@ export default function LandingPage() {
       <section className="bg-white border-y-2 border-black py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-14">
-            <div className="inline-block border-2 border-black rounded-full px-4 py-1 text-xs font-bold text-[#111] mb-5">How it works</div>
+            <div className="relative inline-block bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_4px_10px_rgba(0,0,0,0.15)] px-4 py-1.5 text-xs font-bold text-[#111] mb-5" style={{ transform: "rotate(-2deg)" }}>
+              <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-3.5 rounded-[1px] opacity-90" style={{ background: ACCENT, transform: "rotate(-5deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
+              How it works
+            </div>
             <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">
               From upload to mastery<br />in three steps
             </h2>
@@ -665,7 +691,10 @@ export default function LandingPage() {
       {/* ── WHY BENTO ──────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-6 py-20">
         <div className="text-center mb-14">
-          <div className="inline-block border-2 border-black rounded-full px-4 py-1 text-xs font-bold text-[#111] mb-5">Why FORKSAI</div>
+          <div className="relative inline-block bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_4px_10px_rgba(0,0,0,0.15)] px-4 py-1.5 text-xs font-bold text-[#111] mb-5" style={{ transform: "rotate(1.5deg)" }}>
+            <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-3.5 rounded-[1px] opacity-90" style={{ background: FEATURE_BG, transform: "rotate(6deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
+            Why FORKSAI
+          </div>
           <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">
             Every tool you need,<br />nothing you don't
           </h2>
@@ -723,7 +752,10 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="inline-block border-2 border-black rounded-full px-4 py-1 text-xs font-bold text-[#111] mb-6">Live</div>
+              <div className="relative inline-block bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_4px_10px_rgba(0,0,0,0.15)] px-4 py-1.5 text-xs font-bold text-[#111] mb-6" style={{ transform: "rotate(-2deg)" }}>
+                <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-3.5 rounded-[1px] opacity-90" style={{ background: "#7C3AED", transform: "rotate(-6deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
+                Live
+              </div>
               <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight mb-5">
                 Study with your<br />
                 <span className="italic" style={{ borderBottom: `5px solid ${FEATURE_BG}`, paddingBottom: "2px" }}>classmates, live</span>
@@ -766,7 +798,10 @@ export default function LandingPage() {
       <section className="max-w-6xl mx-auto px-6 py-20">
         <div className="grid md:grid-cols-2 gap-5">
           <div className="bg-white border-2 border-black rounded-xl shadow-[4px_4px_0_#111] p-8">
-            <div className="inline-block border-2 border-black rounded-full px-4 py-1 text-xs font-bold text-[#111] mb-6">Why this works</div>
+            <div className="relative inline-block bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_4px_10px_rgba(0,0,0,0.15)] px-4 py-1.5 text-xs font-bold text-[#111] mb-6" style={{ transform: "rotate(2deg)" }}>
+              <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-3.5 rounded-[1px] opacity-90" style={{ background: ACCENT, transform: "rotate(5deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
+              Why this works
+            </div>
             <h3 className="font-serif font-black text-3xl text-[#111] leading-tight mb-4">
               Retrieval practice beats re-reading every time
             </h3>
@@ -798,7 +833,10 @@ export default function LandingPage() {
       <section className="bg-white border-y-2 border-black py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-14">
-            <div className="inline-block border-2 border-black rounded-full px-4 py-1 text-xs font-bold text-[#111] mb-5">How we compare</div>
+            <div className="relative inline-block bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_4px_10px_rgba(0,0,0,0.15)] px-4 py-1.5 text-xs font-bold text-[#111] mb-5" style={{ transform: "rotate(-1.5deg)" }}>
+              <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-3.5 rounded-[1px] opacity-90" style={{ background: FEATURE_BG, transform: "rotate(-7deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
+              How we compare
+            </div>
             <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">
               FORKSAI vs everything else
             </h2>
@@ -843,7 +881,10 @@ export default function LandingPage() {
       <section className="max-w-6xl mx-auto px-6 py-20">
         <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
           <div>
-            <div className="inline-block border-2 border-black rounded-full px-4 py-1 text-xs font-bold text-[#111] mb-4">From the blog</div>
+            <div className="relative inline-block bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_4px_10px_rgba(0,0,0,0.15)] px-4 py-1.5 text-xs font-bold text-[#111] mb-4" style={{ transform: "rotate(2deg)" }}>
+              <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-3.5 rounded-[1px] opacity-90" style={{ background: "#7C3AED", transform: "rotate(6deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
+              From the blog
+            </div>
             <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">
               Study smarter,<br />read smarter
             </h2>
@@ -873,7 +914,10 @@ export default function LandingPage() {
       <section className="bg-white border-y-2 border-black py-20">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-14">
-            <div className="inline-block border-2 border-black rounded-full px-4 py-1 text-xs font-bold text-[#111] mb-5">FAQ</div>
+            <div className="relative inline-block bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_4px_10px_rgba(0,0,0,0.15)] px-4 py-1.5 text-xs font-bold text-[#111] mb-5" style={{ transform: "rotate(-2deg)" }}>
+              <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-3.5 rounded-[1px] opacity-90" style={{ background: ACCENT, transform: "rotate(-5deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
+              FAQ
+            </div>
             <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">Questions, answered</h2>
           </div>
           <div className="flex flex-col gap-3">
@@ -885,7 +929,10 @@ export default function LandingPage() {
       {/* ── PRICING ────────────────────────────────────────── */}
       <section id="pricing" className="max-w-6xl mx-auto px-6 py-20">
         <div className="text-center mb-14">
-          <div className="inline-block border-2 border-black rounded-full px-4 py-1 text-xs font-bold text-[#111] mb-5">Pricing</div>
+          <div className="relative inline-block bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_4px_10px_rgba(0,0,0,0.15)] px-4 py-1.5 text-xs font-bold text-[#111] mb-5" style={{ transform: "rotate(1.5deg)" }}>
+            <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-3.5 rounded-[1px] opacity-90" style={{ background: FEATURE_BG, transform: "rotate(6deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.25)" }} />
+            Pricing
+          </div>
           <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight mb-8">Simple, transparent pricing</h2>
           <div className="inline-flex items-center border-2 border-black rounded-xl bg-white shadow-[3px_3px_0_#111]">
             {[

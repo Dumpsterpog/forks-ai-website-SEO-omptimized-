@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import { Playfair_Display, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -69,6 +70,7 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         {children}
+        <Analytics />
 
         {/* Google tag (gtag.js) — ported from the old app's static index.html */}
         <Script
