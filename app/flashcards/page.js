@@ -1,7 +1,7 @@
 import FlashcardsContent from "@/components/FlashcardsContent";
 
 export const metadata = {
-  title: "Free AI Flashcards | FORKSAI",
+  title: "Free AI Flashcards",
   description:
     "Create and study AI-generated flashcards with FORKSAI. Use active recall, spaced repetition, and smart revision modes to ace your exams. Free for students.",
   alternates: {

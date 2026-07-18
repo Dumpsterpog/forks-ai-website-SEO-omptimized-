@@ -1,6 +1,6 @@
 import BlogLayout from "@/components/BlogLayout";
 
-const SEO_TITLE = "Why Your Study Schedule Keeps Falling Apart | FORKSAI Blog";
+const SEO_TITLE = "Why Your Study Schedule Keeps Falling Apart";
 const SEO_DESC =
   "Most study schedules fail within a week. Here's why — and a simpler, more honest approach that actually survives contact with real student life.";
 const SEO_URL = "https://forksai.app/blog/study-schedule";

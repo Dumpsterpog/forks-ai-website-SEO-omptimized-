@@ -1,7 +1,7 @@
 import LearnModeContent from "@/components/LearnModeContent";
 
 export const metadata = {
-  title: "Learn Mode - Interactive Flashcard Study Sessions | FORKSAI",
+  title: "Learn Mode - Interactive Flashcard Study Sessions",
   description:
     "Study your flashcards in FORKSAI's Learn Mode - an interactive session that adapts to your answers, prioritises weak cards, and tracks your progress per deck.",
   alternates: {

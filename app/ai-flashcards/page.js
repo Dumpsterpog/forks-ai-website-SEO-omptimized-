@@ -1,7 +1,7 @@
 import AIFlashcardsContent from "@/components/AIFlashcardsContent";
 
 export const metadata = {
-  title: "Free AI Flashcard Generator | FORKSAI",
+  title: "Free AI Flashcard Generator",
   description:
     "Generate AI flashcards from your notes, PDFs, or any text in seconds. Turn lecture notes and textbooks into exam-ready cards. No signup required.",
   alternates: {

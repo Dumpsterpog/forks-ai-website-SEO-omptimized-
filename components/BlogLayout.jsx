@@ -16,19 +16,20 @@ const CAT_STYLES = {
   "Memory":        { bg: "#FFE8E8", border: "#DC2626", text: "#DC2626" },
 };
 
+// Grouped by category so circular neighbors below are topically related too.
 const ALL_POSTS = [
   { title: "Active recall: the study technique that actually works", link: "/blog/active-recall", category: "Study Science" },
+  { title: "FSRS-5 vs SM-2: the algorithm upgrade that actually matters", link: "/blog/fsrs-vs-sm2", category: "Study Science" },
+  { title: "The problem with rereading the textbook", link: "/blog/study-modes", category: "Study Science" },
+  { title: "How to make Anki cards that actually work", link: "/blog/how-to-make-anki-cards", category: "Study Science" },
   { title: "How to prepare for any exam in 2 weeks", link: "/blog/exam-prep", category: "Exam Tips" },
   { title: "Why your study schedule keeps falling apart", link: "/blog/study-schedule", category: "Productivity" },
-  { title: "FSRS-5 vs SM-2: the algorithm upgrade that actually matters", link: "/blog/fsrs-vs-sm2", category: "Study Science" },
   { title: "Spaced repetition: the secret to passing heavy exams", link: "/blog/spaced-repetition", category: "Memory" },
   { title: "Why traditional flashcards are slowing you down", link: "/blog/flashcards", category: "AI Tools" },
   { title: "I stopped taking notes in lecture. Here is what happened.", link: "/blog/notes-maker", category: "AI Tools" },
-  { title: "The problem with rereading the textbook", link: "/blog/study-modes", category: "Study Science" },
   { title: "Turning downtime into learning time with audio", link: "/blog/ai-podcasts", category: "AI Tools" },
   { title: "The best Quizlet alternative for students who want less busywork", link: "/blog/quizlet-alternative", category: "AI Tools" },
   { title: "The best Anki alternative for students who don't want to fight the interface", link: "/blog/anki-alternative", category: "AI Tools" },
-  { title: "How to make Anki cards that actually work", link: "/blog/how-to-make-anki-cards", category: "Study Science" },
 ];
 
 export default function BlogLayout({
@@ -43,11 +44,11 @@ export default function BlogLayout({
 
   const cat = CAT_STYLES[category] || CAT_STYLES["AI Tools"];
 
-  const others = ALL_POSTS.filter(p => p.title !== title);
-  const related = [
-    ...others.filter(p => p.category === category),
-    ...others.filter(p => p.category !== category),
-  ].slice(0, 3);
+  // Circular window (next 3 by array position) guarantees every post gets
+  // exactly 3 inbound related-article links, regardless of category size.
+  const selfIndex = ALL_POSTS.findIndex(p => p.title === title);
+  const n = ALL_POSTS.length;
+  const related = selfIndex === -1 ? [] : [1, 2, 3].map(offset => ALL_POSTS[(selfIndex + offset) % n]);
 
   return (
     <div className="min-h-screen font-sans" style={{ background: "#EEEEE8", color: "#111111" }}>

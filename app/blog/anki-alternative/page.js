@@ -1,8 +1,8 @@
 import BlogLayout from "@/components/BlogLayout";
 
-const SEO_TITLE = "Best Anki Alternative for Students Who Don't Want to Fight the Interface | FORKSAI Blog";
+const SEO_TITLE = "Best Anki Alternative for Students";
 const SEO_DESC =
-  "Anki's algorithm is excellent, but building and maintaining decks by hand is not. Here's what to look for in an Anki alternative, and how FORKSAI keeps the science without the setup.";
+  "Anki's algorithm is excellent, but building decks by hand is not. Here's how to keep the science without the manual setup.";
 const SEO_URL = "https://forksai.app/blog/anki-alternative";
 
 export const metadata = {

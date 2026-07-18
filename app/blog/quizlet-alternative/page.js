@@ -1,8 +1,8 @@
 import BlogLayout from "@/components/BlogLayout";
 
-const SEO_TITLE = "Best Quizlet Alternative in 2026: Why Students Are Switching | FORKSAI Blog";
+const SEO_TITLE = "Best Quizlet Alternative in 2026";
 const SEO_DESC =
-  "Quizlet still works, but manual card creation and paywalled features send students looking elsewhere. Here's what a real Quizlet alternative should do, and how FORKSAI compares.";
+  "Quizlet still works, but manual card creation and paywalled features send students elsewhere. Here's what a real alternative should do.";
 const SEO_URL = "https://forksai.app/blog/quizlet-alternative";
 
 export const metadata = {

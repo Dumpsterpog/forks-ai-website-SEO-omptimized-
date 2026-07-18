@@ -1,7 +1,7 @@
 import AISummarizerContent from "@/components/AISummarizerContent";
 
 export const metadata = {
-  title: "Free AI Summarizer | FORKSAI",
+  title: "Free AI Summarizer",
   description:
     "Summarize any PDF, lecture notes, or textbook chapter with FORKSAI. Get concise, study-ready summaries in seconds. No signup required.",
   alternates: {

@@ -1,7 +1,7 @@
 import AIStudyToolsContent from "@/components/AIStudyToolsContent";
 
 export const metadata = {
-  title: "Free AI Study Tools for Students | FORKSAI",
+  title: "Free AI Study Tools for Students",
   description:
     "FORKSAI's free AI study tools help you learn faster with flashcards, AI podcasts, spaced repetition, and 8 revision modes. No signup required.",
   alternates: {

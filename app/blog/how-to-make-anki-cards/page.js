@@ -1,8 +1,8 @@
 import BlogLayout from "@/components/BlogLayout";
 
-const SEO_TITLE = "How to Make Anki Cards That Actually Work (Step-by-Step) | FORKSAI Blog";
+const SEO_TITLE = "How to Make Anki Cards That Work";
 const SEO_DESC =
-  "Anki is only as good as the cards you feed it. Here's a step-by-step guide to writing atomic, high-quality Anki cards, plus a faster way to build the deck itself.";
+  "Anki is only as good as the cards you feed it. A step-by-step guide to writing atomic, high-quality cards that review well.";
 const SEO_URL = "https://forksai.app/blog/how-to-make-anki-cards";
 
 export const metadata = {

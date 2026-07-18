@@ -1,6 +1,6 @@
 import BlogLayout from "@/components/BlogLayout";
 
-const SEO_TITLE = "Spaced Repetition Explained | FORKSAI";
+const SEO_TITLE = "Spaced Repetition Explained";
 const SEO_DESC =
   "How the FSRS-5 spaced repetition algorithm works, and how FORKSAI uses it to keep your most important cards on schedule.";
 const SEO_URL = "https://forksai.app/blog/spaced-repetition";

@@ -1,7 +1,7 @@
 import BlogsIndexContent from "@/components/BlogsIndexContent";
 
 export const metadata = {
-  title: "Study Hacks, AI Tips & Student Guides | FORKSAI Blog",
+  title: "Study Hacks, AI Tips & Student Guides",
   description:
     "Read FORKSAI guides on AI flashcards, spaced repetition, active recall, study modes, and how AI is changing the way students learn.",
   alternates: { canonical: "https://forksai.app/blogs" },

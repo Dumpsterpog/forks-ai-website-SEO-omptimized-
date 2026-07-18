@@ -1,7 +1,7 @@
 import PdfToFlashcardsContent from "@/components/PdfToFlashcardsContent";
 
 export const metadata = {
-  title: "Free PDF to Flashcards Converter | FORKSAI",
+  title: "Free PDF to Flashcards Converter",
   description:
     "Convert any PDF into an exam-ready flashcard deck in under 30 seconds. Upload textbooks, papers, or slides. Free AI PDF to flashcards converter.",
   alternates: {

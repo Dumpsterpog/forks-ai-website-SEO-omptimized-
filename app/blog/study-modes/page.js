@@ -1,6 +1,6 @@
 import BlogLayout from "@/components/BlogLayout";
 
-const SEO_TITLE = "The Best AI Study Modes for Exam Prep | FORKSAI Blog";
+const SEO_TITLE = "The Best AI Study Modes for Exam Prep";
 const SEO_DESC =
   "A guide to FORKSAI's revision modes — from spaced repetition and Pomodoro to Mind Map and Case Study — and which to use for different subjects and exam types.";
 const SEO_URL = "https://forksai.app/blog/study-modes";
