@@ -36,6 +36,9 @@ const POSTS = [
   { title: "I stopped taking notes in lecture. Here is what happened.", url: "/blog/notes-maker" },
   { title: "The problem with rereading the textbook", url: "/blog/study-modes" },
   { title: "Turning downtime into learning time with audio", url: "/blog/ai-podcasts" },
+  { title: "The best Quizlet alternative for students who want less busywork", url: "/blog/quizlet-alternative" },
+  { title: "The best Anki alternative for students who don't want to fight the interface", url: "/blog/anki-alternative" },
+  { title: "How to make Anki cards that actually work", url: "/blog/how-to-make-anki-cards" },
 ];
 
 const collectionSchema = {

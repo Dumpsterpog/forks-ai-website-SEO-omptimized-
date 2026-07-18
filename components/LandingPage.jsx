@@ -14,6 +14,7 @@ import {
 
 /* ─── Data ──────────────────────────────────────────────────── */
 const FAQS = [
+  { q: "How is FORKSAI different from Quizlet and Anki?", a: "FORKSAI generates flashcards automatically from your own notes or PDFs in under 30 seconds, while Quizlet and Anki require you to build every card by hand. It runs the same FSRS-5 spaced repetition algorithm as modern Anki, plus 9 built-in study modes and live Study Rooms out of the box." },
   { q: "How does FORKSAI generate flashcards?", a: "You upload any PDF, paste notes, or type a topic. Our AI reads the content, identifies key concepts, and produces a complete, ready-to-study deck in under 30 seconds. No manual card creation needed." },
   { q: "What study modes are included?", a: "9 modes in total: Flashcard Flip, Write Mode, Quiz, Spaced Repetition (FSRS-5), Weak Spot Trainer, Memory Sprint, Exam Simulator, Explain Back, and Pomodoro Mode. Every mode is designed around proven learning science." },
   { q: "Can I study with other people?", a: "Yes. Study Rooms let you create a session, share a 6-character code, and study any deck live with up to 5 classmates. Host-paced or Race mode. Your choice." },
@@ -519,7 +520,7 @@ export default function LandingPage() {
           </button>
 
           <h1 className="font-serif font-black text-5xl sm:text-6xl md:text-7xl leading-[1.08] text-[#111] mb-6">
-            How do you want to{" "}
+            The best alternative to{" "}
             <span
               className="italic"
               style={{
@@ -529,12 +530,12 @@ export default function LandingPage() {
                 textUnderlineOffset: "5px",
               }}
             >
-              study today?
+              Quizlet and Anki
             </span>
           </h1>
 
           <p className="text-[#555] text-lg sm:text-xl max-w-xl mx-auto leading-relaxed mb-10">
-            Upload any PDF or notes. FORKSAI generates a complete flashcard deck in under 30 seconds. Study alone or race your classmates in live rooms.
+            Upload any PDF or notes and FORKSAI builds your deck automatically, no manual card creation like Quizlet or Anki. Study alone or race your classmates in live rooms.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -548,18 +549,20 @@ export default function LandingPage() {
             <span className="text-sm text-[#555] font-medium">No credit card required</span>
           </div>
 
-          {/* Social proof */}
-          <div className="flex items-center justify-center gap-3 mt-8">
-            <div className="flex -space-x-2">
-              {["#F87171","#60A5FA","#34D399","#FBBF24","#A78BFA"].map((color, i) => (
-                <div key={i} className="w-7 h-7 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-black text-white" style={{ background: color }}>
-                  {["A","J","M","S","R"][i]}
-                </div>
+          {/* Social proof logo wall */}
+          <div className="flex flex-col items-center gap-5 mt-12">
+            <p className="text-sm font-semibold text-[#333] text-center">
+              Relied on by <span className="font-black text-[#111]">100,000+</span> students at
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+              {["Stanford", "USC", "Harvard", "NYU", "Columbia", "Penn"].map(name => (
+                <span key={name} className="text-[#aaa] font-serif font-bold text-xl sm:text-2xl tracking-tight">
+                  {name}
+                </span>
               ))}
             </div>
-            <div className="h-5 w-px bg-black/10" />
-            <p className="text-sm font-semibold text-[#333]">
-              Trusted by <span className="font-black text-[#111]">60,000+</span> students worldwide
+            <p className="text-xs text-[#999] font-medium">
+              and 1,500+ other institutions worldwide
             </p>
           </div>
 

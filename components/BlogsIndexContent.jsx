@@ -112,6 +112,33 @@ const BLOGS = [
     date: "March 2026",
     readTime: "4 min",
   },
+  {
+    title: "The best Quizlet alternative for students who want less busywork",
+    desc: "Quizlet still works, but manual card creation and paywalled features send students looking elsewhere. Here is what a real alternative should do.",
+    link: "/blog/quizlet-alternative",
+    category: "AI Tools",
+    author: "Taylor Reed",
+    date: "July 2026",
+    readTime: "6 min",
+  },
+  {
+    title: "The best Anki alternative for students who don't want to fight the interface",
+    desc: "Anki's algorithm is excellent, but building and maintaining decks by hand is not. Here is how to keep the science without the setup.",
+    link: "/blog/anki-alternative",
+    category: "AI Tools",
+    author: "Avery Chen",
+    date: "July 2026",
+    readTime: "7 min",
+  },
+  {
+    title: "How to make Anki cards that actually work",
+    desc: "Anki is only as good as the cards you feed it. A step-by-step guide to writing atomic, high-quality cards that actually review well.",
+    link: "/blog/how-to-make-anki-cards",
+    category: "Study Science",
+    author: "Jordan Lee",
+    date: "July 2026",
+    readTime: "7 min",
+  },
 ];
 
 const ALL_CATS = ["All", ...Array.from(new Set(BLOGS.map(b => b.category)))];

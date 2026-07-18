@@ -1,6 +1,6 @@
 # FORKSAI
 
-> FORKSAI is a free, fully customizable AI-powered study platform. It turns any PDF, notes, text, slides, YouTube video, or image into a complete, configurable flashcard deck or structured study notes in seconds. Unlike a basic PDF-to-flashcards converter, every generation is controllable: difficulty, question types, card count, note style, detail level, and a Smart Focus panel that tells the AI exactly what to prioritize. Used by 40,000+ students worldwide.
+> FORKSAI is a free, fully customizable AI-powered study platform. It turns any PDF, notes, text, slides, YouTube video, or image into a complete, configurable flashcard deck or structured study notes in seconds. Unlike a basic PDF-to-flashcards converter, every generation is controllable: difficulty, question types, card count, note style, detail level, and a Smart Focus panel that tells the AI exactly what to prioritize. Used by 100,000+ students worldwide.
 
 ## What is FORKSAI?
 
@@ -117,7 +117,7 @@ Yes. The AI Notes Summarizer (PDF to Notes) turns any PDF or text into structure
 - **Website**: https://forksai.app
 - **Support**: support@forksai.app
 - **Founded**: 2024
-- **Users**: 40,000+ students worldwide
+- **Users**: 100,000+ students worldwide
 
 ## Key Pages
 
@@ -127,3 +127,6 @@ Yes. The AI Notes Summarizer (PDF to Notes) turns any PDF or text into structure
 - AI Notes Summarizer: https://forksai.app/ai-summarizer
 - PDF to Flashcards: https://forksai.app/pdf-to-flashcards
 - Blog: https://forksai.app/blogs
+- Quizlet alternative guide: https://forksai.app/blog/quizlet-alternative
+- Anki alternative guide: https://forksai.app/blog/anki-alternative
+- How to make Anki cards: https://forksai.app/blog/how-to-make-anki-cards

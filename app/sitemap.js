@@ -21,6 +21,9 @@ const BLOG_POSTS = [
   "/blog/exam-prep",
   "/blog/study-schedule",
   "/blog/fsrs-vs-sm2",
+  "/blog/quizlet-alternative",
+  "/blog/anki-alternative",
+  "/blog/how-to-make-anki-cards",
 ];
 
 const LEGAL_PAGES = ["/faq", "/docs", "/privacy-policy", "/terms", "/refund-policy"];

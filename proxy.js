@@ -79,7 +79,7 @@ function isNotAcceptable(accept) {
 // Mirrors /llms.txt exactly so any client can verify by fetching that file.
 const MARKDOWN_CONTENT = `# FORKSAI
 
-> FORKSAI is a free, fully customizable AI-powered study platform. It turns any PDF, notes, text, slides, YouTube video, or image into a complete, configurable flashcard deck or structured study notes in seconds. Unlike a basic PDF-to-flashcards converter, every generation is controllable: difficulty, question types, card count, note style, detail level, and a Smart Focus panel that tells the AI exactly what to prioritize. Used by 40,000+ students worldwide.
+> FORKSAI is a free, fully customizable AI-powered study platform. It turns any PDF, notes, text, slides, YouTube video, or image into a complete, configurable flashcard deck or structured study notes in seconds. Unlike a basic PDF-to-flashcards converter, every generation is controllable: difficulty, question types, card count, note style, detail level, and a Smart Focus panel that tells the AI exactly what to prioritize. Used by 100,000+ students worldwide.
 
 ## What is FORKSAI?
 
@@ -124,7 +124,7 @@ Free plan ($0, no AI generation), Premium Day Pass ($1.99/day), Premium Monthly 
 
 ## Company Information
 
-Website: https://forksai.app | Support: support@forksai.app | Founded: 2024 | Users: 40,000+ students worldwide
+Website: https://forksai.app | Support: support@forksai.app | Founded: 2024 | Users: 100,000+ students worldwide
 
 ## Key Pages
 

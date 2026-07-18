@@ -1,23 +1,23 @@
 import LandingPage from "@/components/LandingPage";
 
 const TITLE =
-  "Free AI Flashcards Generator - AI Flashcard Maker from PDF and Notes - FORKSAI";
+  "AI Flashcards Generator - Best Quizlet & Anki Alternative - FORKSAI";
 const DESCRIPTION =
-  "FORKSAI is a free, customizable AI flashcards generator and AI notes summarizer. Turn any PDF, notes, slides, YouTube video, or image into a configurable flashcard deck or structured notes in seconds - choose difficulty, question types, card count, and Smart Focus topics. 9 study modes with FSRS-5 spaced repetition. Used by 40,000+ students. No credit card required.";
+  "FORKSAI is a free, customizable AI flashcards generator and the best alternative to Quizlet and Anki. Turn any PDF, notes, slides, YouTube video, or image into a configurable flashcard deck or structured notes in seconds - no manual card creation. 9 study modes with FSRS-5 spaced repetition. Used by 100,000+ students. No credit card required.";
 const OG_DESCRIPTION =
-  "Generate customizable AI flashcards from any PDF, notes, slides, YouTube video, or image - set difficulty, question types, and card count. Plus an AI notes summarizer with Cornell, outline, and structured styles. Join 40,000+ students studying smarter with FORKSAI.";
+  "The Quizlet and Anki alternative that builds your deck for you. Generate customizable AI flashcards from any PDF, notes, slides, YouTube video, or image - set difficulty, question types, and card count. Join 100,000+ students studying smarter with FORKSAI.";
 
 export const metadata = {
   title: TITLE,
   description: DESCRIPTION,
   keywords:
-    "AI flashcards, customizable AI flashcard generator, configurable flashcard maker, AI notes summarizer, PDF summarizer, Cornell notes generator, outline notes, flashcards from PDF, flashcards from notes, flashcards from YouTube, flashcards from images OCR, PPT to flashcards, AI study tools, spaced repetition, FSRS-5, exam preparation, active recall learning",
+    "AI flashcards, quizlet alternative, anki alternative, best alternative to quizlet, best alternative to anki, how to make anki cards, customizable AI flashcard generator, configurable flashcard maker, AI notes summarizer, PDF summarizer, Cornell notes generator, outline notes, flashcards from PDF, flashcards from notes, flashcards from YouTube, flashcards from images OCR, PPT to flashcards, AI study tools, spaced repetition, FSRS-5, exam preparation, active recall learning",
   alternates: {
     canonical: "https://forksai.app/",
   },
   openGraph: {
     type: "website",
-    title: "Free AI Flashcards Generator - Flashcard Maker from PDF and Notes - FORKSAI",
+    title: TITLE,
     description: OG_DESCRIPTION,
     url: "https://forksai.app/",
     siteName: "FORKSAI",
@@ -28,9 +28,9 @@ export const metadata = {
     card: "summary_large_image",
     site: "@forksai",
     creator: "@forksai",
-    title: "Free AI Flashcards Generator - Flashcard Maker from PDF and Notes - FORKSAI",
+    title: TITLE,
     description:
-      "Customizable AI flashcards from any PDF, notes, slides, video, or image - choose difficulty, question types & card count. Plus an AI notes summarizer. Free for students.",
+      "The Quizlet and Anki alternative that builds your deck for you. Customizable AI flashcards from any PDF, notes, slides, video, or image - choose difficulty, question types & card count. Free for students.",
     images: ["https://forksai.app/body.png"],
   },
 };
