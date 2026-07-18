@@ -1,6 +1,6 @@
 import BlogLayout from "@/components/BlogLayout";
 
-const SEO_TITLE = "Active Recall: The Study Technique That Actually Works | FORKSAI Blog";
+const SEO_TITLE = "Active Recall: The Study Technique That Works | FORKSAI";
 const SEO_DESC =
   "Active recall beats passive review every time — here's the science behind why testing yourself is the single most effective thing you can do before an exam.";
 const SEO_URL = "https://forksai.app/blog/active-recall";

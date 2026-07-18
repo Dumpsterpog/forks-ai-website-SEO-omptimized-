@@ -1,9 +1,9 @@
 import LandingPage from "@/components/LandingPage";
 
 const TITLE =
-  "AI Flashcards Generator - Best Quizlet & Anki Alternative - FORKSAI";
+  "Free AI Flashcards - Quizlet & Anki Alternative | FORKSAI";
 const DESCRIPTION =
-  "FORKSAI is a free, customizable AI flashcards generator and the best alternative to Quizlet and Anki. Turn any PDF, notes, slides, YouTube video, or image into a configurable flashcard deck or structured notes in seconds - no manual card creation. 9 study modes with FSRS-5 spaced repetition. Used by 100,000+ students. No credit card required.";
+  "Free AI flashcard generator and the best Quizlet & Anki alternative. Turn any PDF, notes, or video into a study-ready deck in seconds. No credit card required.";
 const OG_DESCRIPTION =
   "The Quizlet and Anki alternative that builds your deck for you. Generate customizable AI flashcards from any PDF, notes, slides, YouTube video, or image - set difficulty, question types, and card count. Join 100,000+ students studying smarter with FORKSAI.";
 

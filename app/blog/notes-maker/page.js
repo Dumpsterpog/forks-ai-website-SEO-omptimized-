@@ -1,6 +1,6 @@
 import BlogLayout from "@/components/BlogLayout";
 
-const SEO_TITLE = "How to Summarize Notes with AI - A Student's Guide | FORKSAI Blog";
+const SEO_TITLE = "How to Summarize Notes with AI | FORKSAI";
 const SEO_DESC =
   "Discover how AI note summarization works, the best strategies to extract key points from lecture notes, and how FORKSAI accelerates your revision workflow.";
 const SEO_URL = "https://forksai.app/blog/notes-maker";

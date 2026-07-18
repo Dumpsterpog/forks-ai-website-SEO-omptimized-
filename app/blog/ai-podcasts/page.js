@@ -1,6 +1,6 @@
 import BlogLayout from "@/components/BlogLayout";
 
-const SEO_TITLE = "Study with AI Podcasts - Learn While You Commute | FORKSAI Blog";
+const SEO_TITLE = "Study with AI Podcasts | FORKSAI";
 const SEO_DESC =
   "How FORKSAI turns your flashcard decks into personalised AI podcasts you can listen to anywhere. Turn commutes and gym sessions into study time.";
 const SEO_URL = "https://forksai.app/blog/ai-podcasts";

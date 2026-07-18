@@ -1,6 +1,6 @@
 import BlogLayout from "@/components/BlogLayout";
 
-const SEO_TITLE = "The Ultimate Guide to AI Flashcards for Students | FORKSAI Blog";
+const SEO_TITLE = "The Ultimate Guide to AI Flashcards | FORKSAI";
 const SEO_DESC =
   "Learn how AI flashcard generation works, why active recall beats passive reading, and how FORKSAI creates exam-ready cards from your notes in seconds.";
 const SEO_URL = "https://forksai.app/blog/flashcards";

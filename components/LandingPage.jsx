@@ -235,26 +235,22 @@ export default function LandingPage() {
               </div>
 
               <div className="grid gap-3">
-                <button
-                  className="w-full flex items-center justify-between gap-3 border-2 border-black rounded-xl px-4 py-3 bg-green shadow-[3px_3px_0_#111] text-white font-bold text-sm transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5"
-                  onClick={() => {
-                    dismissEarnPrompt();
-                    window.location.href = '/apply';
-                  }}
+                <a
+                  href="/apply/ambassadors"
+                  className="w-full flex items-center justify-between gap-3 border-2 border-black rounded-xl px-4 py-3 bg-green shadow-[3px_3px_0_#111] text-white font-bold text-sm transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 no-underline"
+                  onClick={dismissEarnPrompt}
                 >
                   <span>Student Ambassador Program</span>
                   <ArrowRight size={16} />
-                </button>
-                <button
-                  className="w-full flex items-center justify-between gap-3 border-2 border-black rounded-xl px-4 py-3 bg-yellow shadow-[3px_3px_0_#111] text-[#111] font-bold text-sm transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5"
-                  onClick={() => {
-                    dismissEarnPrompt();
-                    window.location.href = '/apply';
-                  }}
+                </a>
+                <a
+                  href="/apply/creators"
+                  className="w-full flex items-center justify-between gap-3 border-2 border-black rounded-xl px-4 py-3 bg-yellow shadow-[3px_3px_0_#111] text-[#111] font-bold text-sm transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 no-underline"
+                  onClick={dismissEarnPrompt}
                 >
                   <span>Affiliate Program</span>
                   <ArrowRight size={16} />
-                </button>
+                </a>
               </div>
             </motion.div>
           </motion.div>
@@ -555,7 +551,7 @@ export default function LandingPage() {
               Relied on by <span className="font-black text-[#111]">100,000+</span> students at
             </p>
             <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-              {["Stanford", "USC", "Harvard", "NYU", "Columbia", "Penn"].map(name => (
+              {["UCL", "Harvard", "Stanford", "Zagreb School of Medicine"].map(name => (
                 <span key={name} className="text-[#aaa] font-serif font-bold text-xl sm:text-2xl tracking-tight">
                   {name}
                 </span>
@@ -676,7 +672,7 @@ export default function LandingPage() {
               How it works
             </div>
             <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">
-              From upload to mastery<br />in three steps
+              Free flashcard generator<br />in three simple steps
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-5">
@@ -699,7 +695,7 @@ export default function LandingPage() {
             Why FORKSAI
           </div>
           <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">
-            Every tool you need,<br />nothing you don't
+            The only free study tool<br />you'll ever need
           </h2>
         </div>
 
@@ -742,8 +738,8 @@ export default function LandingPage() {
               <BookOpen size={20} className="text-white" strokeWidth={2.5} />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-[#111] text-sm mb-1">Medical Encyclopedia</h3>
-              <p className="text-[#555] text-xs leading-relaxed">Instant AI summaries for every medical term. Built for pre-med and nursing students who need definitions fast.</p>
+              <h3 className="font-bold text-[#111] text-sm mb-1">How to study anatomy and medical terms fast</h3>
+              <p className="text-[#555] text-xs leading-relaxed">The Medical Encyclopedia gives instant AI summaries for every medical term. Built for pre-med and nursing students who need definitions fast.</p>
             </div>
           </div>
 
@@ -760,8 +756,8 @@ export default function LandingPage() {
                 Live
               </div>
               <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight mb-5">
-                Study with your<br />
-                <span className="italic" style={{ borderBottom: `5px solid ${FEATURE_BG}`, paddingBottom: "2px" }}>classmates, live</span>
+                Flashcards you can study<br />
+                <span className="italic" style={{ borderBottom: `5px solid ${FEATURE_BG}`, paddingBottom: "2px" }}>live, with friends</span>
               </h2>
               <p className="text-[#555] text-base leading-relaxed mb-8">
                 Create a room, share a 6-character code, and study any deck together in real time. Race Mode turns revision into a competition. Live chat keeps the energy up.
@@ -841,7 +837,7 @@ export default function LandingPage() {
               How we compare
             </div>
             <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">
-              FORKSAI vs everything else
+              Flashcards: FORKSAI vs Quizlet vs Anki
             </h2>
             <p className="text-[#555] text-base mt-4 max-w-lg mx-auto leading-relaxed">
               Most tools make you do the work. FORKSAI is the only one that reads your material and does it for you.
@@ -889,7 +885,7 @@ export default function LandingPage() {
               From the blog
             </div>
             <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">
-              Study smarter,<br />read smarter
+              How to study like a topper<br />and get better marks
             </h2>
           </div>
           <a href="/blogs" className="font-bold text-sm text-[#111] border-2 border-black rounded-xl px-5 py-2.5 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center gap-2 shrink-0">
@@ -1046,7 +1042,7 @@ export default function LandingPage() {
       {/* ── FOOTER ─────────────────────────────────────────── */}
       <footer className="border-t-2 border-black text-white" style={{ background: "#111111" }}>
         <div className="max-w-6xl mx-auto px-6 pt-16 pb-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-6 gap-10 pb-12 border-b border-white/10">
             <div className="lg:col-span-2">
               <div className="font-serif font-black text-xl text-white mb-3">FORKSAI</div>
               <p className="text-white/40 text-sm leading-relaxed max-w-xs">The AI study platform that turns your material into mastery. Built for students who want results, not just revision.</p>
@@ -1056,10 +1052,17 @@ export default function LandingPage() {
               {["Dashboard", "AI Flashcards", "Study Modes", "Study Rooms", "Public Decks"].map(l => (
                 <a key={l} href="/dashboard" className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
               ))}
+              <a href="/clipstudio" className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">ClipStudio</a>
             </div>
             <div>
               <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Resources</div>
               {[["Blog", "/blogs"], ["FAQ", "/faq"], ["Docs", "/docs"], ["AI Flashcards Guide", "/blog/flashcards"], ["Spaced Repetition", "/blog/spaced-repetition"]].map(([l, href]) => (
+                <a key={l} href={href} className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
+              ))}
+            </div>
+            <div>
+              <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Company</div>
+              {[["Work with us", "/apply"], ["Creator Program", "/apply/creators"], ["Ambassador Program", "/apply/ambassadors"]].map(([l, href]) => (
                 <a key={l} href={href} className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
               ))}
             </div>

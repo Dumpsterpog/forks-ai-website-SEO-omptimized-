@@ -3,7 +3,7 @@ import DocumentationContent from "@/components/DocumentationContent";
 export const metadata = {
   title: "Documentation",
   description:
-    "Everything you need to know about FORKSAI - from getting started to understanding how each feature works: AI flashcards, PDF summarizer, quiz generator, revision modes, and more.",
+    "Everything you need to know about FORKSAI, from getting started to how each feature works: AI flashcards, PDF summarizer, quiz generator, and more.",
   alternates: {
     canonical: "https://forksai.app/docs",
   },

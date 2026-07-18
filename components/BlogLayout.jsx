@@ -16,6 +16,21 @@ const CAT_STYLES = {
   "Memory":        { bg: "#FFE8E8", border: "#DC2626", text: "#DC2626" },
 };
 
+const ALL_POSTS = [
+  { title: "Active recall: the study technique that actually works", link: "/blog/active-recall", category: "Study Science" },
+  { title: "How to prepare for any exam in 2 weeks", link: "/blog/exam-prep", category: "Exam Tips" },
+  { title: "Why your study schedule keeps falling apart", link: "/blog/study-schedule", category: "Productivity" },
+  { title: "FSRS-5 vs SM-2: the algorithm upgrade that actually matters", link: "/blog/fsrs-vs-sm2", category: "Study Science" },
+  { title: "Spaced repetition: the secret to passing heavy exams", link: "/blog/spaced-repetition", category: "Memory" },
+  { title: "Why traditional flashcards are slowing you down", link: "/blog/flashcards", category: "AI Tools" },
+  { title: "I stopped taking notes in lecture. Here is what happened.", link: "/blog/notes-maker", category: "AI Tools" },
+  { title: "The problem with rereading the textbook", link: "/blog/study-modes", category: "Study Science" },
+  { title: "Turning downtime into learning time with audio", link: "/blog/ai-podcasts", category: "AI Tools" },
+  { title: "The best Quizlet alternative for students who want less busywork", link: "/blog/quizlet-alternative", category: "AI Tools" },
+  { title: "The best Anki alternative for students who don't want to fight the interface", link: "/blog/anki-alternative", category: "AI Tools" },
+  { title: "How to make Anki cards that actually work", link: "/blog/how-to-make-anki-cards", category: "Study Science" },
+];
+
 export default function BlogLayout({
   title, category, author, date, readTime,
   ctaHeading, ctaDesc,
@@ -27,6 +42,12 @@ export default function BlogLayout({
   useEffect(() => onAuthStateChanged(auth, u => setUser(u)), []);
 
   const cat = CAT_STYLES[category] || CAT_STYLES["AI Tools"];
+
+  const others = ALL_POSTS.filter(p => p.title !== title);
+  const related = [
+    ...others.filter(p => p.category === category),
+    ...others.filter(p => p.category !== category),
+  ].slice(0, 3);
 
   return (
     <div className="min-h-screen font-sans" style={{ background: "#EEEEE8", color: "#111111" }}>
@@ -120,6 +141,24 @@ export default function BlogLayout({
             {user ? "Go to Dashboard" : "Try it free"}
           </button>
         </div>
+
+        {/* Related articles */}
+        {related.length > 0 && (
+          <div className="mt-14">
+            <h4 className="text-xs font-black uppercase tracking-widest text-[#999] mb-4">Related articles</h4>
+            <div className="grid sm:grid-cols-3 gap-4">
+              {related.map(p => (
+                <a
+                  key={p.link}
+                  href={p.link}
+                  className="block bg-white border-2 border-black rounded-xl shadow-[3px_3px_0_#111] p-4 text-sm font-bold text-[#111] leading-snug transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 no-underline"
+                >
+                  {p.title}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </main>
 
       {/* ── FOOTER ── */}

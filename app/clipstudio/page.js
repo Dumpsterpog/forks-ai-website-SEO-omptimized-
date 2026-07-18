@@ -1,9 +1,9 @@
 import ClipStudioContent from "@/components/ClipStudioContent";
 
 export const metadata = {
-  title: "ClipStudio - AI Video Clipping for Shorts, Reels & TikTok | FORKSAI",
+  title: "ClipStudio - AI Video Clipping | FORKSAI",
   description:
-    "Upload a long video and FORKSAI's ClipStudio finds the moments worth clipping, generates short versions, and formats them for Shorts, Reels, and TikTok. No timeline editing required.",
+    "Upload a long video and ClipStudio finds the best moments, clips them, and formats them for Shorts, Reels, and TikTok. No timeline editing required.",
   alternates: {
     canonical: "https://forksai.app/clipstudio",
   },

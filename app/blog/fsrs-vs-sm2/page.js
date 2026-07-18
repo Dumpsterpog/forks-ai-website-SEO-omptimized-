@@ -1,6 +1,6 @@
 import BlogLayout from "@/components/BlogLayout";
 
-const SEO_TITLE = "FSRS-5 vs SM-2: Why We Upgraded Our Spaced Repetition Algorithm | FORKSAI Blog";
+const SEO_TITLE = "FSRS-5 vs SM-2: Why We Upgraded | FORKSAI";
 const SEO_DESC =
   "A deep technical breakdown of SM-2 and FSRS-5 — how they work, why SM-2 falls short, and what actually changes when you upgrade from one to the other.";
 const SEO_URL = "https://forksai.app/blog/fsrs-vs-sm2";

@@ -2,7 +2,7 @@ import BlogLayout from "@/components/BlogLayout";
 
 const SEO_TITLE = "How to Prepare for Any Exam in 2 Weeks | FORKSAI Blog";
 const SEO_DESC =
-  "A realistic, week-by-week plan for exam prep — built around spaced repetition, active recall, and actually understanding the material rather than hoping it sticks.";
+  "A realistic, week-by-week plan for exam prep, built around spaced repetition and active recall, not just hoping it sticks.";
 const SEO_URL = "https://forksai.app/blog/exam-prep";
 
 export const metadata = {

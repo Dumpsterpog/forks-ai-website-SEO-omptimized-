@@ -1,7 +1,7 @@
 import NotesSummarizerContent from "@/components/NotesSummarizerContent";
 
 export const metadata = {
-  title: "AI Notes Summarizer - Turn Lecture Notes into Key Points | FORKSAI",
+  title: "AI Notes Summarizer | FORKSAI",
   description:
     "Paste your lecture notes or upload a document and FORKSAI's AI summarizer extracts the key points, definitions, and concepts you actually need to study.",
   alternates: {
