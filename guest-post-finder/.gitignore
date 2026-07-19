@@ -1,0 +1,8 @@
+# Never commit your real API key
+.env
+
+# Generated output
+seo-tools/candidate_domains.csv
+seo-tools/guest_post_opportunities.csv
+
+.DS_Store
