@@ -101,6 +101,100 @@ function FaqItem({ q, a }) {
   );
 }
 
+/* ─── Hero live demo ────────────────────────────────────────── */
+const DEMO_CARDS = [
+  { q: "What is the rate-limiting enzyme of glycolysis?", a: "Phosphofructokinase-1" },
+  { q: "Where does the Krebs cycle take place?",          a: "The mitochondrial matrix" },
+  { q: "Which stage yields the most ATP?",                a: "Oxidative phosphorylation" },
+];
+
+const DEMO_STEPS = [
+  { label: "Uploading your PDF",   pct: 12,  hold: 1400 },
+  { label: "Reading 42 pages",     pct: 46,  hold: 1900 },
+  { label: "Writing your cards",   pct: 81,  hold: 1700 },
+  { label: "Deck ready",           pct: 100, hold: 3800 },
+];
+
+function HeroLiveDemo({ accent, featureBg }) {
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    const t = setTimeout(() => setStep(s => (s + 1) % DEMO_STEPS.length), DEMO_STEPS[step].hold);
+    return () => clearTimeout(t);
+  }, [step]);
+
+  const done = step === DEMO_STEPS.length - 1;
+  const { label, pct } = DEMO_STEPS[step];
+
+  return (
+    <div className="bg-white border-2 border-black rounded-xl shadow-[6px_6px_0_#111] overflow-hidden text-left">
+      <div className="p-5">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="w-9 h-9 rounded-lg border-2 border-black flex items-center justify-center shrink-0" style={{ background: accent }}>
+            <FileText size={16} className="text-[#111]" strokeWidth={2.5} />
+          </span>
+          <div className="min-w-0">
+            <div className="text-[13px] font-bold text-[#111] truncate">biochem-lecture-4.pdf</div>
+            <div className="text-[10px] font-medium text-[#888]">42 pages · 3.1 MB</div>
+          </div>
+        </div>
+
+        <div className="h-2.5 rounded-full border-2 border-black overflow-hidden mb-2.5" style={{ background: "#f0f0ea" }}>
+          <motion.div
+            className="h-full"
+            style={{ background: done ? featureBg : accent }}
+            animate={{ width: `${pct}%` }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          />
+        </div>
+
+        <div className="flex items-center justify-between mb-4 h-4">
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={step}
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.2 }}
+              className="text-[11px] font-bold text-[#555] flex items-center gap-1.5"
+            >
+              {done && <Check size={12} strokeWidth={3} style={{ color: featureBg }} />}
+              {label}
+            </motion.span>
+          </AnimatePresence>
+          <span className="text-[11px] font-black text-[#111] font-mono">{pct}%</span>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          {DEMO_CARDS.map(({ q, a }, i) => (
+            <motion.div
+              key={i}
+              initial={false}
+              animate={done ? { opacity: 1, y: 0 } : { opacity: 0.22, y: 6 }}
+              transition={{ duration: 0.35, delay: done ? i * 0.14 : 0 }}
+              className="rounded-lg bg-white px-3 py-2.5"
+              style={{
+                borderLeft: `3px solid ${[featureBg, "#7C3AED", accent][i]}`,
+                boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.05)",
+              }}
+            >
+              <div className="text-[11px] font-bold text-[#111] leading-snug">{q}</div>
+              <div className="text-[10px] text-[#888] mt-0.5">{a}</div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-4 pt-3 border-t border-black/10 flex items-center justify-between">
+          <span className="text-[11px] font-bold text-[#555]">38 cards · 9 study modes</span>
+          <span className="text-[11px] font-black" style={{ color: done ? featureBg : "#bbb" }}>
+            {done ? "Ready to study" : "Working..."}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Main ──────────────────────────────────────────────────── */
 export default function LandingPage() {
   const [cycle, setCycle] = useState("monthly");
@@ -202,7 +296,8 @@ export default function LandingPage() {
   const tools = ["FORKSAI", "Anki", "Quizlet", "Notion", "ChatGPT"];
 
   return (
-    <div className="min-h-screen font-sans" style={{ background: PAGE_BG, color: "#111111" }}>
+    /* pb-20 on mobile keeps the fixed bottom CTA bar from covering the footer. */
+    <div className="min-h-screen font-sans pb-20 sm:pb-0" style={{ background: PAGE_BG, color: "#111111" }}>
 
       {/* Earn while you study prompt */}
       <AnimatePresence>
@@ -344,22 +439,49 @@ export default function LandingPage() {
         >
           <a href="/" className="flex items-center gap-2 shrink-0">
             <img src="/forks-logo.png" alt="FORKSAI" className="h-7 w-auto" />
-            <span className="font-serif font-black text-xl text-[#111] tracking-tight">FORKSAI</span>
+            {/* Wordmark is hidden on the narrowest phones so the two CTAs keep
+                their full labels on one line instead of wrapping. */}
+            <span className="hidden sm:inline font-serif font-black text-xl text-[#111] tracking-tight">FORKSAI</span>
           </a>
 
           <div className="flex items-center gap-2 sm:gap-3">
             <a href="#pricing" className="hidden sm:block text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
               Pricing
             </a>
-            <button onClick={goLogin} className="text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
+            <button onClick={goLogin} className="whitespace-nowrap text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
               Sign In
             </button>
-            <button onClick={goSignup} className="text-sm font-bold text-[#111] border-2 border-black rounded-xl px-3 sm:px-4 py-2 shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5" style={{ background: ACCENT }}>
+            <button onClick={goSignup} className="whitespace-nowrap text-sm font-bold text-[#111] border-2 border-black rounded-xl px-3 sm:px-4 py-2 shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5" style={{ background: ACCENT }}>
               Start for Free
             </button>
           </div>
         </div>
       </nav>
+
+      {/* ── STICKY MOBILE CTA ──────────────────────────────── */}
+      <AnimatePresence>
+        {navScrolled && (
+          <motion.div
+            initial={{ y: 90 }}
+            animate={{ y: 0 }}
+            exit={{ y: 90 }}
+            transition={{ type: "spring", stiffness: 320, damping: 30 }}
+            className="fixed bottom-0 inset-x-0 z-50 sm:hidden border-t-2 border-black bg-white px-4 py-3 flex items-center gap-3"
+          >
+            <div className="leading-tight min-w-0">
+              <div className="text-[13px] font-black text-[#111]">Start for free</div>
+              <div className="text-[10px] font-semibold text-[#777]">No credit card required</div>
+            </div>
+            <button
+              onClick={goSignup}
+              className="ml-auto shrink-0 font-black text-sm border-2 border-black rounded-xl px-5 py-2.5 text-[#111] shadow-[3px_3px_0_#111] transition-all active:shadow-[1px_1px_0_#111] active:translate-x-0.5 active:translate-y-0.5 flex items-center gap-2"
+              style={{ background: ACCENT }}
+            >
+              Get started <ArrowRight size={15} strokeWidth={2.75} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── HERO ───────────────────────────────────────────── */}
       <section className="relative pt-24 pb-20 text-center">
@@ -526,7 +648,7 @@ export default function LandingPage() {
             <span className="text-xs font-bold text-[#111]">Calling all students & influencers! Work with us <span className="ml-1">→</span></span>
           </button>
 
-          <h1 className="font-serif font-black text-5xl sm:text-6xl md:text-7xl leading-[1.08] text-[#111] mb-6">
+          <h1 className="font-serif font-black text-5xl sm:text-6xl md:text-7xl leading-[1.06] text-[#111] mb-5">
             The best alternative to{" "}
             <span
               className="italic"
@@ -541,29 +663,45 @@ export default function LandingPage() {
             </span>
           </h1>
 
-          <p className="text-[#555] text-lg sm:text-xl max-w-xl mx-auto leading-relaxed mb-10">
-            Upload any PDF or notes and FORKSAI builds your deck automatically, no manual card creation like Quizlet or Anki. Study alone or race your classmates in live rooms.
+          <p className="text-[#444] text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-9">
+            Drop in a PDF or your notes. Get a complete flashcard deck in{" "}
+            <span className="font-bold text-[#111]">30 seconds</span>, not an evening of typing.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
             <button
               onClick={goSignup}
-              className="w-full sm:w-auto font-bold text-base border-2 border-black rounded-xl px-8 py-3.5 text-white shadow-[4px_4px_0_#555] transition-all hover:shadow-[2px_2px_0_#555] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center justify-center gap-2"
-              style={{ background: "#111111" }}
+              className="w-full sm:w-auto font-black text-lg border-2 border-black rounded-2xl px-10 py-4 text-[#111] shadow-[5px_5px_0_#111] transition-all hover:shadow-[2px_2px_0_#111] hover:translate-x-1 hover:translate-y-1 flex items-center justify-center gap-2.5"
+              style={{ background: ACCENT }}
             >
-              Start for free <ArrowRight size={16} />
+              Start for free <ArrowRight size={19} strokeWidth={2.75} />
             </button>
-            <span className="text-sm text-[#555] font-medium">No credit card required</span>
+            <a
+              href="#how-it-works"
+              className="w-full sm:w-auto font-bold text-base border-2 border-black rounded-2xl px-7 py-4 text-[#111] bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center justify-center no-underline"
+            >
+              See how it works
+            </a>
+          </div>
+
+          {/* Risk reversal */}
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6">
+            {["Free forever plan", "No credit card required", "Ready in 30 seconds"].map(t => (
+              <span key={t} className="flex items-center gap-1.5 text-[13px] font-semibold text-[#555]">
+                <Check size={14} strokeWidth={3} style={{ color: FEATURE_BG }} />
+                {t}
+              </span>
+            ))}
           </div>
 
           {/* Social proof logo wall */}
-          <div className="flex flex-col items-center gap-5 mt-12">
+          <div className="flex flex-col items-center gap-4 mt-12">
             <p className="text-sm font-semibold text-[#333] text-center">
               Relied on by <span className="font-black text-[#111]">100,000+</span> students at
             </p>
             <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
               {["UCL", "Harvard", "Stanford", "University of Zagreb", "Johns Hopkins"].map(name => (
-                <span key={name} className="text-[#aaa] font-serif font-bold text-xl sm:text-2xl tracking-tight">
+                <span key={name} className="text-[#9c9c96] font-serif font-bold text-xl sm:text-2xl tracking-tight">
                   {name}
                 </span>
               ))}
@@ -572,53 +710,15 @@ export default function LandingPage() {
               and 1,500+ other institutions worldwide
             </p>
           </div>
-
-          {/* Mobile apps coming soon */}
-          <div className="flex flex-col items-center gap-3 mt-10">
-            <span className="inline-flex items-center gap-2 border-2 border-black rounded-full px-3 py-1 bg-yellow shadow-[2px_2px_0_#111] text-[10px] font-black uppercase tracking-[0.18em] text-[#111]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#111] animate-pulse" />
-              Coming soon to mobile
-            </span>
-            <div className="flex flex-col sm:flex-row items-center gap-3">
-              <div className="flex items-center gap-3 border-2 border-black rounded-xl px-4 py-2.5 bg-white shadow-[3px_3px_0_#111]" aria-label="FORKSAI coming soon on the App Store">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="#111" aria-hidden="true">
-                  <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09l-.001-.001zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z" />
-                </svg>
-                <div className="text-left leading-none">
-                  <div className="text-[9px] font-bold text-[#555] uppercase tracking-widest mb-0.5">Soon on the</div>
-                  <div className="text-sm font-black text-[#111]">App Store</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 border-2 border-black rounded-xl px-4 py-2.5 bg-white shadow-[3px_3px_0_#111]" aria-label="FORKSAI coming soon on Google Play">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="#111" aria-hidden="true">
-                  <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.39 12l2.308-2.49zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z" />
-                </svg>
-                <div className="text-left leading-none">
-                  <div className="text-[9px] font-bold text-[#555] uppercase tracking-widest mb-0.5">Soon on</div>
-                  <div className="text-sm font-black text-[#111]">Google Play</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
-        {/* Apps + arrow + dashboard */}
+        {/* Live demo + dashboard */}
         <div className="max-w-6xl mx-auto px-6 mt-14">
           <div className="flex items-center gap-5">
 
-            {/* Apps card */}
-            <div className="hidden lg:block shrink-0 bg-white border-2 border-black rounded-xl shadow-[4px_4px_0_#111] p-5">
-              <p className="text-[9px] font-bold text-[#555] uppercase tracking-widest mb-4 text-left">Works with</p>
-              <div className="flex flex-col gap-3">
-                {IMPORT_APPS.map(({ name, bg, label }) => (
-                  <div key={name} className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg border-2 border-black flex items-center justify-center font-black text-xs text-white shrink-0" style={{ background: bg }}>
-                      {label}
-                    </div>
-                    <span className="text-xs font-bold text-[#111]">{name}</span>
-                  </div>
-                ))}
-              </div>
+            {/* Live generation demo */}
+            <div className="hidden lg:block shrink-0 w-[300px]">
+              <HeroLiveDemo accent={ACCENT} featureBg={FEATURE_BG} />
             </div>
 
             {/* Curved arrow */}
@@ -630,12 +730,49 @@ export default function LandingPage() {
             </div>
 
             {/* Dashboard */}
-            <div className="flex-1 border-2 border-black rounded-xl overflow-hidden shadow-[6px_6px_0_#111] bg-white">
+            <div className="flex-1 min-w-0 border-2 border-black rounded-xl overflow-hidden shadow-[6px_6px_0_#111] bg-white">
               <div className="border-b-2 border-black px-4 py-3 flex items-center justify-center" style={{ background: "#f0f0ea" }}>
                 <span className="text-xs font-mono font-bold text-[#555]">forksai.app/dashboard</span>
               </div>
-              <img src="/dashboardpreview.png" alt="FORKSAI Dashboard" className="w-full h-auto block"
-                onError={e => { e.currentTarget.src = "/dashboard.png"; }} />
+              {/* ?v= is a cache-buster: the old preview screenshot stayed pinned in
+                  browser and CDN caches after the file itself was replaced. */}
+              <img src="/dashboardpreview.png?v=2" alt="FORKSAI Dashboard" className="w-full h-auto block" />
+            </div>
+          </div>
+        </div>
+
+        {/* Imports + mobile */}
+        <div className="max-w-6xl mx-auto px-6 mt-12 flex flex-col items-center gap-8">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+            <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#888]">Brings in your decks from</span>
+            {IMPORT_APPS.map(({ name, bg, label }) => (
+              <span key={name} className="flex items-center gap-2">
+                <span className="w-7 h-7 rounded-lg border-2 border-black flex items-center justify-center font-black text-[11px] text-white shrink-0" style={{ background: bg }}>
+                  {label}
+                </span>
+                <span className="text-xs font-bold text-[#111]">{name}</span>
+              </span>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-3">
+            <span className="inline-flex items-center gap-2 border-2 border-black rounded-full px-3 py-1.5 bg-yellow shadow-[2px_2px_0_#111] text-[10px] font-black uppercase tracking-[0.18em] text-[#111]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#111]" />
+              Coming soon
+            </span>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2.5 border-2 border-black rounded-xl px-3.5 py-2 bg-white shadow-[3px_3px_0_#111]" aria-label="FORKSAI coming soon on the App Store">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="#111" aria-hidden="true">
+                  <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09l-.001-.001zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z" />
+                </svg>
+                <span className="text-[13px] font-black text-[#111]">App Store</span>
+              </div>
+              <div className="flex items-center gap-2.5 border-2 border-black rounded-xl px-3.5 py-2 bg-white shadow-[3px_3px_0_#111]" aria-label="FORKSAI coming soon on Google Play">
+                <svg viewBox="0 0 24 24" width="17" height="17" fill="#111" aria-hidden="true">
+                  <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.39 12l2.308-2.49zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z" />
+                </svg>
+                <span className="text-[13px] font-black text-[#111]">Google Play</span>
+              </div>
             </div>
           </div>
         </div>
@@ -675,7 +812,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── HOW IT WORKS ───────────────────────────────────── */}
-      <section className="bg-white border-y-2 border-black py-20">
+      <section id="how-it-works" className="bg-white border-y-2 border-black py-20 scroll-mt-24">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-2 mb-5">
