@@ -101,6 +101,21 @@ function FaqItem({ q, a }) {
   );
 }
 
+/* ─── Scroll reveal ─────────────────────────────────────────── */
+function Reveal({ children, delay = 0, className = "" }) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-70px" }}
+      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 /* ─── Hero live demo ────────────────────────────────────────── */
 const DEMO_CARDS = [
   { q: "What is the rate-limiting enzyme of glycolysis?", a: "Phosphofructokinase-1" },
@@ -638,17 +653,30 @@ export default function LandingPage() {
 
         {/* Text */}
         <div className="max-w-4xl mx-auto px-6 flex flex-col items-center">
-          <button
-            onClick={() => setShowEarnPrompt(true)}
-            className="flex items-center gap-2 border-2 border-black rounded-full px-4 py-1.5 mb-6 bg-white shadow-[2px_2px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5"
+          {/* Top badge points at a product feature rather than the affiliate
+              programme: this is the highest-attention slot on the page and the
+              "work with us" prompt was pulling first-time visitors away from
+              signup. That prompt now lives in the footer instead. */}
+          <motion.a
+            href="#study-rooms"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="flex items-center gap-2.5 border-2 border-black rounded-full pl-1.5 pr-4 py-1.5 mb-6 bg-white shadow-[2px_2px_0_#111] no-underline transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5"
           >
-            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-yellow border-2 border-black shrink-0">
-              <span className="font-bold text-[10px] text-black">!</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-white px-2.5 py-1 rounded-full shrink-0" style={{ background: FEATURE_BG }}>
+              New
             </span>
-            <span className="text-xs font-bold text-[#111]">Calling all students & influencers! Work with us <span className="ml-1">→</span></span>
-          </button>
+            <span className="text-xs font-bold text-[#111]">Study Rooms: revise live with your classmates</span>
+            <ArrowRight size={13} strokeWidth={2.75} className="text-[#111]" />
+          </motion.a>
 
-          <h1 className="font-serif font-black text-5xl sm:text-6xl md:text-7xl leading-[1.06] text-[#111] mb-5">
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
+            className="font-serif font-black text-5xl sm:text-6xl md:text-7xl leading-[1.06] text-[#111] mb-5"
+          >
             The best alternative to{" "}
             <span
               className="italic"
@@ -661,14 +689,24 @@ export default function LandingPage() {
             >
               Quizlet and Anki
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-[#444] text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-9">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+            className="text-[#444] text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-9"
+          >
             Drop in a PDF or your notes. Get a complete flashcard deck in{" "}
             <span className="font-bold text-[#111]">30 seconds</span>, not an evening of typing.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto"
+          >
             <button
               onClick={goSignup}
               className="w-full sm:w-auto font-black text-lg border-2 border-black rounded-2xl px-10 py-4 text-[#111] shadow-[5px_5px_0_#111] transition-all hover:shadow-[2px_2px_0_#111] hover:translate-x-1 hover:translate-y-1 flex items-center justify-center gap-2.5"
@@ -682,7 +720,7 @@ export default function LandingPage() {
             >
               See how it works
             </a>
-          </div>
+          </motion.div>
 
           {/* Risk reversal */}
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6">
@@ -744,7 +782,7 @@ export default function LandingPage() {
         {/* Imports + mobile */}
         <div className="max-w-6xl mx-auto px-6 mt-12 flex flex-col items-center gap-8">
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-            <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#888]">Brings in your decks from</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#888]">Works with</span>
             {IMPORT_APPS.map(({ name, bg, label }) => (
               <span key={name} className="flex items-center gap-2">
                 <span className="w-7 h-7 rounded-lg border-2 border-black flex items-center justify-center font-black text-[11px] text-white shrink-0" style={{ background: bg }}>
@@ -788,9 +826,9 @@ export default function LandingPage() {
             const cardTilt = [-2, 1.5, -1][i % 3];
             const tapeTilt = [-6, 7, -5][i % 3];
             return (
+              <Reveal key={i} delay={i * 0.09}>
               <div
-                key={i}
-                className="relative bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_6px_14px_rgba(0,0,0,0.18)] p-6 pt-8 transition-transform hover:-translate-y-1"
+                className="relative bg-[#fffdf3] border border-black/10 rounded-sm shadow-[0_6px_14px_rgba(0,0,0,0.18)] p-6 pt-8 transition-transform hover:-translate-y-1 h-full"
                 style={{ transform: `rotate(${cardTilt}deg)` }}
               >
                 <span
@@ -806,6 +844,7 @@ export default function LandingPage() {
                 <h3 className="font-bold text-[#111] text-base mb-2 leading-snug">{title}</h3>
                 <p className="text-[#555] text-sm leading-relaxed">{desc}</p>
               </div>
+              </Reveal>
             );
           })}
         </div>
@@ -826,13 +865,13 @@ export default function LandingPage() {
           <div className="flex flex-col md:flex-row items-stretch gap-6 md:gap-3">
             {STEPS.map(({ num, title, desc }, i) => (
               <Fragment key={i}>
-                <div className="flex-1 text-center md:text-left">
+                <Reveal delay={i * 0.12} className="flex-1 text-center md:text-left">
                   <div className="w-9 h-9 rounded-full flex items-center justify-center font-mono font-black text-sm mb-4 mx-auto md:mx-0" style={{ background: ACCENT, color: "#111" }}>
                     {num}
                   </div>
                   <h3 className="font-bold text-[#111] text-base mb-2 leading-snug">{title}</h3>
                   <p className="text-[#555] text-sm leading-relaxed">{desc}</p>
-                </div>
+                </Reveal>
                 {i < STEPS.length - 1 && (
                   <div className="flex items-center justify-center shrink-0">
                     <ArrowRight size={24} className="hidden md:block" style={{ color: ACCENT }} strokeWidth={2.5} />
@@ -841,6 +880,17 @@ export default function LandingPage() {
                 )}
               </Fragment>
             ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-14">
+            <button
+              onClick={goSignup}
+              className="w-full sm:w-auto font-black text-base border-2 border-black rounded-xl px-8 py-3.5 text-[#111] shadow-[4px_4px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-1 hover:translate-y-1 flex items-center justify-center gap-2"
+              style={{ background: ACCENT }}
+            >
+              Build my first deck <ArrowRight size={16} strokeWidth={2.75} />
+            </button>
+            <span className="text-sm text-[#555] font-medium">Takes about 30 seconds. No card needed.</span>
           </div>
         </div>
       </section>
@@ -905,7 +955,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── STUDY ROOMS ────────────────────────────────────── */}
-      <section className="bg-white border-y-2 border-black py-20">
+      <section id="study-rooms" className="bg-white border-y-2 border-black py-20 scroll-mt-24">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -1020,16 +1070,38 @@ export default function LandingPage() {
                   <tr key={ri} className="border-t-2 border-black/10">
                     <td className="px-5 py-3.5 text-sm font-medium text-[#111]">{row.feat}</td>
                     {row.vals.map((v, vi) => (
-                      <td key={vi} className="px-3 py-3.5 text-center" style={{ background: vi === 0 ? "rgba(240,212,74,0.1)" : "transparent" }}>
-                        {v
-                          ? <span className="font-black text-base" style={{ color: FEATURE_BG }}>✓</span>
-                          : <span className="text-sm font-bold text-black/20">✕</span>}
+                      <td key={vi} className="px-3 py-3.5" style={{ background: vi === 0 ? "rgba(240,212,74,0.22)" : "transparent" }}>
+                        <span className="flex items-center justify-center">
+                          {v ? (
+                            <span
+                              className="w-6 h-6 rounded-full flex items-center justify-center border-2 border-black"
+                              style={{ background: vi === 0 ? FEATURE_BG : "transparent" }}
+                            >
+                              <Check size={13} strokeWidth={3.5} style={{ color: vi === 0 ? "#fff" : FEATURE_BG }} />
+                            </span>
+                          ) : (
+                            /* A muted dash reads as "not offered" far more clearly
+                               than the near-invisible ✕ this used to render. */
+                            <span className="block w-3.5 h-0.5 rounded-full bg-black/25" />
+                          )}
+                        </span>
                       </td>
                     ))}
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+            <button
+              onClick={goSignup}
+              className="w-full sm:w-auto font-black text-base border-2 border-black rounded-xl px-8 py-3.5 text-[#111] shadow-[4px_4px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-1 hover:translate-y-1 flex items-center justify-center gap-2"
+              style={{ background: ACCENT }}
+            >
+              Switch to FORKSAI free <ArrowRight size={16} strokeWidth={2.75} />
+            </button>
+            <span className="text-sm text-[#555] font-medium">Free forever plan. No credit card required.</span>
           </div>
         </div>
       </section>
@@ -1052,7 +1124,8 @@ export default function LandingPage() {
         </div>
         <div className="grid sm:grid-cols-2 gap-5">
           {BLOGS.map(({ title, desc, link, cat, time, catColor }, i) => (
-            <a key={i} href={link} className="bg-white border-2 border-black rounded-xl shadow-[4px_4px_0_#111] p-6 flex flex-col transition-all hover:shadow-[2px_2px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 group" style={{ textDecoration: "none" }}>
+            <Reveal key={i} delay={(i % 2) * 0.1} className="flex">
+            <a href={link} className="w-full bg-white border-2 border-black rounded-xl shadow-[4px_4px_0_#111] p-6 flex flex-col transition-all hover:shadow-[2px_2px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 group" style={{ textDecoration: "none" }}>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-[10px] font-bold uppercase tracking-widest border rounded-full px-3 py-1" style={{ borderColor: catColor, color: catColor, background: `${catColor}18` }}>{cat}</span>
                 <span className="flex items-center gap-1 text-xs text-[#555] font-medium"><Clock size={11} />{time} read</span>
@@ -1063,6 +1136,7 @@ export default function LandingPage() {
                 Read more <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
               </div>
             </a>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -1137,9 +1211,10 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
-            <button onClick={goSignup} className="mt-auto w-full font-bold text-sm border-2 border-black rounded-xl py-3.5 bg-white text-[#111] shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
+            <button onClick={goSignup} className="mt-auto w-full font-black text-sm border-2 border-black rounded-xl py-3.5 text-[#111] shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5" style={{ background: ACCENT }}>
               Get started free
             </button>
+            <p className="text-[11px] text-[#888] text-center mt-3 font-medium">No credit card required</p>
           </div>
 
           {/* Right card — Premium */}
@@ -1190,8 +1265,39 @@ export default function LandingPage() {
             <button onClick={goSignup} className="mt-auto w-full font-bold text-sm border-2 border-black rounded-xl py-3.5 text-white shadow-[3px_3px_0_#555] transition-all hover:shadow-[1px_1px_0_#555] hover:translate-x-0.5 hover:translate-y-0.5" style={{ background: "#111111" }}>
               Get Premium
             </button>
+            <p className="text-[11px] text-[#888] text-center mt-3 font-medium">Cancel anytime · Start on Free first</p>
           </div>
         </div>
+      </section>
+
+      {/* ── FINAL CTA ──────────────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-6 pb-20">
+        <Reveal>
+          <div className="border-2 border-black rounded-2xl shadow-[6px_6px_0_#111] px-8 py-14 sm:px-14 text-center relative overflow-hidden" style={{ background: ACCENT }}>
+            <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight mb-4">
+              Stop making flashcards.<br />Start actually learning.
+            </h2>
+            <p className="text-[#333] text-base sm:text-lg max-w-lg mx-auto leading-relaxed mb-9">
+              Upload your first PDF and have a study-ready deck before your coffee gets cold.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <button
+                onClick={goSignup}
+                className="w-full sm:w-auto font-black text-lg border-2 border-black rounded-2xl px-10 py-4 text-[#111] bg-white shadow-[5px_5px_0_#111] transition-all hover:shadow-[2px_2px_0_#111] hover:translate-x-1 hover:translate-y-1 flex items-center justify-center gap-2.5"
+              >
+                Start for free <ArrowRight size={19} strokeWidth={2.75} />
+              </button>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-7">
+              {["Free forever plan", "No credit card required", "Ready in 30 seconds"].map(t => (
+                <span key={t} className="flex items-center gap-1.5 text-[13px] font-bold text-[#111]">
+                  <Check size={14} strokeWidth={3} />
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* ── FOOTER ─────────────────────────────────────────── */}
@@ -1204,8 +1310,19 @@ export default function LandingPage() {
             </div>
             <div>
               <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Product</div>
-              {["Dashboard", "AI Flashcards", "Study Modes", "Study Rooms", "Public Decks"].map(l => (
-                <a key={l} href="/dashboard" className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
+              {/* These all used to point at /dashboard, which is served by the
+                  old app through the multi-zone fallback proxy and 404s. They
+                  now point at the real marketing pages, which also gives those
+                  pages the internal links they were missing. */}
+              {[
+                ["AI Flashcards", "/ai-flashcards"],
+                ["PDF to Flashcards", "/pdf-to-flashcards"],
+                ["Study Modes", "/learn"],
+                ["AI Notes", "/notes"],
+                ["AI Summarizer", "/ai-summarizer"],
+                ["Study Tools", "/ai-study-tools"],
+              ].map(([l, href]) => (
+                <a key={l} href={href} className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
               ))}
             </div>
             <div>
@@ -1219,6 +1336,15 @@ export default function LandingPage() {
               {[["Work with us", "/apply"], ["Creator Program", "/apply/creators"], ["Ambassador Program", "/apply/ambassadors"]].map(([l, href]) => (
                 <a key={l} href={href} className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
               ))}
+              {/* Re-homed from the hero badge, which was diverting first-time
+                  visitors away from signup. */}
+              <button
+                onClick={() => setShowEarnPrompt(true)}
+                className="block text-left text-sm font-bold mb-2 transition-colors hover:opacity-80"
+                style={{ color: ACCENT }}
+              >
+                Earn with FORKSAI
+              </button>
             </div>
             <div>
               <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Legal</div>
@@ -1228,7 +1354,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <span className="text-white/30 text-xs">2025 FORKSAI. All rights reserved.</span>
+            <span className="text-white/30 text-xs">2026 FORKSAI. All rights reserved.</span>
             <span className="text-white/30 text-xs">Made for students, by students.</span>
           </div>
         </div>
