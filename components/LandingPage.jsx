@@ -1,6 +1,7 @@
 "use client";
 
 import { goToDashboard } from "@/lib/goToDashboard";
+import { trackSignupClick } from "@/lib/track";
 
 import { useState, useEffect, Fragment } from "react";
 import Image from "next/image";
@@ -301,8 +302,17 @@ export default function LandingPage() {
   // ending in a Google sign-in step right before their first deck gets
   // created - so auth happens as late as possible either way, instead of
   // gating it behind a popup on this page.
-  const goSignup = () => goToDashboard();
-  const goLogin  = () => goToDashboard();
+  // `location` identifies which CTA was clicked so the analytics events can be
+  // broken down per placement. Tracking is best-effort and never blocks the
+  // redirect - see lib/track.js.
+  const goSignup = (location) => {
+    trackSignupClick(location, "signup");
+    goToDashboard();
+  };
+  const goLogin = (location) => {
+    trackSignupClick(location, "login");
+    goToDashboard();
+  };
   const dismissEarnPrompt = () => {
     localStorage.setItem("forksai_earn_prompt_v1", "1");
     setShowEarnPrompt(false);
@@ -463,10 +473,10 @@ export default function LandingPage() {
             <a href="#pricing" className="hidden sm:block text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
               Pricing
             </a>
-            <button onClick={goLogin} className="whitespace-nowrap text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
+            <button onClick={() => goLogin("nav")} className="whitespace-nowrap text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
               Sign In
             </button>
-            <button onClick={goSignup} className="whitespace-nowrap text-sm font-bold text-[#111] border-2 border-black rounded-xl px-3 sm:px-4 py-2 shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5" style={{ background: ACCENT }}>
+            <button onClick={() => goSignup("nav")} className="whitespace-nowrap text-sm font-bold text-[#111] border-2 border-black rounded-xl px-3 sm:px-4 py-2 shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5" style={{ background: ACCENT }}>
               Start for Free
             </button>
           </div>
@@ -488,7 +498,7 @@ export default function LandingPage() {
               <div className="text-[10px] font-semibold text-[#777]">No credit card required</div>
             </div>
             <button
-              onClick={goSignup}
+              onClick={() => goSignup("sticky_mobile")}
               className="ml-auto shrink-0 font-black text-sm border-2 border-black rounded-xl px-5 py-2.5 text-[#111] shadow-[3px_3px_0_#111] transition-all active:shadow-[1px_1px_0_#111] active:translate-x-0.5 active:translate-y-0.5 flex items-center gap-2"
               style={{ background: ACCENT }}
             >
@@ -708,7 +718,7 @@ export default function LandingPage() {
             className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto"
           >
             <button
-              onClick={goSignup}
+              onClick={() => goSignup("hero")}
               className="w-full sm:w-auto font-black text-lg border-2 border-black rounded-2xl px-10 py-4 text-[#111] shadow-[5px_5px_0_#111] transition-all hover:shadow-[2px_2px_0_#111] hover:translate-x-1 hover:translate-y-1 flex items-center justify-center gap-2.5"
               style={{ background: ACCENT }}
             >
@@ -755,7 +765,7 @@ export default function LandingPage() {
           <div className="flex items-center gap-5">
 
             {/* Live generation demo */}
-            <div className="hidden lg:block shrink-0 w-[300px]">
+            <div className="hidden lg:block shrink-0 w-75">
               <HeroLiveDemo accent={ACCENT} featureBg={FEATURE_BG} />
             </div>
 
@@ -772,9 +782,19 @@ export default function LandingPage() {
               <div className="border-b-2 border-black px-4 py-3 flex items-center justify-center" style={{ background: "#f0f0ea" }}>
                 <span className="text-xs font-mono font-bold text-[#555]">forksai.app/dashboard</span>
               </div>
-              {/* ?v= is a cache-buster: the old preview screenshot stayed pinned in
-                  browser and CDN caches after the file itself was replaced. */}
-              <img src="/dashboardpreview.png?v=2" alt="FORKSAI Dashboard" className="w-full h-auto block" />
+              {/* next/image serves AVIF/WebP at the size actually needed rather
+                  than shipping the full 3200px PNG to every device. Its URLs are
+                  content-addressed, so the manual ?v= cache-buster this used to
+                  carry is no longer necessary. */}
+              <Image
+                src="/dashboardpreview.png"
+                alt="FORKSAI dashboard showing decks, study streak and cards due for review"
+                width={3200}
+                height={1822}
+                priority
+                sizes="(max-width: 1024px) 100vw, 900px"
+                className="w-full h-auto block"
+              />
             </div>
           </div>
         </div>
@@ -884,7 +904,7 @@ export default function LandingPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-14">
             <button
-              onClick={goSignup}
+              onClick={() => goSignup("how_it_works")}
               className="w-full sm:w-auto font-black text-base border-2 border-black rounded-xl px-8 py-3.5 text-[#111] shadow-[4px_4px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-1 hover:translate-y-1 flex items-center justify-center gap-2"
               style={{ background: ACCENT }}
             >
@@ -987,7 +1007,7 @@ export default function LandingPage() {
                   </div>
                 ))}
               </div>
-              <button onClick={goSignup} className="font-bold text-[#111] text-sm border-2 border-black rounded-xl px-6 py-3 shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center gap-2" style={{ background: ACCENT }}>
+              <button onClick={() => goSignup("study_rooms")} className="font-bold text-[#111] text-sm border-2 border-black rounded-xl px-6 py-3 shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center gap-2" style={{ background: ACCENT }}>
                 Create a room <ArrowRight size={14} />
               </button>
             </div>
@@ -1029,7 +1049,7 @@ export default function LandingPage() {
                 Mind Maps, Podcast Mode, Study Rooms, Medical Encyclopedia. All shipped in the last 3 months. Join now and get every feature the moment it lands.
               </p>
             </div>
-            <button onClick={goSignup} className="w-full font-bold text-[#111] text-sm border-2 border-black rounded-xl px-6 py-3.5 shadow-[3px_3px_0_#555] transition-all hover:shadow-[1px_1px_0_#555] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center justify-center gap-2" style={{ background: ACCENT }}>
+            <button onClick={() => goSignup("weekly_updates")} className="w-full font-bold text-[#111] text-sm border-2 border-black rounded-xl px-6 py-3.5 shadow-[3px_3px_0_#555] transition-all hover:shadow-[1px_1px_0_#555] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center justify-center gap-2" style={{ background: ACCENT }}>
               Start for free <ArrowRight size={15} />
             </button>
           </div>
@@ -1095,7 +1115,7 @@ export default function LandingPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
             <button
-              onClick={goSignup}
+              onClick={() => goSignup("comparison")}
               className="w-full sm:w-auto font-black text-base border-2 border-black rounded-xl px-8 py-3.5 text-[#111] shadow-[4px_4px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-1 hover:translate-y-1 flex items-center justify-center gap-2"
               style={{ background: ACCENT }}
             >
@@ -1211,7 +1231,7 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
-            <button onClick={goSignup} className="mt-auto w-full font-black text-sm border-2 border-black rounded-xl py-3.5 text-[#111] shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5" style={{ background: ACCENT }}>
+            <button onClick={() => goSignup("pricing_free")} className="mt-auto w-full font-black text-sm border-2 border-black rounded-xl py-3.5 text-[#111] shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5" style={{ background: ACCENT }}>
               Get started free
             </button>
             <p className="text-[11px] text-[#888] text-center mt-3 font-medium">No credit card required</p>
@@ -1262,7 +1282,7 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
-            <button onClick={goSignup} className="mt-auto w-full font-bold text-sm border-2 border-black rounded-xl py-3.5 text-white shadow-[3px_3px_0_#555] transition-all hover:shadow-[1px_1px_0_#555] hover:translate-x-0.5 hover:translate-y-0.5" style={{ background: "#111111" }}>
+            <button onClick={() => goSignup("pricing_premium")} className="mt-auto w-full font-bold text-sm border-2 border-black rounded-xl py-3.5 text-white shadow-[3px_3px_0_#555] transition-all hover:shadow-[1px_1px_0_#555] hover:translate-x-0.5 hover:translate-y-0.5" style={{ background: "#111111" }}>
               Get Premium
             </button>
             <p className="text-[11px] text-[#888] text-center mt-3 font-medium">Cancel anytime · Start on Free first</p>
@@ -1282,7 +1302,7 @@ export default function LandingPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
-                onClick={goSignup}
+                onClick={() => goSignup("final_cta")}
                 className="w-full sm:w-auto font-black text-lg border-2 border-black rounded-2xl px-10 py-4 text-[#111] bg-white shadow-[5px_5px_0_#111] transition-all hover:shadow-[2px_2px_0_#111] hover:translate-x-1 hover:translate-y-1 flex items-center justify-center gap-2.5"
               >
                 Start for free <ArrowRight size={19} strokeWidth={2.75} />

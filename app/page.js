@@ -60,7 +60,7 @@ const softwareSchema = {
   url: "https://forksai.app",
   applicationCategory: "EducationalApplication",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock" },
-  screenshot: { "@type": "ImageObject", url: "https://forksai.app/dashboard.png" },
+  screenshot: { "@type": "ImageObject", url: "https://forksai.app/dashboardpreview.png" },
   operatingSystem: "Web",
   inLanguage: "en",
   developer: { "@type": "Organization", name: "ForksAI" },
