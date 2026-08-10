@@ -15,11 +15,11 @@ import {
 
 /* ─── Data ──────────────────────────────────────────────────── */
 const FAQS = [
-  { q: "How is FORKSAI different from Quizlet and Anki?", a: "FORKSAI generates flashcards automatically from your own notes or PDFs in under 30 seconds, while Quizlet and Anki require you to build every card by hand. It runs the same FSRS-5 spaced repetition algorithm as modern Anki, plus 9 built-in study modes and live Study Rooms out of the box." },
+  { q: "How is FORKSAI different from Quizlet and Anki?", a: "FORKSAI generates flashcards automatically from your own notes or PDFs in under 30 seconds, while Quizlet and Anki require you to build every card by hand. It runs the same FSRS-5 spaced repetition algorithm as modern Anki, plus 12 built-in study modes and live Study Rooms out of the box." },
   { q: "How does FORKSAI generate flashcards?", a: "You upload any PDF, paste notes, or type a topic. Our AI reads the content, identifies key concepts, and produces a complete, ready-to-study deck in under 30 seconds. No manual card creation needed." },
-  { q: "What study modes are included?", a: "9 modes in total: Flashcard Flip, Write Mode, Quiz, Spaced Repetition (FSRS-5), Weak Spot Trainer, Memory Sprint, Exam Simulator, Explain Back, and Pomodoro Mode. Every mode is designed around proven learning science." },
+  { q: "What study modes are included?", a: "12 modes in total: Flashcard Flip, Swipe Cards, MCQ Practice, Spaced Repetition (FSRS-5), Weak Spot Trainer, Memory Sprint, Exam Simulator, Explain Back, AI Tutor Revision, Interactive Mind Maps, Case Study Mode, and Pomodoro Mode. Every mode is designed around proven learning science." },
   { q: "Can I study with other people?", a: "Yes. Study Rooms let you create a session, share a 6-character code, and study any deck live with up to 5 classmates. Host-paced or Race mode. Your choice." },
-  { q: "What's the difference between Free and Premium?", a: "Free gives you 30 AI generations per month plus access to all 9 study modes and Study Rooms. Premium removes every limit: unlimited generations, full PDF support, Podcast Mode, Medical Encyclopedia, Mind Maps, and Case Study Mode." },
+  { q: "What's the difference between Free and Premium?", a: "Free gives you 30 AI generations per month plus access to all 12 study modes and Study Rooms. Premium removes every limit: unlimited generations, full PDF support, Podcast Mode, Medical Encyclopedia, Mind Maps, and Case Study Mode." },
   { q: "Does it work for medical students?", a: "Absolutely. The Medical Encyclopedia gives instant AI summaries for any medical term. Combined with spaced repetition and the Weak Spot Trainer, it's become a go-to tool for pre-med and nursing students." },
   { q: "Is my data private?", a: "Yes. Your uploaded content is processed to generate your flashcards and is not shared, sold, or used to train any AI model. You can delete your account and all data at any time from Settings." },
 ];
@@ -27,13 +27,13 @@ const FAQS = [
 const FEATURES = [
   { icon: Zap,   title: "AI Flashcards in 30 seconds", desc: "Upload any PDF or paste notes. FORKSAI reads your material and produces a complete, high-quality deck instantly." },
   { icon: Users, title: "Live Study Rooms",             desc: "Study any deck in real time with classmates. Race mode, live chat, and a shared leaderboard keep the energy up." },
-  { icon: Brain, title: "9 Built-in Study Modes",       desc: "From classic flip to FSRS-5 spaced repetition, exam simulation, and explain-back. Every mode built on learning science." },
+  { icon: Brain, title: "12 Built-in Study Modes",       desc: "From classic flip to FSRS-5 spaced repetition, exam simulation, and explain-back. Every mode built on learning science." },
 ];
 
 const STEPS = [
   { num: "01", title: "Upload your material", desc: "Drop in any PDF, paste notes, or type a topic. Supports lecture slides, textbooks, and hand-written summaries." },
   { num: "02", title: "AI builds your deck",  desc: "The model reads your content, identifies key concepts, and produces a complete flashcard set ready in under 30 seconds." },
-  { num: "03", title: "Study your way",       desc: "Pick from 9 study modes. Study alone or spin up a live Study Room and race your classmates through the deck." },
+  { num: "03", title: "Study your way",       desc: "Pick from 12 study modes. Study alone or spin up a live Study Room and race your classmates through the deck." },
 ];
 
 const WHY = [
@@ -46,7 +46,7 @@ const WHY = [
 const COMPARE = [
   { feat: "AI generates cards from your notes",  vals: [true,  false, false, false, false] },
   { feat: "Reads and understands your PDFs",     vals: [true,  false, false, false, false] },
-  { feat: "9 built-in study modes",              vals: [true,  false, true,  false, false] },
+  { feat: "12 built-in study modes",              vals: [true,  false, true,  false, false] },
   { feat: "Ready in under 30 seconds",           vals: [true,  false, false, false, false] },
   { feat: "Real-time multiplayer study rooms",   vals: [true,  false, false, false, false] },
   { feat: "Progress tracking and streaks",       vals: [true,  false, true,  false, false] },
@@ -63,7 +63,7 @@ const BLOGS = [
 
 const FREE_FEATURES = [
   "30 AI flashcard generations / month",
-  "All 9 study modes",
+  "All 12 study modes",
   "Live Study Rooms (up to 5 people)",
   "Public Decks library",
   "Progress tracking and streaks",
@@ -118,40 +118,137 @@ function Reveal({ children, delay = 0, className = "" }) {
 }
 
 /* ─── Hero live demo ────────────────────────────────────────── */
-const DEMO_CARDS = [
-  { q: "What is the rate-limiting enzyme of glycolysis?", a: "Phosphofructokinase-1" },
-  { q: "Where does the Krebs cycle take place?",          a: "The mitochondrial matrix" },
-  { q: "Which stage yields the most ATP?",                a: "Oxidative phosphorylation" },
+// Four real subjects with genuinely usable example cards. The visitor picks
+// one and watches that deck build, so the first interaction on the page is
+// with the product rather than with decoration. Cards are worked examples,
+// not generated live: no unauthenticated model calls, no cost, no abuse
+// surface, and nothing here claims to be the visitor's own material.
+const DEMO_SUBJECTS = [
+  {
+    id: "bio",
+    label: "Biology",
+    file: "biochem-lecture-4.pdf",
+    meta: "42 pages",
+    read: "Reading 42 pages",
+    count: 38,
+    cards: [
+      { q: "What is the rate-limiting enzyme of glycolysis?", a: "Phosphofructokinase-1" },
+      { q: "Where does the Krebs cycle take place?", a: "The mitochondrial matrix" },
+      { q: "Which stage yields the most ATP?", a: "Oxidative phosphorylation" },
+    ],
+  },
+  {
+    id: "med",
+    label: "Medicine",
+    file: "cardio-pharm-notes.pdf",
+    meta: "27 pages",
+    read: "Reading 27 pages",
+    count: 31,
+    cards: [
+      { q: "First-line treatment for anaphylaxis?", a: "IM adrenaline, 0.5 mg of 1:1000" },
+      { q: "Which electrolyte disturbance causes peaked T waves?", a: "Hyperkalaemia" },
+      { q: "Mechanism of action of beta blockers?", a: "Competitive antagonism at beta-adrenoceptors" },
+    ],
+  },
+  {
+    id: "hist",
+    label: "History",
+    file: "cold-war-seminar.pdf",
+    meta: "18 pages",
+    read: "Reading 18 pages",
+    count: 24,
+    cards: [
+      { q: "What did the Marshall Plan aim to achieve?", a: "Rebuild western European economies to resist Soviet influence" },
+      { q: "Which crisis brought the superpowers closest to nuclear war?", a: "The Cuban Missile Crisis, 1962" },
+      { q: "What was the Truman Doctrine?", a: "A pledge to contain Soviet expansion by supporting free peoples" },
+    ],
+  },
+  {
+    id: "law",
+    label: "Law",
+    file: "contract-law-week6.pdf",
+    meta: "33 pages",
+    read: "Reading 33 pages",
+    count: 29,
+    cards: [
+      { q: "What are the three elements of a valid contract?", a: "Offer, acceptance, and consideration" },
+      { q: "What did Carlill v Carbolic Smoke Ball establish?", a: "A unilateral offer to the world can form a binding contract" },
+      { q: "What is promissory estoppel?", a: "A promise relied on can bind even without consideration" },
+    ],
+  },
 ];
 
 const DEMO_STEPS = [
-  { label: "Uploading your PDF",   pct: 12,  hold: 1400 },
-  { label: "Reading 42 pages",     pct: 46,  hold: 1900 },
-  { label: "Writing your cards",   pct: 81,  hold: 1700 },
-  { label: "Deck ready",           pct: 100, hold: 3800 },
+  { label: "Uploading", pct: 12, hold: 900 },
+  { label: null, pct: 46, hold: 1200 },
+  { label: "Writing your cards", pct: 81, hold: 1100 },
+  { label: "Deck ready", pct: 100, hold: 4200 },
 ];
 
 function HeroLiveDemo({ accent, featureBg }) {
+  const [subjectIdx, setSubjectIdx] = useState(0);
   const [step, setStep] = useState(0);
+  const subject = DEMO_SUBJECTS[subjectIdx];
 
   useEffect(() => {
-    const t = setTimeout(() => setStep(s => (s + 1) % DEMO_STEPS.length), DEMO_STEPS[step].hold);
+    const t = setTimeout(() => setStep((s) => (s + 1) % DEMO_STEPS.length), DEMO_STEPS[step].hold);
     return () => clearTimeout(t);
   }, [step]);
 
+  const pick = (i) => {
+    if (i === subjectIdx) return;
+    setSubjectIdx(i);
+    setStep(0); // rebuild from the top so the choice visibly does something
+  };
+
   const done = step === DEMO_STEPS.length - 1;
-  const { label, pct } = DEMO_STEPS[step];
+  const { pct } = DEMO_STEPS[step];
+  const label = DEMO_STEPS[step].label ?? subject.read;
 
   return (
     <div className="bg-white border-2 border-black rounded-xl shadow-[6px_6px_0_#111] overflow-hidden text-left">
+      {/* Subject picker - the interactive bit. Real buttons, keyboard
+          reachable, and each one visibly rebuilds the deck below. */}
+      <div className="flex items-center gap-1.5 px-3 py-2.5 border-b-2 border-black overflow-x-auto" style={{ background: "#f0f0ea" }}>
+        <span className="text-[9px] font-black uppercase tracking-widest text-[#777] shrink-0 mr-0.5">Try</span>
+        {DEMO_SUBJECTS.map((s, i) => {
+          const active = i === subjectIdx;
+          return (
+            <button
+              key={s.id}
+              onClick={() => pick(i)}
+              aria-pressed={active}
+              className="text-[10px] font-black rounded-full px-2.5 py-1 border-2 border-black shrink-0 transition-all"
+              style={{
+                background: active ? accent : "#fff",
+                color: "#111",
+                boxShadow: active ? "1px 1px 0 #111" : "none",
+              }}
+            >
+              {s.label}
+            </button>
+          );
+        })}
+      </div>
+
       <div className="p-5">
         <div className="flex items-center gap-3 mb-4">
           <span className="w-9 h-9 rounded-lg border-2 border-black flex items-center justify-center shrink-0" style={{ background: accent }}>
             <FileText size={16} className="text-[#111]" strokeWidth={2.5} />
           </span>
           <div className="min-w-0">
-            <div className="text-[13px] font-bold text-[#111] truncate">biochem-lecture-4.pdf</div>
-            <div className="text-[10px] font-medium text-[#888]">42 pages · 3.1 MB</div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={subject.id}
+                initial={{ opacity: 0, y: 3 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -3 }}
+                transition={{ duration: 0.18 }}
+              >
+                <div className="text-[13px] font-bold text-[#111] truncate">{subject.file}</div>
+                <div className="text-[10px] font-medium text-[#888]">{subject.meta}</div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
@@ -160,18 +257,18 @@ function HeroLiveDemo({ accent, featureBg }) {
             className="h-full"
             style={{ background: done ? featureBg : accent }}
             animate={{ width: `${pct}%` }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
           />
         </div>
 
         <div className="flex items-center justify-between mb-4 h-4">
           <AnimatePresence mode="wait">
             <motion.span
-              key={step}
+              key={`${subject.id}-${step}`}
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.18 }}
               className="text-[11px] font-bold text-[#555] flex items-center gap-1.5"
             >
               {done && <Check size={12} strokeWidth={3} style={{ color: featureBg }} />}
@@ -182,12 +279,12 @@ function HeroLiveDemo({ accent, featureBg }) {
         </div>
 
         <div className="flex flex-col gap-2">
-          {DEMO_CARDS.map(({ q, a }, i) => (
+          {subject.cards.map(({ q, a }, i) => (
             <motion.div
-              key={i}
-              initial={false}
+              key={`${subject.id}-${i}`}
+              initial={{ opacity: 0.22, y: 6 }}
               animate={done ? { opacity: 1, y: 0 } : { opacity: 0.22, y: 6 }}
-              transition={{ duration: 0.35, delay: done ? i * 0.14 : 0 }}
+              transition={{ duration: 0.3, delay: done ? i * 0.12 : 0 }}
               className="rounded-lg bg-white px-3 py-2.5"
               style={{
                 borderLeft: `3px solid ${[featureBg, "#7C3AED", accent][i]}`,
@@ -201,7 +298,7 @@ function HeroLiveDemo({ accent, featureBg }) {
         </div>
 
         <div className="mt-4 pt-3 border-t border-black/10 flex items-center justify-between">
-          <span className="text-[11px] font-bold text-[#555]">38 cards · 9 study modes</span>
+          <span className="text-[11px] font-bold text-[#555]">{subject.count} cards · 12 study modes</span>
           <span className="text-[11px] font-black" style={{ color: done ? featureBg : "#bbb" }}>
             {done ? "Ready to study" : "Working..."}
           </span>
@@ -259,16 +356,10 @@ export default function LandingPage() {
     return () => window.removeEventListener("mousemove", move);
   }, []);
   const lx1 = useTransform(mouseX, v => v * -22); const ly1 = useTransform(mouseY, v => v * -22);
-  const lx2 = useTransform(mouseX, v => v * -12); const ly2 = useTransform(mouseY, v => v * -12);
   const lx3 = useTransform(mouseX, v => v * -30); const ly3 = useTransform(mouseY, v => v * -30);
-  const lx4 = useTransform(mouseX, v => v * -16); const ly4 = useTransform(mouseY, v => v * -16);
-  const lx5 = useTransform(mouseX, v => v * -20); const ly5 = useTransform(mouseY, v => v * -20);
   const lx6 = useTransform(mouseX, v => v * -10); const ly6 = useTransform(mouseY, v => v * -10);
-  const rx1 = useTransform(mouseX, v => v * 18);  const ry1 = useTransform(mouseY, v => v * 18);
   const rx2 = useTransform(mouseX, v => v * 28);  const ry2 = useTransform(mouseY, v => v * 28);
   const rx3 = useTransform(mouseX, v => v * 12);  const ry3 = useTransform(mouseY, v => v * 12);
-  const rx4 = useTransform(mouseX, v => v * 24);  const ry4 = useTransform(mouseY, v => v * 24);
-  const rx5 = useTransform(mouseX, v => v * 20);  const ry5 = useTransform(mouseY, v => v * 20);
   const rx6 = useTransform(mouseX, v => v * 15);  const ry6 = useTransform(mouseY, v => v * 15);
 
   const isPinkDay = false;
@@ -509,7 +600,7 @@ export default function LandingPage() {
       </AnimatePresence>
 
       {/* ── HERO ───────────────────────────────────────────── */}
-      <section className="relative pt-24 pb-20 text-center">
+      <section className="relative pt-14 pb-20 text-center">
 
         {/* Floating left - 6 cards, each wrapper div gives a static horizontal offset */}
         <div className="absolute left-8 top-20 hidden xl:flex flex-col gap-4 pointer-events-none select-none" style={{ zIndex: 2 }}>
@@ -525,17 +616,6 @@ export default function LandingPage() {
             </motion.div>
           </div>
 
-          {/* 2 - Active recall pill · push 40 px toward center */}
-          <div style={{ marginLeft: 40 }}>
-            <motion.div style={{ x: lx2, y: ly2 }}>
-              <div className="flex items-center gap-2.5 bg-white rounded-lg pl-3 pr-4 py-2.5" style={{ borderLeft: `3px solid ${FEATURE_BG}`, boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06)", transform: "rotate(2deg)" }}>
-                <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0" style={{ background: FEATURE_BG }}>
-                  <Brain size={12} className="text-white" strokeWidth={2.5} />
-                </span>
-                <span className="text-[11px] font-bold text-[#111]">Active recall</span>
-              </div>
-            </motion.div>
-          </div>
 
           {/* 3 - Last quiz · slight push */}
           <div style={{ marginLeft: 10 }}>
@@ -547,29 +627,7 @@ export default function LandingPage() {
             </motion.div>
           </div>
 
-          {/* 4 - PDF ready pill · biggest push */}
-          <div style={{ marginLeft: 56 }}>
-            <motion.div style={{ x: lx4, y: ly4 }}>
-              <div className="flex items-center gap-2.5 bg-white rounded-lg pl-3 pr-4 py-2.5" style={{ borderLeft: "3px solid #111", boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06)", transform: "rotate(-2deg)" }}>
-                <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0" style={{ background: "#111" }}>
-                  <FileText size={12} className="text-white" strokeWidth={2.5} />
-                </span>
-                <span className="text-[11px] font-bold text-[#111]">PDF ready</span>
-              </div>
-            </motion.div>
-          </div>
 
-          {/* 5 - Study room pill · medium push */}
-          <div style={{ marginLeft: 24 }}>
-            <motion.div style={{ x: lx5, y: ly5 }}>
-              <div className="flex items-center gap-2.5 bg-white rounded-lg pl-3 pr-4 py-2.5" style={{ borderLeft: `3px solid ${FEATURE_BG}`, boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06)", transform: "rotate(1.5deg)" }}>
-                <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0" style={{ background: FEATURE_BG }}>
-                  <Users size={12} className="text-white" strokeWidth={2.5} />
-                </span>
-                <span className="text-[11px] font-bold text-[#111]">4 studying live</span>
-              </div>
-            </motion.div>
-          </div>
 
           {/* 6 - Weak spots card · far push */}
           <div style={{ marginLeft: 68 }}>
@@ -589,17 +647,6 @@ export default function LandingPage() {
         {/* Floating right - 6 cards, negative margins push items toward center */}
         <div className="absolute right-8 top-20 hidden xl:flex flex-col gap-4 items-end pointer-events-none select-none" style={{ zIndex: 2 }}>
 
-          {/* 1 - 30 cards pill · no offset */}
-          <div>
-            <motion.div style={{ x: rx1, y: ry1 }}>
-              <div className="flex items-center gap-2.5 bg-white rounded-lg pl-3 pr-4 py-2.5" style={{ borderLeft: `3px solid ${ACCENT}`, boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06)", transform: "rotate(3deg)" }}>
-                <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0" style={{ background: ACCENT }}>
-                  <Zap size={12} className="text-[#111]" strokeWidth={2.5} />
-                </span>
-                <span className="text-[11px] font-bold text-[#111]">30 cards in 8s</span>
-              </div>
-            </motion.div>
-          </div>
 
           {/* 2 - Day streak · 40 px toward center */}
           <div style={{ marginRight: 40 }}>
@@ -622,29 +669,7 @@ export default function LandingPage() {
             </motion.div>
           </div>
 
-          {/* 4 - 1,326 cards · biggest push toward center */}
-          <div style={{ marginRight: 56 }}>
-            <motion.div style={{ x: rx4, y: ry4 }}>
-              <div className="flex items-center gap-2.5 bg-white rounded-lg pl-3 pr-4 py-2.5" style={{ borderLeft: "3px solid #7C3AED", boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06)", transform: "rotate(-2deg)" }}>
-                <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0" style={{ background: "#7C3AED" }}>
-                  <BookOpen size={12} className="text-white" strokeWidth={2.5} />
-                </span>
-                <span className="text-[11px] font-bold text-[#111]">1,326 cards</span>
-              </div>
-            </motion.div>
-          </div>
 
-          {/* 5 - Podcast pill · medium push */}
-          <div style={{ marginRight: 24 }}>
-            <motion.div style={{ x: rx5, y: ry5 }}>
-              <div className="flex items-center gap-2.5 bg-white rounded-lg pl-3 pr-4 py-2.5" style={{ borderLeft: "3px solid #111", boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06)", transform: "rotate(1deg)" }}>
-                <span className="w-6 h-6 rounded-full flex items-center justify-center shrink-0" style={{ background: "#111" }}>
-                  <Headphones size={12} className="text-white" strokeWidth={2.5} />
-                </span>
-                <span className="text-[11px] font-bold text-[#111]">Podcast ready</span>
-              </div>
-            </motion.div>
-          </div>
 
           {/* 6 - Score trend card · far push */}
           <div style={{ marginRight: 68 }}>
@@ -685,7 +710,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
-            className="font-serif font-black text-5xl sm:text-6xl md:text-7xl leading-[1.06] text-[#111] mb-5"
+            className="font-serif font-black text-4xl sm:text-5xl md:text-6xl leading-[1.06] text-[#111] mb-4"
           >
             The best alternative to{" "}
             <span
@@ -705,7 +730,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[#444] text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-9"
+            className="text-[#444] text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-7"
           >
             Drop in a PDF or your notes. Get a complete flashcard deck in{" "}
             <span className="font-bold text-[#111]">30 seconds</span>, not an evening of typing.
@@ -742,30 +767,14 @@ export default function LandingPage() {
             ))}
           </div>
 
-          {/* Social proof logo wall */}
-          <div className="flex flex-col items-center gap-4 mt-12">
-            <p className="text-sm font-semibold text-[#333] text-center">
-              Relied on by <span className="font-black text-[#111]">100,000+</span> students at
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-              {["UCL", "Harvard", "Stanford", "University of Zagreb", "Johns Hopkins"].map(name => (
-                <span key={name} className="text-[#9c9c96] font-serif font-bold text-xl sm:text-2xl tracking-tight">
-                  {name}
-                </span>
-              ))}
-            </div>
-            <p className="text-xs text-[#999] font-medium">
-              and 1,500+ other institutions worldwide
-            </p>
-          </div>
         </div>
 
         {/* Live demo + dashboard */}
-        <div className="max-w-6xl mx-auto px-6 mt-14">
+        <div className="max-w-6xl mx-auto px-6 mt-10">
           <div className="flex items-center gap-5">
 
             {/* Live generation demo */}
-            <div className="hidden lg:block shrink-0 w-75">
+            <div className="hidden lg:block shrink-0 w-80">
               <HeroLiveDemo accent={ACCENT} featureBg={FEATURE_BG} />
             </div>
 
@@ -796,6 +805,25 @@ export default function LandingPage() {
                 className="w-full h-auto block"
               />
             </div>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 flex flex-col items-center mt-14">
+          {/* Social proof logo wall */}
+          <div className="flex flex-col items-center gap-4 mt-12">
+            <p className="text-sm font-semibold text-[#333] text-center">
+              Relied on by <span className="font-black text-[#111]">100,000+</span> students at
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+              {["UCL", "Harvard", "Stanford", "University of Zagreb", "Johns Hopkins"].map(name => (
+                <span key={name} className="text-[#9c9c96] font-serif font-bold text-xl sm:text-2xl tracking-tight">
+                  {name}
+                </span>
+              ))}
+            </div>
+            <p className="text-xs text-[#999] font-medium">
+              and 1,500+ other institutions worldwide
+            </p>
           </div>
         </div>
 
@@ -1222,7 +1250,7 @@ export default function LandingPage() {
             </div>
             <div className="text-sm text-[#555] mb-6">/ forever</div>
             <div className="flex flex-col gap-2.5 mb-8">
-              {["All 9 study modes", "Live Study Rooms (up to 5 people)", "Public Decks library", "Progress tracking and streaks"].map((f, i) => (
+              {["All 12 study modes", "Live Study Rooms (up to 5 people)", "Public Decks library", "Progress tracking and streaks"].map((f, i) => (
                 <div key={i} className="flex items-start gap-2.5">
                   <span className="mt-0.5 w-4 h-4 rounded-full flex items-center justify-center shrink-0" style={{ background: FEATURE_BG }}>
                     <Check size={10} className="text-white" strokeWidth={3} />

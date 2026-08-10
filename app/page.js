@@ -69,7 +69,7 @@ const softwareSchema = {
     "AI notes summarizer with Structured, Cornell, Narrative, and Outline note styles",
     "Generate flashcards from PDF, notes, text, YouTube videos, PowerPoint, or images via OCR",
     "FSRS-5 spaced repetition with configurable retention, learning steps, and review limits",
-    "9 study modes including exam simulator, weak spot trainer, and live study rooms",
+    "12 study modes including exam simulator, weak spot trainer, and live study rooms",
   ],
 };
 

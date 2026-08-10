@@ -340,7 +340,7 @@ function ToolsDropdown() {
   }, []);
   const tools = [
     { href:"/flashcards", icon:"🃏", bg:"#eef0ff",              title:"AI Flashcards",    desc:"Generate decks from notes or PDFs" },
-    { href:"/learn",      icon:"🔄", bg:"rgba(35,178,109,0.1)", title:"Learn Mode",       desc:"9 study modes including FSRS-5" },
+    { href:"/learn",      icon:"🔄", bg:"rgba(35,178,109,0.1)", title:"Learn Mode",       desc:"12 study modes including FSRS-5" },
     { href:"/notes",      icon:"📄", bg:"rgba(22,163,74,0.08)", title:"Notes Summarizer", desc:"Turn PDFs into structured notes" },
   ];
   return (
