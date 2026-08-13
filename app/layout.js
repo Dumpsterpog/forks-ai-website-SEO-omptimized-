@@ -1,12 +1,21 @@
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
-import { Playfair_Display, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair",
-  weight: "900",
+// Display face for every heading. Replaces Playfair Display, which reads as the
+// default AI-generated house style (high-contrast serif plus italic word
+// accents) and fought the rest of the design system: hard offset shadows, 2px
+// black borders and tape motifs are poster language, which wants a heavy
+// grotesque rather than a delicate serif. Bricolage is variable, so one load
+// covers the H1 down to card titles.
+const displayFont = Bricolage_Grotesque({
+  variable: "--font-display-family",
+  // No `weight`: Bricolage is a variable font, so this loads one file covering
+  // the whole axis instead of a static instance per weight. Its axis tops out
+  // at 800, so the `font-black` (900) used throughout clamps to 800.
   subsets: ["latin"],
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -66,7 +75,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${playfairDisplay.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${displayFont.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {children}

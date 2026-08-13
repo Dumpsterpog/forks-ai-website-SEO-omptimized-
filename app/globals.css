@@ -13,7 +13,12 @@
   --color-yellow: #f0d44a;
   --color-green: #5cb85c;
   --color-muted: #555555;
-  --font-serif: var(--font-playfair), Georgia, serif;
+  /* The display face is a grotesque now, not a serif. The token keeps its old
+     name so the ~30 files using `font-serif` for headings do not all have to
+     change; `--font-display` is the alias to prefer in new code. Both resolve
+     to the same family, and the fallback stack is sans, not Georgia. */
+  --font-display: var(--font-display-family), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-display-family), "Helvetica Neue", Arial, sans-serif;
   --font-mono: var(--font-jetbrains), monospace;
 
   /* SAGE — used elsewhere in the FORKSAI brand (dashboard), kept for parity */
@@ -26,4 +31,35 @@
 body {
   background: var(--color-background);
   color: var(--color-foreground);
+}
+
+/* Paper grain.
+   The design system is poster/zine language (hard offset shadows, 2px black
+   borders, tape and sticky-note motifs) sitting on perfectly flat colour, which
+   is what made it read as generic-digital. A single very low-opacity noise
+   layer over the whole page gives it the texture of something printed.
+
+   Inlined as an SVG data URI so it costs no request and no image bytes, fixed
+   so it does not scroll with content, and pointer-events:none so it can never
+   intercept a click. Kept at 0.035 alpha: it should register as texture, not
+   as an effect anyone consciously notices. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

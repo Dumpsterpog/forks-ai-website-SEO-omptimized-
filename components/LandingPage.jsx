@@ -7,7 +7,7 @@ import { useState, useEffect, Fragment } from "react";
 import Image from "next/image";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
-import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Zap, FileText, Headphones, BookOpen, Users, Brain,
   Map, ChevronDown, Check, ArrowRight, Clock,
@@ -102,6 +102,26 @@ function FaqItem({ q, a }) {
   );
 }
 
+/* ─── Marker highlight ──────────────────────────────────────── */
+// The flat highlight block introduced in the H1, reused on one phrase per
+// section heading. Repeating a single emphasis device is what turns a set of
+// styled headings into a visual language: it replaces the italic-plus-underline
+// accent that read as generic, and matches the flat, hard-edged system.
+// `text` defaults to ink rather than inheriting: a mark placed inside
+// light-on-dark copy would otherwise inherit white and land white-on-yellow,
+// which is about 1.7:1 and unreadable. Pass text="#fff" only for a dark fill
+// like the purple, where ink is the weaker pairing.
+function Mark({ children, color, text = "#111" }) {
+  return (
+    <span
+      className="inline-block px-2 -mx-0.5"
+      style={{ background: color, color: text, boxShadow: `0 0 0 2px ${color}` }}
+    >
+      {children}
+    </span>
+  );
+}
+
 /* ─── Scroll reveal ─────────────────────────────────────────── */
 function Reveal({ children, delay = 0, className = "" }) {
   return (
@@ -185,21 +205,93 @@ const DEMO_STEPS = [
   { label: "Deck ready", pct: 100, hold: 4200 },
 ];
 
-function HeroLiveDemo({ accent, featureBg }) {
+const MAX_OWN_CHARS = 6000;
+
+// Cycled through the textarea placeholder so the field reads as something to
+// use rather than an empty box. Real subjects, phrased the way a student
+// would actually paste them.
+const PLACEHOLDER_EXAMPLES = [
+  "The Krebs cycle occurs in the mitochondrial matrix and produces NADH, FADH2 and GTP...",
+  "First-line treatment for anaphylaxis is IM adrenaline, 0.5 mg of 1:1000...",
+  "The Marshall Plan aimed to rebuild western European economies to resist Soviet influence...",
+  "A valid contract requires three elements: offer, acceptance, and consideration...",
+];
+
+function HeroLiveDemo({ accent, featureBg, onGenerate }) {
   const [subjectIdx, setSubjectIdx] = useState(0);
   const [step, setStep] = useState(0);
+
+  // "Your notes" is the default tab: it is the one panel that asks the visitor
+  // to do something, and the samples are there as a fallback for people who
+  // arrive with nothing to paste. The textarea captures intent and the button
+  // hands off to the dashboard, so generation happens after signup rather than
+  // anonymously on this page.
+  const [own, setOwn] = useState(true);
+  const [ownText, setOwnText] = useState("");
+  const [typed, setTyped] = useState("");
+  const [focused, setFocused] = useState(false);
+
   const subject = DEMO_SUBJECTS[subjectIdx];
 
   useEffect(() => {
+    // The sample animation only runs while a sample is actually on screen.
+    if (own) return;
     const t = setTimeout(() => setStep((s) => (s + 1) % DEMO_STEPS.length), DEMO_STEPS[step].hold);
     return () => clearTimeout(t);
-  }, [step]);
+  }, [step, own]);
 
   const pick = (i) => {
+    setOwn(false);
     if (i === subjectIdx) return;
     setSubjectIdx(i);
     setStep(0); // rebuild from the top so the choice visibly does something
   };
+
+  // A blank box invites nothing, so the placeholder types itself out and cycles
+  // through real examples. It only runs while the field is empty, unfocused and
+  // on screen, and it stops entirely for anyone who prefers reduced motion.
+  useEffect(() => {
+    if (!own || focused || ownText) return;
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTyped(PLACEHOLDER_EXAMPLES[0]);
+      return;
+    }
+
+    let cancelled = false;
+    let timer;
+    let phrase = 0;
+    let i = 0;
+    let erasing = false;
+
+    const tick = () => {
+      if (cancelled) return;
+      const full = PLACEHOLDER_EXAMPLES[phrase];
+      if (!erasing) {
+        i += 1;
+        setTyped(full.slice(0, i));
+        if (i >= full.length) {
+          erasing = true;
+          timer = setTimeout(tick, 2600); // hold the finished sentence
+          return;
+        }
+      } else {
+        i -= 8;
+        if (i <= 0) {
+          i = 0;
+          erasing = false;
+          phrase = (phrase + 1) % PLACEHOLDER_EXAMPLES.length;
+        }
+        setTyped(PLACEHOLDER_EXAMPLES[phrase].slice(0, Math.max(i, 0)));
+      }
+      timer = setTimeout(tick, erasing ? 18 : 34);
+    };
+
+    timer = setTimeout(tick, 500);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [own, focused, ownText]);
 
   const done = step === DEMO_STEPS.length - 1;
   const { pct } = DEMO_STEPS[step];
@@ -209,10 +301,11 @@ function HeroLiveDemo({ accent, featureBg }) {
     <div className="bg-white border-2 border-black rounded-xl shadow-[6px_6px_0_#111] overflow-hidden text-left">
       {/* Subject picker - the interactive bit. Real buttons, keyboard
           reachable, and each one visibly rebuilds the deck below. */}
+      {/* No "Try" eyebrow here: with the "Your notes" chip added, five items
+          plus a label overflow the card and clip the first subject. */}
       <div className="flex items-center gap-1.5 px-3 py-2.5 border-b-2 border-black overflow-x-auto" style={{ background: "#f0f0ea" }}>
-        <span className="text-[9px] font-black uppercase tracking-widest text-[#777] shrink-0 mr-0.5">Try</span>
         {DEMO_SUBJECTS.map((s, i) => {
-          const active = i === subjectIdx;
+          const active = !own && i === subjectIdx;
           return (
             <button
               key={s.id}
@@ -229,8 +322,54 @@ function HeroLiveDemo({ accent, featureBg }) {
             </button>
           );
         })}
+        <button
+          onClick={() => setOwn(true)}
+          aria-pressed={own}
+          className="text-[10px] font-black rounded-full px-2.5 py-1 border-2 border-black shrink-0 transition-all whitespace-nowrap"
+          style={{
+            background: own ? featureBg : "#fff",
+            color: own ? "#fff" : "#111",
+            boxShadow: own ? "1px 1px 0 #111" : "none",
+          }}
+        >
+          Your notes
+        </button>
       </div>
 
+      {own ? (
+        <div className="p-5">
+          <label htmlFor="hero-own-notes" className="block text-[11px] font-black uppercase tracking-widest text-[#777] mb-2">
+            Paste your notes
+          </label>
+          <textarea
+            id="hero-own-notes"
+            value={ownText}
+            onChange={(e) => setOwnText(e.target.value.slice(0, MAX_OWN_CHARS))}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            rows={6}
+            placeholder={focused ? "Paste your notes here." : typed}
+            className="w-full text-[12px] leading-relaxed rounded-lg border-2 border-black p-3 resize-none focus:outline-none focus:shadow-[2px_2px_0_#111] transition-shadow"
+            style={{ background: "#fdfdfa" }}
+          />
+          <div className="flex items-center justify-end mt-1.5 mb-3">
+            <span className="text-[10px] font-mono text-[#999]">
+              {ownText.length}/{MAX_OWN_CHARS}
+            </span>
+          </div>
+
+          <button
+            onClick={onGenerate}
+            className="w-full font-black text-sm border-2 border-black rounded-xl py-3.5 text-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center justify-center gap-2"
+            style={{ background: "#111" }}
+          >
+            Generate flashcards <Zap size={15} strokeWidth={2.75} style={{ color: accent }} />
+          </button>
+          <p className="text-[10px] text-[#999] text-center mt-2.5">
+            Free forever plan. No credit card required.
+          </p>
+        </div>
+      ) : (
       <div className="p-5">
         <div className="flex items-center gap-3 mb-4">
           <span className="w-9 h-9 rounded-lg border-2 border-black flex items-center justify-center shrink-0" style={{ background: accent }}>
@@ -297,13 +436,25 @@ function HeroLiveDemo({ accent, featureBg }) {
           ))}
         </div>
 
-        <div className="mt-4 pt-3 border-t border-black/10 flex items-center justify-between">
+        <div className="mt-4 pt-3 border-t border-black/10 flex items-center justify-between mb-3.5">
           <span className="text-[11px] font-bold text-[#555]">{subject.count} cards · 12 study modes</span>
           <span className="text-[11px] font-black" style={{ color: done ? featureBg : "#bbb" }}>
             {done ? "Ready to study" : "Working..."}
           </span>
         </div>
+
+        {/* The sample view used to end here, with no way out. Anyone who
+            browsed a deck hit a dead end and had to look elsewhere on the page
+            for a CTA, so the most engaged visitors got the weakest path. */}
+        <button
+          onClick={onGenerate}
+          className="w-full font-black text-sm border-2 border-black rounded-xl py-3.5 text-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center justify-center gap-2"
+          style={{ background: "#111" }}
+        >
+          Study this deck free <ArrowRight size={15} strokeWidth={2.75} style={{ color: accent }} />
+        </button>
       </div>
+      )}
     </div>
   );
 }
@@ -345,22 +496,10 @@ export default function LandingPage() {
     return unsub;
   }, []);
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  useEffect(() => {
-    const move = (e) => {
-      mouseX.set(e.clientX / window.innerWidth - 0.5);
-      mouseY.set(e.clientY / window.innerHeight - 0.5);
-    };
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
-  }, []);
-  const lx1 = useTransform(mouseX, v => v * -22); const ly1 = useTransform(mouseY, v => v * -22);
-  const lx3 = useTransform(mouseX, v => v * -30); const ly3 = useTransform(mouseY, v => v * -30);
-  const lx6 = useTransform(mouseX, v => v * -10); const ly6 = useTransform(mouseY, v => v * -10);
-  const rx2 = useTransform(mouseX, v => v * 28);  const ry2 = useTransform(mouseY, v => v * 28);
-  const rx3 = useTransform(mouseX, v => v * 12);  const ry3 = useTransform(mouseY, v => v * 12);
-  const rx6 = useTransform(mouseX, v => v * 15);  const ry6 = useTransform(mouseY, v => v * 15);
+  // The mouse-parallax motion values that used to live here drove the twelve
+  // decorative cards in the hero margins. Those are gone with the hero rewrite,
+  // so the mousemove listener they needed is gone too rather than firing on
+  // every pointer move for nothing.
 
   const isPinkDay = false;
   const ACCENT     = isPinkDay ? '#FF6EB4' : '#F0D44A';
@@ -600,236 +739,135 @@ export default function LandingPage() {
       </AnimatePresence>
 
       {/* ── HERO ───────────────────────────────────────────── */}
-      <section className="relative pt-14 pb-20 text-center">
+      {/* Asymmetric split rather than the previous centered stack. The old hero
+          ran ~1.5 viewports tall, put every piece of proof below the ask, and
+          set two product visuals (the demo card and a dashboard screenshot)
+          competing for the same attention. Here the left column carries the
+          argument and the right column carries the one thing no competitor
+          offers: a generator the visitor can actually use before signing up. */}
+      <section className="relative pt-14 pb-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid lg:grid-cols-[1.02fr_0.98fr] gap-10 lg:gap-12 items-center">
 
-        {/* Floating left - 6 cards, each wrapper div gives a static horizontal offset */}
-        <div className="absolute left-8 top-20 hidden xl:flex flex-col gap-4 pointer-events-none select-none" style={{ zIndex: 2 }}>
-
-          {/* 1 - Flashcard card · no offset */}
-          <div>
-            <motion.div style={{ x: lx1, y: ly1 }}>
-              <div className="bg-white rounded-lg pl-3 pr-4 py-2.5 w-36 text-left" style={{ borderLeft: `3px solid ${ACCENT}`, boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06)", transform: "rotate(-2deg)" }}>
-                <div className="text-[8px] font-bold text-[#555] uppercase tracking-widest mb-1">Flashcard</div>
-                <div className="text-[10px] font-bold text-[#111] leading-tight mb-1.5">What is the powerhouse of the cell?</div>
-                <div className="text-[9px] text-[#999] italic">Tap to reveal</div>
-              </div>
-            </motion.div>
-          </div>
-
-
-          {/* 3 - Last quiz · slight push */}
-          <div style={{ marginLeft: 10 }}>
-            <motion.div style={{ x: lx3, y: ly3 }}>
-              <div className="bg-white rounded-lg pl-3 pr-4 py-2.5 text-left" style={{ borderLeft: `3px solid ${FEATURE_BG}`, boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06)", transform: "rotate(3deg)" }}>
-                <div className="text-[9px] font-bold text-[#555] uppercase tracking-widest mb-0.5">Last quiz</div>
-                <div className="text-2xl font-black text-[#111] leading-none">94%</div>
-              </div>
-            </motion.div>
-          </div>
-
-
-
-          {/* 6 - Weak spots card · far push */}
-          <div style={{ marginLeft: 68 }}>
-            <motion.div style={{ x: lx6, y: ly6 }}>
-              <div className="bg-white rounded-lg pl-3 pr-4 py-2.5 text-left" style={{ borderLeft: "3px solid #7C3AED", boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06)", transform: "rotate(-3deg)" }}>
-                <div className="text-[8px] font-bold text-[#555] uppercase tracking-widest mb-1.5">Weak spots</div>
-                <div className="flex gap-1">
-                  {["Krebs", "Meiosis", "Ohm's"].map(t => (
-                    <span key={t} className="text-[7px] font-bold px-1.5 py-0.5 rounded-full border border-black/10 text-[#111]" style={{ background: "#FEF3C7" }}>{t}</span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Floating right - 6 cards, negative margins push items toward center */}
-        <div className="absolute right-8 top-20 hidden xl:flex flex-col gap-4 items-end pointer-events-none select-none" style={{ zIndex: 2 }}>
-
-
-          {/* 2 - Day streak · 40 px toward center */}
-          <div style={{ marginRight: 40 }}>
-            <motion.div style={{ x: rx2, y: ry2 }}>
-              <div className="bg-white rounded-lg pl-3 pr-4 py-2.5 text-left" style={{ borderLeft: `3px solid ${ACCENT}`, boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06)", transform: "rotate(-3deg)" }}>
-                <div className="text-lg font-black text-[#111] leading-none">🔥 7</div>
-                <div className="text-[9px] font-bold text-[#555] uppercase tracking-widest mt-1">Day streak</div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* 3 - Spaced rep card · slight push */}
-          <div style={{ marginRight: 10 }}>
-            <motion.div style={{ x: rx3, y: ry3 }}>
-              <div className="bg-white rounded-lg pl-3 pr-4 py-2.5 w-36 text-left" style={{ borderLeft: "3px solid #7C3AED", boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06)", transform: "rotate(2deg)" }}>
-                <div className="text-[8px] font-bold text-[#555] uppercase tracking-widest mb-1">Spaced rep</div>
-                <div className="text-[10px] font-bold text-[#111] leading-tight mb-1.5">Mitochondria review</div>
-                <span className="text-[8px] font-bold text-white px-1.5 py-0.5 rounded" style={{ background: FEATURE_BG }}>Due in 2d</span>
-              </div>
-            </motion.div>
-          </div>
-
-
-
-          {/* 6 - Score trend card · far push */}
-          <div style={{ marginRight: 68 }}>
-            <motion.div style={{ x: rx6, y: ry6 }}>
-              <div className="bg-white rounded-lg pl-3 pr-4 py-2.5 text-left" style={{ borderLeft: `3px solid ${ACCENT}`, boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06)", transform: "rotate(-1.5deg)" }}>
-                <div className="text-[8px] font-bold text-[#555] uppercase tracking-widest mb-1.5">Quiz progress</div>
-                <div className="flex items-center gap-1">
-                  {["72%", "85%", "94%"].map((v, i) => (
-                    <span key={i} className="text-[9px] font-black text-[#111]">{v}{i < 2 && <span className="text-[#aaa] mx-0.5">›</span>}</span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Text */}
-        <div className="max-w-4xl mx-auto px-6 flex flex-col items-center">
-          {/* Top badge points at a product feature rather than the affiliate
-              programme: this is the highest-attention slot on the page and the
-              "work with us" prompt was pulling first-time visitors away from
-              signup. That prompt now lives in the footer instead. */}
-          <motion.a
-            href="#study-rooms"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="flex items-center gap-2.5 border-2 border-black rounded-full pl-1.5 pr-4 py-1.5 mb-6 bg-white shadow-[2px_2px_0_#111] no-underline transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5"
-          >
-            <span className="text-[10px] font-black uppercase tracking-widest text-white px-2.5 py-1 rounded-full shrink-0" style={{ background: FEATURE_BG }}>
-              New
-            </span>
-            <span className="text-xs font-bold text-[#111]">Study Rooms: revise live with your classmates</span>
-            <ArrowRight size={13} strokeWidth={2.75} className="text-[#111]" />
-          </motion.a>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
-            className="font-serif font-black text-4xl sm:text-5xl md:text-6xl leading-[1.06] text-[#111] mb-4"
-          >
-            The best alternative to{" "}
-            <span
-              className="italic"
-              style={{
-                textDecoration: "underline",
-                textDecorationColor: ACCENT,
-                textDecorationThickness: "5px",
-                textUnderlineOffset: "5px",
-              }}
-            >
-              Quizlet and Anki
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[#444] text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-7"
-          >
-            Drop in a PDF or your notes. Get a complete flashcard deck in{" "}
-            <span className="font-bold text-[#111]">30 seconds</span>, not an evening of typing.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto"
-          >
-            <button
-              onClick={() => goSignup("hero")}
-              className="w-full sm:w-auto font-black text-lg border-2 border-black rounded-2xl px-10 py-4 text-[#111] shadow-[5px_5px_0_#111] transition-all hover:shadow-[2px_2px_0_#111] hover:translate-x-1 hover:translate-y-1 flex items-center justify-center gap-2.5"
-              style={{ background: ACCENT }}
-            >
-              Start for free <ArrowRight size={19} strokeWidth={2.75} />
-            </button>
-            <a
-              href="#how-it-works"
-              className="w-full sm:w-auto font-bold text-base border-2 border-black rounded-2xl px-7 py-4 text-[#111] bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center justify-center no-underline"
-            >
-              See how it works
-            </a>
-          </motion.div>
-
-          {/* Risk reversal */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6">
-            {["Free forever plan", "No credit card required", "Ready in 30 seconds"].map(t => (
-              <span key={t} className="flex items-center gap-1.5 text-[13px] font-semibold text-[#555]">
-                <Check size={14} strokeWidth={3} style={{ color: FEATURE_BG }} />
-                {t}
-              </span>
-            ))}
-          </div>
-
-        </div>
-
-        {/* Live demo + dashboard */}
-        <div className="max-w-6xl mx-auto px-6 mt-10">
-          <div className="flex items-center gap-5">
-
-            {/* Live generation demo */}
-            <div className="hidden lg:block shrink-0 w-80">
-              <HeroLiveDemo accent={ACCENT} featureBg={FEATURE_BG} />
-            </div>
-
-            {/* Curved arrow */}
-            <div className="hidden lg:block shrink-0">
-              <svg width="90" height="60" viewBox="0 0 90 60" fill="none">
-                <path d="M5,35 C25,10 58,12 80,28" stroke={ACCENT} strokeWidth="3.5" strokeLinecap="round" />
-                <path d="M68,18 L82,27 L72,36" stroke={ACCENT} strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-
-            {/* Dashboard */}
-            <div className="flex-1 min-w-0 border-2 border-black rounded-xl overflow-hidden shadow-[6px_6px_0_#111] bg-white">
-              <div className="border-b-2 border-black px-4 py-3 flex items-center justify-center" style={{ background: "#f0f0ea" }}>
-                <span className="text-xs font-mono font-bold text-[#555]">forksai.app/dashboard</span>
-              </div>
-              {/* next/image serves AVIF/WebP at the size actually needed rather
-                  than shipping the full 3200px PNG to every device. Its URLs are
-                  content-addressed, so the manual ?v= cache-buster this used to
-                  carry is no longer necessary. */}
-              <Image
-                src="/dashboardpreview.png"
-                alt="FORKSAI dashboard showing decks, study streak and cards due for review"
-                width={3200}
-                height={1822}
-                priority
-                sizes="(max-width: 1024px) 100vw, 900px"
-                className="w-full h-auto block"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-4xl mx-auto px-6 flex flex-col items-center mt-14">
-          {/* Social proof logo wall */}
-          <div className="flex flex-col items-center gap-4 mt-12">
-            <p className="text-sm font-semibold text-[#333] text-center">
-              Relied on by <span className="font-black text-[#111]">100,000+</span> students at
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-              {["UCL", "Harvard", "Stanford", "University of Zagreb", "Johns Hopkins"].map(name => (
-                <span key={name} className="text-[#9c9c96] font-serif font-bold text-xl sm:text-2xl tracking-tight">
-                  {name}
+            {/* ── Left: the argument ── */}
+            <div className="text-center lg:text-left">
+              <motion.a
+                href="#study-rooms"
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-flex items-center gap-2.5 border-2 border-black rounded-full pl-1.5 pr-4 py-1.5 mb-6 bg-white shadow-[2px_2px_0_#111] no-underline transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5"
+              >
+                <span className="text-[10px] font-black uppercase tracking-widest text-white px-2.5 py-1 rounded-full shrink-0" style={{ background: FEATURE_BG }}>
+                  New
                 </span>
-              ))}
-            </div>
-            <p className="text-xs text-[#999] font-medium">
-              and 1,500+ other institutions worldwide
-            </p>
-          </div>
-        </div>
+                <span className="text-xs font-bold text-[#111]">Study Rooms: revise live with classmates</span>
+                <ArrowRight size={13} strokeWidth={2.75} className="text-[#111]" />
+              </motion.a>
 
-        {/* Imports + mobile */}
-        <div className="max-w-6xl mx-auto px-6 mt-12 flex flex-col items-center gap-8">
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+              {/* The Quizlet/Anki string stays inside the h1 so the keyword
+                  intent survives, but it is no longer the largest text on the
+                  page: it describes a category rather than making a promise,
+                  and it made the first nouns a visitor read be the competitors.
+                  To revert, swap the two lines back. */}
+              <motion.h1
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
+                className="font-serif font-black text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.04] text-[#111] mb-4"
+              >
+                A flashcard deck in{" "}
+                {/* Marker-block highlight rather than the italic-plus-underline
+                    word accent, which is the other half of the generic AI
+                    display look and reads as decoration rather than emphasis.
+                    A flat block matches the hard-edged, flat-colour system. */}
+                <span
+                  className="inline-block px-2 -mx-0.5"
+                  style={{ background: ACCENT, boxShadow: `0 0 0 2px ${ACCENT}` }}
+                >
+                  30 seconds
+                </span>
+                , not an evening of typing.
+                <span className="block font-sans font-bold text-sm sm:text-base tracking-tight text-[#777] mt-4">
+                  The best alternative to Quizlet and Anki
+                </span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+                className="text-[#444] text-base sm:text-lg leading-relaxed mb-7 lg:max-w-lg mx-auto lg:mx-0"
+              >
+                Drop in a PDF, paste your notes, or just name a topic. FORKSAI writes the
+                cards and FSRS-5 spaced repetition decides when you see each one again.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-3"
+              >
+                <button
+                  onClick={() => goSignup("hero")}
+                  className="w-full sm:w-auto font-black text-lg border-2 border-black rounded-2xl px-9 py-4 text-[#111] shadow-[5px_5px_0_#111] transition-all hover:shadow-[2px_2px_0_#111] hover:translate-x-1 hover:translate-y-1 flex items-center justify-center gap-2.5"
+                  style={{ background: ACCENT }}
+                >
+                  Start for free <ArrowRight size={19} strokeWidth={2.75} />
+                </button>
+                {/* Demoted from a bordered button to a text link. Two filled
+                    buttons of near-equal weight side by side read as a choice
+                    rather than a hierarchy, and split the attention the primary
+                    action should own. */}
+                <a
+                  href="#how-it-works"
+                  className="font-bold text-base text-[#555] hover:text-[#111] transition-colors no-underline flex items-center gap-1.5 group px-2 py-2"
+                >
+                  See how it works
+                  <ArrowRight size={16} strokeWidth={2.75} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+              </motion.div>
+
+              <div className="flex flex-wrap items-center lg:justify-start justify-center gap-x-5 gap-y-2 mt-6">
+                {["Free forever plan", "No credit card", "Ready in 30 seconds"].map(t => (
+                  <span key={t} className="flex items-center gap-1.5 text-[13px] font-semibold text-[#555]">
+                    <Check size={14} strokeWidth={3} style={{ color: FEATURE_BG }} />
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              {/* Institution names only. The 100,000+ and 1,500+ figures used
+                  to sit here too, but the stats band one scroll below now states
+                  both at display size, and saying a number twice that close
+                  together weakens it rather than reinforcing it. */}
+              <p className="text-[13px] text-[#888] font-medium mt-7 leading-relaxed">
+                Trusted by students at UCL, Harvard, Stanford and Johns Hopkins.
+              </p>
+            </div>
+
+            {/* ── Right: the thing no competitor lets you do before signing up ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full max-w-md mx-auto lg:mx-0 lg:justify-self-end"
+            >
+              {/* goSignup routes through goToDashboard(), which mints the
+                  Firebase auth-bridge token before sending the visitor to
+                  dashboard.forksai.app, so a returning user lands signed in. */}
+              <HeroLiveDemo accent={ACCENT} featureBg={FEATURE_BG} onGenerate={() => goSignup("hero_widget")} />
+              <p className="text-[11px] text-[#999] text-center mt-3 font-medium">
+                Paste your own notes, or browse a sample deck.
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Works with strip. The app-store "coming soon" badges that used to
+              sit here advertised an absence at the point of highest intent;
+              they now live in the footer. */}
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mt-10 pt-8 border-t border-black/10">
             <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#888]">Works with</span>
             {IMPORT_APPS.map(({ name, bg, label }) => (
               <span key={name} className="flex items-center gap-2">
@@ -839,27 +877,6 @@ export default function LandingPage() {
                 <span className="text-xs font-bold text-[#111]">{name}</span>
               </span>
             ))}
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center gap-3">
-            <span className="inline-flex items-center gap-2 border-2 border-black rounded-full px-3 py-1.5 bg-yellow shadow-[2px_2px_0_#111] text-[10px] font-black uppercase tracking-[0.18em] text-[#111]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#111]" />
-              Coming soon
-            </span>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2.5 border-2 border-black rounded-xl px-3.5 py-2 bg-white shadow-[3px_3px_0_#111]" aria-label="FORKSAI coming soon on the App Store">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="#111" aria-hidden="true">
-                  <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09l-.001-.001zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z" />
-                </svg>
-                <span className="text-[13px] font-black text-[#111]">App Store</span>
-              </div>
-              <div className="flex items-center gap-2.5 border-2 border-black rounded-xl px-3.5 py-2 bg-white shadow-[3px_3px_0_#111]" aria-label="FORKSAI coming soon on Google Play">
-                <svg viewBox="0 0 24 24" width="17" height="17" fill="#111" aria-hidden="true">
-                  <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.39 12l2.308-2.49zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z" />
-                </svg>
-                <span className="text-[13px] font-black text-[#111]">Google Play</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -898,8 +915,28 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Breaks the page's two-tone, one-composition rhythm without reaching
+          for the four-up stat grid, which is the single most templated section
+          in this category: big numerals, tiny tracked labels, one colour each.
+          A single statement in poster type does the same structural job and
+          says something a real person would say. One accent, not four. */}
+      <section className="border-y-2 border-black" style={{ background: "#111" }}>
+        <div className="max-w-5xl mx-auto px-6 py-20 sm:py-24">
+          <Reveal>
+            <p className="font-serif font-black text-white text-3xl sm:text-5xl lg:text-[3.6rem] leading-[1.08] tracking-tight">
+              You didn&rsquo;t enrol to spend your evenings{" "}
+              <Mark color={ACCENT}>typing out index cards.</Mark>
+            </p>
+            <p className="text-white/45 text-base sm:text-lg leading-relaxed mt-8 max-w-xl">
+              So don&rsquo;t. Hand over the material, keep the studying, and let the
+              scheduling algorithm remember what you are due to review.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── HOW IT WORKS ───────────────────────────────────── */}
-      <section id="how-it-works" className="bg-white border-y-2 border-black py-20 scroll-mt-24">
+      <section id="how-it-works" className="bg-white border-b-2 border-black py-20 scroll-mt-24">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-2 mb-5">
@@ -907,7 +944,7 @@ export default function LandingPage() {
               <span className="text-xs font-black uppercase tracking-[0.2em] text-[#111]">How it works</span>
             </div>
             <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">
-              Free flashcard generator<br />in three simple steps
+              Free flashcard generator<br />in <Mark color={ACCENT}>three simple steps</Mark>
             </h2>
           </div>
           <div className="flex flex-col md:flex-row items-stretch gap-6 md:gap-3">
@@ -930,6 +967,25 @@ export default function LandingPage() {
             ))}
           </div>
 
+          {/* The dashboard screenshot moved here from the hero, where it was a
+              second product visual competing with the generator widget. It
+              belongs with step three: this is what "study your way" looks like. */}
+          <Reveal>
+            <div className="mt-14 border-2 border-black rounded-xl overflow-hidden shadow-[6px_6px_0_#111] bg-white">
+              <div className="border-b-2 border-black px-4 py-3 flex items-center justify-center" style={{ background: "#f0f0ea" }}>
+                <span className="text-xs font-mono font-bold text-[#555]">forksai.app/dashboard</span>
+              </div>
+              <Image
+                src="/dashboardpreview.png"
+                alt="FORKSAI dashboard showing decks, study streak and cards due for review"
+                width={3200}
+                height={1822}
+                sizes="(max-width: 1024px) 100vw, 1100px"
+                className="w-full h-auto block"
+              />
+            </div>
+          </Reveal>
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-14">
             <button
               onClick={() => goSignup("how_it_works")}
@@ -951,7 +1007,7 @@ export default function LandingPage() {
             <span className="text-xs font-black uppercase tracking-[0.2em] text-[#111]">Why FORKSAI</span>
           </div>
           <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">
-            The only free study tool<br />you'll ever need
+            The only <Mark color={FEATURE_BG}>free</Mark> study tool<br />you'll ever need
           </h2>
         </div>
 
@@ -1013,7 +1069,7 @@ export default function LandingPage() {
               </div>
               <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight mb-5">
                 Flashcards you can study<br />
-                <span className="italic" style={{ borderBottom: `5px solid ${FEATURE_BG}`, paddingBottom: "2px" }}>live, with friends</span>
+                <Mark color={FEATURE_BG}>live, with friends</Mark>
               </h2>
               <p className="text-[#555] text-base leading-relaxed mb-8">
                 Create a room, share a 6-character code, and study any deck together in real time. Race Mode turns revision into a competition. Live chat keeps the energy up.
@@ -1052,20 +1108,39 @@ export default function LandingPage() {
       {/* ── SPLIT CTA ──────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-6 py-20">
         <div className="grid md:grid-cols-2 gap-5">
-          <div className="bg-white border-2 border-black rounded-xl shadow-[4px_4px_0_#111] p-8">
+          {/* Was a flat wall of body copy in a plain white box, the least
+              looked-at composition on the page. A pull-quote treatment gives
+              the science claim a shape worth stopping on, and the accent rule
+              plus oversized quote mark reuse the type system rather than adding
+              a new device. */}
+          <div className="bg-white border-2 border-black rounded-xl shadow-[4px_4px_0_#111] p-8 flex flex-col">
             <div className="flex items-center gap-2 mb-6">
               <span className="w-6 h-0.75 rounded-full" style={{ background: ACCENT }} />
               <span className="text-xs font-black uppercase tracking-[0.2em] text-[#111]">Why this works</span>
             </div>
-            <h3 className="font-serif font-black text-3xl text-[#111] leading-tight mb-4">
-              Retrieval practice beats re-reading every time
+
+            <div
+              className="font-serif font-black leading-none select-none mb-1"
+              style={{ color: ACCENT, fontSize: "3.5rem" }}
+              aria-hidden="true"
+            >
+              &ldquo;
+            </div>
+            <h3 className="font-serif font-black text-3xl sm:text-[2.1rem] text-[#111] leading-[1.12] mb-6">
+              Testing yourself beats re-reading. <Mark color={ACCENT}>Every time.</Mark>
             </h3>
-            <p className="text-[#555] text-sm leading-relaxed mb-4">
-              Decades of cognitive science confirm it: testing yourself forces your brain to retrieve information, which is how long-term memory actually forms. Re-reading feels productive but leaves almost nothing behind.
-            </p>
-            <p className="text-[#555] text-sm leading-relaxed">
-              FORKSAI automates the hard part of active recall (building the cards) so you spend every minute actually studying instead of preparing to study.
-            </p>
+
+            <div className="pl-4 border-l-2 mt-auto" style={{ borderColor: ACCENT }}>
+              <p className="text-[#555] text-sm leading-relaxed mb-3">
+                Decades of cognitive science agree: retrieval forces your brain to
+                reconstruct information, and that is how long-term memory forms.
+                Re-reading feels productive and leaves almost nothing behind.
+              </p>
+              <p className="text-[#555] text-sm leading-relaxed">
+                FORKSAI automates the hard part of active recall, building the cards,
+                so every minute goes on studying instead of preparing to study.
+              </p>
+            </div>
           </div>
           <div className="border-2 border-black rounded-xl shadow-[4px_4px_0_#555] p-8 flex flex-col justify-between" style={{ background: "#111111" }}>
             <div>
@@ -1093,7 +1168,7 @@ export default function LandingPage() {
               <span className="text-xs font-black uppercase tracking-[0.2em] text-[#111]">How we compare</span>
             </div>
             <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">
-              Flashcards: FORKSAI vs Quizlet vs Anki
+              Flashcards: <Mark color={ACCENT}>FORKSAI</Mark> vs Quizlet vs Anki
             </h2>
             <p className="text-[#555] text-base mt-4 max-w-lg mx-auto leading-relaxed">
               Most tools make you do the work. FORKSAI is the only one that reads your material and does it for you.
@@ -1163,7 +1238,7 @@ export default function LandingPage() {
               <span className="text-xs font-black uppercase tracking-[0.2em] text-[#111]">From the blog</span>
             </div>
             <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight">
-              How to study like a topper<br />and get better marks
+              How to study <Mark color="#7C3AED" text="#fff">like a topper</Mark><br />and get better marks
             </h2>
           </div>
           <a href="/blogs" className="font-bold text-sm text-[#111] border-2 border-black rounded-xl px-5 py-2.5 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 flex items-center gap-2 shrink-0">
@@ -1323,7 +1398,7 @@ export default function LandingPage() {
         <Reveal>
           <div className="border-2 border-black rounded-2xl shadow-[6px_6px_0_#111] px-8 py-14 sm:px-14 text-center relative overflow-hidden" style={{ background: ACCENT }}>
             <h2 className="font-serif font-black text-4xl sm:text-5xl text-[#111] leading-tight mb-4">
-              Stop making flashcards.<br />Start actually learning.
+              Stop making flashcards.<br />Start <Mark color="#fff">actually learning.</Mark>
             </h2>
             <p className="text-[#333] text-base sm:text-lg max-w-lg mx-auto leading-relaxed mb-9">
               Upload your first PDF and have a study-ready deck before your coffee gets cold.
@@ -1354,7 +1429,25 @@ export default function LandingPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-6 gap-10 pb-12 border-b border-white/10">
             <div className="lg:col-span-2">
               <div className="font-serif font-black text-xl text-white mb-3">FORKSAI</div>
-              <p className="text-white/40 text-sm leading-relaxed max-w-xs">The AI study platform that turns your material into mastery. Built for students who want results, not just revision.</p>
+              <p className="text-white/40 text-sm leading-relaxed max-w-xs mb-6">The AI study platform that turns your material into mastery. Built for students who want results, not just revision.</p>
+
+              {/* Moved out of the hero: a "coming soon" badge advertises an
+                  absence, and it was doing that at the moment of highest intent. */}
+              <div className="text-[10px] font-black uppercase tracking-[0.18em] text-white/40 mb-3">Mobile apps coming soon</div>
+              <div className="flex items-center gap-2.5">
+                <span className="flex items-center gap-2 border border-white/20 rounded-lg px-3 py-2" aria-label="FORKSAI coming soon on the App Store">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="rgba(255,255,255,0.55)" aria-hidden="true">
+                    <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09l-.001-.001zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z" />
+                  </svg>
+                  <span className="text-[11px] font-bold text-white/50">App Store</span>
+                </span>
+                <span className="flex items-center gap-2 border border-white/20 rounded-lg px-3 py-2" aria-label="FORKSAI coming soon on Google Play">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="rgba(255,255,255,0.55)" aria-hidden="true">
+                    <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.39 12l2.308-2.49zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z" />
+                  </svg>
+                  <span className="text-[11px] font-bold text-white/50">Google Play</span>
+                </span>
+              </div>
             </div>
             <div>
               <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Product</div>
