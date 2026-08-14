@@ -221,9 +221,9 @@ export default function ToolPageShell({ children }) {
 
 // Shared prose blocks so the supporting content below each calculator looks
 // like one system across the four pages.
-export function ToolSection({ title, children, id }) {
+export function ToolSection({ title, children, id, className = "" }) {
   return (
-    <section id={id} className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+    <section id={id} className={`max-w-3xl mx-auto px-4 sm:px-6 py-8 ${className}`}>
       <h2 className="font-serif font-black text-2xl sm:text-[1.75rem] text-[#111] mb-4 leading-tight">
         {title}
       </h2>
