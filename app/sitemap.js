@@ -1,4 +1,10 @@
+import { TOOLS, TOOLS_HUB } from "@/lib/studentTools";
+
 const BASE_URL = "https://forksai.app";
+
+// Derived from the shared tool list, so a new tool reaches the sitemap by
+// being added in one place rather than two.
+const TOOL_PAGES = TOOLS.map((tool) => tool.href);
 
 const FEATURE_PAGES = [
   "/ai-flashcards",
@@ -43,6 +49,8 @@ export default function sitemap() {
   return [
     entry("/", { changeFrequency: "weekly", priority: 1.0 }),
     ...FEATURE_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.9 })),
+    entry(TOOLS_HUB, { changeFrequency: "monthly", priority: 0.8 }),
+    ...TOOL_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.8 })),
     entry("/blogs", { changeFrequency: "weekly", priority: 0.7 }),
     ...BLOG_POSTS.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.6 })),
     ...APPLY_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.5 })),

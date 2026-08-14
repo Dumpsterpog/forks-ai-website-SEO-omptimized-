@@ -3,8 +3,8 @@ import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
 import { FINAL_GRADE_FAQS } from "@/lib/toolFaqs";
 
 export const metadata = {
-  // Absolute rather than the root template, which renders the brand as
-  // "ForksAI". House style is FORKSAI in caps.
+  // Absolute rather than the root layout's title template, which spells the
+  // brand in mixed case. House style is FORKSAI in caps.
   title: { absolute: "Final Grade Calculator | FORKSAI" },
   description:
     "Find the exact score you need on your final exam to hit your target grade. Says plainly when a target is impossible or already secured, instead of printing an absurd number.",

@@ -365,6 +365,7 @@ export default function AIFlashcardsPage() {
                 <a href="/ai-summarizer" className="text-zinc-500 hover:text-white transition-colors">AI Summarizer</a>
                 <a href="/pdf-to-flashcards" className="text-zinc-500 hover:text-white transition-colors">PDF to Flashcards</a>
                 <a href="/ai-study-tools" className="text-zinc-500 hover:text-white transition-colors">AI Study Tools</a>
+                <a href="/tools" className="text-zinc-500 hover:text-white transition-colors">Free Student Tools</a>
               </div>
             </div>
             <div>

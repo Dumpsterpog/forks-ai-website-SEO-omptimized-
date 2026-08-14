@@ -3,8 +3,8 @@ import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
 import { ATTENDANCE_FAQS } from "@/lib/toolFaqs";
 
 export const metadata = {
-  // Absolute rather than the root template, which renders the brand as
-  // "ForksAI". House style is FORKSAI in caps.
+  // Absolute rather than the root layout's title template, which spells the
+  // brand in mixed case. House style is FORKSAI in caps.
   title: { absolute: "Attendance Calculator (75% Rule) | FORKSAI" },
   description:
     "Free attendance calculator for college students. See how many classes you can skip and still hold 75%, or how many you must attend in a row to get back above it.",

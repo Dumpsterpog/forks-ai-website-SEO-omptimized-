@@ -700,6 +700,9 @@ export default function LandingPage() {
           </a>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            <a href="/tools" className="hidden md:block text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
+              Free tools
+            </a>
             <a href="#pricing" className="hidden sm:block text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
               Pricing
             </a>
@@ -1462,13 +1465,14 @@ export default function LandingPage() {
                 ["AI Notes", "/notes"],
                 ["AI Summarizer", "/ai-summarizer"],
                 ["Study Tools", "/ai-study-tools"],
+                ["Free student tools", "/tools"],
               ].map(([l, href]) => (
                 <a key={l} href={href} className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
               ))}
             </div>
             <div>
               <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Resources</div>
-              {[["Blog", "/blogs"], ["FAQ", "/faq"], ["Docs", "/docs"], ["AI Flashcards Guide", "/blog/flashcards"], ["Spaced Repetition", "/blog/spaced-repetition"]].map(([l, href]) => (
+              {[["Blog", "/blogs"], ["FAQ", "/faq"], ["Docs", "/docs"], ["Attendance Calculator", "/attendance-calculator"], ["CGPA to Percentage", "/cgpa-to-percentage-calculator"], ["AI Flashcards Guide", "/blog/flashcards"]].map(([l, href]) => (
                 <a key={l} href={href} className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
               ))}
             </div>

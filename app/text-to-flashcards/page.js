@@ -3,8 +3,8 @@ import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
 import { TEXT_TO_FLASHCARDS_FAQS } from "@/lib/toolFaqs";
 
 export const metadata = {
-  // Absolute rather than the root template, which renders the brand as
-  // "ForksAI". House style is FORKSAI in caps.
+  // Absolute rather than the root layout's title template, which spells the
+  // brand in mixed case. House style is FORKSAI in caps.
   title: { absolute: "Text to Flashcards Converter | FORKSAI" },
   description:
     "Paste notes and get flashcards, split on Q and A lines, tabs, dashes, colons or alternating lines. Edit the cards, then export to CSV, to Anki or to your printer.",

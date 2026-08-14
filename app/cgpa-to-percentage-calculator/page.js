@@ -3,8 +3,8 @@ import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
 import { CGPA_FAQS } from "@/lib/toolFaqs";
 
 export const metadata = {
-  // Absolute rather than the root template, which renders the brand as
-  // "ForksAI". House style is FORKSAI in caps.
+  // Absolute rather than the root layout's title template, which spells the
+  // brand in mixed case. House style is FORKSAI in caps.
   title: { absolute: "CGPA to Percentage Calculator | FORKSAI" },
   description:
     "Convert CGPA to percentage and back, on the 10-point and 4-point scales. Pick the conversion rule your university uses and see the exact formula applied.",
