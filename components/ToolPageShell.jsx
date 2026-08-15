@@ -102,7 +102,7 @@ export function ToolCta({ heading, body, location }) {
           Try FORKSAI free <ArrowRight size={16} strokeWidth={2.75} />
         </button>
         <p className="text-xs text-[#111]/60 mt-3">
-          The calculator above stays free and needs no account.
+          The tool above stays free and needs no account.
         </p>
       </div>
     </section>
