@@ -189,15 +189,16 @@ const EMPTY = {
 };
 
 /**
- * Loads a PDF for the tools that show page previews, and streams the
- * thumbnails in one page at a time. Split, rotate and delete all need exactly
- * this, and all three would otherwise freeze the tab on a long document.
+ * Loads a PDF and, unless thumbnails are turned off, streams a preview of
+ * every page in one at a time. Split, rotate and delete all want the previews;
+ * PDF to images and the text extractor only want the page count, and rendering
+ * previews they never show would be time spent for nothing.
  *
  * Every load carries a run id. A second file picked while the first is still
  * rendering bumps the id, and the older loop sees the mismatch and stops,
  * rather than painting its thumbnails over the new document's.
  */
-export function usePdfPreview() {
+export function usePdfPreview({ thumbnails = true } = {}) {
   const [state, setState] = useState(EMPTY);
   const runId = useRef(0);
 
@@ -217,17 +218,18 @@ export function usePdfPreview() {
       if (id !== runId.current) return;
 
       const pageCount = doc.numPages;
-      const tooManyPages = pageCount > THUMBNAIL_PAGE_LIMIT;
+      const tooManyPages = thumbnails && pageCount > THUMBNAIL_PAGE_LIMIT;
+      const willRender = thumbnails && !tooManyPages;
       setState({
         ...EMPTY,
         file,
         pageCount,
         tooManyPages,
-        thumbs: new Array(pageCount).fill(null),
-        thumbProgress: tooManyPages ? null : { done: 0, total: pageCount },
+        thumbs: new Array(thumbnails ? pageCount : 0).fill(null),
+        thumbProgress: willRender ? { done: 0, total: pageCount } : null,
       });
 
-      if (!tooManyPages) {
+      if (willRender) {
         for (let n = 1; n <= pageCount; n += 1) {
           if (id !== runId.current) return;
           const page = await doc.getPage(n);
@@ -255,7 +257,7 @@ export function usePdfPreview() {
     } finally {
       await closeDocument(doc);
     }
-  }, []);
+  }, [thumbnails]);
 
   return { ...state, load, reset };
 }
