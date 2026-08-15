@@ -9,6 +9,7 @@ import { ArrowRight, Check, ChevronRight, FileText, Zap, BookOpen, Clock, Brain,
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import AuthModal from "@/components/AuthModal";
+import FooterFreeTools from "@/components/FooterFreeTools";
 
 const FontLoader = () => {
   useEffect(() => {
@@ -381,6 +382,7 @@ export default function AISummarizerPage() {
             </div>
           </div>
         </div>
+        <FooterFreeTools skin="slate" />
         <div className="max-w-6xl mx-auto mt-8 pt-6 border-t border-white/5 text-[11px] text-zinc-700">
           © {new Date().getFullYear()} FORKSAI. All rights reserved.
         </div>

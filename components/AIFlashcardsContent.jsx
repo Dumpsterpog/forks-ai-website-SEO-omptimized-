@@ -9,6 +9,7 @@ import { ArrowRight, Check, ChevronRight, Zap, Brain, FileText, Target, Repeat, 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import AuthModal from "@/components/AuthModal";
+import FooterFreeTools from "@/components/FooterFreeTools";
 
 const FontLoader = () => {
   useEffect(() => {
@@ -385,6 +386,7 @@ export default function AIFlashcardsPage() {
             </div>
           </div>
         </div>
+        <FooterFreeTools skin="slate" />
         <div className="max-w-6xl mx-auto mt-8 pt-6 border-t border-white/5 text-[11px] text-zinc-700">
           © {new Date().getFullYear()} FORKSAI. All rights reserved.
         </div>

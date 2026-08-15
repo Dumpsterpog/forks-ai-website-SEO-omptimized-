@@ -2,6 +2,7 @@
 
 import { goToDashboard } from "@/lib/goToDashboard";
 import { trackSignupClick } from "@/lib/track";
+import FooterFreeTools from "@/components/FooterFreeTools";
 
 import { useState, useEffect, Fragment } from "react";
 import Image from "next/image";
@@ -1498,6 +1499,9 @@ export default function LandingPage() {
               ))}
             </div>
           </div>
+
+          <FooterFreeTools />
+
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
             <span className="text-white/30 text-xs">2026 FORKSAI. All rights reserved.</span>
             <span className="text-white/30 text-xs">Made for students, by students.</span>

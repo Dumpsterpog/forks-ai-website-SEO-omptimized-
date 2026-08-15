@@ -7,6 +7,8 @@ import { ArrowRight } from "lucide-react";
 import { goToDashboard } from "@/lib/goToDashboard";
 import { trackSignupClick } from "@/lib/track";
 import { TOOLS } from "@/lib/studentTools";
+import { TOOL_GROUPS } from "@/app/tools/toolGroups";
+import FooterFreeTools from "@/components/FooterFreeTools";
 
 // The four free calculators share a nav, a footer, a cross-link strip and one
 // CTA, so they live here rather than being pasted into each page. Visual
@@ -200,6 +202,12 @@ export function ToolFooter() {
             ))}
           </div>
         </div>
+
+        <FooterFreeTools
+          label="More free tools"
+          groups={TOOL_GROUPS.filter((group) => group.id !== "study")}
+        />
+
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <span className="text-white/30 text-xs">{new Date().getFullYear()} FORKSAI. All rights reserved.</span>
           <span className="text-white/30 text-xs">Made for students, by students.</span>

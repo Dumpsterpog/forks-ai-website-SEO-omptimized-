@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import AuthModal from "@/components/AuthModal";
+import FooterFreeTools from "@/components/FooterFreeTools";
 import { ArrowLeft, Clock, User } from "lucide-react";
 
 const CAT_STYLES = {
@@ -189,6 +190,9 @@ export default function BlogLayout({
               ))}
             </div>
           </div>
+
+          <FooterFreeTools />
+
           <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-xs text-white/25">© {new Date().getFullYear()} FORKSAI. All rights reserved.</p>
             <p className="text-xs text-white/25">Made for students who want to actually remember what they study.</p>
