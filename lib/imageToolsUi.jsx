@@ -13,7 +13,6 @@ import {
   MAX_CROP_ZOOM,
   clamp,
   cropRect,
-  formatSize,
 } from "@/lib/imageTools";
 
 export function Field({ id, label, hint, children }) {
@@ -109,7 +108,7 @@ export function CheckboxField({ id, label, hint, checked, onChange }) {
           type="checkbox"
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
-          className="mt-0.5 h-5 w-5 shrink-0 accent-[#111] cursor-pointer rounded focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#F0D44A]"
+          className="mt-0.5 h-6 w-6 shrink-0 accent-[#111] cursor-pointer rounded focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#F0D44A]"
         />
         <label htmlFor={id} className="text-sm font-bold text-[#111] leading-snug cursor-pointer">
           {label}
@@ -440,5 +439,3 @@ export function ImageToolCrossLinks({ current }) {
     </section>
   );
 }
-
-export { formatSize };
