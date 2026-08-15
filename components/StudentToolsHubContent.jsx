@@ -7,11 +7,12 @@ import ToolPageShell, {
   ToolSection,
   cardClass,
 } from "@/components/ToolPageShell";
-import { TOOLS } from "@/lib/studentTools";
+import { TOOL_GROUPS, ALL_TOOLS } from "@/app/tools/toolGroups";
 
 // The one-liner that goes under each card on the hub. Longer than the shared
 // blurb used in the cross-link strips, because this is the page where a
-// visitor decides which tool they came for.
+// visitor decides which tool they came for. Only the four calculators carry
+// one; every other card falls back to the blurb its list already defines.
 const DETAIL = {
   "/attendance-calculator":
     "Set your own threshold, enter classes attended and held, and get both answers at once: the classes you can still miss, and the unbroken run you would need to climb back above the line.",
@@ -23,52 +24,84 @@ const DETAIL = {
     "Paste notes written as Q and A lines, tabs, dashes, colons or alternating lines. Edit the parsed cards, then export to CSV, to Anki, or to your printer.",
 };
 
+function ToolCard({ tool }) {
+  return (
+    <Link
+      href={tool.href}
+      className={`${cardClass} p-5 sm:p-6 no-underline transition-all hover:shadow-[2px_2px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#F0D44A] flex flex-col`}
+    >
+      <span className="font-serif font-black text-lg sm:text-xl text-[#111] mb-2 leading-tight">
+        {tool.name}
+      </span>
+      <span className="text-sm text-[#555] leading-relaxed flex-1">
+        {DETAIL[tool.href] || tool.blurb}
+      </span>
+      <span className="inline-flex items-center gap-1.5 text-sm font-bold text-[#111] mt-4">
+        Open the tool <ArrowRight size={15} strokeWidth={2.75} />
+      </span>
+    </Link>
+  );
+}
+
 export default function StudentToolsHubContent() {
   return (
     <ToolPageShell>
-      <section className="max-w-3xl mx-auto px-4 sm:px-6">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6">
         <h1 className="font-serif font-black text-3xl sm:text-[2.8rem] leading-[1.06] text-[#111] mb-4">
           Free tools for students
         </h1>
-        <p className="text-[15px] sm:text-base text-[#444] leading-relaxed mb-8 max-w-2xl">
-          Four calculators that do one job each and do it properly. No account,
-          no email, no limits, and nothing you type is sent anywhere. They all
-          run in your browser, which is also why they are free to keep running.
+        <p className="text-[15px] sm:text-base text-[#444] leading-relaxed mb-6 max-w-2xl">
+          {ALL_TOOLS.length} tools that each do one job and do it properly. No
+          account, no email, no limits, and nothing you type or open is sent
+          anywhere. They all run in your browser, which is also why they are
+          free to keep running.
         </p>
 
-        <div className="grid sm:grid-cols-2 gap-4">
-          {TOOLS.map((tool) => (
-            <Link
-              key={tool.href}
-              href={tool.href}
-              className={`${cardClass} p-6 no-underline transition-all hover:shadow-[2px_2px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#F0D44A] flex flex-col`}
+        <nav aria-label="Tool categories" className="flex flex-wrap gap-2 mb-12">
+          {TOOL_GROUPS.map((group) => (
+            <a
+              key={group.id}
+              href={`#${group.id}`}
+              className="inline-flex items-center gap-2 border-2 border-black rounded-xl bg-white px-3.5 py-2 text-sm font-bold text-[#111] no-underline shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#F0D44A]"
             >
-              <span className="font-serif font-black text-xl text-[#111] mb-2 leading-tight">
-                {tool.name}
-              </span>
-              <span className="text-sm text-[#555] leading-relaxed flex-1">
-                {DETAIL[tool.href]}
-              </span>
-              <span className="inline-flex items-center gap-1.5 text-sm font-bold text-[#111] mt-4">
-                Open the tool <ArrowRight size={15} strokeWidth={2.75} />
-              </span>
-            </Link>
+              {group.title}
+              <span className="text-xs font-bold text-[#777]">{group.tools.length}</span>
+            </a>
           ))}
-        </div>
+        </nav>
+
+        {TOOL_GROUPS.map((group) => (
+          <section key={group.id} id={group.id} className="mb-14 scroll-mt-24">
+            <h2 className="font-serif font-black text-2xl sm:text-[1.75rem] text-[#111] mb-2 leading-tight">
+              {group.title}
+            </h2>
+            <p className="text-[15px] text-[#555] leading-relaxed mb-5 max-w-2xl">
+              {group.intro}
+            </p>
+            <div
+              className={`grid gap-4 sm:grid-cols-2 ${group.wide ? "" : "lg:grid-cols-3"}`}
+            >
+              {group.tools.map((tool) => (
+                <ToolCard key={tool.href} tool={tool} />
+              ))}
+            </div>
+          </section>
+        ))}
       </section>
 
       <ToolSection title="Why these run in your browser">
         <p>
-          Every one of these tools is arithmetic or string handling. An
-          attendance percentage is a division. A required final exam score is a
-          rearranged weighted average. A CGPA conversion is a multiplication. A
-          set of flashcards parsed out of Q and A lines is a string split.
+          Every tool on this page is arithmetic, string handling, or work the
+          browser can already do to a file it has open. An attendance
+          percentage is a division. A required final exam score is a rearranged
+          weighted average. Resizing a photo is a canvas draw and an encode.
+          Merging two PDFs is reading the bytes of both and writing new ones.
         </p>
         <p>
-          None of that needs a server, so none of it uses one. Your numbers and
-          your notes stay on your device, the pages work on a slow connection,
-          and there is no usage cap to enforce because there is no cost per use
-          to recover.
+          None of that needs a server, so none of it uses one. Your numbers,
+          your notes and your files stay on your device, the pages work on a
+          slow connection, and there is no usage cap to enforce because there is
+          no cost per use to recover.
         </p>
       </ToolSection>
 
@@ -109,8 +142,8 @@ export default function StudentToolsHubContent() {
 
       <ToolCta
         location="tools_hub"
-        heading="Four calculators, one study platform"
-        body="FORKSAI turns your notes, slides and PDFs into flashcards, quizzes and spaced repetition sessions. The calculators above stay free either way."
+        heading="One place for the tools and the studying"
+        body="FORKSAI turns your notes, slides and PDFs into flashcards, quizzes and spaced repetition sessions. The tools on this page stay free either way."
       />
     </ToolPageShell>
   );
