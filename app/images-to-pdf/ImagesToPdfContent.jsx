@@ -56,7 +56,12 @@ export default function ImagesToPdfContent() {
   const dragIndex = useRef(null);
   const itemsRef = useRef([]);
 
-  itemsRef.current = items;
+  // The unmount cleanup needs the final list, but it only runs once, so it
+  // cannot close over the list from any single render. A ref kept in step with
+  // state gives it the current one.
+  useEffect(() => {
+    itemsRef.current = items;
+  }, [items]);
   useEffect(
     () => () => itemsRef.current.forEach((item) => URL.revokeObjectURL(item.url)),
     []

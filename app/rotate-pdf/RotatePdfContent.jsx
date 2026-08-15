@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { RotateCcw, RotateCw, Save } from "lucide-react";
 import ToolPageShell, {
   ToolSection,
@@ -39,16 +39,22 @@ const turn = (current, delta) => (((current + delta) % 360) + 360) % 360;
 
 export default function RotatePdfContent() {
   const preview = usePdfPreview();
-  const [deltas, setDeltas] = useState([]);
   const [rangeText, setRangeText] = useState("");
   const [status, setStatus] = useState(null);
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState(null);
 
-  // A fresh document means a fresh set of turns, one per page, all at zero.
-  useEffect(() => {
-    setDeltas(new Array(preview.pageCount).fill(0));
-  }, [preview.pageCount, preview.file]);
+  // The turns are stored against the document that produced them. Load a
+  // different file and the key stops matching, so a fresh set of zeroes takes
+  // over with no effect needed to reset anything.
+  const documentKey = preview.file
+    ? `${preview.file.name}:${preview.file.size}:${preview.pageCount}`
+    : "";
+  const [turns, setTurns] = useState({ key: "", values: [] });
+  const deltas =
+    turns.key === documentKey ? turns.values : new Array(preview.pageCount).fill(0);
+  const setDeltas = (next) =>
+    setTurns({ key: documentKey, values: typeof next === "function" ? next(deltas) : next });
 
   const parsedRange = useMemo(
     () => parsePageSelection(rangeText, preview.pageCount),
