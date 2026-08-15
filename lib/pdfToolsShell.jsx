@@ -282,17 +282,22 @@ export function PageCell({
   actions,
 }) {
   const id = useId();
+  // The preview box is square on purpose. An element rotated about the centre
+  // of a square stays inside that square, so a portrait page turned 90 degrees
+  // cannot spill over its neighbours in the grid.
   const preview = (
-    <span className="flex items-center justify-center h-24 sm:h-28 overflow-hidden">
+    <span className="relative block mx-auto h-24 w-24 sm:h-28 sm:w-28">
       {thumb ? (
         <img
           src={thumb}
           alt=""
-          className="max-h-full max-w-full object-contain transition-transform duration-200"
+          className="absolute inset-0 h-full w-full object-contain transition-transform duration-200"
           style={{ transform: rotation ? `rotate(${rotation}deg)` : undefined }}
         />
       ) : (
-        <span className="text-xs font-bold text-[#999]">page {pageNumber}</span>
+        <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-[#999]">
+          page {pageNumber}
+        </span>
       )}
     </span>
   );
