@@ -32,29 +32,30 @@ export default function ImageConverterContent() {
   const [quality, setQuality] = useState(92);
   const [background, setBackground] = useState("#ffffff");
   const [result, setResult] = useState(null);
-  const [error, setError] = useState("");
-  const [busy, setBusy] = useState(false);
+  const [failure, setFailure] = useState(null);
 
   const lossy = format !== "image/png";
   const losesTransparency = format === "image/jpeg";
 
+  // One string identifying the conversion the settings currently ask for. The
+  // result and any error carry the key they belong to, which is what lets the
+  // component tell "still working" from "done" without a busy flag that would
+  // have to be set inside the effect.
+  const jobKey = file ? `${file.name}:${file.size}:${format}:${quality}:${background}` : "";
+
   // Re-converts whenever the file or any setting changes, so there is no
   // Convert button between the choice and the result.
   useEffect(() => {
-    if (!file) {
-      setResult(null);
-      return undefined;
-    }
+    if (!file) return undefined;
     let cancelled = false;
     let objectUrl = "";
-    setBusy(true);
-    setError("");
 
     convertImage(file, { format, quality: quality / 100, background })
       .then(({ blob, width, height }) => {
         if (cancelled) return;
         objectUrl = URL.createObjectURL(blob);
         setResult({
+          key: jobKey,
           blob,
           width,
           height,
@@ -66,24 +67,24 @@ export default function ImageConverterContent() {
       })
       .catch((err) => {
         if (!cancelled) {
-          setResult(null);
-          setError(err.message || "That image could not be converted.");
+          setFailure({ key: jobKey, message: err.message || "That image could not be converted." });
         }
-      })
-      .finally(() => {
-        if (!cancelled) setBusy(false);
       });
 
     return () => {
       cancelled = true;
       if (objectUrl) setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
     };
-  }, [file, format, quality, background]);
+  }, [file, format, quality, background, jobKey]);
 
-  const mismatch = result && result.actualType !== format;
+  const current = result && result.key === jobKey ? result : null;
+  const error = failure && failure.key === jobKey ? failure.message : "";
+  const busy = Boolean(file) && !current && !error;
+
+  const mismatch = current && current.actualType !== format;
   const outputName = file ? `${baseName(file.name)}.${extensionFor(format)}` : "";
   const delta =
-    result && file ? Math.round(((result.blob.size - file.size) / file.size) * 100) : null;
+    current && file ? Math.round(((current.blob.size - file.size) / file.size) * 100) : null;
 
   return (
     <ToolPageShell>
@@ -104,7 +105,11 @@ export default function ImageConverterContent() {
             accept="image/*"
             fileName={file ? `${file.name} (${formatBytes(file.size)})` : ""}
             hint="PNG, JPG, WebP, GIF, BMP or anything else your browser can open."
-            onFile={(next) => setFile(next)}
+            onFile={(next) => {
+              setFile(next);
+              setResult(null);
+              setFailure(null);
+            }}
           />
 
           <fieldset className="mt-5">
@@ -191,11 +196,11 @@ export default function ImageConverterContent() {
               <p className="border-2 border-black rounded-xl bg-white px-4 py-4 text-sm font-bold text-[#111]">
                 {error}
               </p>
-            ) : busy && !result ? (
+            ) : busy ? (
               <p className="border-2 border-black rounded-xl bg-white px-4 py-4 text-sm text-[#555]">
                 Converting.
               </p>
-            ) : result ? (
+            ) : current ? (
               <div className="border-2 border-black rounded-xl bg-white p-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
@@ -204,7 +209,7 @@ export default function ImageConverterContent() {
                     </p>
                     <p className="font-bold text-[15px] text-[#111]">{formatBytes(file.size)}</p>
                     <p className="text-xs text-[#666] mt-0.5">
-                      {file.type || "unknown type"}, {result.width} by {result.height} pixels
+                      {file.type || "unknown type"}, {current.width} by {current.height} pixels
                     </p>
                   </div>
                   <div>
@@ -212,7 +217,7 @@ export default function ImageConverterContent() {
                       After
                     </p>
                     <p className="font-bold text-[15px] text-[#111]">
-                      {formatBytes(result.blob.size)}{" "}
+                      {formatBytes(current.blob.size)}{" "}
                       {delta !== null ? (
                         <span className="text-xs text-[#666] font-normal">
                           ({delta > 0 ? "+" : ""}
@@ -221,7 +226,7 @@ export default function ImageConverterContent() {
                       ) : null}
                     </p>
                     <p className="text-xs text-[#666] mt-0.5">
-                      {labelFor(format)}, {result.width} by {result.height} pixels
+                      {labelFor(format)}, {current.width} by {current.height} pixels
                     </p>
                   </div>
                 </div>
@@ -229,13 +234,13 @@ export default function ImageConverterContent() {
                 {mismatch ? (
                   <p className="text-sm font-bold text-[#111] border-2 border-black rounded-xl px-3 py-2 mt-4">
                     This browser cannot write {labelFor(format)}, so it returned{" "}
-                    {result.actualType} instead. Try another format or another browser.
+                    {current.actualType} instead. Try another format or another browser.
                   </p>
                 ) : null}
 
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={result.url}
+                  src={current.url}
                   alt="Converted result preview"
                   className="mt-4 w-full h-auto border-2 border-black rounded-xl bg-white"
                   style={{ maxHeight: 420, objectFit: "contain" }}
@@ -243,7 +248,7 @@ export default function ImageConverterContent() {
 
                 <button
                   type="button"
-                  onClick={() => downloadBlob(outputName, result.blob)}
+                  onClick={() => downloadBlob(outputName, current.blob)}
                   className={`${buttonClass} mt-4`}
                 >
                   <Download size={14} strokeWidth={2.75} /> Download {outputName}
@@ -255,7 +260,7 @@ export default function ImageConverterContent() {
           <OnDeviceNote>
             The file is decoded and re-encoded by your browser with the canvas API. It is
             never uploaded, so you can convert a passport scan or a contract without
-            handing it to a stranger's server.
+            handing it to a server run by strangers.
           </OnDeviceNote>
         </div>
       </section>
@@ -290,7 +295,7 @@ export default function ImageConverterContent() {
         <p>
           This converter fills it with white by default and lets you pick another
           colour. If the image is a logo destined for a dark page, set the fill
-          to that page's colour rather than accepting a white box around it, or
+          to the colour of that page rather than accepting a white box around it, or
           convert to PNG or WebP and keep the transparency.
         </p>
       </ToolSection>

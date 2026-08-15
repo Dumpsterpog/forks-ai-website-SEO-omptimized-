@@ -45,8 +45,7 @@ export default function CompressImageContent() {
   const [targetKb, setTargetKb] = useState("100");
   const [format, setFormat] = useState("image/jpeg");
   const [result, setResult] = useState(null);
-  const [error, setError] = useState("");
-  const [busy, setBusy] = useState(false);
+  const [failure, setFailure] = useState(null);
   const [originalUrl, setOriginalUrl] = useState("");
 
   const targetBytes = useMemo(() => {
@@ -54,43 +53,32 @@ export default function CompressImageContent() {
     return Number.isFinite(kb) && kb > 0 ? Math.round(kb * 1024) : 0;
   }, [targetKb]);
 
-  useEffect(() => {
-    if (!file) {
-      setOriginalUrl("");
-      return undefined;
-    }
-    const url = URL.createObjectURL(file);
-    setOriginalUrl(url);
-    return () => setTimeout(() => URL.revokeObjectURL(url), 0);
-  }, [file]);
+  // One string identifying the compression the settings currently ask for. The
+  // result carries the key it was produced for, so a stale result is never
+  // shown and "still compressing" is derived rather than tracked in a flag.
+  const jobKey = file ? `${file.name}:${file.size}:${targetBytes}:${format}` : "";
 
   // Debounced so typing a target size does not kick off a dozen compression
   // runs, one per keystroke.
   useEffect(() => {
-    if (!file || !targetBytes) {
-      setResult(null);
-      return undefined;
-    }
+    if (!file || !targetBytes) return undefined;
     let cancelled = false;
     let objectUrl = "";
-    setBusy(true);
-    setError("");
 
     const timer = setTimeout(() => {
       compressToTarget(file, { targetBytes, format })
         .then((outcome) => {
           if (cancelled || !outcome?.blob) return;
           objectUrl = URL.createObjectURL(outcome.blob);
-          setResult({ ...outcome, url: objectUrl });
+          setResult({ ...outcome, key: jobKey, url: objectUrl });
         })
         .catch((err) => {
           if (!cancelled) {
-            setResult(null);
-            setError(err.message || "That image could not be compressed.");
+            setFailure({
+              key: jobKey,
+              message: err.message || "That image could not be compressed.",
+            });
           }
-        })
-        .finally(() => {
-          if (!cancelled) setBusy(false);
         });
     }, 250);
 
@@ -99,11 +87,15 @@ export default function CompressImageContent() {
       clearTimeout(timer);
       if (objectUrl) setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
     };
-  }, [file, targetBytes, format]);
+  }, [file, targetBytes, format, jobKey]);
+
+  const current = result && result.key === jobKey ? result : null;
+  const error = failure && failure.key === jobKey ? failure.message : "";
+  const busy = Boolean(file) && Boolean(targetBytes) && !current && !error;
 
   const outputName = file ? `${baseName(file.name)}-compressed.${extensionFor(format)}` : "";
   const saved =
-    result && file ? Math.round(((file.size - result.blob.size) / file.size) * 100) : null;
+    current && file ? Math.round(((file.size - current.blob.size) / file.size) * 100) : null;
 
   return (
     <ToolPageShell>
@@ -125,7 +117,17 @@ export default function CompressImageContent() {
             accept="image/*"
             fileName={file ? `${file.name} (${formatBytes(file.size)})` : ""}
             hint="A photo, a scan or a screenshot. Larger files simply take a moment longer."
-            onFile={(next) => setFile(next)}
+            onFile={(next) => {
+              setFile(next);
+              setResult(null);
+              setFailure(null);
+              // The preview URL is created here rather than in an effect, and
+              // the previous one is released as it is replaced.
+              setOriginalUrl((previous) => {
+                if (previous) setTimeout(() => URL.revokeObjectURL(previous), 0);
+                return next ? URL.createObjectURL(next) : "";
+              });
+            }}
           />
 
           <div className="grid sm:grid-cols-2 gap-4 mt-5">
@@ -202,50 +204,54 @@ export default function CompressImageContent() {
               <p className="border-2 border-black rounded-xl bg-white px-4 py-4 text-sm text-[#555]">
                 Choose an image above and the compressed version appears here.
               </p>
+            ) : !targetBytes ? (
+              <p className="border-2 border-black rounded-xl bg-white px-4 py-4 text-sm text-[#555]">
+                Enter a target size in kilobytes.
+              </p>
             ) : error ? (
               <p className="border-2 border-black rounded-xl bg-white px-4 py-4 text-sm font-bold text-[#111]">
                 {error}
               </p>
-            ) : busy && !result ? (
+            ) : busy ? (
               <p className="border-2 border-black rounded-xl bg-white px-4 py-4 text-sm text-[#555]">
                 Compressing.
               </p>
-            ) : result ? (
+            ) : current ? (
               <>
                 <div
                   className="border-2 border-black rounded-xl px-4 py-4"
-                  style={{ background: result.ok ? "#F0D44A" : "#fff" }}
+                  style={{ background: current.ok ? "#F0D44A" : "#fff" }}
                 >
                   <p className="text-[11px] font-black uppercase tracking-widest text-[#111]/60 mb-1">
-                    {result.ok ? "Landed under your target" : "Could not reach your target"}
+                    {current.ok ? "Landed under your target" : "Could not reach your target"}
                   </p>
                   <p className="font-serif font-black text-2xl sm:text-3xl text-[#111] leading-tight">
-                    {formatBytes(file.size)} to {formatBytes(result.blob.size)}
+                    {formatBytes(file.size)} to {formatBytes(current.blob.size)}
                   </p>
                   <p className="text-sm text-[#111]/75 mt-1.5 leading-relaxed">
-                    {result.ok
+                    {current.ok
                       ? `Target was ${formatBytes(targetBytes)} and the result is ${formatBytes(
-                          result.blob.size
+                          current.blob.size
                         )}, which is ${saved}% smaller than the original.`
                       : `The smallest usable version came out at ${formatBytes(
-                          result.blob.size
+                          current.blob.size
                         )}, still above your ${formatBytes(
                           targetBytes
                         )} target. Try WebP, or raise the target.`}{" "}
-                    {result.quality !== null && result.quality !== undefined
-                      ? `Quality ${Math.round(result.quality * 100)}.`
+                    {current.quality !== null && current.quality !== undefined
+                      ? `Quality ${Math.round(current.quality * 100)}.`
                       : ""}{" "}
-                    {result.scale < 1
-                      ? `Scaled to ${Math.round(result.scale * 100)}% of the original width, now ${
-                          result.width
-                        } by ${result.height} pixels.`
-                      : `Dimensions unchanged at ${result.width} by ${result.height} pixels.`}
+                    {current.scale < 1
+                      ? `Scaled to ${Math.round(current.scale * 100)}% of the original width, now ${
+                          current.width
+                        } by ${current.height} pixels.`
+                      : `Dimensions unchanged at ${current.width} by ${current.height} pixels.`}
                   </p>
                 </div>
 
                 <button
                   type="button"
-                  onClick={() => downloadBlob(outputName, result.blob)}
+                  onClick={() => downloadBlob(outputName, current.blob)}
                   className={`${buttonClass} mt-3`}
                 >
                   <Download size={14} strokeWidth={2.75} /> Download {labelFor(format)}
@@ -268,11 +274,11 @@ export default function CompressImageContent() {
                   </figure>
                   <figure className="border-2 border-black rounded-xl bg-white p-3">
                     <figcaption className="text-[11px] font-black uppercase tracking-widest text-[#666] mb-2">
-                      Compressed, {formatBytes(result.blob.size)}
+                      Compressed, {formatBytes(current.blob.size)}
                     </figcaption>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={result.url}
+                      src={current.url}
                       alt="The same image after compression, for comparison"
                       className="w-full h-auto rounded-lg"
                       style={{ maxHeight: 320, objectFit: "contain" }}
@@ -333,7 +339,7 @@ export default function CompressImageContent() {
       <ToolSection title="Common size limits">
         <p>
           Exam and government portals in particular are strict, and the limits
-          are usually written in the form's own instructions: photographs often
+          are usually written into the form itself: photographs often
           have to fit in 20 to 100 KB, signatures in 10 to 20 KB, and supporting
           documents in 200 KB to 2 MB. Read the limit off your form and type it
           in rather than guessing.

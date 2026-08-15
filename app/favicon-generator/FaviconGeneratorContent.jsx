@@ -48,21 +48,18 @@ export default function FaviconGeneratorContent() {
   const [file, setFile] = useState(null);
   const [background, setBackground] = useState("#ffffff");
   const [useBackground, setUseBackground] = useState(false);
-  const [icons, setIcons] = useState([]);
-  const [source, setSource] = useState(null);
-  const [error, setError] = useState("");
-  const [busy, setBusy] = useState(false);
+  const [output, setOutput] = useState(null);
+  const [failure, setFailure] = useState(null);
+
+  // One string identifying the icon set the settings currently ask for. The
+  // output carries the key it was generated for, so "still resizing" is derived
+  // rather than tracked in a busy flag set inside the effect.
+  const jobKey = file ? `${file.name}:${file.size}:${useBackground ? background : "transparent"}` : "";
 
   useEffect(() => {
-    if (!file) {
-      setIcons([]);
-      setSource(null);
-      return undefined;
-    }
+    if (!file) return undefined;
     let cancelled = false;
     let created = [];
-    setBusy(true);
-    setError("");
 
     generateFavicons(file, { background: useBackground ? background : null })
       .then(({ results, sourceWidth, sourceHeight }) => {
@@ -71,24 +68,25 @@ export default function FaviconGeneratorContent() {
           return;
         }
         created = results;
-        setIcons(results);
-        setSource({ width: sourceWidth, height: sourceHeight });
+        setOutput({ key: jobKey, icons: results, source: { width: sourceWidth, height: sourceHeight } });
       })
       .catch((err) => {
         if (!cancelled) {
-          setIcons([]);
-          setError(err.message || "That image could not be read.");
+          setFailure({ key: jobKey, message: err.message || "That image could not be read." });
         }
-      })
-      .finally(() => {
-        if (!cancelled) setBusy(false);
       });
 
     return () => {
       cancelled = true;
       created.forEach((icon) => setTimeout(() => URL.revokeObjectURL(icon.url), 0));
     };
-  }, [file, useBackground, background]);
+  }, [file, useBackground, background, jobKey]);
+
+  const current = output && output.key === jobKey ? output : null;
+  const icons = current ? current.icons : [];
+  const source = current ? current.source : null;
+  const error = failure && failure.key === jobKey ? failure.message : "";
+  const busy = Boolean(file) && !current && !error;
 
   const downloadZip = async () => {
     const ico = await buildIco(icons.filter((icon) => icon.size <= 48));
@@ -117,7 +115,7 @@ export default function FaviconGeneratorContent() {
           Upload one image and get every favicon size a site needs: 16, 32, 48,
           180, 192 and 512 pixels, plus a favicon.ico and the head tags to paste
           into your HTML. Free, no signup, and the image is resized in your
-          browser rather than on somebody's server.
+          browser rather than on a server you do not control.
         </p>
 
         <div className={`${cardClass} p-5 sm:p-7`}>
@@ -127,7 +125,11 @@ export default function FaviconGeneratorContent() {
             accept="image/*"
             fileName={file ? `${file.name} (${formatBytes(file.size)})` : ""}
             hint="Square works best, 512 pixels or larger. A non-square image is cropped from the centre."
-            onFile={(next) => setFile(next)}
+            onFile={(next) => {
+              setFile(next);
+              setOutput(null);
+              setFailure(null);
+            }}
           />
 
           <div className="flex flex-wrap items-center gap-3 mt-5">

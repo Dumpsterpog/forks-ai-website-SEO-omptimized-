@@ -342,7 +342,7 @@ export default function MarkdownToPdfContent() {
               <Preview blocks={blocks} />
             </div>
             <p className="text-xs text-[#666] mt-2">
-              The preview uses your browser's fonts and the PDF uses the standard PDF
+              The preview uses the fonts on your machine and the PDF uses the standard PDF
               fonts, so line breaks can land differently. Headings, lists, code and quotes
               match.
             </p>

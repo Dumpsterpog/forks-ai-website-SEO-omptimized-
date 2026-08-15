@@ -250,7 +250,7 @@ export default function TextToPdfContent() {
                   />
                 </div>
                 <p className="text-xs text-[#666] mt-2">
-                  The preview is the actual file, shown by your browser's PDF viewer. Some
+                  The preview is the actual file, shown by the PDF viewer built into your browser. Some
                   mobile browsers refuse to display it inline, in which case download it
                   and open it normally.
                 </p>
@@ -304,7 +304,7 @@ export default function TextToPdfContent() {
         <p>
           Printing a page to PDF from the browser works, and for a web page it is
           often the right answer. It is a poor fit for plain text, because you
-          get the browser's headers, footers, URL stamp and whatever margins the
+          you get the headers, footers, URL stamp and whatever margins the browser
           print dialog decides on.
         </p>
         <p>
