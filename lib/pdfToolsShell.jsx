@@ -5,13 +5,26 @@
 // calculator shell so the PDF pages look like part of the same set: flat
 // colour, 2px black borders, hard offset shadows, no gradients.
 
-import { useId, useRef, useState } from "react";
+import { useCallback, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Upload } from "lucide-react";
 import { goToDashboard } from "@/lib/goToDashboard";
 import { trackSignupClick } from "@/lib/track";
 import { ACCENT, cardClass } from "@/components/ToolPageShell";
-import { PDF_TOOLS, formatBytes, LARGE_FILE_BYTES } from "@/lib/pdfTools";
+import {
+  PDF_TOOLS,
+  formatBytes,
+  LARGE_FILE_BYTES,
+  THUMBNAIL_PAGE_LIMIT,
+  yieldToBrowser,
+} from "@/lib/pdfTools";
+import {
+  closeDocument,
+  describePdfError,
+  openForReading,
+  readFileBytes,
+  renderThumbnail,
+} from "@/lib/pdfToolsPdf";
 
 export const PDF_ACCEPT = "application/pdf,.pdf";
 export const IMAGE_ACCEPT = "image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp";
@@ -162,6 +175,163 @@ export function PdfToolCta({ heading, body, location }) {
         <p className="text-xs text-[#111]/60 mt-3">The tool above stays free and needs no account.</p>
       </div>
     </section>
+  );
+}
+
+const EMPTY = {
+  file: null,
+  pageCount: 0,
+  thumbs: [],
+  tooManyPages: false,
+  loading: false,
+  error: null,
+  thumbProgress: null,
+};
+
+/**
+ * Loads a PDF for the tools that show page previews, and streams the
+ * thumbnails in one page at a time. Split, rotate and delete all need exactly
+ * this, and all three would otherwise freeze the tab on a long document.
+ *
+ * Every load carries a run id. A second file picked while the first is still
+ * rendering bumps the id, and the older loop sees the mismatch and stops,
+ * rather than painting its thumbnails over the new document's.
+ */
+export function usePdfPreview() {
+  const [state, setState] = useState(EMPTY);
+  const runId = useRef(0);
+
+  const reset = useCallback(() => {
+    runId.current += 1;
+    setState(EMPTY);
+  }, []);
+
+  const load = useCallback(async (file) => {
+    const id = (runId.current += 1);
+    setState({ ...EMPTY, file, loading: true });
+
+    let doc = null;
+    try {
+      const bytes = await readFileBytes(file);
+      doc = await openForReading(bytes);
+      if (id !== runId.current) return;
+
+      const pageCount = doc.numPages;
+      const tooManyPages = pageCount > THUMBNAIL_PAGE_LIMIT;
+      setState({
+        ...EMPTY,
+        file,
+        pageCount,
+        tooManyPages,
+        thumbs: new Array(pageCount).fill(null),
+        thumbProgress: tooManyPages ? null : { done: 0, total: pageCount },
+      });
+
+      if (!tooManyPages) {
+        for (let n = 1; n <= pageCount; n += 1) {
+          if (id !== runId.current) return;
+          const page = await doc.getPage(n);
+          const thumb = await renderThumbnail(page, 150);
+          page.cleanup();
+          if (id !== runId.current) return;
+          setState((prev) => {
+            const thumbs = [...prev.thumbs];
+            thumbs[n - 1] = thumb;
+            return {
+              ...prev,
+              thumbs,
+              thumbProgress: n < pageCount ? { done: n, total: pageCount } : null,
+            };
+          });
+          // Every few pages, let the browser paint and take clicks. Without
+          // this the whole render looks like one long freeze.
+          if (n % 3 === 0) await yieldToBrowser();
+        }
+      }
+    } catch (error) {
+      if (id === runId.current) {
+        setState({ ...EMPTY, file, error: describePdfError(error, file.name) });
+      }
+    } finally {
+      await closeDocument(doc);
+    }
+  }, []);
+
+  return { ...state, load, reset };
+}
+
+export function PageGrid({ children }) {
+  return (
+    <ul className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 sm:gap-3">{children}</ul>
+  );
+}
+
+/**
+ * One page in a picker grid. Selectable cells use a real checkbox so the
+ * keyboard, the space bar and a screen reader all behave the way they do
+ * everywhere else, with the thumbnail as its label.
+ */
+export function PageCell({
+  pageNumber,
+  thumb,
+  rotation = 0,
+  selectable = false,
+  selected = false,
+  onSelect,
+  selectHint,
+  actions,
+}) {
+  const id = useId();
+  const preview = (
+    <span className="flex items-center justify-center h-24 sm:h-28 overflow-hidden">
+      {thumb ? (
+        <img
+          src={thumb}
+          alt=""
+          className="max-h-full max-w-full object-contain transition-transform duration-200"
+          style={{ transform: rotation ? `rotate(${rotation}deg)` : undefined }}
+        />
+      ) : (
+        <span className="text-xs font-bold text-[#999]">page {pageNumber}</span>
+      )}
+    </span>
+  );
+
+  return (
+    <li
+      className="border-2 border-black rounded-xl overflow-hidden"
+      style={{ background: selected ? ACCENT : "#FFFFFF" }}
+    >
+      {selectable ? (
+        <>
+          <input
+            id={id}
+            type="checkbox"
+            checked={selected}
+            onChange={() => onSelect(pageNumber)}
+            className="peer sr-only"
+          />
+          <label
+            htmlFor={id}
+            className="block cursor-pointer p-2 peer-focus-visible:outline-none peer-focus-visible:ring-4 peer-focus-visible:ring-[#F0D44A] peer-focus-visible:rounded-lg"
+          >
+            <span className="sr-only">
+              {selectHint ? `${selectHint} page ${pageNumber}` : `Select page ${pageNumber}`}
+            </span>
+            {preview}
+            <span className="block text-center text-xs font-black text-[#111] mt-1.5" aria-hidden="true">
+              {pageNumber}
+            </span>
+          </label>
+        </>
+      ) : (
+        <div className="p-2">
+          {preview}
+          <span className="block text-center text-xs font-black text-[#111] mt-1.5">{pageNumber}</span>
+        </div>
+      )}
+      {actions ? <div className="border-t-2 border-black flex">{actions}</div> : null}
+    </li>
   );
 }
 
