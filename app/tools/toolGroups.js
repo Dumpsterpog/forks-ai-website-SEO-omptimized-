@@ -1,15 +1,18 @@
 // The hub's sections. Every member is read out of the list that already owns
-// the tool, so a tool added to lib/studentTools.js, lib/imageTools.js,
-// lib/pdfTools.js or lib/formatToolsMeta.js reaches the hub, its JSON-LD and
-// the sitemap without its name or its blurb being typed a second time.
+// the tool, so a tool added to lib/studentTools.js, lib/calcToolsList.js,
+// lib/imageTools.js, lib/pdfTools.js, lib/formatToolsMeta.js or
+// lib/textToolsList.js reaches the hub, its JSON-LD and the sitemap without
+// its name or its blurb being typed a second time.
 //
 // Plain module with no browser access at import time: app/tools/page.js is a
 // Server Component and imports it to build the ItemList.
 
 import { TOOLS } from "@/lib/studentTools";
+import { CALC_TOOLS } from "@/lib/calcToolsList";
 import { IMAGE_TOOLS } from "@/lib/imageTools";
 import { PDF_TOOLS } from "@/lib/pdfTools";
 import { FORMAT_TOOLS } from "@/lib/formatToolsMeta";
+import { TEXT_TOOLS } from "@/lib/textToolsList";
 
 // The converter group is the longest, and its source order is the order the
 // pages were built in, which buries the ones people arrive looking for.
@@ -43,6 +46,17 @@ export const TOOL_GROUPS = [
     tools: TOOLS,
   },
   {
+    // Its own group rather than more cards under Study calculators, which is
+    // already the two-column section and which the tool page footer leaves out
+    // because that footer lists those four in a column of its own. A separate
+    // group keeps this one linked from every footer on the site.
+    id: "calc",
+    title: "Everyday calculators",
+    intro:
+      "Age, percentages, marks, SGPA and CGPA, and the score negative marking actually leaves you.",
+    tools: CALC_TOOLS,
+  },
+  {
     id: "image",
     title: "Image tools",
     intro:
@@ -60,8 +74,8 @@ export const TOOL_GROUPS = [
     id: "convert",
     title: "File and text converters",
     intro:
-      "Change a file from one format into another, and count or reshape what you have written.",
-    tools: leadWith(FORMAT_TOOLS, CONVERTER_LEAD),
+      "Change a file from one format into another, and count, compare or reshape what you have written.",
+    tools: leadWith([...FORMAT_TOOLS, ...TEXT_TOOLS], CONVERTER_LEAD),
   },
 ];
 

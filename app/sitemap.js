@@ -1,15 +1,12 @@
-import { TOOLS, TOOLS_HUB } from "@/lib/studentTools";
-import { IMAGE_TOOLS } from "@/lib/imageTools";
-import { PDF_TOOLS } from "@/lib/pdfTools";
-import { FORMAT_TOOLS } from "@/lib/formatToolsMeta";
+import { TOOLS_HUB } from "@/lib/studentTools";
+import { ALL_TOOLS } from "@/app/tools/toolGroups";
 
 const BASE_URL = "https://forksai.app";
 
-// Derived from the shared tool lists, so a new tool reaches the sitemap by
-// being added in one place rather than two.
-const TOOL_PAGES = [...TOOLS, ...IMAGE_TOOLS, ...PDF_TOOLS, ...FORMAT_TOOLS].map(
-  (tool) => tool.href
-);
+// Derived from the same groups the hub renders, so the sitemap and the hub
+// cannot disagree about which tools exist and a new tool reaches both by being
+// added to its own list once.
+const TOOL_PAGES = ALL_TOOLS.map((tool) => tool.href);
 
 const FEATURE_PAGES = [
   "/ai-flashcards",
