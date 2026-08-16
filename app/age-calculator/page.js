@@ -1,6 +1,7 @@
 import AgeCalculatorContent from "./AgeCalculatorContent";
 import { calcToolJsonLd, jsonLdHtml } from "@/lib/calcToolsList";
 import { AGE_FAQS } from "@/lib/calcToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Work out an exact age in years, months and days between any two dates, with leap years and short months handled properly. Free, no signup.",
     url: "https://forksai.app/age-calculator",
+    images: TOOL_OG_IMAGE,
   },
 };
 

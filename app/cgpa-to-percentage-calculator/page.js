@@ -1,5 +1,5 @@
 import CgpaPercentageConverterContent from "@/components/CgpaPercentageConverterContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { CGPA_FAQS } from "@/lib/toolFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Convert between a 10-point CGPA, a 4-point GPA and a percentage in either direction, with the formula named on screen. Free and no signup.",
     url: "https://forksai.app/cgpa-to-percentage-calculator",
+    images: TOOL_OG_IMAGE,
   },
 };
 

@@ -1,5 +1,5 @@
 import PdfTextExtractorContent from "./PdfTextExtractorContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { PDF_TEXT_EXTRACTOR_FAQS } from "@/lib/pdfToolsFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Get the text out of a PDF, with page markers and a page range. Honest about scans: a picture of a page has no characters to extract. Nothing is uploaded.",
     url: "https://forksai.app/pdf-text-extractor",
+    images: TOOL_OG_IMAGE,
   },
 };
 

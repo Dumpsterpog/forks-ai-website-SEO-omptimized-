@@ -1,5 +1,5 @@
 import SplitPdfContent from "./SplitPdfContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { SPLIT_PDF_FAQS } from "@/lib/pdfToolsFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Extract the pages you need from a PDF, or break it into single pages as a zip. Page previews included, and your file never leaves your device.",
     url: "https://forksai.app/split-pdf",
+    images: TOOL_OG_IMAGE,
   },
 };
 

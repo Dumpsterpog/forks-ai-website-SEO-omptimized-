@@ -1,5 +1,5 @@
 import CircleCropContent from "./CircleCropContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { CIRCLE_CROP_FAQS } from "./faqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "A free circle cropper that runs in your browser. The corners come out at an alpha of zero, not filled with white, so the cut out works on any background.",
     url: "https://forksai.app/circle-crop",
+    images: TOOL_OG_IMAGE,
   },
 };
 

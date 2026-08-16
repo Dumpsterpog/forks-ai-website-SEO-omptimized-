@@ -1,6 +1,7 @@
 import JsonFormatterContent from "./JsonFormatterContent";
 import { formatToolJsonLd, jsonLdHtml } from "@/lib/formatToolsMeta";
 import { JSON_FORMATTER_FAQS } from "@/lib/textToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Beautify, minify and validate JSON, with the line and column of the error pointed out. Free, no signup, runs entirely in your browser.",
     url: "https://forksai.app/json-formatter",
+    images: TOOL_OG_IMAGE,
   },
 };
 

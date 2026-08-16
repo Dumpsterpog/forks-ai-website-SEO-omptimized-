@@ -1,6 +1,7 @@
 import PercentageCalculatorContent from "./PercentageCalculatorContent";
 import { calcToolJsonLd, jsonLdHtml } from "@/lib/calcToolsList";
 import { PERCENTAGE_FAQS } from "@/lib/calcToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "The three percentage questions on one page: what percent is X of Y, what is X% of Y, and the increase or decrease between two numbers. Free, no signup.",
     url: "https://forksai.app/percentage-calculator",
+    images: TOOL_OG_IMAGE,
   },
 };
 

@@ -1,5 +1,5 @@
 import ImagesToPdfContent from "./ImagesToPdfContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { IMAGES_TO_PDF_FAQS } from "@/lib/pdfToolsFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Turn photos of a whiteboard, scans or screenshots into a single PDF, with the page size and orientation you pick. Nothing leaves your device.",
     url: "https://forksai.app/images-to-pdf",
+    images: TOOL_OG_IMAGE,
   },
 };
 

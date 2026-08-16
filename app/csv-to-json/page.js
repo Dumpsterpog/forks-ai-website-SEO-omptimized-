@@ -1,6 +1,7 @@
 import CsvToJsonContent from "./CsvToJsonContent";
 import { formatToolJsonLd, jsonLdHtml } from "@/lib/formatToolsMeta";
 import { CSV_TO_JSON_FAQS } from "@/lib/formatToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Convert CSV to JSON and JSON to CSV with proper RFC 4180 quoting and a parsed preview. Free, no signup, and your data never leaves the browser.",
     url: "https://forksai.app/csv-to-json",
+    images: TOOL_OG_IMAGE,
   },
 };
 

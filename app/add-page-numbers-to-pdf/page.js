@@ -1,5 +1,5 @@
 import PageNumbersContent from "./PageNumbersContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { PAGE_NUMBERS_FAQS } from "./faqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Numbers are written into the file, so they print and they survive being emailed. Rotated scans are numbered along the edge you actually see. Nothing is uploaded.",
     url: "https://forksai.app/add-page-numbers-to-pdf",
+    images: TOOL_OG_IMAGE,
   },
 };
 

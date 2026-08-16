@@ -1,5 +1,5 @@
 import StudentToolsHubContent from "@/components/StudentToolsHubContent";
-import { SITE_URL, jsonLdHtml } from "@/lib/studentTools";
+import { SITE_URL, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { ALL_TOOLS } from "./toolGroups";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Study calculators, image tools, PDF tools and file converters. No account, no limits, nothing sent anywhere.",
     url: "https://forksai.app/tools",
+    images: TOOL_OG_IMAGE,
   },
 };
 

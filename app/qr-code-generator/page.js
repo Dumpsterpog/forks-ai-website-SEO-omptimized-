@@ -1,6 +1,7 @@
 import QrCodeGeneratorContent from "./QrCodeGeneratorContent";
 import { formatToolJsonLd, jsonLdHtml } from "@/lib/formatToolsMeta";
 import { QR_CODE_FAQS } from "@/lib/formatToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Turn a link or text into a QR code and download it as PNG or SVG. The code holds your content directly, so it never expires. Free and generated in your browser.",
     url: "https://forksai.app/qr-code-generator",
+    images: TOOL_OG_IMAGE,
   },
 };
 

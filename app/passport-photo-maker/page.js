@@ -1,5 +1,5 @@
 import PassportPhotoMakerContent from "./PassportPhotoMakerContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { PASSPORT_PHOTO_FAQS } from "@/lib/imageToolsFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Standard passport and visa photo sizes at real print resolution, with the pixel arithmetic shown. Free, no signup, and your photo never leaves your device.",
     url: "https://forksai.app/passport-photo-maker",
+    images: TOOL_OG_IMAGE,
   },
 };
 

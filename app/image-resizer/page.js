@@ -1,5 +1,5 @@
 import ImageResizerContent from "./ImageResizerContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { IMAGE_RESIZER_FAQS } from "@/lib/imageToolsFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Free browser-based image resizer with stepped downscaling for sharp results, live file size, and JPEG, PNG and WebP output. Your image never leaves your device.",
     url: "https://forksai.app/image-resizer",
+    images: TOOL_OG_IMAGE,
   },
 };
 

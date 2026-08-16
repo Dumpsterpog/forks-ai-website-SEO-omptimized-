@@ -1,5 +1,5 @@
 import DeletePdfPagesContent from "./DeletePdfPagesContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { DELETE_PDF_PAGES_FAQS } from "@/lib/pdfToolsFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Remove blank scans, cover sheets or whole chapters from a PDF by clicking page previews. No signup, no upload, no watermark.",
     url: "https://forksai.app/delete-pdf-pages",
+    images: TOOL_OG_IMAGE,
   },
 };
 

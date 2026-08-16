@@ -1,6 +1,7 @@
 import WordCounterContent from "./WordCounterContent";
 import { formatToolJsonLd, jsonLdHtml } from "@/lib/formatToolsMeta";
 import { WORD_COUNTER_FAQS } from "@/lib/formatToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Paste your text and see words, characters, sentences, paragraphs and reading time update live. Free, no signup, runs entirely in your browser.",
     url: "https://forksai.app/word-counter",
+    images: TOOL_OG_IMAGE,
   },
 };
 

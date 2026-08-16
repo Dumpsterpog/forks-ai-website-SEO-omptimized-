@@ -1,6 +1,7 @@
 import DiffCheckerContent from "./DiffCheckerContent";
 import { formatToolJsonLd, jsonLdHtml } from "@/lib/formatToolsMeta";
 import { DIFF_CHECKER_FAQS } from "@/lib/textToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Compare two texts and see exactly what changed, line by line and word by word. Free, no signup, runs entirely in your browser.",
     url: "https://forksai.app/diff-checker",
+    images: TOOL_OG_IMAGE,
   },
 };
 

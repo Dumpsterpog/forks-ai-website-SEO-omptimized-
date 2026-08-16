@@ -1,6 +1,7 @@
 import FaviconGeneratorContent from "./FaviconGeneratorContent";
 import { formatToolJsonLd, jsonLdHtml } from "@/lib/formatToolsMeta";
 import { FAVICON_GENERATOR_FAQS } from "@/lib/formatToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "One upload, every favicon size, as single PNGs or one zip with the ico and the head tags. Free, no signup, and your logo never leaves the browser.",
     url: "https://forksai.app/favicon-generator",
+    images: TOOL_OG_IMAGE,
   },
 };
 

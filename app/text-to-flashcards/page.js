@@ -1,5 +1,5 @@
 import TextToFlashcardsContent from "@/components/TextToFlashcardsContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { TEXT_TO_FLASHCARDS_FAQS } from "@/lib/toolFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Turn pasted notes into flashcards by pattern matching, edit them in the preview, and export to CSV or Anki. Runs entirely in your browser.",
     url: "https://forksai.app/text-to-flashcards",
+    images: TOOL_OG_IMAGE,
   },
 };
 

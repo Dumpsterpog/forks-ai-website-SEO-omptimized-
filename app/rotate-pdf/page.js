@@ -1,5 +1,5 @@
 import RotatePdfContent from "./RotatePdfContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { ROTATE_PDF_FAQS } from "@/lib/pdfToolsFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Most readers rotate the view and forget it. This writes the rotation into the PDF itself. Page previews turn as you press, and nothing is uploaded.",
     url: "https://forksai.app/rotate-pdf",
+    images: TOOL_OG_IMAGE,
   },
 };
 

@@ -1,6 +1,7 @@
 import NegativeMarkingCalculatorContent from "./NegativeMarkingCalculatorContent";
 import { calcToolJsonLd, jsonLdHtml } from "@/lib/calcToolsList";
 import { NEGATIVE_MARKING_FAQS } from "@/lib/calcToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Work out your score after the penalty for wrong answers, with your accuracy and the point where guessing stops paying. Free, no signup.",
     url: "https://forksai.app/negative-marking-calculator",
+    images: TOOL_OG_IMAGE,
   },
 };
 

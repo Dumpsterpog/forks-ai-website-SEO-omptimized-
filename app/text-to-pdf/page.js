@@ -1,6 +1,7 @@
 import TextToPdfContent from "./TextToPdfContent";
 import { formatToolJsonLd, jsonLdHtml } from "@/lib/formatToolsMeta";
 import { TEXT_TO_PDF_FAQS } from "@/lib/formatToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Turn plain text into a PDF with your own page size, font and margins. Free, no watermark, and nothing is uploaded.",
     url: "https://forksai.app/text-to-pdf",
+    images: TOOL_OG_IMAGE,
   },
 };
 

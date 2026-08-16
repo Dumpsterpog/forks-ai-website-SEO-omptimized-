@@ -1,6 +1,7 @@
 import MarkdownToPdfContent from "./MarkdownToPdfContent";
 import { formatToolJsonLd, jsonLdHtml } from "@/lib/formatToolsMeta";
 import { MARKDOWN_TO_PDF_FAQS } from "@/lib/formatToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Write markdown, see it rendered, download the PDF. Free, no signup, and the document never leaves your device.",
     url: "https://forksai.app/markdown-to-pdf",
+    images: TOOL_OG_IMAGE,
   },
 };
 

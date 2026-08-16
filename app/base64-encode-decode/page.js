@@ -1,6 +1,7 @@
 import Base64Content from "./Base64Content";
 import { formatToolJsonLd, jsonLdHtml } from "@/lib/formatToolsMeta";
 import { BASE64_FAQS } from "@/lib/textToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Encode and decode base64 both ways, for text and for files, with UTF-8 handled correctly. Free, no signup, runs entirely in your browser.",
     url: "https://forksai.app/base64-encode-decode",
+    images: TOOL_OG_IMAGE,
   },
 };
 

@@ -1,6 +1,7 @@
 import ImageConverterContent from "./ImageConverterContent";
 import { formatToolJsonLd, jsonLdHtml } from "@/lib/formatToolsMeta";
 import { IMAGE_CONVERTER_FAQS } from "@/lib/formatToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Convert PNG, JPG and WebP both ways in your browser. Quality control, live size preview, and no upload. Free and no signup.",
     url: "https://forksai.app/image-converter",
+    images: TOOL_OG_IMAGE,
   },
 };
 

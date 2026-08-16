@@ -1,5 +1,5 @@
 import ExamPhotoResizerContent from "./ExamPhotoResizerContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { EXAM_PHOTO_FAQS } from "@/lib/imageToolsFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Hit the exact pixel size and the exact file size range an exam application form demands. Free, no signup, and your photo never leaves your device.",
     url: "https://forksai.app/exam-photo-resizer",
+    images: TOOL_OG_IMAGE,
   },
 };
 

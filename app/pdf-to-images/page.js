@@ -1,5 +1,5 @@
 import PdfToImagesContent from "./PdfToImagesContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { PDF_TO_IMAGES_FAQS } from "@/lib/pdfToolsFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Turn PDF pages into images at the size you choose, with a progress bar and a stop button for long documents. Nothing is uploaded anywhere.",
     url: "https://forksai.app/pdf-to-images",
+    images: TOOL_OG_IMAGE,
   },
 };
 

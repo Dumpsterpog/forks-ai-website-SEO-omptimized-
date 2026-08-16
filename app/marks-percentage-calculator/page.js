@@ -1,6 +1,7 @@
 import MarksPercentageCalculatorContent from "./MarksPercentageCalculatorContent";
 import { calcToolJsonLd, jsonLdHtml } from "@/lib/calcToolsList";
 import { MARKS_FAQS } from "@/lib/calcToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Enter every subject with its own maximum marks and get the total and the overall percentage, weighted correctly rather than averaged. Free, no signup.",
     url: "https://forksai.app/marks-percentage-calculator",
+    images: TOOL_OG_IMAGE,
   },
 };
 

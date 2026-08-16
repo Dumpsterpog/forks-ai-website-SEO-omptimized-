@@ -1,6 +1,7 @@
 import SgpaToCgpaCalculatorContent from "./SgpaToCgpaCalculatorContent";
 import { calcToolJsonLd, jsonLdHtml } from "@/lib/calcToolsList";
 import { SGPA_CGPA_FAQS } from "@/lib/calcToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Turn several semester SGPAs into one credit-weighted CGPA, or work backwards to the SGPA the rest of your degree needs. Free, no signup.",
     url: "https://forksai.app/sgpa-to-cgpa-calculator",
+    images: TOOL_OG_IMAGE,
   },
 };
 

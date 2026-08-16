@@ -1,5 +1,5 @@
 import ImageCropperContent from "./ImageCropperContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { IMAGE_CROPPER_FAQS } from "@/lib/imageToolsFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "A free ratio-locked image cropper that runs in your browser. Drag or pinch on a phone, keep the original resolution, and see the file size before you download.",
     url: "https://forksai.app/image-cropper",
+    images: TOOL_OG_IMAGE,
   },
 };
 

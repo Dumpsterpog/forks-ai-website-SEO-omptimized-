@@ -1,5 +1,5 @@
 import MergePdfContent from "./MergePdfContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { MERGE_PDF_FAQS } from "@/lib/pdfToolsFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Merge PDFs on your own device. Drag to reorder, keep every page, and download the combined file. Nothing is uploaded anywhere.",
     url: "https://forksai.app/merge-pdf",
+    images: TOOL_OG_IMAGE,
   },
 };
 

@@ -1,5 +1,5 @@
 import FinalGradeCalculatorContent from "@/components/FinalGradeCalculatorContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { FINAL_GRADE_FAQS } from "@/lib/toolFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Enter your current grade, the final exam weight and your target. Get the score the final has to earn, plus the best and worst grade still available to you.",
     url: "https://forksai.app/final-grade-calculator",
+    images: TOOL_OG_IMAGE,
   },
 };
 

@@ -1,5 +1,5 @@
 import WatermarkImageContent from "./WatermarkImageContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { WATERMARK_IMAGE_FAQS } from "./faqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "A free image watermarker that runs in your browser. Size and margin are shares of the picture, so one setting looks right on every photo you run through it.",
     url: "https://forksai.app/watermark-image",
+    images: TOOL_OG_IMAGE,
   },
 };
 

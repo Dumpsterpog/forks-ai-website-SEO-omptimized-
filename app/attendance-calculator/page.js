@@ -1,5 +1,5 @@
 import AttendanceCalculatorContent from "@/components/AttendanceCalculatorContent";
-import { toolJsonLd, jsonLdHtml } from "@/lib/studentTools";
+import { toolJsonLd, jsonLdHtml, TOOL_OG_IMAGE } from "@/lib/studentTools";
 import { ATTENDANCE_FAQS } from "@/lib/toolFaqs";
 
 export const metadata = {
@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Work out how many classes you can skip, or how many you must attend, to stay above your college's 75% attendance requirement. Free, no signup.",
     url: "https://forksai.app/attendance-calculator",
+    images: TOOL_OG_IMAGE,
   },
 };
 

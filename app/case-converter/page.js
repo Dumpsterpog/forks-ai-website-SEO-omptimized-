@@ -1,6 +1,7 @@
 import CaseConverterContent from "./CaseConverterContent";
 import { formatToolJsonLd, jsonLdHtml } from "@/lib/formatToolsMeta";
 import { CASE_CONVERTER_FAQS } from "@/lib/formatToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Convert text between nine cases at once and copy the one you need. Free, no signup, runs entirely in your browser.",
     url: "https://forksai.app/case-converter",
+    images: TOOL_OG_IMAGE,
   },
 };
 

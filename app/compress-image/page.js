@@ -1,6 +1,7 @@
 import CompressImageContent from "./CompressImageContent";
 import { formatToolJsonLd, jsonLdHtml } from "@/lib/formatToolsMeta";
 import { COMPRESS_IMAGE_FAQS } from "@/lib/formatToolsFaqs";
+import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -18,6 +19,7 @@ export const metadata = {
     description:
       "Name a target file size and get an image compressed until it fits, with a before and after preview. Free, no signup, nothing leaves your device.",
     url: "https://forksai.app/compress-image",
+    images: TOOL_OG_IMAGE,
   },
 };
 
