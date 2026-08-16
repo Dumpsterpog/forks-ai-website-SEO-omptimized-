@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ToolPageShell, {
   ToolCta,
   ToolCrossLinks,
@@ -14,6 +14,7 @@ import ToolPageShell, {
 } from "@/components/ToolPageShell";
 import { calcFinalGrade, round } from "@/lib/studyToolMath";
 import { FINAL_GRADE_FAQS } from "@/lib/toolFaqs";
+import { countToolUseOnResult } from "@/lib/toolUsage";
 
 const ERRORS = {
   incomplete: "Fill in all three boxes to see what you need.",
@@ -122,6 +123,13 @@ export default function FinalGradeCalculatorContent() {
     () => calcFinalGrade(current, weight, target),
     [current, weight, target]
   );
+
+  // These three predate the shared calculator shell, so the usage count is
+  // wired here rather than in ResultCard. Keyed on the result, and ignored
+  // before the first real input, so the prefilled defaults do not count.
+  useEffect(() => {
+    countToolUseOnResult();
+  }, [result]);
 
   return (
     <ToolPageShell>

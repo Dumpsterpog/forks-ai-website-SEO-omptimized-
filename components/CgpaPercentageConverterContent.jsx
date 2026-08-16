@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowUpDown } from "lucide-react";
 import ToolPageShell, {
   ToolCta,
@@ -22,6 +22,7 @@ import {
   GPA4_RULE,
 } from "@/lib/studyToolMath";
 import { CGPA_FAQS } from "@/lib/toolFaqs";
+import { countToolUseOnResult } from "@/lib/toolUsage";
 
 const SCALE_LIST = [SCALES.cgpa10, SCALES.gpa4, SCALES.percent];
 
@@ -35,6 +36,13 @@ export default function CgpaPercentageConverterContent() {
     () => convertGrade(value, from, to, ruleId),
     [value, from, to, ruleId]
   );
+
+  // These three predate the shared calculator shell, so the usage count is
+  // wired here rather than in ResultCard. Keyed on the result, and ignored
+  // before the first real input, so the prefilled defaults do not count.
+  useEffect(() => {
+    countToolUseOnResult();
+  }, [result]);
 
   const swap = () => {
     setFrom(to);

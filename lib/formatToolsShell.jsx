@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Check, Copy, Upload } from "lucide-react";
 import { buttonClass } from "@/components/ToolPageShell";
 import { FORMAT_TOOLS } from "@/lib/formatToolsMeta";
+import { countToolUse } from "@/lib/toolUsage";
 
 // Internal linking is what makes the nine pages rank as a set instead of nine
 // orphans, so every one of them links to the other eight.
@@ -117,6 +118,9 @@ export function CopyButton({ value, label = "Copy", disabled }) {
         try {
           await navigator.clipboard.writeText(value);
           setCopied(true);
+          // For the tools whose output is text on screen rather than a file,
+          // taking the result away is the equivalent of a download.
+          countToolUse();
         } catch {
           // Clipboard access can be blocked, in which case the textarea below
           // is still selectable by hand, so there is nothing to recover from.

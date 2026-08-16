@@ -4,9 +4,11 @@
 // number field and the segmented mode switch. Lives here rather than being
 // pasted into each page so the set cannot drift apart.
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { inputClass, labelClass, hintClass } from "@/components/ToolPageShell";
 import { CALC_TOOLS } from "@/lib/calcToolsList";
+import { countToolUseOnResult } from "@/lib/toolUsage";
 
 // Internal linking is what makes the six pages rank as a set instead of six
 // orphans, so every one of them links to the other five and to the hub.
@@ -153,6 +155,14 @@ export function ModeSwitch({ label, options, value, onChange }) {
 
 // The one big number a calculator exists to produce.
 export function ResultCard({ eyebrow, headline, children }) {
+  // A calculator has no download, so producing this number is the use. The
+  // headline is the dependency rather than the mount, and countToolUseOnResult
+  // ignores anything before the first real input, so a calculator that renders
+  // a result for its prefilled defaults does not count the page view.
+  useEffect(() => {
+    countToolUseOnResult();
+  }, [headline]);
+
   return (
     <div className="border-2 border-black rounded-xl px-4 py-4" style={{ background: "#F0D44A" }}>
       <p className="text-[11px] font-black uppercase tracking-widest text-[#111]/60 mb-1">
