@@ -127,7 +127,7 @@ export default function AISummarizerPage() {
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#b5ff4d] text-black text-sm font-bold hover:bg-[#c8ff6e] transition-colors">
                   Summarize notes instantly <ArrowRight size={15} />
                 </button>
-                <p className="text-[11px] text-zinc-700 mt-3">Free to start · No card needed</p>
+                <p className="text-[11px] text-zinc-700 mt-3">Included with Premium · Free account to sign up</p>
               </motion.div>
             </div>
 
@@ -315,7 +315,7 @@ export default function AISummarizerPage() {
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#b5ff4d] text-black text-sm font-bold hover:bg-[#c8ff6e] transition-colors">
                 Summarize your notes <ChevronRight size={15} />
               </button>
-              <p className="text-[11px] text-zinc-700 mt-4">Free forever · Premium from $1/day</p>
+              <p className="text-[11px] text-zinc-700 mt-4">Summarizer is a Premium feature · Premium from $1/day</p>
             </div>
           </div>
         </section>
