@@ -84,6 +84,9 @@ export default function BlogNotesMakerPage() {
           Later, I provide the lecture transcript or the corresponding PDF chapter to a summarization tool. It reads the raw material and extracts exactly what I need: a clean, hierarchical outline, bolded key terms, and bulleted lists.
         </p>
         <p>
+          The one thing that trips this up is a PDF that will not copy cleanly. If the text refuses to select, the free <a href="/pdf-text-extractor" className="font-bold text-[#111] underline underline-offset-4">PDF text extractor</a> pulls it out first so you have something to paste.
+        </p>
+        <p>
           Instead of spending two hours attempting to format a messy text document into readable notes, I receive a perfect study guide instantly. This lets me dive right into studying rather than formatting. Ultimately, your time is better spent absorbing the structure of the ideas than drafting them from scratch.
         </p>
         <p>

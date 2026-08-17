@@ -81,6 +81,9 @@ export default function BlogQuizletAlternativePage() {
           Manual creation is the real cost. Typing out fifty terms from a 40-page PDF takes real time, and that is time subtracted directly from review. Quizlet also gates several genuinely useful features, like ad-free studying and offline access, behind a subscription, which stings when the core problem, getting from raw notes to a study-ready deck, is still unsolved even on the paid tier.
         </p>
         <p>
+          If the only thing you want removed is the typing, that part is solvable for free and without switching apps. The <a href="/text-to-flashcards" className="font-bold text-[#111] underline underline-offset-4">text to flashcards tool</a> turns pasted notes into cards in your browser and exports them to CSV or Anki.
+        </p>
+        <p>
           There is also no real spaced repetition engine under the hood. Quizlet's Learn mode adapts a little, but it is not running anything close to the FSRS-5 scheduling algorithm that modern spaced repetition research is built around.
         </p>
 

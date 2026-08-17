@@ -78,6 +78,9 @@ export default function BlogFlashcardsPage() {
         <p>
           When software automates the creation of study materials, that ratio flips. You upload the text, like a chapter from a PDF, a set of lecture slides, or a raw transcript, and the software isolates the important definitions and concepts. It generates the questions and answers instantly. The preparation time drops to near zero.
         </p>
+        <p>
+          You can watch that happen on a small scale for free. The <a href="/text-to-flashcards" className="font-bold text-[#111] underline underline-offset-4">text to flashcards converter</a> runs the pattern matching in your browser, needs no account, and exports the result to CSV or Anki.
+        </p>
 
         <h3 className="font-serif font-black text-2xl text-[#111] mt-10 mb-2">A difference in focus</h3>
         <p>

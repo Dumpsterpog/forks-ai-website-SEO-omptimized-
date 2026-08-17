@@ -98,6 +98,9 @@ export default function BlogExamPrepPage() {
           The second mistake is treating all material as equally important. Every exam has a small core of concepts that appear repeatedly and a large periphery of details that rarely show up. Your Week 1 diagnostic exists precisely to find that core. Once you know it, you can allocate 80 percent of your review time to the concepts most likely to determine your grade and handle the rest on maintenance.
         </p>
         <p>
+          It also helps to know what the exam is actually worth. The free <a href="/final-grade-calculator" className="font-bold text-[#111] underline underline-offset-4">final grade calculator</a> tells you the exact score the exam has to earn for you to finish on the grade you are aiming for, which is a fast way to find out whether this fortnight is a rescue mission or a maintenance job.
+        </p>
+        <p>
           AI tools change this calculation significantly. When generating flashcards from your notes takes thirty seconds instead of two hours, you can start retrieval practice on Day 1 of your two-week plan instead of Day 5. That compounding effect — more retrieval cycles over more days — is where the real gains come from.
         </p>
         <p>

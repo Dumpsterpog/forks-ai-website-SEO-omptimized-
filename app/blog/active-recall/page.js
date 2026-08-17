@@ -89,6 +89,9 @@ export default function BlogActiveRecallPage() {
           Flashcards are the oldest implementation of active recall. The problem with traditional flashcard decks is the friction: you have to make them, organize them, and figure out which ones to review. Most students either skip making them entirely or make them and never actually use them in a self-testing way — they just flip through, nodding at the answer side.
         </p>
         <p>
+          If you want to feel that friction disappear before committing to anything, the free <a href="/text-to-flashcards" className="font-bold text-[#111] underline underline-offset-4">text to flashcards tool</a> pattern matches pasted notes into question and answer pairs in your browser, with no account, and exports them to CSV or Anki.
+        </p>
+        <p>
           FORKSAI removes the creation burden entirely. Upload your notes, a PDF, or paste in text, and the platform generates a full deck of flashcards automatically. Every card is built for active recall — the question side is designed to force retrieval, not hint at it. The review queue is driven by a spaced repetition algorithm that shows you cards at exactly the moment your memory is about to drop off, so every session is maximally efficient. You spend your time testing yourself, not managing the system.
         </p>
         <p>

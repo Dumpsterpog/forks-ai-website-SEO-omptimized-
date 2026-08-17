@@ -97,6 +97,9 @@ export default function BlogAnkiAlternativePage() {
           If you already have the spaced repetition habit from Anki, the transition is mostly about where the deck comes from, not how you review it. Upload the same material you would have typed into Anki, and let the AI handle deck construction while you keep the review discipline that made Anki work for you in the first place.
         </p>
         <p>
+          If you are not ready to move at all, the free <a href="/text-to-flashcards" className="font-bold text-[#111] underline underline-offset-4">text to flashcards tool</a> will speed up the writing without touching your setup. It converts pasted notes into cards and exports a file Anki imports directly.
+        </p>
+        <p>
           Curious how it compares on your own material? <a href="/ai-flashcards" className="font-bold text-[#111] underline underline-offset-4">Generate a deck from a PDF or your notes</a> and see how much setup time you get back.
         </p>
         <p>

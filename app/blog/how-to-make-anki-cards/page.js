@@ -109,6 +109,9 @@ export default function BlogHowToMakeAnkiCardsPage() {
           FORKSAI applies most of these same rules automatically: it splits concepts into atomic cards, phrases questions with a single clear answer, and schedules reviews with the same FSRS-5 algorithm, straight from a PDF, your notes, or a slide deck. You still control difficulty, question type, and card count, but the manual writing step disappears.
         </p>
         <p>
+          If you would rather stay in Anki and only remove the typing, the free <a href="/text-to-flashcards" className="font-bold text-[#111] underline underline-offset-4">text to flashcards tool</a> converts pasted notes into cards in your browser and exports a file Anki can import, which keeps your existing deck and scheduler exactly as they are.
+        </p>
+        <p>
           Where the cards come from is a design decision worth making deliberately rather than by accident. Some tools grow them out of the notes you write, using a syntax you apply as you go. Others generate them from material you already have. The two approaches suit different people for reasons that have little to do with card quality, and the difference is set out in <a href="/flashcards-and-notes-app" className="font-bold text-[#111] underline underline-offset-4">the guide to keeping flashcards and notes in one app</a>.
         </p>
         <p>
