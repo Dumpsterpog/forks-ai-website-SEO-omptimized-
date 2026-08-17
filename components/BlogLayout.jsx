@@ -166,7 +166,7 @@ export default function BlogLayout({
       {/* ── FOOTER ── */}
       <footer className="border-t-2 border-black text-white" style={{ background: "#111111" }}>
         <div className="max-w-6xl mx-auto px-6 pt-16 pb-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-6 gap-10 pb-12 border-b border-white/10">
             <div className="lg:col-span-2">
               <div className="font-serif font-black text-xl text-white mb-3">FORKSAI</div>
               <p className="text-white/40 text-sm leading-relaxed max-w-xs">The AI study platform that turns your material into mastery. Built for students who want results, not just revision.</p>
@@ -180,6 +180,14 @@ export default function BlogLayout({
             <div>
               <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Free tools</div>
               {[["All free tools", "/tools"], ["Attendance Calculator", "/attendance-calculator"], ["Final Grade Calculator", "/final-grade-calculator"], ["CGPA to Percentage", "/cgpa-to-percentage-calculator"], ["Text to Flashcards", "/text-to-flashcards"]].map(([l, href]) => (
+                <a key={l} href={href} className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
+              ))}
+            </div>
+            <div>
+              {/* Comparison pages need inbound links from real content, and
+                  every blog post carries this footer. */}
+              <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Compare</div>
+              {[["RemNote alternative", "/remnote-alternative"], ["FORKSAI vs RemNote", "/forksai-vs-remnote"], ["FORKSAI vs Notion", "/forksai-vs-notion"], ["Flashcards and notes", "/flashcards-and-notes-app"]].map(([l, href]) => (
                 <a key={l} href={href} className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
               ))}
             </div>

@@ -8,6 +8,7 @@ import { goToDashboard } from "@/lib/goToDashboard";
 import { trackSignupClick } from "@/lib/track";
 import { TOOLS } from "@/lib/studentTools";
 import { TOOL_GROUPS } from "@/app/tools/toolGroups";
+import { COMPARE_PAGES } from "@/lib/comparePages";
 import FooterFreeTools from "@/components/FooterFreeTools";
 
 // The four free calculators share a nav, a footer, a cross-link strip and one
@@ -145,7 +146,7 @@ export function ToolFooter() {
   return (
     <footer className="border-t-2 border-black text-white print:hidden" style={{ background: INK }}>
       <div className="max-w-6xl mx-auto px-6 pt-12 pb-8">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-white/10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-white/10">
           <div>
             <div className="font-serif font-black text-xl text-white mb-3">FORKSAI</div>
             <p className="text-white/40 text-sm leading-relaxed max-w-xs">
@@ -181,6 +182,22 @@ export function ToolFooter() {
                 className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline"
               >
                 {label}
+              </Link>
+            ))}
+          </div>
+          <div>
+            {/* The comparison pages ride the tool footer because that footer is
+                on every free tool page, which is where most non-brand traffic
+                lands. Without it they would be orphans. */}
+            <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Compare</div>
+            {COMPARE_PAGES.map((page) => (
+              <Link
+                key={page.href}
+                href={page.href}
+                prefetch={false}
+                className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline"
+              >
+                {page.name}
               </Link>
             ))}
           </div>

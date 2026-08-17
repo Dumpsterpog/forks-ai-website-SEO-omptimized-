@@ -1230,6 +1230,17 @@ export default function LandingPage() {
             </button>
             <span className="text-sm text-[#555] font-medium">Free forever plan. No credit card required.</span>
           </div>
+
+          {/* The comparison pages hang off this section rather than off the
+              footer alone: a reader who just read a comparison table is the
+              one most likely to want the long version. */}
+          <p className="text-center text-sm text-[#555] mt-8 leading-relaxed">
+            Comparing something else?{" "}
+            <a href="/remnote-alternative" className="font-bold text-[#111] underline underline-offset-2">RemNote alternative</a>,{" "}
+            <a href="/forksai-vs-remnote" className="font-bold text-[#111] underline underline-offset-2">FORKSAI vs RemNote</a>,{" "}
+            <a href="/forksai-vs-notion" className="font-bold text-[#111] underline underline-offset-2">FORKSAI vs Notion</a>, or{" "}
+            <a href="/flashcards-and-notes-app" className="font-bold text-[#111] underline underline-offset-2">flashcards and notes in one app</a>.
+          </p>
         </div>
       </section>
 
@@ -1473,7 +1484,7 @@ export default function LandingPage() {
             </div>
             <div>
               <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Resources</div>
-              {[["Blog", "/blogs"], ["FAQ", "/faq"], ["Docs", "/docs"], ["Attendance Calculator", "/attendance-calculator"], ["CGPA to Percentage", "/cgpa-to-percentage-calculator"], ["AI Flashcards Guide", "/blog/flashcards"]].map(([l, href]) => (
+              {[["Blog", "/blogs"], ["FAQ", "/faq"], ["Docs", "/docs"], ["RemNote alternative", "/remnote-alternative"], ["FORKSAI vs RemNote", "/forksai-vs-remnote"], ["FORKSAI vs Notion", "/forksai-vs-notion"], ["Flashcards and notes in one app", "/flashcards-and-notes-app"], ["Attendance Calculator", "/attendance-calculator"], ["AI Flashcards Guide", "/blog/flashcards"]].map(([l, href]) => (
                 <a key={l} href={href} className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
               ))}
             </div>

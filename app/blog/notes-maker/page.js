@@ -89,6 +89,9 @@ export default function BlogNotesMakerPage() {
         <p>
           Want to try it on your own lecture notes? <a href="/notes" className="font-bold text-[#111] underline underline-offset-4">FORKSAI's AI notes summarizer</a> turns a raw transcript or PDF chapter into a structured outline in seconds.
         </p>
+        <p>
+          On the question of whether notes and cards should live in the same app at all, there is a separate guide to <a href="/flashcards-and-notes-app" className="font-bold text-[#111] underline underline-offset-4">flashcards and notes in one app</a> and the two designs behind that phrase.
+        </p>
       </BlogLayout>
     </>
   );

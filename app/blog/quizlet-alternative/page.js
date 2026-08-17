@@ -102,6 +102,9 @@ export default function BlogQuizletAlternativePage() {
         <p>
           Ready to see it for yourself? <a href="/ai-flashcards" className="font-bold text-[#111] underline underline-offset-4">Generate a deck from your own notes</a> and start reviewing instead of typing.
         </p>
+        <p>
+          Weighing up other tools too? There is a longer writeup on the <a href="/remnote-alternative" className="font-bold text-[#111] underline underline-offset-4">RemNote alternative question</a>, a head to head on <a href="/forksai-vs-remnote" className="font-bold text-[#111] underline underline-offset-4">FORKSAI vs RemNote</a>, and one on <a href="/forksai-vs-notion" className="font-bold text-[#111] underline underline-offset-4">FORKSAI vs Notion</a> if your setup currently lives in a workspace.
+        </p>
       </BlogLayout>
     </>
   );

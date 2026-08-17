@@ -99,6 +99,9 @@ export default function BlogAnkiAlternativePage() {
         <p>
           Curious how it compares on your own material? <a href="/ai-flashcards" className="font-bold text-[#111] underline underline-offset-4">Generate a deck from a PDF or your notes</a> and see how much setup time you get back.
         </p>
+        <p>
+          If the tool you are actually weighing up is a notes-first one rather than Anki, the <a href="/remnote-alternative" className="font-bold text-[#111] underline underline-offset-4">RemNote alternative writeup</a> and the <a href="/forksai-vs-remnote" className="font-bold text-[#111] underline underline-offset-4">FORKSAI vs RemNote comparison</a> cover that side of the question.
+        </p>
       </BlogLayout>
     </>
   );
