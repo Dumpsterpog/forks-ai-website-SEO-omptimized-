@@ -87,6 +87,9 @@ export default function BlogFlashcardsPage() {
           It is the repetition, spaced out over several days, that cements the knowledge in your brain. When you skip the tedious creation phase, you buy yourself extra days to review the material.
         </p>
         <p>
+          That argument is also the foundation of notes-first study apps, where every card is written by hand inside the note it came from. It is a real position rather than a straw man, and which side you land on depends mostly on whether you wrote the material yourself. The long version of that trade-off is in <a href="/forksai-vs-remnote" className="font-bold text-[#111] underline underline-offset-4">how FORKSAI compares to RemNote</a>.
+        </p>
+        <p>
           By treating study material generation as a solved problem rather than a manual chore, you leave much more cognitive stamina for the part that actually matters. Understanding and passing the exam.
         </p>
         <p>

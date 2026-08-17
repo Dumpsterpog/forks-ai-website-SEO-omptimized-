@@ -84,6 +84,9 @@ export default function BlogSpacedRepetitionPage() {
           Spaced repetition software runs an algorithm in the background. It logs how badly you interact with a prompt and schedules the next review date dynamically based on your performance. It completely flattens the forgetting curve.
         </p>
         <p>
+          This is the part worth checking before you settle on a tool. Storing the questions is easy and every app manages it, including a spreadsheet. Deciding which ones you see this morning is the actual work, which is why <a href="/forksai-vs-notion" className="font-bold text-[#111] underline underline-offset-4">a flashcard setup built inside Notion</a> still needs something scheduling it, and why the choice of algorithm is covered separately in <a href="/blog/fsrs-vs-sm2" className="font-bold text-[#111] underline underline-offset-4">FSRS-5 against the older SM-2</a>.
+        </p>
+        <p>
           By giving fifteen minutes a day to a smart review queue, cramming goes away. You inherently know the material. The peace of mind derived from proper spaced repetition completely changes how students walk into an exam hall.
         </p>
         <p>

@@ -180,6 +180,9 @@ export default function BlogFSRSvsSM2Page() {
           But the scheduling algorithm determines which cards you see and when, which is to say it determines what you actually spend your study time on. An algorithm that gets this wrong by ten percent means ten percent of your review sessions are spent on cards that were either too early (wasting the session) or too late (after the knowledge was already partially lost). Over a semester-long deck of five hundred cards reviewed daily, that is a large cumulative error.
         </p>
         <p>
+          It is also the thing a hand-built flashcard system has no answer for. A table of questions and answers inside a general workspace stores the pairs perfectly well, but nothing in it decides which pairs are due this morning, and that decision is the entire benefit of spaced repetition. That gap is the subject of <a href="/forksai-vs-notion" className="font-bold text-[#111] underline underline-offset-4">the comparison between FORKSAI and a Notion flashcard setup</a>.
+        </p>
+        <p>
           FSRS-5 was calibrated against real review outcome data at a scale SM-2 never had access to in 1987. It directly models the quantity that matters most (your probability of recall) rather than using interval length as a rough proxy. That is why FORKSAI upgraded the entire scheduling engine rather than patching around SM-2's limitations. For students treating spaced repetition as a serious long-term study tool rather than a short-term exam hack, the difference is not marginal -- and it compounds with every session.
         </p>
         <p>

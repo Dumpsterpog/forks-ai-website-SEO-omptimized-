@@ -89,6 +89,9 @@ export default function BlogStudySchedulePage() {
           One of the least discussed benefits of streak tracking is what it does to your psychology after a missed day. When you can see a visible record of consecutive sessions, a single missed day becomes something you want to repair rather than a reason to abandon the system entirely. The streak reframes consistency as something to protect, not something to restart from zero.
         </p>
         <p>
+          Plenty of students already run their planning inside a general workspace and then try to make the reviewing happen in the same place. Splitting the two jobs, planning where planning is good and reviewing somewhere that schedules for you, removes most of the daily decision on its own. That split is the whole argument of <a href="/forksai-vs-notion" className="font-bold text-[#111] underline underline-offset-4">FORKSAI compared with a Notion study setup</a>, which also covers the parts you should keep in the workspace.
+        </p>
+        <p>
           A dashboard that shows your review queue, your weak cards, and your session history also removes the daily decision of what to study. Decision fatigue is a real drain on study sessions — when you sit down and have to figure out where to start, that friction eats into your available cognitive energy before you have reviewed a single card. A well-designed review system answers "what should I study right now" automatically, every session, based on where your memory is actually weakest.
         </p>
         <p>
