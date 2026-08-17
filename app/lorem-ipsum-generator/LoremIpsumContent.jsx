@@ -34,13 +34,14 @@ export default function LoremIpsumContent() {
   const [seed, setSeed] = useState(1);
 
   const spec = getUnit(unit);
-  const wanted = Number.parseInt(count, 10);
-  const valid = Number.isFinite(wanted) && wanted >= 1 && wanted <= spec.max;
+  const typed = Number.parseInt(count, 10);
+  const valid = Number.isFinite(typed) && typed >= 1 && typed <= spec.max;
 
-  const blocks = useMemo(
-    () => (valid ? generateLorem({ unit, count: wanted, seed, startWithLorem }) : []),
-    [valid, unit, wanted, seed, startWithLorem]
-  );
+  const blocks = useMemo(() => {
+    const wanted = Number.parseInt(count, 10);
+    if (!Number.isFinite(wanted) || wanted < 1 || wanted > getUnit(unit).max) return [];
+    return generateLorem({ unit, count: wanted, seed, startWithLorem });
+  }, [unit, count, seed, startWithLorem]);
 
   const output = useMemo(() => renderLorem(blocks, format), [blocks, format]);
   const stats = useMemo(() => loremStats(blocks), [blocks]);

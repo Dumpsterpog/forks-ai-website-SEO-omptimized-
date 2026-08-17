@@ -1,6 +1,6 @@
 "use client";
 
-// UI pieces the seven PDF tools share: the file picker, the progress bar, the
+// UI pieces the nine PDF tools share: the file picker, the progress bar, the
 // on-device promise, the CTA and the cross-link strip. Styling comes from the
 // calculator shell so the PDF pages look like part of the same set: flat
 // colour, 2px black borders, hard offset shadows, no gradients.
