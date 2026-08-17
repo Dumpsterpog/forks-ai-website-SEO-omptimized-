@@ -18,9 +18,9 @@ import {
 const FAQS = [
   { q: "How is FORKSAI different from Quizlet and Anki?", a: "FORKSAI generates flashcards automatically from your own notes or PDFs in under 30 seconds, while Quizlet and Anki require you to build every card by hand. It runs the same FSRS-5 spaced repetition algorithm as modern Anki, plus 12 built-in study modes and live Study Rooms out of the box." },
   { q: "How does FORKSAI generate flashcards?", a: "You upload any PDF, paste notes, or type a topic. Our AI reads the content, identifies key concepts, and produces a complete, ready-to-study deck in under 30 seconds. No manual card creation needed." },
-  { q: "What study modes are included?", a: "12 modes in total: Flashcard Flip, Swipe Cards, MCQ Practice, Spaced Repetition (FSRS-5), Weak Spot Trainer, Memory Sprint, Exam Simulator, Explain Back, AI Tutor Revision, Interactive Mind Maps, Case Study Mode, and Pomodoro Mode. Every mode is designed around proven learning science." },
+  { q: "What study modes are included?", a: "12 modes in total. Seven are on the free plan: Flashcard Flip, Swipe Cards, MCQ Practice, Spaced Repetition (FSRS-5), Weak Spot Trainer, Memory Sprint, and Pomodoro Mode. Five AI-powered modes are Premium: AI Tutor Revision, Exam Simulator, Explain Back, Case Study Mode, and Interactive Mind Maps. Every mode is designed around proven learning science." },
   { q: "Can I study with other people?", a: "Yes. Study Rooms let you create a session, share a 6-character code, and study any deck live with up to 5 classmates. Host-paced or Race mode. Your choice." },
-  { q: "What's the difference between Free and Premium?", a: "Free gets you one AI-generated deck with no cap on how many cards it holds, plus unlimited manual decks, all 12 study modes, FSRS-5 spaced repetition and Study Rooms. The free deck is a one-time unlock, not a monthly allowance. Premium adds 100 AI flashcard generations a month on the monthly and yearly plans, full PDF support, Podcast Mode, Medical Encyclopedia, Mind Maps, and Case Study Mode." },
+  { q: "What's the difference between Free and Premium?", a: "Free gets you one AI-generated deck with no cap on how many cards it holds, plus unlimited manual decks and folders, 7 study modes including FSRS-5 spaced repetition, 3 Quick Study sessions a week, and Study Rooms. The free deck is a one-time unlock, not a monthly allowance. Premium adds 100 AI flashcard generations a month on the monthly and yearly plans, the 5 AI study modes (AI Revision, Exam Simulator, Explain Back, Case Study and Interactive Mind Map), the PDF Summarizer and AI notes, full PDF support, Podcast Mode, and the Medical Encyclopedia." },
   { q: "Does it work for medical students?", a: "Absolutely. The Medical Encyclopedia gives instant AI summaries for any medical term. Combined with spaced repetition and the Weak Spot Trainer, it's become a go-to tool for pre-med and nursing students." },
   { q: "Is my data private?", a: "Yes. Your uploaded content is processed to generate your flashcards and is not shared, sold, or used to train any AI model. You can delete your account and all data at any time from Settings." },
 ];
@@ -1321,7 +1321,7 @@ export default function LandingPage() {
             </div>
             <div className="text-sm text-[#555] mb-6">/ forever</div>
             <div className="flex flex-col gap-2.5 mb-8">
-              {["1 AI-generated deck, no card limit", "Unlimited manual decks and folders", "All 12 study modes", "Live Study Rooms (up to 5 people)", "Public Decks library", "Progress tracking and streaks"].map((f, i) => (
+              {["1 AI-generated deck, no card limit", "Unlimited manual decks and folders", "7 study modes including spaced repetition", "FSRS-5 scheduling on every deck", "3 Quick Study sessions a week (paste and study, no deck)", "Live Study Rooms (up to 5 people)", "Browse the Public Decks library", "Progress tracking and streaks"].map((f, i) => (
                 <div key={i} className="flex items-start gap-2.5">
                   <span className="mt-0.5 w-4 h-4 rounded-full flex items-center justify-center shrink-0" style={{ background: FEATURE_BG }}>
                     <Check size={10} className="text-white" strokeWidth={3} />
@@ -1367,6 +1367,8 @@ export default function LandingPage() {
             <div className="flex flex-col gap-2.5 mb-8">
               {[
                 "100 AI flashcard generations / month",
+                "5 AI study modes: AI Revision, Exam Simulator, Explain Back, Case Study, Mind Map",
+                "PDF Summarizer and AI notes",
                 "AI Podcasts",
                 "Medical Encyclopedia access",
                 "Full PDF support (any length)",
