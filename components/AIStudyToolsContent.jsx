@@ -74,11 +74,11 @@ export default function AIStudyToolsPage() {
     {
       href: "#revision",
       icon: Repeat,
-      title: "Revision Modes",
+      title: "Study Modes",
       tag: "Active recall",
       tagColor: "#a882ff",
-      desc: "Flip mode for classic flashcard review. Quiz mode for active recall testing. Cram mode for last-minute sessions. Switch between them anytime - all in one place.",
-      points: ["Flip, quiz, and cram modes", "Progress tracked per card", "Weak cards resurface more", "Spaced repetition built in"],
+      desc: "Twelve modes in total. Seven classic ones, from flip cards to FSRS-5 spaced repetition, and five AI-powered ones on Premium. Switch between them anytime, all on the same deck.",
+      points: ["7 classic modes, 5 AI modes", "Progress tracked per card", "Weak cards resurface more", "FSRS-5 spaced repetition built in"],
     },
     {
       href: "#progress",

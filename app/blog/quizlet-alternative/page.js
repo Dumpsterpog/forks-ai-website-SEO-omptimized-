@@ -95,7 +95,7 @@ export default function BlogQuizletAlternativePage() {
           This is the gap FORKSAI was built to close. You upload your own material, whatever it is, a textbook chapter, a slide deck, a YouTube lecture, and the AI extracts the key concepts and produces a complete deck. No public-set lottery, no blank card waiting for you to fill it in.
         </p>
         <p>
-          It also ships with FSRS-5 spaced repetition, live Study Rooms for group review, and nine study modes beyond plain flip cards, from a Weak Spot Trainer to a timed Exam Simulator, all on the free plan.
+          It also ships with FSRS-5 spaced repetition, live Study Rooms for group review, and twelve study modes beyond plain flip cards, from a Weak Spot Trainer to a timed Exam Simulator. Seven of the twelve are on the free plan; the five AI-powered ones need Premium.
         </p>
 
         <h3 className="font-serif font-black text-2xl text-[#111] mt-10 mb-2">Trying it with your own notes</h3>

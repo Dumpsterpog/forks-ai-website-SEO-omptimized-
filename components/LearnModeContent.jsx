@@ -304,18 +304,22 @@ const CLASSIC_MODES = [
   { icon:"📅", title:"Spaced Repetition",  desc:"FSRS-5 algorithm scheduling. Cards you know are shown less. Cards you struggle with come back sooner and more often.", badge:"FSRS-5" },
   { icon:"🎯", title:"Weak Spot Trainer",  desc:"Automatically drills the cards you have previously flagged as hard or unknown. No setup needed.",                    badge:null },
   { icon:"🍅", title:"Pomodoro",           desc:"Built-in Pomodoro timer tied to your study sessions. Work in focused blocks with automatic break reminders.",        badge:null },
+  { icon:"📋", title:"MCQ Quiz",           desc:"Practice real multiple-choice questions built from your deck, with instant feedback on every answer.",              badge:null },
 ];
 
 const AI_MODES = [
   { icon:"🧠", title:"AI Revision",    desc:"An adaptive AI tutor that adjusts the difficulty of questions based on how you're performing in real time. Premium only.",    premium:true },
   { icon:"🏆", title:"Exam Simulator", desc:"Generates a full mock exam from your deck, with timing, scoring, and a breakdown of which areas need more work. Premium.",   premium:true },
   { icon:"🤖", title:"Explain Back",   desc:"Feynman technique. The AI asks you to explain a concept in plain language, then evaluates the quality of your answer. Premium.", premium:true },
+  { icon:"📁", title:"Case Study",     desc:"Turns your deck into a real-world scenario you have to reason through rather than recall. Premium.",                         premium:true },
+  { icon:"🗺️", title:"Interactive Mind Map", desc:"Renders the concepts in your deck as a live, navigable map so you can see how they connect. Premium.",               premium:true },
 ];
 
 const SCREENSHOTS = [
   ["🃏","Flip Cards mode"],     ["⚡","Swipe Cards view"],     ["⏱️","Memory Sprint timer"],  ["📅","Spaced Repetition"],
   ["🎯","Weak Spot Trainer"],   ["🍅","Pomodoro timer"],       ["🧠","AI Revision session"],   ["🏆","Exam Simulator"],
-  ["🤖","Explain Back (Feynman)"],["📊","Session stats"],      ["🏅","Streak tracker"],        ["📈","Progress over time"],
+  ["🤖","Explain Back (Feynman)"],["📋","MCQ Quiz"],           ["📁","Case Study"],           ["🗺️","Interactive Mind Map"],
+  ["📊","Session stats"],        ["🏅","Streak tracker"],       ["📈","Progress over time"],
   ["🔔","Review reminders"],    ["🔀","Shuffle deck"],         ["🌗","Focus mode"],            ["📱","Mobile view"],
 ];
 
@@ -324,7 +328,7 @@ const FEATURES = [
   { icon:"🎯", title:"Weak Spot Trainer",          desc:"Automatically collects every card you flag and drills them until you mark them as known." },
   { icon:"⏱️", title:"Timed pressure modes",       desc:"Memory Sprint and Pomodoro both add time pressure to simulate exam conditions while you study." },
   { icon:"🧠", title:"Adaptive AI (Premium)",      desc:"AI Revision adjusts difficulty in real time based on your performance across the session." },
-  { icon:"🔄", title:"6 Classic modes, 3 AI modes", desc:"Nine total study modes across two categories. Pick by mood, by subject, or by how much time you have." },
+  { icon:"🔄", title:"7 classic modes, 5 AI modes", desc:"Twelve study modes in total, across two categories. Pick by mood, by subject, or by how much time you have." },
   { icon:"📊", title:"Session analytics",          desc:"Every session tracks accuracy, cards reviewed, time spent, and streak consistency." },
 ];
 
@@ -448,14 +452,14 @@ export default function LearnModePage() {
         <div className="hero">
           <div>
             <div className="hero-label">✦ Learn Mode</div>
-            <h1 className="hero-title">Nine ways to <em>study a deck.</em></h1>
-            <p className="hero-sub">Six classic modes and three AI-powered modes, all built around active recall. Pick by how much time you have or how close the exam is. Switch between modes any time.</p>
+            <h1 className="hero-title">Twelve ways to <em>study a deck.</em></h1>
+            <p className="hero-sub">Seven classic modes and five AI-powered modes, all built around active recall. Pick by how much time you have or how close the exam is. Switch between modes any time.</p>
             <div style={{ display:"flex", gap:12, flexWrap:"wrap", marginBottom:28 }}>
               <button className="btn-hg" onClick={() => setShowAuth(true)}>Start a session →</button>
               <button className="btn-hs" onClick={() => document.getElementById("modes")?.scrollIntoView({ behavior:"smooth" })}>See all modes</button>
             </div>
             <div style={{ display:"flex", gap:20, flexWrap:"wrap" }}>
-              {["6 classic modes","3 AI modes (Premium)","FSRS-5 spaced repetition","Pomodoro timer built in"].map((t, i) => (
+              {["7 classic modes","5 AI modes (Premium)","FSRS-5 spaced repetition","Pomodoro timer built in"].map((t, i) => (
                 <div key={i} style={{ display:"flex", alignItems:"center", gap:7, fontSize:13, color:"#6b7280" }}>
                   <span style={{ color:"#23b26d", fontWeight:700 }}>✓</span>{t}
                 </div>
@@ -511,7 +515,7 @@ export default function LearnModePage() {
           <div className="section fiv">
             <div className="section-label">✦ Classic Modes</div>
             <h2 className="section-title">Six modes. Zero setup. Free for everyone.</h2>
-            <p className="section-body">Pick any deck you've already created and launch it in any of the six classic modes. No extra configuration needed.</p>
+            <p className="section-body">Pick any deck you've already created and launch it in any of the seven classic modes. No extra configuration needed.</p>
             <div className="modes-section-grid">
               {CLASSIC_MODES.map((m, i) => (
                 <div key={i} className="mode-card">
@@ -603,7 +607,7 @@ export default function LearnModePage() {
       <div id="screenshots" className="page">
         <div className="section fiv">
           <div className="section-label">✦ Every Screen</div>
-          <h2 className="section-title">All nine modes, all screens.</h2>
+          <h2 className="section-title">All twelve modes, all screens.</h2>
           <p className="section-body">Every state inside Learn Mode, from launching a session to reviewing your final score and streak.</p>
           <div className="sc-grid">
             {SCREENSHOTS.map(([emoji, label], i) => (
@@ -639,7 +643,7 @@ export default function LearnModePage() {
 
       <div className="cta-bar">
         <h2 className="cta-title">Pick a mode and start your first session.</h2>
-        <p className="cta-sub">All six classic modes are free. No credit card needed.</p>
+        <p className="cta-sub">All seven classic modes are free. No credit card needed.</p>
         <button className="btn-cta" onClick={() => setShowAuth(true)}>Get started free →</button>
       </div>
 
@@ -651,7 +655,7 @@ export default function LearnModePage() {
                 <img src="/forks-logo.png" alt="FORKSAI" style={{ height:20, width:"auto" }} />
                 FORKSAI
               </div>
-              <p className="ft-tagline">Nine study modes built around active recall. Classic and AI-powered, all in one place.</p>
+              <p className="ft-tagline">Twelve study modes built around active recall. Classic and AI-powered, all in one place.</p>
             </div>
             <div>
               <div className="ft-col-h">Tools</div>

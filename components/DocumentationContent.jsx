@@ -153,7 +153,8 @@ const sections = [
     id: "revision-modes",
     title: "Revision Modes",
     content: [
-      "FORKSAI offers two revision modes for studying flashcard decks. Both are available on the free plan and work with any deck, AI-generated or manual.",
+      "FORKSAI has 12 study modes: 7 classic modes on the free plan (Flip Cards, Throw Cards, MCQ Quiz, Spaced Repetition, Weak Spot Trainer, Memory Sprint, Pomodoro) and 5 AI-powered modes on Premium (AI Revision, Exam Simulator, Explain Back, Case Study, Interactive Mind Map).",
+      "This section documents the two flip-based modes in full, because they are where most people start. The remaining classic modes are covered on the Learn Mode page, and the AI modes under Premium Features below.",
       "Switching between modes across study sessions is effective - different formats activate different retrieval pathways, which strengthens long-term retention.",
       "### Flip Cards",
       "The classic flashcard experience. You see the question, think through your answer mentally, then flip to reveal it. Completely self-paced.",

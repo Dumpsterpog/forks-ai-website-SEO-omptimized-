@@ -108,7 +108,7 @@ const categories = [
     faqs: [
       {
         q: "What revision modes does FORKSAI offer?",
-        a: "Two modes: Flip Cards and Throw Cards. Flip Cards is the classic experience - see the question, think through your answer, then flip to reveal it. Self-paced and deliberate. Throw Cards is swipe-based - mark each card as Known or Needs Work. Fast, high-repetition, and momentum-driven. Both are available to Premium subscribers.",
+        a: "Twelve in total. Seven are on the free plan: Flip Cards, Throw Cards, MCQ Quiz, Spaced Repetition (FSRS-5), Weak Spot Trainer, Memory Sprint, and Pomodoro. Five are AI-powered and need Premium: AI Revision, Exam Simulator, Explain Back, Case Study, and Interactive Mind Map. The two most-used are Flip Cards, the classic experience where you see the question, think through your answer, then flip to reveal it, and Throw Cards, which is swipe-based: mark each card as Known or Needs Work. Both of those are free.",
       },
       {
         q: "Which revision mode should I use?",
