@@ -110,7 +110,7 @@ University and college students, medical students (USMLE Step 1/2), NEET and JEE
 
 ## Pricing
 
-Free plan ($0, no AI generation), Premium Day Pass ($1.99/day), Premium Monthly ($7.99/month, 100 AI generations), Premium Yearly ($23.99/year, best value).
+Free plan ($0, one AI-generated deck plus unlimited manual decks and all study modes), Premium Day Pass ($1.99/day, 1 AI generation), Premium Monthly ($7.99/month, 100 AI generations per month), Premium Yearly ($23.99/year, 100 AI generations per month, best value).
 
 ## Frequently Asked Questions
 
@@ -118,7 +118,7 @@ Free plan ($0, no AI generation), Premium Day Pass ($1.99/day), Premium Monthly 
 
 **How is FORKSAI different from Anki?** Anki requires significant manual setup. FORKSAI generates a complete deck in under 30 seconds with built-in FSRS-5 spaced repetition.
 
-**Is FORKSAI free?** Yes. The free plan includes all core study modes, unlimited deck creation, and progress tracking. AI flashcard generation requires a Premium plan.
+**Is FORKSAI free?** Yes. The free plan includes one AI-generated flashcard deck with no cap on the number of cards in it, unlimited manual deck creation, all core study modes with FSRS-5 spaced repetition, and progress tracking. The free AI deck is a one-time unlock, not a monthly allowance. Generating more decks after that requires a Premium plan, which gives 100 AI flashcard generations per month on the monthly and yearly plans.
 
 **What file types does FORKSAI support?** PDF, plain text, PPTX, images (via OCR), and YouTube video URLs.
 

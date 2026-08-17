@@ -64,10 +64,11 @@ Join or create collaborative study rooms where multiple students study the same 
 FORKSAI offers a free tier and three Premium plans:
 
 ### Free Plan ($0)
-- Basic study modes (flashcards, spaced repetition, mind maps, study rooms)
-- Create and manage unlimited flashcard decks
+- 1 AI-generated flashcard deck, one time, with no cap on the number of cards in that deck
+- Create and manage unlimited manual flashcard decks and folders
+- All study modes (flashcards, FSRS-5 spaced repetition, mind maps, study rooms)
 - Progress tracking and analytics
-- No AI flashcard generation
+- Further AI generations require a Premium plan
 
 ### Premium Day Pass ($1.99 per day)
 - 1 AI flashcard generation
@@ -101,7 +102,7 @@ Anki requires significant manual setup. FORKSAI generates a complete deck from y
 Yes. The Medical Encyclopedia feature provides AI summaries for medical terms. FORKSAI is widely used for USMLE, NEET, nursing, anatomy, pharmacology, and clinical medicine preparation.
 
 **Is FORKSAI free?**
-Yes. The free plan includes all core study modes, unlimited deck creation, and progress tracking. AI flashcard generation requires a Premium plan.
+Yes. The free plan includes one AI-generated flashcard deck with no cap on the number of cards in it, unlimited manual deck creation, all core study modes with FSRS-5 spaced repetition, and progress tracking. The free AI deck is a one-time unlock, not a monthly allowance. Generating more decks after that requires a Premium plan, which gives 100 AI flashcard generations per month on the monthly and yearly plans.
 
 **What file types does FORKSAI support?**
 FORKSAI accepts PDF files, plain text and pasted notes, PowerPoint (PPTX) presentations, images (handwritten or printed, read via built-in OCR), and YouTube video URLs. The AI works with textbooks, lecture slides, research papers, and any text-based study material.
