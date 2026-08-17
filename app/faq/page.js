@@ -42,7 +42,7 @@ const faqSchema = {
       name: "Is FORKSAI free to use?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes - FORKSAI has a permanent free tier that includes manual flashcard creation, the full study dashboard (timer, goals, streak, heatmap), and achievement tracking. Premium unlocks AI-powered tools.",
+        text: "Yes - FORKSAI has a permanent free tier. It includes one AI-generated flashcard deck with no cap on how many cards it holds, unlimited manual flashcard creation, the study modes with FSRS-5 spaced repetition, the full study dashboard (timer, goals, streak, heatmap), and achievement tracking. The free AI deck is a one-time unlock rather than a monthly allowance, so Premium is what you buy when you want to keep generating.",
       },
     },
     {
@@ -50,7 +50,7 @@ const faqSchema = {
       name: "What does Premium include?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Premium adds AI Flashcard generation from PDFs and text, the PDF Summariser, the Quiz Generator, and all Revision Modes. It also includes priority AI processing speed.",
+        text: "Premium adds 100 AI flashcard generations a month on the monthly and yearly plans, the PDF Summariser, the Quiz Generator, and the AI-powered study modes. It also includes priority AI processing speed.",
       },
     },
     {

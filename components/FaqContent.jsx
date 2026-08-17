@@ -20,11 +20,11 @@ const categories = [
       },
       {
         q: "Is FORKSAI free to use?",
-        a: "Yes - FORKSAI has a permanent free tier that includes manual flashcard creation, the full study dashboard (timer, goals, streak, heatmap), and achievement tracking. Premium unlocks the AI-powered tools: AI Flashcard generation, PDF Summariser, Quiz Generator, and Revision Modes.",
+        a: "Yes - FORKSAI has a permanent free tier. It includes one AI-generated flashcard deck with no cap on how many cards it holds, unlimited manual flashcard creation, the study modes with FSRS-5 spaced repetition, the full study dashboard (timer, goals, streak, heatmap), and achievement tracking. The free AI deck is a one-time unlock rather than a monthly allowance, so Premium is what you buy when you want to keep generating.",
       },
       {
         q: "What does Premium include?",
-        a: "Premium adds AI Flashcard generation from PDFs and text, the PDF Summariser, the Quiz Generator, and all Revision Modes (Flip Cards and Throw Cards). It also includes priority AI processing speed during high-demand periods. Premium is available as a 1-day, monthly, or yearly subscription.",
+        a: "Premium adds 100 AI flashcard generations a month on the monthly and yearly plans, the PDF Summariser, the Quiz Generator, and the AI-powered study modes. It also includes priority AI processing speed during high-demand periods. Premium is available as a 1-day, monthly, or yearly subscription.",
       },
       {
         q: "Can I use FORKSAI on mobile?",
@@ -32,7 +32,7 @@ const categories = [
       },
       {
         q: "How do I get started?",
-        a: "Sign up at forksai.com using Google or email and password. Email accounts require verification before logging in. Once you're in, you'll land on the study dashboard. From there, click Create to make your first flashcard deck - either manually (free) or using AI generation (Premium).",
+        a: "Sign up at forksai.com using Google or email and password. Email accounts require verification before logging in. Once you're in, you'll land on the study dashboard. From there, click Create to make your first flashcard deck. Manual decks are unlimited on the free plan, and your first AI-generated deck is free too.",
       },
     ],
   },
