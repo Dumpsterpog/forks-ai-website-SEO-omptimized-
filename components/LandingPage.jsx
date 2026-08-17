@@ -20,7 +20,7 @@ const FAQS = [
   { q: "How does FORKSAI generate flashcards?", a: "You upload any PDF, paste notes, or type a topic. Our AI reads the content, identifies key concepts, and produces a complete, ready-to-study deck in under 30 seconds. No manual card creation needed." },
   { q: "What study modes are included?", a: "12 modes in total: Flashcard Flip, Swipe Cards, MCQ Practice, Spaced Repetition (FSRS-5), Weak Spot Trainer, Memory Sprint, Exam Simulator, Explain Back, AI Tutor Revision, Interactive Mind Maps, Case Study Mode, and Pomodoro Mode. Every mode is designed around proven learning science." },
   { q: "Can I study with other people?", a: "Yes. Study Rooms let you create a session, share a 6-character code, and study any deck live with up to 5 classmates. Host-paced or Race mode. Your choice." },
-  { q: "What's the difference between Free and Premium?", a: "Free gives you 30 AI generations per month plus access to all 12 study modes and Study Rooms. Premium removes every limit: unlimited generations, full PDF support, Podcast Mode, Medical Encyclopedia, Mind Maps, and Case Study Mode." },
+  { q: "What's the difference between Free and Premium?", a: "Free gets you one AI-generated deck with no cap on how many cards it holds, plus unlimited manual decks, all 12 study modes, FSRS-5 spaced repetition and Study Rooms. The free deck is a one-time unlock, not a monthly allowance. Premium adds 100 AI flashcard generations a month on the monthly and yearly plans, full PDF support, Podcast Mode, Medical Encyclopedia, Mind Maps, and Case Study Mode." },
   { q: "Does it work for medical students?", a: "Absolutely. The Medical Encyclopedia gives instant AI summaries for any medical term. Combined with spaced repetition and the Weak Spot Trainer, it's become a go-to tool for pre-med and nursing students." },
   { q: "Is my data private?", a: "Yes. Your uploaded content is processed to generate your flashcards and is not shared, sold, or used to train any AI model. You can delete your account and all data at any time from Settings." },
 ];
@@ -60,25 +60,6 @@ const BLOGS = [
   { title: "How to prepare for any exam in 2 weeks",                   desc: "A realistic week-by-week plan built around spaced repetition, not wishful thinking.",  link: "/blog/exam-prep",        cat: "Exam Tips",     time: "6 min", catColor: "#ea580c" },
   { title: "Why traditional flashcards are slowing you down",          desc: "Making cards by hand steals hours from actually studying them. A better approach exists.", link: "/blog/flashcards",       cat: "AI Tools",      time: "4 min", catColor: "#0891b2" },
   { title: "Spaced repetition: the secret to passing heavy exams",     desc: "Cramming doesn't work for long-term memory. Let's look at the forgetting curve.", link: "/blog/spaced-repetition", cat: "Memory",        time: "7 min", catColor: "#dc2626" },
-];
-
-const FREE_FEATURES = [
-  "30 AI flashcard generations / month",
-  "All 12 study modes",
-  "Live Study Rooms (up to 5 people)",
-  "Public Decks library",
-  "Progress tracking and streaks",
-];
-
-const PREMIUM_FEATURES = [
-  "Unlimited AI flashcard generations",
-  "Full PDF support (any length)",
-  "Podcast Mode",
-  "Medical Encyclopedia",
-  "Interactive Mind Maps",
-  "Case Study Mode",
-  "Priority AI processing",
-  "Early access to new features",
 ];
 
 const IMPORT_APPS = [
@@ -1340,7 +1321,7 @@ export default function LandingPage() {
             </div>
             <div className="text-sm text-[#555] mb-6">/ forever</div>
             <div className="flex flex-col gap-2.5 mb-8">
-              {["All 12 study modes", "Live Study Rooms (up to 5 people)", "Public Decks library", "Progress tracking and streaks"].map((f, i) => (
+              {["1 AI-generated deck, no card limit", "Unlimited manual decks and folders", "All 12 study modes", "Live Study Rooms (up to 5 people)", "Public Decks library", "Progress tracking and streaks"].map((f, i) => (
                 <div key={i} className="flex items-start gap-2.5">
                   <span className="mt-0.5 w-4 h-4 rounded-full flex items-center justify-center shrink-0" style={{ background: FEATURE_BG }}>
                     <Check size={10} className="text-white" strokeWidth={3} />
