@@ -3,14 +3,14 @@ import AISummarizerContent from "@/components/AISummarizerContent";
 export const metadata = {
   title: "Free AI Summarizer",
   description:
-    "Summarize any PDF, lecture notes, or textbook chapter with FORKSAI. Get concise, study-ready summaries in seconds. No signup required.",
+    "Summarize any PDF, lecture notes, or textbook chapter with FORKSAI. Get concise, study-ready summaries in seconds. Start free, no credit card.",
   alternates: {
     canonical: "https://forksai.app/ai-summarizer",
   },
   openGraph: {
     title: "Free AI Summarizer - Instant Note Summaries | FORKSAI",
     description:
-      "Turn long notes and PDFs into concise summaries with FORKSAI's free AI summarizer. No signup required.",
+      "Turn long notes and PDFs into concise summaries with FORKSAI's AI summarizer. Start free, no credit card.",
     url: "https://forksai.app/ai-summarizer",
     type: "website",
   },
