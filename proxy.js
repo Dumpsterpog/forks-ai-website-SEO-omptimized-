@@ -24,7 +24,7 @@ import { LLMS_TXT as MARKDOWN_CONTENT } from "@/lib/llmsContent";
 
 // ─── AI Bot User-Agent fingerprints ──────────────────────────────────────────
 // Only bots that do NOT execute JavaScript are included.
-// Google/Bing use Chromium-based crawlers that handle SSR pages fine — excluded.
+// Google/Bing use Chromium-based crawlers that handle SSR pages fine, so they are excluded.
 const AI_BOTS = [
   // OpenAI
   "GPTBot",
@@ -108,7 +108,7 @@ export default function proxy(request) {
   const { pathname } = new URL(request.url);
 
   // Skip API routes, static assets, and anything owned by the old app via the
-  // multi-zone fallback rewrite (dashboard, dev login, auth bridge) — none of
+  // multi-zone fallback rewrite (dashboard, dev login, auth bridge). None of
   // that is meant to be indexed or AEO-negotiated, robots.txt already
   // disallows /dashboard.
   if (
