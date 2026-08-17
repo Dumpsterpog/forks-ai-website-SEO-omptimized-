@@ -268,8 +268,8 @@ const sections = [
           "Recurring subscriptions (1-day, monthly, yearly) can be managed and canceled from the FORKSAI dashboard under Premium settings.",
           "The Lifetime plan has no subscription to cancel - access is permanent and no future charges will occur.",
           "Cancellation of a recurring plan prevents future renewals but does not revoke access until the end of the current billing period.",
-          "After cancellation, you retain access to free-tier features - manual flashcard creation, the study dashboard, and streak tracking.",
-          "AI-powered features (Summarizer, AI Flashcards, Quiz Generator, Revision Modes) are locked at the end of the billing period.",
+          "After cancellation, you retain access to free-tier features - manual flashcard creation, every non-AI study mode, the study dashboard, and streak tracking.",
+          "AI-powered features (Summarizer, AI flashcard generation, Quiz Generator, and the AI-powered study modes) are locked at the end of the billing period.",
         ].map((t, i) => (
           <li key={i} className="flex gap-3">
             <span className="text-[#b5ff4d] shrink-0 mt-0.5">-</span>

@@ -63,7 +63,7 @@ const sections = [
     content: (
       <>
         <p className="text-sm text-zinc-400 leading-relaxed mb-4">
-          FORKSAI offers optional Premium plans that unlock AI-powered features including unlimited flashcard generation, PDF summarization, quiz generation, and all revision modes.
+          FORKSAI offers optional Premium plans that unlock AI-powered features including a monthly flashcard generation quota, PDF summarization, quiz generation, and the AI-powered study modes. Generation limits for each plan are shown at checkout and in the dashboard.
         </p>
         <ul className="space-y-3 text-sm text-zinc-400">
           {[
