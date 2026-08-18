@@ -1,4 +1,4 @@
-import LandingPage from "@/components/LandingPage";
+import HomeLanding from "@/components/HomeLanding";
 
 const TITLE =
   "Free AI Flashcards - Quizlet & Anki Alternative | FORKSAI";
@@ -135,7 +135,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <LandingPage />
+      <HomeLanding />
     </>
   );
 }
