@@ -339,7 +339,7 @@ export default function GizmoLanding() {
         {/* Video, overlapping into the section below */}
         <div className="hero-video-wrap" style={{ position: "relative", zIndex: 10, width: "100%", maxWidth: 1100, margin: "48px auto -200px", padding: "0 32px" }}>
           <div style={{ borderRadius: 20, overflow: "hidden", boxShadow: "0 8px 60px rgba(17,0,46,0.22), 0 0 0 1px rgba(17,0,46,0.08)", lineHeight: 0 }}>
-            <video src="/pomodoro-mode.mp4" autoPlay muted loop playsInline style={{ width: "100%", display: "block" }} />
+            <video src="/forksgothroughlanding.mp4" autoPlay muted loop playsInline style={{ width: "100%", display: "block" }} />
           </div>
         </div>
       </section>
