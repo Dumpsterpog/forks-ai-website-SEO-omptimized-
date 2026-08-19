@@ -27,8 +27,8 @@ const sections = [
     content: (
       <ul className="space-y-3 text-sm text-zinc-400">
         {[
-          "FORKSAI offers 1-day, monthly, yearly, and Lifetime Premium plans.",
-          "1-day, monthly, and yearly subscriptions renew automatically according to the selected billing cycle unless canceled before the renewal date.",
+          "FORKSAI offers 1-day, weekly, monthly, yearly, and Lifetime Premium plans.",
+          "1-day, weekly, monthly, and yearly subscriptions renew automatically according to the selected billing cycle unless canceled before the renewal date. The weekly plan renews every week; it is a subscription, not a one-time pass.",
           "The Lifetime plan is a one-time purchase that provides permanent Premium access with no recurring charges.",
           "Access to Premium features remains active until the end of the current billing period, even after cancellation of a recurring plan.",
           "Plan pricing is displayed at checkout and may be updated with reasonable notice.",
@@ -52,7 +52,7 @@ const sections = [
         <ul className="space-y-3 text-sm text-zinc-400">
           {[
             "Partial subscription periods remaining after cancellation.",
-            "Unused AI features, generation limits, or tool access during a billing period.",
+            "Unused AI features, generation limits, or tool access during a billing period - including unused weekly generations.",
             "Subscription renewals that were not canceled before the renewal date.",
             "Changes in personal circumstances, usage patterns, or academic schedules.",
             "Dissatisfaction with AI-generated content quality - outputs are provided as-is for educational purposes.",
@@ -139,13 +139,15 @@ const sections = [
   },
   {
     id: "monthly-yearly",
-    title: "Monthly & Yearly Subscriptions",
+    title: "Weekly, Monthly & Yearly Subscriptions",
     content: (
       <ul className="space-y-3 text-sm text-zinc-400">
         {[
-          "Monthly and yearly plans are billed in advance for the full selected period.",
+          "Weekly, monthly and yearly plans are billed in advance for the full selected period.",
+          "The weekly plan is $4.99 USD and renews automatically every week until canceled. It is a recurring subscription, not a one-time week of access.",
           "Once a billing cycle has started, the payment is non-refundable.",
           "Canceling a subscription stops future charges but does not issue a partial refund for unused time.",
+          "Weekly subscribers who cancel mid-week retain Premium access until the end of the week already paid for.",
           "Yearly subscribers who cancel mid-period retain Premium access until the annual period ends.",
         ].map((t, i) => (
           <li key={i} className="flex gap-3">
@@ -265,7 +267,7 @@ const sections = [
     content: (
       <ul className="space-y-3 text-sm text-zinc-400">
         {[
-          "Recurring subscriptions (1-day, monthly, yearly) can be managed and canceled from the FORKSAI dashboard under Premium settings.",
+          "Recurring subscriptions (1-day, weekly, monthly, yearly) can be managed and canceled from the FORKSAI dashboard under Premium settings.",
           "The Lifetime plan has no subscription to cancel - access is permanent and no future charges will occur.",
           "Cancellation of a recurring plan prevents future renewals but does not revoke access until the end of the current billing period.",
           "After cancellation, you retain access to free-tier features - manual flashcard creation, every non-AI study mode, the study dashboard, and streak tracking.",

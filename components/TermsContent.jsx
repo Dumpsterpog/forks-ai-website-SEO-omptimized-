@@ -63,11 +63,12 @@ const sections = [
     content: (
       <>
         <p className="text-sm text-zinc-400 leading-relaxed mb-4">
-          FORKSAI offers optional Premium plans that unlock AI-powered features including a monthly flashcard generation quota, PDF summarization, quiz generation, and the AI-powered study modes. Generation limits for each plan are shown at checkout and in the dashboard.
+          FORKSAI offers optional Premium plans that unlock AI-powered features including a flashcard generation quota, PDF summarization, quiz generation, and the AI-powered study modes. The quota is per billing cycle: the weekly plan includes 25 AI flashcard generations per week, and the monthly and yearly plans include 100 per month. Generation limits for each plan are shown at checkout and in the dashboard.
         </p>
         <ul className="space-y-3 text-sm text-zinc-400">
           {[
-            "Premium plans are available on a 1-day, monthly, yearly, or Lifetime basis. Pricing is displayed at the time of purchase.",
+            "Premium plans are available on a 1-day, weekly, monthly, yearly, or Lifetime basis. Pricing is displayed at the time of purchase.",
+            "The weekly plan is a recurring subscription of $4.99 USD that renews automatically every week until canceled. It is not a one-time purchase or a single-week pass.",
             "The Lifetime plan is a one-time payment of $99.99 USD that provides permanent Premium access with no recurring charges. It is strictly non-refundable - see the Billing section below and our Refund Policy for full details.",
             "Payments are processed by Dodo Payments. By purchasing a plan, you agree to their terms of service.",
             "You are responsible for ensuring your payment details are accurate and up to date.",
@@ -90,8 +91,8 @@ const sections = [
     content: (
       <ul className="space-y-3 text-sm text-zinc-400">
         {[
-          "Subscriptions are billed according to the plan selected at checkout - 1-day, monthly, yearly, or Lifetime.",
-          "Recurring plans (1-day, monthly, yearly) may be canceled at any time. Cancellation takes effect at the end of the current billing period.",
+          "Subscriptions are billed according to the plan selected at checkout - 1-day, weekly, monthly, yearly, or Lifetime.",
+          "Recurring plans (1-day, weekly, monthly, yearly) renew automatically until canceled and may be canceled at any time. Cancellation takes effect at the end of the current billing period.",
           "The Lifetime plan is a one-time purchase with no subscription to cancel and no recurring charges. It is strictly and permanently non-refundable under all circumstances - including accidental purchases, change of mind, or failure to review plan details before completing payment.",
           "No free trial is offered. Access to Premium features begins immediately upon successful payment.",
           "Refunds for recurring plans are assessed on a case-by-case basis. Lifetime plan payments are final and will not be refunded for any reason. See our Refund Policy for full details.",

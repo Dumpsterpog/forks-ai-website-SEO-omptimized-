@@ -70,6 +70,17 @@ const HERO_POPPERS = [
   { e: "🎉", tx: "110px",  ty: "-50px",  rot: "-280deg", delay: "0.05s" },
 ];
 
+// Every Premium cycle here is a recurring subscription, so each one states its
+// renewal next to its price rather than leaving it to the terms page. The
+// weekly plan is $4.99 a week with 25 AI generations a week, deliberately not a
+// better per-day rate than the 100 a month the other cycles give.
+const PRICING_CYCLES = {
+  weekly:  { label: "Weekly",  name: "Premium weekly",  price: "4.99",  note: "per week, renews weekly, cancel anytime",   gens: "25 AI generations a week" },
+  monthly: { label: "Monthly", name: "Premium",         price: "7.99",  note: "per month, renews monthly, cancel anytime", gens: "100 AI generations a month" },
+  yearly:  { label: "Yearly",  name: "Premium yearly",  price: "23.99", note: "per year, renews yearly, cancel anytime",   gens: "100 AI generations a month" },
+};
+const PRICING_CYCLE_ORDER = ["weekly", "monthly", "yearly"];
+
 // ── App ───────────────────────────────────────────────────────────────────────
 export default function GizmoLanding() {
   const router = useRouter();
@@ -611,9 +622,10 @@ export default function GizmoLanding() {
 
       {/* ── PRICING ────────────────────────────────────────────────────────
           Numbers here are the ones the live landing page carries, reconciled
-          against the product code: $7.99 a month, $23.99 a year, and 100 AI
-          generations a month on Premium. Nothing on this page says unlimited,
-          because only the lifetime plan is uncapped and it is not sold here. */}
+          against the product code: $4.99 a week, $7.99 a month, $23.99 a year,
+          25 AI generations a week on weekly and 100 a month on the other two.
+          Nothing on this page says unlimited, because only the lifetime plan is
+          uncapped and it is not sold here. */}
       <section id="pricing" style={{ background: "#fafff4", padding: "96px 0 104px", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", backgroundImage: ["linear-gradient(rgba(17,0,46,0.06) 1px, transparent 1px)", "linear-gradient(90deg, rgba(17,0,46,0.06) 1px, transparent 1px)"].join(", "), backgroundSize: "44px 44px" }} />
 
@@ -623,10 +635,10 @@ export default function GizmoLanding() {
             <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(28px,4vw,48px)", fontWeight: 900, color: PRIMARY, margin: "0 0 26px", lineHeight: 1.08 }}>Start free. Upgrade only if you need to.</h2>
 
             <div style={{ display: "inline-flex", border: `2.5px solid ${PRIMARY}`, borderRadius: 12, background: "#fff", boxShadow: `4px 4px 0 ${PRIMARY}`, overflow: "hidden" }}>
-              {[{ val: "monthly", label: "Monthly" }, { val: "yearly", label: "Yearly" }].map(({ val, label }, i) => (
+              {PRICING_CYCLE_ORDER.map((val, i) => (
                 <button key={val} onClick={() => setCycle(val)}
-                  style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 800, padding: "11px 22px", border: "none", cursor: "pointer", background: cycle === val ? ELECTRIC_LIME : "#fff", color: PRIMARY, borderRight: i === 0 ? `2.5px solid ${PRIMARY}` : "none" }}>
-                  {label}
+                  style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 800, padding: "11px 22px", border: "none", cursor: "pointer", background: cycle === val ? ELECTRIC_LIME : "#fff", color: PRIMARY, borderRight: i < PRICING_CYCLE_ORDER.length - 1 ? `2.5px solid ${PRIMARY}` : "none" }}>
+                  {PRICING_CYCLES[val].label}
                 </button>
               ))}
             </div>
@@ -670,20 +682,20 @@ export default function GizmoLanding() {
             {/* Premium */}
             <div style={{ background: PRIMARY, border: `2.5px solid ${PRIMARY}`, borderRadius: 20, boxShadow: `6px 6px 0 ${ELECTRIC_LIME}`, padding: "30px 28px 32px", display: "flex", flexDirection: "column" }}>
               <p style={{ fontFamily: FONT_MONO, fontSize: 11, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: ELECTRIC_LIME, margin: "0 0 14px" }}>
-                {cycle === "monthly" ? "Premium" : "Premium yearly"}
+                {PRICING_CYCLES[cycle].name}
               </p>
               <div style={{ display: "flex", alignItems: "flex-start", lineHeight: 1, marginBottom: 4 }}>
                 <span style={{ fontFamily: FONT_DISPLAY, fontSize: 24, fontWeight: 900, color: "#fff", marginTop: 6 }}>$</span>
-                <span style={{ fontFamily: FONT_DISPLAY, fontSize: 54, fontWeight: 900, color: "#fff" }}>{cycle === "monthly" ? "7.99" : "23.99"}</span>
+                <span style={{ fontFamily: FONT_DISPLAY, fontSize: 54, fontWeight: 900, color: "#fff" }}>{PRICING_CYCLES[cycle].price}</span>
               </div>
               <p style={{ fontFamily: FONT_BODY, fontSize: 13, color: "rgba(255,255,255,0.55)", margin: "0 0 20px" }}>
-                {cycle === "monthly" ? "per month, cancel anytime" : "per year, cancel anytime"}
+                {PRICING_CYCLES[cycle].note}
               </p>
               <p style={{ fontFamily: FONT_MONO, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.5)", margin: "0 0 14px", letterSpacing: "0.06em" }}>EVERYTHING IN FREE, PLUS</p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 11, marginBottom: 28 }}>
                 {[
-                  "100 AI generations a month",
+                  PRICING_CYCLES[cycle].gens,
                   "AI Revision, Exam Simulator and Explain Back",
                   "Case Study mode and Interactive Mind Map",
                   "PDF Summarizer and AI notes",

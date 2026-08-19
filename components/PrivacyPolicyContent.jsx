@@ -49,7 +49,7 @@ const sections = [
           ["Study Streak & Activity Data", "Daily activity logs used to calculate your study streak, heatmap, and consistency statistics shown in your dashboard."],
           ["Goal Data", "Study goals you create during sessions, stored temporarily in your session and not permanently retained after logout."],
           ["Achievement Data", "Records of achievements unlocked based on your activity - stored per account to persist across sessions."],
-          ["Subscription & Billing Data", "Subscription status, plan type (free or premium), billing cycle, transaction identifiers, and payment confirmation timestamps. Card details are never stored on our servers."],
+          ["Subscription & Billing Data", "Subscription status, plan type (free or premium), billing cycle (weekly, monthly, yearly or lifetime), transaction identifiers, and payment confirmation timestamps. Card details are never stored on our servers."],
           ["Content Data", "Text you provide and the text extracted in your browser from PDFs you select, which is sent to our AI tools (PDF Summarizer, PDF-to-Notes, AI Flashcard Generator), and the outputs generated from them. The original PDF file is not uploaded to our servers."],
           ["Usage & Device Data", "Feature activity, session logs, IP address, operating system, browser type, and device identifiers."],
           ["Cookies & Analytics", "Used to maintain sessions, measure engagement, and improve platform performance."],
@@ -166,7 +166,7 @@ const sections = [
     content: (
       <>
         <p className="text-sm text-zinc-400 leading-relaxed">
-          FORKSAI offers optional Premium subscription plans that unlock AI-powered features including a monthly flashcard generation quota, PDF summarization, and the AI-powered study modes.
+          FORKSAI offers optional Premium subscription plans that unlock AI-powered features including a per-cycle flashcard generation quota (25 a week on the weekly plan, 100 a month on the monthly and yearly plans), PDF summarization, and the AI-powered study modes.
         </p>
         <ul className="mt-4 space-y-3 text-sm text-zinc-400">
           {[

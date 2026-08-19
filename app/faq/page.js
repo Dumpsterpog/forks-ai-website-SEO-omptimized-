@@ -50,7 +50,7 @@ const faqSchema = {
       name: "What does Premium include?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Premium adds 100 AI flashcard generations a month on the monthly and yearly plans, the PDF Summariser, the Quiz Generator, and the AI-powered study modes. It also includes priority AI processing speed.",
+        text: "Premium adds 100 AI flashcard generations a month on the monthly and yearly plans, the PDF Summariser, the Quiz Generator, and the AI-powered study modes. It also includes priority AI processing speed. Premium is available as a weekly subscription at $4.99, which includes 25 AI generations a week and renews weekly until you cancel, or as a 1-day, monthly, or yearly subscription.",
       },
     },
     {
