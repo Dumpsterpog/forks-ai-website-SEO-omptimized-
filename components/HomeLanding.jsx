@@ -175,9 +175,9 @@ export default function GizmoLanding() {
                 whose destinations were all elsewhere on the site and now live in
                 the footer instead. Same jump-to-section job, no menu to open,
                 and plain anchors rather than router pushes because none of these
-                leave the page. */}
+                leave the page. Every href here must match an id that is still
+                rendered, so a link goes when its section goes. */}
             {[
-              ["Features", "#features"],
               ["Reviews", "#reviews"],
               ["Pricing", "#pricing"],
               ["Free tools", "#free-tools"],
@@ -193,8 +193,8 @@ export default function GizmoLanding() {
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             {/* The one section link that has to survive on a phone. The rest of
-                the set is desktop only, because four links plus the logo plus
-                the CTA wraps at 360px. Login hides here too: Get Started calls
+                the set is desktop only, because the links plus the logo plus
+                the CTA wrap at 360px. Login hides here too: Get Started calls
                 the same goToDashboard() handoff, so nothing is lost. */}
             <a href="#pricing" className="md:hidden" style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 700, color: ON_SURFACE_VAR, textDecoration: "none", padding: "8px 4px" }}>Pricing</a>
             <button onClick={() => goLogin("nav")} className="hidden md:block" style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 600, color: PRIMARY, background: "none", border: "none", cursor: "pointer", padding: "8px 16px", borderRadius: 8, transition: "background 0.2s" }} onMouseEnter={e => e.currentTarget.style.background = "rgba(231,224,233,0.5)"} onMouseLeave={e => e.currentTarget.style.background = "none"}>Login</button>
@@ -362,6 +362,16 @@ export default function GizmoLanding() {
         .marquee-left  { animation: marquee-left  32s linear infinite; display: flex; width: max-content; }
         .marquee-right { animation: marquee-right 28s linear infinite; display: flex; width: max-content; }
         .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
+        @keyframes popperFly {
+          0%   { transform: translate(-50%,-50%) scale(0.2) rotate(0deg); opacity: 1; }
+          70%  { opacity: 1; }
+          100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.3) rotate(var(--rot)); opacity: 0; }
+        }
+        @keyframes waveBounce {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          30%       { transform: translateY(-14px) rotate(-3deg); }
+          60%       { transform: translateY(-6px) rotate(2deg); }
+        }
         @keyframes featFloat {
           0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
           50%       { transform: translateY(-10px) rotate(var(--rot, 0deg)); }
@@ -418,206 +428,6 @@ export default function GizmoLanding() {
         {/* Fade edges */}
         <div style={{ position: "absolute", top: 0, left: 0, width: 120, height: "100%", background: "linear-gradient(to right, #fafff4, transparent)", pointerEvents: "none", zIndex: 2 }} />
         <div style={{ position: "absolute", top: 0, right: 0, width: 120, height: "100%", background: "linear-gradient(to left, #fafff4, transparent)", pointerEvents: "none", zIndex: 2 }} />
-      </section>
-
-
-
-
-      {/* ── WHAT YOU GET ─────────────────────────────────
-          Alternating full-width rows rather than a grid of boxes. A six-item
-          grid on a three-up track leaves the last row half empty as soon as the
-          count changes; a vertical flow cannot strand an empty cell at any
-          count. No border, no fill, no shadow on the row itself, separation
-          comes from the vertical rhythm plus a hairline rule. The hard offset
-          shadow the rest of the page speaks in survives on the emoji medallion,
-          so losing the boxes does not lose the personality.
-          On a phone every row collapses to a single column with the medallion
-          above the text, always the same way round: alternating sides on a
-          narrow screen just reads as jumbled, and nearly all of this traffic is
-          on a phone. */}
-      <style>{`
-        .feature-row { display: flex; align-items: center; gap: 56px; padding: 48px 0; }
-        .feature-row-alt { flex-direction: row-reverse; }
-        .feature-row + .feature-row { border-top: 1px solid rgba(17,0,46,0.08); }
-        .feature-copy { flex: 1 1 0; min-width: 0; }
-        .feature-visual { flex: 0 0 190px; display: flex; justify-content: center; }
-        @media (max-width: 768px) {
-          .feature-row, .feature-row-alt { flex-direction: column !important; align-items: flex-start !important; gap: 18px; padding: 34px 0; }
-          .feature-visual { flex: none; justify-content: flex-start; }
-        }
-      `}</style>
-      <section id="features" style={{ background: BG, padding: "104px 0 96px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", backgroundImage: ["linear-gradient(rgba(17,0,46,0.05) 1px, transparent 1px)", "linear-gradient(90deg, rgba(17,0,46,0.05) 1px, transparent 1px)"].join(", "), backgroundSize: "44px 44px" }} />
-
-        <div style={{ maxWidth: 1060, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
-          <div style={{ marginBottom: 20 }}>
-            <p style={{ fontFamily: FONT_MONO, fontSize: 11, fontWeight: 700, color: SECONDARY, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>What you get</p>
-            <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(28px,4.4vw,50px)", fontWeight: 900, color: PRIMARY, margin: 0, lineHeight: 1.06, letterSpacing: -1 }}>
-              One workspace for<br />
-              <span style={{ background: ELECTRIC_LIME, padding: "0 8px 4px", borderRadius: 8, display: "inline-block" }}>the whole subject.</span>
-            </h2>
-          </div>
-
-          {[
-            {
-              e: "📄",
-              title: "Anything you already have, in",
-              body: "Drop in a PDF, paste your notes, upload a slide deck, hand it a YouTube link, or photograph a page and let the OCR read it. Before it generates you choose the difficulty, the question types, how many cards you want, and Smart Focus tags for the topics that matter most.",
-            },
-            {
-              e: "📝",
-              title: "Flashcards, notes or a podcast, out",
-              body: "The same upload can become a deck, a set of structured notes in Cornell, outline or narrative style, or an audio episode you listen to on the way to class. One piece of material is not locked to one format.",
-            },
-            {
-              e: "🔁",
-              title: "FSRS-5 decides what you review",
-              body: "Every deck is scheduled by FSRS-5, the modern spaced repetition algorithm. Cards you keep forgetting come back sooner and the ones you have locked in get out of the way, so your revision time lands where it is actually needed.",
-            },
-            {
-              e: "🎯",
-              title: "12 study modes, not one",
-              body: "Classic flip, swipe to sort what you know, a weak spot trainer that loops only the cards you keep missing, timed memory sprints, an exam simulator, explain back, mind maps, case studies and a built-in pomodoro timer.",
-            },
-            {
-              e: "👥",
-              title: "Study rooms with your friends",
-              body: "Open a room, share the code, and up to five of you run the same deck at once on a shared 12 second timer, with a live leaderboard, a speed bonus for answering early and reactions. Revision stops being the thing you do alone at midnight.",
-            },
-            {
-              e: "📚",
-              title: "Bring your old decks, or borrow ours",
-              body: "Import straight from Quizlet, from an Anki .apkg file, or from a plain CSV, and edit every card before it saves. Or search the public deck library by subject, by difficulty, or by the text inside the cards themselves.",
-            },
-          ].map(({ e, title, body }, i) => (
-            <div key={title} className={i % 2 === 1 ? "feature-row feature-row-alt" : "feature-row"}>
-              <div className="feature-visual">
-                <div style={{ width: 116, height: 116, borderRadius: 26, background: ELECTRIC_LIME, border: `2.5px solid ${PRIMARY}`, boxShadow: `6px 6px 0 ${PRIMARY}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 52, lineHeight: 1 }}>
-                  {e}
-                </div>
-              </div>
-              <div className="feature-copy">
-                <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(20px,2.4vw,28px)", fontWeight: 900, color: PRIMARY, margin: "0 0 12px", lineHeight: 1.2, letterSpacing: -0.5 }}>{title}</h3>
-                <p style={{ fontFamily: FONT_BODY, fontSize: "clamp(14px,1.5vw,16.5px)", color: "rgba(17,0,46,0.62)", lineHeight: 1.7, margin: 0, maxWidth: 620 }}>{body}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <style>{`
-        @keyframes popperFly {
-          0%   { transform: translate(-50%,-50%) scale(0.2) rotate(0deg); opacity: 1; }
-          70%  { opacity: 1; }
-          100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.3) rotate(var(--rot)); opacity: 0; }
-        }
-        @keyframes waveBounce {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          30%       { transform: translateY(-14px) rotate(-3deg); }
-          60%       { transform: translateY(-6px) rotate(2deg); }
-        }
-        @keyframes emojiFloat {
-          0%, 100% { transform: translateY(0px) rotate(var(--er, 0deg)); }
-          50%       { transform: translateY(-16px) rotate(var(--er, 0deg)); }
-        }
-      `}</style>
-      <section style={{ background: "#fafff4", padding: "110px 0 100px", position: "relative", overflow: "hidden" }}>
-
-        {/* Sun rays */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", background: "repeating-conic-gradient(from 0deg at 50% 50%, rgba(180,255,0,0.09) 0deg 7deg, transparent 7deg 18deg)" }} />
-
-        {/* Central sun glow */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", background: "radial-gradient(ellipse 55% 70% at 50% 50%, rgba(204,255,0,0.55) 0%, rgba(204,255,0,0.22) 30%, transparent 68%)" }} />
-
-        {/* Gizmo-style square grid */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", backgroundImage: ["linear-gradient(rgba(17,0,46,0.07) 1px, transparent 1px)", "linear-gradient(90deg, rgba(17,0,46,0.07) 1px, transparent 1px)"].join(", "), backgroundSize: "44px 44px" }} />
-
-        {/* Scattered emojis */}
-        {[
-          { e: "📚", top: "8%",  left: "6%",  size: 52, rot: -12, dur: 4.2, delay: 0   },
-          { e: "🧠", top: "64%", left: "9%",  size: 46, rot:   8, dur: 3.8, delay: 0.5 },
-          { e: "✏️", top: "34%", left: "3%",  size: 50, rot:  -5, dur: 5.0, delay: 1.0 },
-          { e: "💡", top: "83%", left: "20%", size: 42, rot:  10, dur: 4.5, delay: 0.3 },
-          { e: "📝", top: "10%", left: "54%", size: 36, rot:   7, dur: 4.8, delay: 0.9 },
-          { e: "🎯", top: "7%",  left: "85%", size: 54, rot:  15, dur: 3.9, delay: 0.2 },
-          { e: "🏆", top: "68%", left: "88%", size: 48, rot:  -8, dur: 4.6, delay: 0.7 },
-          { e: "⚡", top: "38%", left: "92%", size: 44, rot:   5, dur: 4.1, delay: 1.2 },
-          { e: "🔥", top: "82%", left: "74%", size: 42, rot: -10, dur: 5.2, delay: 0.4 },
-          { e: "🌟", top: "14%", left: "38%", size: 38, rot:  -6, dur: 4.3, delay: 1.4 },
-        ].map(({ e, top, left, size, rot, dur, delay }, i) => (
-          <div key={i} className="cta-emoji" style={{ position: "absolute", top, left, zIndex: 2, pointerEvents: "none", fontSize: size, animation: `emojiFloat ${dur}s ease-in-out ${delay}s infinite`, "--er": `${rot}deg`, filter: "drop-shadow(0 6px 16px rgba(17,0,46,0.12))" }}>
-            {e}
-          </div>
-        ))}
-
-        <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 24px", textAlign: "center", position: "relative", zIndex: 1 }}>
-
-          {/* Line 1: wave-bouncing letters */}
-          <div style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(32px,4.5vw,58px)", fontWeight: 900, color: PRIMARY, lineHeight: 1.1, marginBottom: 4 }}>
-            {"Stop studying hard.".split("").map((char, i) => (
-              <span key={i} style={{ display: "inline-block", animation: `waveBounce 2s ease-in-out ${i * 0.055}s infinite`, whiteSpace: "pre" }}>
-                {char === " " ? " " : char}
-              </span>
-            ))}
-          </div>
-
-          {/* Line 2: SVG arc curve */}
-          <svg width="100%" viewBox="0 0 700 80" style={{ overflow: "visible", display: "block", margin: "0 auto 36px", maxWidth: 700 }}>
-            <defs>
-              <path id="ctaArc" d="M 40,65 Q 350,15 660,65" fill="none" />
-            </defs>
-            <text fontFamily={FONT_DISPLAY} fontSize="46" fontWeight="900" fill="none" stroke={PRIMARY} strokeWidth="2">
-              <textPath href="#ctaArc" startOffset="50%" textAnchor="middle">Start studying smart.</textPath>
-            </text>
-            <text fontFamily={FONT_DISPLAY} fontSize="46" fontWeight="900" fill={ELECTRIC_LIME}>
-              <textPath href="#ctaArc" startOffset="50%" textAnchor="middle">Start studying smart.</textPath>
-            </text>
-          </svg>
-
-          <button onClick={() => goSignup("final_cta")}
-            className="cta-section-btn"
-            style={{ fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: "clamp(17px,2vw,22px)", background: PRIMARY, color: ELECTRIC_LIME, border: "none", padding: "22px 60px", borderRadius: 18, cursor: "pointer", boxShadow: `6px 6px 0px 0px ${ELECTRIC_LIME}`, transition: "transform 0.15s, box-shadow 0.15s", marginBottom: 20 }}
-            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; }}
-            onMouseDown={e => { e.currentTarget.style.transform = "translateY(2px)"; e.currentTarget.style.boxShadow = `3px 3px 0px 0px ${ELECTRIC_LIME}`; }}
-            onMouseUp={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `6px 6px 0px 0px ${ELECTRIC_LIME}`; }}
-          >
-            Start studying for free
-          </button>
-          <p style={{ fontFamily: FONT_MONO, fontSize: 11, color: "rgba(17,0,46,0.35)", margin: 0 }}>No credit card required</p>
-        </div>
-      </section>
-
-      {/* ── BLOG SECTION ───────────────────────────────────────────────────── */}
-      <section style={{ background: BG, padding: "96px 0 80px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", backgroundImage: ["linear-gradient(rgba(17,0,46,0.05) 1px, transparent 1px)", "linear-gradient(90deg, rgba(17,0,46,0.05) 1px, transparent 1px)"].join(", "), backgroundSize: "44px 44px" }} />
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
-          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 52, flexWrap: "wrap", gap: 16 }}>
-            <div>
-              <p style={{ fontFamily: FONT_MONO, fontSize: 11, fontWeight: 700, color: SECONDARY, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 10 }}>From the blog</p>
-              <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(26px, 4vw, 44px)", fontWeight: 900, color: PRIMARY, margin: 0, lineHeight: 1.05 }}>Study smarter,<br /><span style={{ background: ELECTRIC_LIME, padding: "0 6px 3px", borderRadius: 8, display: "inline-block" }}>not harder.</span></h2>
-            </div>
-            <Link href="/blogs" style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 700, color: PRIMARY, textDecoration: "none", border: `2px solid ${PRIMARY}`, borderRadius: 10, padding: "9px 20px", background: "#fff", boxShadow: `3px 3px 0 ${PRIMARY}`, transition: "transform 0.1s, box-shadow 0.1s", display: "inline-block", whiteSpace: "nowrap" }} onMouseEnter={e => { e.currentTarget.style.transform = "translate(2px,2px)"; e.currentTarget.style.boxShadow = `1px 1px 0 ${PRIMARY}`; }} onMouseLeave={e => { e.currentTarget.style.transform = "translate(0,0)"; e.currentTarget.style.boxShadow = `3px 3px 0 ${PRIMARY}`; }}>View all posts →</Link>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
-            {HERO_BLOGS.map((blog, i) => (
-              <Link key={i} href={blog.path} style={{ display: "block", background: "#fff", border: `2px solid ${PRIMARY}`, borderRadius: 18, overflow: "hidden", textDecoration: "none", boxShadow: `5px 5px 0 ${PRIMARY}`, transition: "transform 0.15s, box-shadow 0.15s" }} onMouseEnter={e => { e.currentTarget.style.transform = "translate(3px,3px)"; e.currentTarget.style.boxShadow = `2px 2px 0 ${PRIMARY}`; }} onMouseLeave={e => { e.currentTarget.style.transform = "translate(0,0)"; e.currentTarget.style.boxShadow = `5px 5px 0 ${PRIMARY}`; }}>
-                <div style={{ padding: "6px 0 0 22px" }}>
-                  <span style={{ display: "inline-block", background: blog.accent, border: `2px solid ${PRIMARY}`, borderRadius: 99, padding: "3px 12px", fontFamily: FONT_MONO, fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", color: PRIMARY, marginBottom: 0 }}>{blog.category}</span>
-                </div>
-                <div style={{ padding: "14px 22px 20px" }}>
-                  <p style={{ fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: 17, color: PRIMARY, lineHeight: 1.3, margin: "0 0 10px" }}>{blog.title}</p>
-                  <p style={{ fontFamily: FONT_BODY, fontSize: 13, color: "#666", lineHeight: 1.6, margin: "0 0 18px" }}>{blog.excerpt}</p>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <span style={{ fontFamily: FONT_MONO, fontSize: 11, color: "#aaa" }}>{blog.readTime} min read</span>
-                    <span style={{ width: 32, height: 32, borderRadius: 9, background: ELECTRIC_LIME, border: `2px solid ${PRIMARY}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, color: PRIMARY, fontWeight: 900, flexShrink: 0 }}>→</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* ── PRICING ────────────────────────────────────────────────────────
@@ -821,10 +631,6 @@ export default function GizmoLanding() {
 
           /* Testimonials */
           .section-testimonials { padding-top: 120px !important; }
-
-          /* CTA section */
-          .cta-emoji { display: none !important; }
-          .cta-section-btn { padding: 16px 36px !important; }
 
           /* Pricing */
           .pricing-grid { grid-template-columns: 1fr !important; }
