@@ -303,7 +303,7 @@ const sections = [
       "If you have forgotten your password - or if you signed up via Google and want to set a password - use the Forgot Password link on the login page. A reset link is sent to your registered email.",
       "Accounts created exclusively via Google Sign-In do not initially have a password. You can add one at any time using Forgot Password.",
       "### Deleting your account",
-      "To request full account deletion - permanently removing your account, flashcard decks, study history, streaks, achievements, and all associated data - contact us at support@forksai.app with your account email and a clear deletion request.",
+      "To request full account deletion - permanently removing your account, flashcard decks, study history, streaks, achievements, and all associated data - contact us at team.forksai@gmail.com with your account email and a clear deletion request.",
     ],
   },
   {
@@ -327,7 +327,7 @@ const sections = [
       "### Study stats look incorrect",
       "Stats are calculated from saved session data only. Sessions closed without stopping the timer are not included. Timezone changes can cause edge cases in daily stat groupings.",
       "### Email verification not arriving",
-      "Check your spam folder. Add support@forksai.app to your contacts and try resending. Ensure you are checking the exact email address used to register.",
+      "Check your spam folder. Add team.forksai@gmail.com to your contacts and try resending. Ensure you are checking the exact email address used to register.",
     ],
   },
   {
@@ -381,7 +381,7 @@ const sections = [
       "### Quality and accuracy",
       "Public decks are created by students using FORKSAI's AI tools - the same tools you have access to. Quality varies: some decks reflect careful, refined material, while others may be rough first-pass outputs.",
       "Always review and verify important information against your course materials and lecturer's notes, especially before high-stakes exams.",
-      "If you encounter a public deck with inaccurate, harmful, or inappropriate content, please report it to support@forksai.app with a link to the deck.",
+      "If you encounter a public deck with inaccurate, harmful, or inappropriate content, please report it to team.forksai@gmail.com with a link to the deck.",
       "### Sharing your own decks",
       "After generating an AI-generated deck, you can toggle it to Public to share with other FORKSAI users. Use the deck settings to control visibility.",
       "Public deck creators are credited by name in the deck details when other users import. This encourages the creation and sharing of high-quality study material across the community.",
@@ -424,7 +424,7 @@ const sections = [
     title: "Contact & Support",
     content: [
       "For technical issues, billing questions, feature requests, or general enquiries, contact the FORKSAI team at:",
-      { type: "email", address: "support@forksai.app" },
+      { type: "email", address: "team.forksai@gmail.com" },
       "We aim to respond within 7 business days.",
       "### What to include in your message",
       "For technical issues: your account email, a description of the problem, what you expected to happen, and any error messages you saw. Screenshots are helpful.",
@@ -662,7 +662,7 @@ export default function DocumentationContent() {
               <a href="/" className="hover:text-white transition-colors">Home</a>
               <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy</a>
               <a href="/terms" className="hover:text-white transition-colors">Terms</a>
-              <a href="mailto:support@forksai.app" className="hover:text-white transition-colors">Contact</a>
+              <a href="mailto:team.forksai@gmail.com" className="hover:text-white transition-colors">Contact</a>
             </div>
           </div>
         </footer>

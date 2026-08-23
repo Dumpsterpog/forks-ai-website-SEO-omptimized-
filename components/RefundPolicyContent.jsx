@@ -177,7 +177,7 @@ const sections = [
             "Once payment is confirmed, the transaction is final and cannot be reversed by FORKSAI.",
             "Accidental purchases, change of mind, or failure to cancel before purchasing are not grounds for a refund.",
             "Purchasing the Lifetime plan while already on a recurring subscription does not entitle you to a refund for the remaining subscription period.",
-            "If you believe your account was charged fraudulently or without your authorization, contact us immediately at support@forksai.app - confirmed fraud cases will be reviewed separately.",
+            "If you believe your account was charged fraudulently or without your authorization, contact us immediately at team.forksai@gmail.com - confirmed fraud cases will be reviewed separately.",
             "We strongly recommend reviewing all plan details at checkout before completing a Lifetime purchase.",
           ].map((t, i) => (
             <li key={i} className="flex gap-3">
@@ -222,7 +222,7 @@ const sections = [
     content: (
       <>
         <p className="text-sm text-zinc-400 leading-relaxed mb-4">
-          To request a refund, contact us at <a href="mailto:support@forksai.app" className="text-[#b5ff4d] hover:underline underline-offset-4">support@forksai.app</a> with the following:
+          To request a refund, contact us at <a href="mailto:team.forksai@gmail.com" className="text-[#b5ff4d] hover:underline underline-offset-4">team.forksai@gmail.com</a> with the following:
         </p>
         <ul className="space-y-3 text-sm text-zinc-400">
           {[
@@ -302,8 +302,8 @@ const sections = [
           For billing questions, refund requests, or payment issues:
         </p>
         <p className="mt-3">
-          <a href="mailto:support@forksai.app" className="text-[#b5ff4d] hover:underline underline-offset-4 text-sm font-medium">
-            support@forksai.app
+          <a href="mailto:team.forksai@gmail.com" className="text-[#b5ff4d] hover:underline underline-offset-4 text-sm font-medium">
+            team.forksai@gmail.com
           </a>
         </p>
         <p className="mt-3 text-xs text-zinc-600">We typically respond within 7 business days.</p>
@@ -451,7 +451,7 @@ export default function RefundPolicyContent() {
             <div className="flex items-center gap-5">
               <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
               <a href="/terms" className="hover:text-white transition-colors">Terms</a>
-              <a href="mailto:support@forksai.app" className="hover:text-white transition-colors">Contact</a>
+              <a href="mailto:team.forksai@gmail.com" className="hover:text-white transition-colors">Contact</a>
             </div>
           </div>
         </div>

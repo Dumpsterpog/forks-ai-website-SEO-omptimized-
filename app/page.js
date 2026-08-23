@@ -47,7 +47,7 @@ const organizationSchema = {
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "Customer Service",
-    email: "support@forksai.app",
+    email: "team.forksai@gmail.com",
   },
   founder: { "@type": "Person", name: "ForksAI Team" },
 };

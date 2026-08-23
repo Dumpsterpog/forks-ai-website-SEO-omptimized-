@@ -183,11 +183,11 @@ const categories = [
       },
       {
         q: "Can I get a refund?",
-        a: "Subscription fees are generally non-refundable. Refunds may be considered for duplicate charges, verified technical issues preventing access for an extended period, or confirmed fraudulent transactions. Contact support@forksai.app with your account email, charge date, and a description of the issue.",
+        a: "Subscription fees are generally non-refundable. Refunds may be considered for duplicate charges, verified technical issues preventing access for an extended period, or confirmed fraudulent transactions. Contact team.forksai@gmail.com with your account email, charge date, and a description of the issue.",
       },
       {
         q: "How do I delete my account?",
-        a: "Email support@forksai.app with your account email and a clear deletion request. This permanently removes your account, flashcard decks, study history, streaks, and achievements from active systems. Some residual data may remain in encrypted backups briefly for security purposes.",
+        a: "Email team.forksai@gmail.com with your account email and a clear deletion request. This permanently removes your account, flashcard decks, study history, streaks, and achievements from active systems. Some residual data may remain in encrypted backups briefly for security purposes.",
       },
       {
         q: "Is my data safe?",
@@ -208,11 +208,11 @@ const categories = [
       },
       {
         q: "Premium is showing as locked after I paid.",
-        a: "Premium status is verified on each page load from our payment provider. Wait a few seconds and hard-refresh the page (Ctrl+Shift+R on Windows, Cmd+Shift+R on Mac). If still locked after one minute, contact support@forksai.app with your account email and payment confirmation.",
+        a: "Premium status is verified on each page load from our payment provider. Wait a few seconds and hard-refresh the page (Ctrl+Shift+R on Windows, Cmd+Shift+R on Mac). If still locked after one minute, contact team.forksai@gmail.com with your account email and payment confirmation.",
       },
       {
         q: "My verification email didn't arrive.",
-        a: "Check your spam or junk folder. Add support@forksai.app to your contacts and use the Resend Verification option on the login screen. Ensure you're checking the exact email address used to register.",
+        a: "Check your spam or junk folder. Add team.forksai@gmail.com to your contacts and use the Resend Verification option on the login screen. Ensure you're checking the exact email address used to register.",
       },
       {
         q: "Newly generated flashcards aren't appearing.",
@@ -407,12 +407,12 @@ export default function FaqContent() {
           {/* Still have questions */}
           <div className="mt-16 border border-white/6 rounded-2xl p-8 bg-white/2 text-center">
             <p style={{ fontFamily: "var(--font-dm-serif-display), serif" }} className="text-xl font-normal mb-2">Still have questions?</p>
-            <p className="text-sm text-zinc-500 mb-5">Can't find what you're looking for? Reach out directly.</p>
+            <p className="text-sm text-zinc-500 mb-5">Can&rsquo;t find what you&rsquo;re looking for? Support runs inside the app: open Settings, choose Support, and raise a ticket. Replies arrive in that same thread. If you cannot sign in, email us instead.</p>
             <a
-              href="mailto:support@forksai.app"
+              href="mailto:team.forksai@gmail.com"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#b5ff4d] text-black text-sm font-bold hover:bg-[#c8ff6e] transition-colors"
             >
-              support@forksai.app
+              team.forksai@gmail.com
             </a>
           </div>
         </div>
@@ -427,7 +427,7 @@ export default function FaqContent() {
             <a href="/blogs" className="hover:text-white transition-colors">Blog</a>
             <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy</a>
             <a href="/terms" className="hover:text-white transition-colors">Terms</a>
-            <a href="mailto:support@forksai.app" className="hover:text-white transition-colors">Contact</a>
+            <a href="mailto:team.forksai@gmail.com" className="hover:text-white transition-colors">Contact</a>
           </div>
         </div>
       </footer>

@@ -190,7 +190,7 @@ const sections = [
     title: "Billing, Cancellations & Refunds",
     content: (
       <p className="text-sm text-zinc-400 leading-relaxed">
-        Users can manage or cancel their Premium subscription according to the terms presented at the time of purchase. Billing inquiries, payment failures, or refund-related questions can be directed to our support team at <a href="mailto:support@forksai.app" className="text-[#b5ff4d] hover:underline underline-offset-4">support@forksai.app</a>. Refund eligibility may depend on the payment provider's policies and the plan selected.
+        Users can manage or cancel their Premium subscription according to the terms presented at the time of purchase. Billing inquiries, payment failures, or refund-related questions can be directed to our support team at <a href="mailto:team.forksai@gmail.com" className="text-[#b5ff4d] hover:underline underline-offset-4">team.forksai@gmail.com</a>. Refund eligibility may depend on the payment provider's policies and the plan selected.
       </p>
     ),
   },
@@ -309,7 +309,7 @@ const sections = [
     title: "Children's Privacy",
     content: (
       <p className="text-sm text-zinc-400 leading-relaxed">
-        FORKSAI is not intended for users under 13 (or the applicable minimum age in your jurisdiction). We do not knowingly collect or store data from minors. If we become aware of such collection, we delete it promptly. If you believe a minor has created an account, please contact us at <a href="mailto:support@forksai.app" className="text-[#b5ff4d] hover:underline underline-offset-4">support@forksai.app</a>.
+        FORKSAI is not intended for users under 13 (or the applicable minimum age in your jurisdiction). We do not knowingly collect or store data from minors. If we become aware of such collection, we delete it promptly. If you believe a minor has created an account, please contact us at <a href="mailto:team.forksai@gmail.com" className="text-[#b5ff4d] hover:underline underline-offset-4">team.forksai@gmail.com</a>.
       </p>
     ),
   },
@@ -349,7 +349,7 @@ const sections = [
     content: (
       <>
         <p className="text-sm text-zinc-400 leading-relaxed mb-4">
-          Depending on where you live, you may have additional rights. We honor these rights for all users where they apply. To exercise any of them, email <a href="mailto:support@forksai.app" className="text-[#b5ff4d] hover:underline underline-offset-4">support@forksai.app</a> from your account email; we may need to verify your identity before acting on a request, and we will respond within the timeframe required by applicable law.
+          Depending on where you live, you may have additional rights. We honor these rights for all users where they apply. To exercise any of them, email <a href="mailto:team.forksai@gmail.com" className="text-[#b5ff4d] hover:underline underline-offset-4">team.forksai@gmail.com</a> from your account email; we may need to verify your identity before acting on a request, and we will respond within the timeframe required by applicable law.
         </p>
         <div className="space-y-4 text-sm text-zinc-400">
           <div>
@@ -383,7 +383,7 @@ const sections = [
           FORKSAI is the data controller responsible for your personal data. If you have any questions, complaints, or requests regarding your personal data or this Privacy Policy - including requests to access or delete your data - you can contact our Grievance Officer:
         </p>
         <p className="mt-3 text-sm">
-          <a href="mailto:support@forksai.app" className="text-[#b5ff4d] hover:underline underline-offset-4 font-medium">support@forksai.app</a>
+          <a href="mailto:team.forksai@gmail.com" className="text-[#b5ff4d] hover:underline underline-offset-4 font-medium">team.forksai@gmail.com</a>
         </p>
         <p className="mt-3 text-xs text-zinc-600 leading-relaxed">
           We acknowledge grievances promptly and aim to resolve them within the timeframe required by applicable law. This Privacy Policy is governed by the laws of India, without prejudice to any mandatory data-protection rights you hold under the laws of your country of residence.
@@ -508,8 +508,8 @@ const sections = [
           For questions, concerns, or data-related requests regarding FORKSAI, contact us at:
         </p>
         <p className="mt-3">
-          <a href="mailto:support@forksai.app" className="text-[#b5ff4d] hover:underline underline-offset-4 text-sm font-medium">
-            support@forksai.app
+          <a href="mailto:team.forksai@gmail.com" className="text-[#b5ff4d] hover:underline underline-offset-4 text-sm font-medium">
+            team.forksai@gmail.com
           </a>
         </p>
         <p className="mt-3 text-xs text-zinc-600">
@@ -653,7 +653,7 @@ export default function PrivacyPolicyContent() {
             <span>© {new Date().getFullYear()} FORKSAI. All rights reserved.</span>
             <div className="flex items-center gap-5">
               <a href="/terms" className="hover:text-white transition-colors">Terms</a>
-              <a href="mailto:support@forksai.app" className="hover:text-white transition-colors">Contact</a>
+              <a href="mailto:team.forksai@gmail.com" className="hover:text-white transition-colors">Contact</a>
               <a href="/refund-policy" className="hover:text-white transition-colors">Refund Policy</a>
             </div>
           </div>

@@ -26,7 +26,7 @@ const sections = [
           "You agree to provide accurate, current, and complete information when creating an account.",
           "Accounts are created using Google Sign-In (Google OAuth). By signing in, you authorize us to access basic profile information (such as your name, email address, and profile photo) as described in our Privacy Policy.",
           "You are responsible for maintaining the security of your Google account and for all activity that occurs under your FORKSAI account.",
-          "You must notify us immediately of any unauthorized access or suspected security breach at support@forksai.app.",
+          "You must notify us immediately of any unauthorized access or suspected security breach at team.forksai@gmail.com.",
         ].map((t, i) => (
           <li key={i} className="flex gap-3">
             <span className="text-[#b5ff4d] shrink-0 mt-0.5">-</span>
@@ -436,7 +436,7 @@ const sections = [
     content: (
       <ul className="space-y-3 text-sm text-zinc-400">
         {[
-          "Informal resolution first: before initiating any formal proceeding, you agree to contact us at support@forksai.app and attempt in good faith to resolve the dispute. Most issues can be resolved this way.",
+          "Informal resolution first: before initiating any formal proceeding, you agree to contact us at team.forksai@gmail.com and attempt in good faith to resolve the dispute. Most issues can be resolved this way.",
           "If a dispute cannot be resolved informally within 30 days, it shall be handled in accordance with the Governing Law & Jurisdiction section above.",
           "Billing and refund disputes are governed by our Refund Policy. Please review it and contact us before initiating a chargeback - see our Refund Policy for details.",
           "To the extent permitted by law, any claim must be brought on an individual basis and not as part of a class or representative action.",
@@ -458,8 +458,8 @@ const sections = [
           For questions regarding these Terms, contact us at:
         </p>
         <p className="mt-3">
-          <a href="mailto:support@forksai.app" className="text-[#b5ff4d] hover:underline underline-offset-4 text-sm font-medium">
-            support@forksai.app
+          <a href="mailto:team.forksai@gmail.com" className="text-[#b5ff4d] hover:underline underline-offset-4 text-sm font-medium">
+            team.forksai@gmail.com
           </a>
         </p>
         <p className="mt-3 text-xs text-zinc-600">We aim to respond within 7 business days.</p>
@@ -601,7 +601,7 @@ export default function TermsContent() {
             <span>© {new Date().getFullYear()} FORKSAI. All rights reserved.</span>
             <div className="flex items-center gap-5">
               <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="mailto:support@forksai.app" className="hover:text-white transition-colors">Contact</a>
+              <a href="mailto:team.forksai@gmail.com" className="hover:text-white transition-colors">Contact</a>
               <a href="/refund-policy" className="hover:text-white transition-colors">Refund Policy</a>
             </div>
           </div>
