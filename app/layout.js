@@ -1,5 +1,6 @@
 import Script from "next/script";
-import { Analytics } from "@vercel/analytics/next";
+import ConsentedAnalytics from "../components/ConsentedAnalytics";
+import ConsentBanner from "../components/ConsentBanner";
 import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -79,9 +80,25 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         {children}
-        <Analytics />
+        <ConsentedAnalytics />
+        <ConsentBanner />
 
-        {/* Google tag (gtag.js) — ported from the old app's static index.html */}
+        {/* Consent Mode defaults are declared beforeInteractive, so they are in
+            the dataLayer before gtag.js can act. Everything non-essential
+            starts denied and is updated only when the visitor chooses. */}
+        <Script id="gtag-consent-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              analytics_storage: 'denied',
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              wait_for_update: 500
+            });
+          `}
+        </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-18068336980"
           strategy="afterInteractive"
