@@ -47,6 +47,8 @@ const sections = [
           ["Study Session Data", "Start time, end time, and duration of each study timer session - used to calculate daily and weekly study totals shown on your dashboard."],
           ["Flashcard & Deck Data", "All flashcard decks you create - whether AI-generated or manual - including card content, deck titles, creation timestamps, and source type."],
           ["Study Streak & Activity Data", "Daily activity logs used to calculate your study streak, heatmap, and consistency statistics shown in your dashboard."],
+          ["Study Session History", "When you finish a session in any study mode, we record which mode it was, how many cards you answered, how long it took, and how you rated your recall. Modes that produce no recall signal, such as browsing a deck or a mind map, record the time and card count only. This history powers your statistics, your review schedule, and the time estimates on your dashboard."],
+          ["Exam Details", "If you set an exam, we store its name, its date, and which of your decks it covers, so the dashboard can plan your remaining study around it. You can change or remove this at any time from the dashboard."],
           ["Goal Data", "Study goals you create during sessions, stored temporarily in your session and not permanently retained after logout."],
           ["Achievement Data", "Records of achievements unlocked based on your activity - stored per account to persist across sessions."],
           ["Subscription & Billing Data", "Subscription status, plan type (free or premium), billing cycle (weekly, monthly, yearly or lifetime), transaction identifiers, and payment confirmation timestamps. Card details are never stored on our servers."],
@@ -69,7 +71,7 @@ const sections = [
       <>
         <ul className="space-y-3 text-sm text-zinc-400">
           {[
-            "To provide and operate the FORKSAI platform - including flashcard creation (AI and manual), PDF summarization, quiz generation, all revision modes (Memory Sprint, Spaced Repetition, Weak Spot Trainer, Pomodoro, AI Revision, Exam Simulator, Explain Back), activity heatmap, Explore Decks feature, and the study dashboard.",
+            "To provide and operate the FORKSAI platform - including flashcard creation (AI and manual), PDF summarization, quiz generation, all revision modes (Flashcard Flip, Swipe Cards, Memory Sprint, Spaced Repetition, Weak Spot Trainer, Pomodoro, MCQ Practice, Fill in the Blanks, AI Revision, Exam Simulator, Explain Back, Case Study, Interactive Mind Map and Study Rooms), the exam planner, activity heatmap, Explore Decks feature, and the study dashboard.",
             "To calculate and display study statistics - including daily study time, weekly totals, streaks, activity heatmap calendar view (showing daily consistency patterns), and consistency percentages.",
             "To manage and display your achievements and progress, unlocked based on your real activity across the platform.",
             "To manage Premium subscriptions - verifying payment status and enabling or restricting access to paid AI features.",
@@ -210,6 +212,7 @@ const sections = [
             ["Streak & achievement data", "Retained per account to persist across sessions. Deleted upon account deletion."],
             ["Goal data", "Session-only. Not stored on servers. Cleared when the browser tab is closed."],
             ["Logs & temporary data", "Retained for 30–90 days for debugging and performance monitoring."],
+            ["Generated study material", "Material the AI derives from your decks, such as fill-in-the-blank exercises, is cached against your account so the same deck does not have to be processed again. It is deleted with the deck."],
             ["Backups", "Securely stored and not publicly accessible. Purged on a rolling schedule."],
           ].map(([term, def]) => (
             <li key={term} className="flex gap-3 border-b border-white/4 pb-3 last:border-0 last:pb-0">
@@ -429,7 +432,8 @@ const sections = [
             ["What is shared when a deck is public", "Only the flashcard deck content (questions, answers, and deck title) is visible to other users in the Explore library."],
             ["What is NOT shared", "Your email address, account creation date, subscription status, account settings, and any other personal account information are never exposed publicly. Your identity on the platform is represented by your account name only."],
             ["Creator attribution", "Your account name appears as the deck creator for attribution purposes. This allows other users to recognize quality decks and discover more from the same creator - but does not expose any personal data beyond the name you chose."],
-            ["Control over sharing", "You can toggle any AI-generated deck between public and private at any time via deck settings. Making a deck private immediately removes it from public search and hides it from other users."],
+            ["Private by default", "Decks you create are private. Nothing is published to the Explore library unless you choose to publish it yourself."],
+            ["Control over sharing", "You can toggle any deck between public and private at any time via deck settings. Making a deck private immediately removes it from public search and hides it from other users."],
             ["Account deletion removes public decks", "If you delete your account, all your public decks are removed from the Explore library. Other users who imported your decks retain their private copies, but the public deck is no longer discoverable."],
             ["Safe to share", "You can confidently make decks public knowing that your email, personal information, and account details remain completely private. Only flashcard content is visible."],
           ].map(([term, def]) => (
@@ -476,7 +480,7 @@ const sections = [
             ["Chat messages", "Messages sent in the Study Room chat are visible to all current participants and stored within the room document until it expires. Chat history is not permanently recorded or associated with any user account after expiry."],
             ["Participant visibility", "When you join a Study Room, your display name is visible to other participants for the duration of the session. Your email address and other account details are never shared."],
             ["Session progress", "Card answers and completion progress within a session are tracked per participant to power live leaderboards in race mode. This data is discarded with the room on expiry."],
-            ["No long-term retention", "Study Room activity does not contribute to your personal study statistics, streaks, or heatmap. Room data is entirely session-scoped and automatically deleted."],
+            ["What outlives the room", "The room itself is deleted on expiry, but your own result from it is not. When a room finishes, a summary of your personal performance (the number of cards you answered, how many you got right, and how long you studied) is saved to your account so the session counts toward your streak, heatmap and statistics like any other study mode. It records your own answers only, never other participants', the deck contents, or anything from the chat."],
           ].map(([term, def]) => (
             <li key={term} className="flex gap-3 border-b border-white/4 pb-3 last:border-0 last:pb-0">
               <span className="font-medium text-white shrink-0 w-48">{term}</span>
@@ -495,7 +499,7 @@ const sections = [
         <p className="text-sm text-zinc-400 leading-relaxed">
           We may update this Privacy Policy from time to time to reflect product changes, new features, or legal requirements. Major updates will be communicated through in-app notifications, email, or website banners. The most recent revision date will always appear at the top of this page.
         </p>
-        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: June 9, 2026 (v12.1)</p>
+        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: August 23, 2026 (v12.2)</p>
       </>
     ),
   },
@@ -590,7 +594,7 @@ export default function PrivacyPolicyContent() {
             <p className="text-zinc-500 text-sm max-w-xl leading-relaxed">
               This policy explains how FORKSAI collects, uses, and protects your information across the platform - including the study dashboard, AI tools, and payment features.
             </p>
-            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: June 9, 2026 · v12.1</p>
+            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: August 23, 2026 · v12.2</p>
           </motion.div>
 
           {/* Two-column layout */}

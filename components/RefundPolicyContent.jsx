@@ -222,7 +222,7 @@ const sections = [
     content: (
       <>
         <p className="text-sm text-zinc-400 leading-relaxed mb-4">
-          To request a refund, contact us at <a href="mailto:team.forksai@gmail.com" className="text-[#b5ff4d] hover:underline underline-offset-4">team.forksai@gmail.com</a> with the following:
+          To request a refund, open Settings in the app and choose Support to raise a ticket, which keeps the whole exchange in one thread you can return to. If you cannot sign in, email <a href="mailto:team.forksai@gmail.com" className="text-[#b5ff4d] hover:underline underline-offset-4">team.forksai@gmail.com</a> instead. Either way, include the following:
         </p>
         <ul className="space-y-3 text-sm text-zinc-400">
           {[
@@ -289,7 +289,7 @@ const sections = [
         <p className="text-sm text-zinc-400 leading-relaxed">
           We may update this Refund Policy from time to time to reflect pricing changes, billing model updates, or legal requirements. The most recent revision date will always appear below.
         </p>
-        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: June 9, 2026 (v1.2)</p>
+        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: August 23, 2026 (v1.3)</p>
       </>
     ),
   },
@@ -382,7 +382,7 @@ export default function RefundPolicyContent() {
             <p className="text-zinc-500 text-sm max-w-xl leading-relaxed">
               This page explains how refunds, cancellations, and billing disputes are handled for FORKSAI Premium subscriptions.
             </p>
-            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: June 9, 2026 · v1.2</p>
+            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: August 23, 2026 · v1.3</p>
           </motion.div>
 
           {/* Two-column layout */}

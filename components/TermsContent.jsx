@@ -288,7 +288,7 @@ const sections = [
         <p className="text-sm text-zinc-400 leading-relaxed">
           We may update these Terms from time to time to reflect changes in the Service, new features, or legal requirements. Major updates will be communicated through in-app notifications, email, or website banners. Continued use of the Service after updates take effect constitutes your acceptance of the revised Terms.
         </p>
-        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: June 9, 2026 (v12.1)</p>
+        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: August 23, 2026 (v12.2)</p>
       </>
     ),
   },
@@ -538,7 +538,7 @@ export default function TermsContent() {
             <p className="text-zinc-500 text-sm max-w-xl leading-relaxed">
               These terms apply to all products and services under FORKSAI - including the study dashboard, AI tools, Premium subscriptions, and all related features.
             </p>
-            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: June 9, 2026 · v12.1</p>
+            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: August 23, 2026 · v12.2</p>
           </motion.div>
 
           {/* Two-column layout */}
