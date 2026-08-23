@@ -26,8 +26,8 @@ export default function ConsentBanner() {
 
   if (!phase) return null;
 
-  const save = (categories) => {
-    writeConsent(categories);
+  const save = (categories, method = "banner") => {
+    writeConsent(categories, method);
     setPhase(null);
   };
 
@@ -129,7 +129,7 @@ export default function ConsentBanner() {
                   Back
                 </button>
                 <button
-                  onClick={() => save(prefs)}
+                  onClick={() => save(prefs, "preferences")}
                   className="flex-1 rounded-lg bg-[#b5ff4d] px-3 py-2 text-[13px] font-bold text-black hover:bg-[#c8ff6e] transition-colors"
                 >
                   Save choices
