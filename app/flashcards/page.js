@@ -1,4 +1,5 @@
 import FlashcardsContent from "@/components/FlashcardsContent";
+import { SOFTWARE_OFFERS } from "@/lib/pricing";
 
 export const metadata = {
   title: "Free AI Flashcards",
@@ -24,7 +25,7 @@ const schema = {
     "Create and study AI-generated flashcards with FORKSAI. Use active recall, spaced repetition, and smart revision modes to ace your exams.",
   url: "https://forksai.app/flashcards",
   applicationCategory: "EducationalApplication",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  offers: SOFTWARE_OFFERS,
   operatingSystem: "Web",
   browserRequirements: "Requires JavaScript",
 };

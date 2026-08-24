@@ -1,4 +1,5 @@
 import HomeLanding from "@/components/HomeLanding";
+import { SOFTWARE_OFFERS } from "@/lib/pricing";
 
 const TITLE =
   "Free AI Flashcards - Quizlet & Anki Alternative | FORKSAI";
@@ -59,7 +60,7 @@ const softwareSchema = {
   description: "AI-powered flashcard generator and study tool for students",
   url: "https://forksai.app",
   applicationCategory: "EducationalApplication",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock" },
+  offers: SOFTWARE_OFFERS,
   screenshot: { "@type": "ImageObject", url: "https://forksai.app/dashboardpreview.png" },
   operatingSystem: "Web",
   inLanguage: "en",

@@ -1,4 +1,5 @@
 import NotesSummarizerContent from "@/components/NotesSummarizerContent";
+import { SOFTWARE_OFFERS } from "@/lib/pricing";
 
 export const metadata = {
   title: "AI Notes Summarizer",
@@ -24,7 +25,7 @@ const schema = {
     "Paste your lecture notes or upload a document and FORKSAI's AI summarizer extracts the key points, definitions, and concepts you actually need to study.",
   url: "https://forksai.app/notes",
   applicationCategory: "EducationalApplication",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  offers: SOFTWARE_OFFERS,
   operatingSystem: "Web",
   browserRequirements: "Requires JavaScript",
 };

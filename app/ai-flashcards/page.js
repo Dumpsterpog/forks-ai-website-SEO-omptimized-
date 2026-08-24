@@ -1,4 +1,5 @@
 import AIFlashcardsContent from "@/components/AIFlashcardsContent";
+import { SOFTWARE_OFFERS } from "@/lib/pricing";
 
 export const metadata = {
   title: "Free AI Flashcard Generator",
@@ -24,7 +25,7 @@ const schema = {
     "Generate AI flashcards from your notes, PDFs, or any text in seconds. Free AI flashcard maker for students - turn lecture notes, textbooks, and study material into exam-ready question-answer cards.",
   url: "https://forksai.app/ai-flashcards",
   applicationCategory: "EducationalApplication",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  offers: SOFTWARE_OFFERS,
   operatingSystem: "Web",
   browserRequirements: "Requires JavaScript",
 };

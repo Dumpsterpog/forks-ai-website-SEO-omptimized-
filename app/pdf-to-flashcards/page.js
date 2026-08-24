@@ -1,4 +1,5 @@
 import PdfToFlashcardsContent from "@/components/PdfToFlashcardsContent";
+import { SOFTWARE_OFFERS } from "@/lib/pricing";
 
 export const metadata = {
   title: "Free PDF to Flashcards Converter",
@@ -24,7 +25,7 @@ const schema = {
     "Convert any PDF into flashcards automatically with FORKSAI. Upload textbooks, research papers, or lecture slides and get an exam-ready flashcard deck in under 30 seconds.",
   url: "https://forksai.app/pdf-to-flashcards",
   applicationCategory: "EducationalApplication",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  offers: SOFTWARE_OFFERS,
   operatingSystem: "Web",
   browserRequirements: "Requires JavaScript",
 };

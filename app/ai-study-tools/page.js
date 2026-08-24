@@ -1,4 +1,5 @@
 import AIStudyToolsContent from "@/components/AIStudyToolsContent";
+import { SOFTWARE_OFFERS } from "@/lib/pricing";
 
 export const metadata = {
   title: "Free AI Study Tools for Students",
@@ -24,7 +25,7 @@ const schema = {
     "FORKSAI's AI study tools help students learn faster with flashcard generation, AI podcasts, spaced repetition, exam simulation, and 12 study modes.",
   url: "https://forksai.app/ai-study-tools",
   applicationCategory: "EducationalApplication",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  offers: SOFTWARE_OFFERS,
   operatingSystem: "Web",
   browserRequirements: "Requires JavaScript",
   featureList: [

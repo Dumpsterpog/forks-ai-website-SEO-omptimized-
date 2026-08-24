@@ -1,4 +1,5 @@
 import LearnModeContent from "@/components/LearnModeContent";
+import { SOFTWARE_OFFERS } from "@/lib/pricing";
 
 export const metadata = {
   title: "Learn Mode - Interactive Flashcard Study Sessions",
@@ -24,7 +25,7 @@ const schema = {
     "Study your flashcards in FORKSAI's Learn Mode - an interactive session that adapts to your answers, prioritises weak cards, and tracks your progress per deck.",
   url: "https://forksai.app/learn",
   applicationCategory: "EducationalApplication",
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  offers: SOFTWARE_OFFERS,
   operatingSystem: "Web",
   browserRequirements: "Requires JavaScript",
 };
