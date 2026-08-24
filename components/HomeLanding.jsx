@@ -48,6 +48,33 @@ const TESTIMONIALS = [
   { initials: "IV", handle: "@ivan_split",    name: "Ivan V 🇭🇷",   bg: "#f5f3ff",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 93,  time: "7d ago",  text: "FORKSAI is a revolution in learning!! I use it every day and my grades have improved drastically. Recommend to everyone 🚀" },
 ];
 
+// A third marquee row, from the reviews collected after the first two were
+// built. These arrived with a country and are mostly not in English, so the
+// row shows the country rather than dropping that detail, and nothing is
+// translated: a review rewritten is no longer the review someone left.
+const TESTIMONIALS_INTL = [
+  { initials: "MA", handle: "@marija_rijeka", name: "Marija A.", country: "Croatia", text: "FORKSAI mi je potpuno promijenio način učenja. Flashcards i ponavljanje su mi stvarno pomogli da učim brže i bolje. Preporučujem! ✨" },
+  { initials: "IP", handle: "@ivana_split", name: "Ivana P.", country: "Croatia", text: "Najbolja aplikacija za učenje koju sam koristila! Sve mi je puno preglednije i sada mogu ponavljati gradivo bez stresa. 💜" },
+  { initials: "LM", handle: "@lucie_paris", name: "Lucie M.", country: "France", text: "FORKSAI m'aide énormément pour mes révisions. Les flashcards sont vraiment efficaces et les résumés me font gagner beaucoup de temps. 🔥" },
+  { initials: "TR", handle: "@thomas_lyon", name: "Thomas R.", country: "France", text: "Franchement, FORKSAI est devenu indispensable pour mes études. Les résumés et les flashcards m'aident à retenir beaucoup plus facilement. 🚀" },
+  { initials: "CD", handle: "@camille_bdx", name: "Camille D.", country: "France", text: "J'utilise FORKSAI presque tous les jours avant mes examens. L'interface est simple, rapide et les outils de révision sont vraiment utiles. ✨" },
+  { initials: "EW", handle: "@ethan_studies", name: "Ethan W.", country: "United States", text: "FORKSAI completely changed how I study. I can turn my notes into flashcards in minutes and actually remember what I studied. 🔥" },
+  { initials: "OM", handle: "@olivia_learns", name: "Olivia M.", country: "United States", text: "I started using FORKSAI before finals and it made revision so much easier. The flashcards are seriously one of my favorite features. 💯" },
+  { initials: "RC", handle: "@ryan_codes", name: "Ryan C.", country: "United States", text: "The AI summaries save me so much time. Instead of spending hours organizing my notes, I can focus on actually learning the material. 🚀" },
+  { initials: "AS", handle: "@arjun_studies", name: "Arjun S.", country: "India", text: "FORKSAI has made exam preparation way more organized for me. The flashcards and revision modes are honestly amazing. 🔥" },
+  { initials: "RK", handle: "@rahul_learns", name: "Rahul K.", country: "India", text: "I used FORKSAI throughout my exam preparation and it made revision much faster. The AI flashcards are easily my favorite feature. 💯" },
+  { initials: "AB", handle: "@antoine_paris", name: "Antoine B.", country: "France", text: "FORKSAI m'a vraiment aidé à mieux organiser mes révisions. Les flashcards sont rapides à créer et beaucoup plus efficaces que mes anciennes méthodes. 🔥" },
+  { initials: "ÉR", handle: "@elodie_revision", name: "Élodie R.", country: "France", text: "Je révise beaucoup plus facilement avec FORKSAI. Les résumés et les flashcards me permettent de gagner énormément de temps avant les examens. ✨" },
+  { initials: "ML", handle: "@maxime_learns", name: "Maxime L.", country: "France", text: "Honnêtement, FORKSAI est l'un des meilleurs outils que j'ai utilisés pour mes études. Tout est simple, rapide et super bien organisé. 🚀" },
+  { initials: "MG", handle: "@manon_studies", name: "Manon G.", country: "France", text: "Mes révisions sont devenues tellement plus simples depuis que j'utilise FORKSAI. Les flashcards IA sont incroyables pour mémoriser rapidement. 💯" },
+  { initials: "LP", handle: "@louis_revision", name: "Louis P.", country: "France", text: "J'utilise FORKSAI pour préparer mes examens et ça m'aide énormément. Je passe moins de temps à faire mes fiches et plus de temps à apprendre. 🔥" },
+  { initials: "CV", handle: "@clara_etudes", name: "Clara V.", country: "France", text: "FORKSAI a complètement changé ma façon de réviser. Les flashcards sont personnalisées et les résumés sont vraiment pratiques. Je recommande à 100% ! ❤️" },
+  { initials: "AR", handle: "@aditya_prep", name: "Aditya R.", country: "India", text: "FORKSAI made my exam preparation so much easier. I can turn long notes into useful flashcards and revise everything much faster. 🔥" },
+  { initials: "RM", handle: "@rohan_studies", name: "Rohan M.", country: "India", text: "The spaced repetition feature is honestly amazing. I used to forget what I studied after a few days, but FORKSAI makes revision way more consistent. 💯" },
+  { initials: "KS", handle: "@karan_learns", name: "Karan S.", country: "India", text: "I started using FORKSAI during exam season and it completely changed my revision routine. The AI flashcards save me hours every week. 🚀" },
+  { initials: "AK", handle: "@ana_zagreb", name: "Ana K.", country: "Croatia", text: "FORKSAI mi je stvarno olakšao učenje. Sve je puno organiziranije, a flashcards su mi posebno korisne za brzo ponavljanje prije ispita. ✨" },
+];
+
 
 // ── Hero blog cards ───────────────────────────────────────────────────────────
 const HERO_BLOGS = [
@@ -361,7 +388,8 @@ export default function GizmoLanding() {
         @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
         .marquee-left  { animation: marquee-left  32s linear infinite; display: flex; width: max-content; }
         .marquee-right { animation: marquee-right 28s linear infinite; display: flex; width: max-content; }
-        .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
+        .marquee-slow  { animation: marquee-left  46s linear infinite; display: flex; width: max-content; }
+        .marquee-left:hover, .marquee-right:hover, .marquee-slow:hover { animation-play-state: paused; }
         @keyframes popperFly {
           0%   { transform: translate(-50%,-50%) scale(0.2) rotate(0deg); opacity: 1; }
           70%  { opacity: 1; }
@@ -420,6 +448,27 @@ export default function GizmoLanding() {
                   </div>
                 </div>
                 <p style={{ fontFamily: FONT_BODY, fontSize: 13, color, lineHeight: 1.65, margin: 0 }}>{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Row 3: the international reviews, scrolling left and slower so the
+            three rows never fall into step with each other. */}
+        <div style={{ overflow: "hidden", marginTop: 20 }}>
+          <div className="marquee-slow">
+            {[...TESTIMONIALS_INTL, ...TESTIMONIALS_INTL].map(({ initials, handle, name, country, text }, i) => (
+              <div key={i} style={{ flexShrink: 0, width: 320, marginRight: 20, background: "#fff", border: `1.5px solid ${ELECTRIC_LIME}`, borderRadius: 20, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
+                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: PRIMARY, color: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, flexShrink: 0 }}>{initials}</div>
+                  <div style={{ minWidth: 0 }}>
+                    <p style={{ fontFamily: FONT_DISPLAY, fontSize: 14, fontWeight: 800, color: PRIMARY, margin: 0 }}>{name}</p>
+                    <p style={{ fontFamily: FONT_MONO, fontSize: 11, color: ON_SURFACE_VAR, margin: 0, opacity: 0.8 }}>
+                      {handle}{country ? ` · ${country}` : ""}
+                    </p>
+                  </div>
+                </div>
+                <p style={{ fontFamily: FONT_BODY, fontSize: 13, color: PRIMARY, lineHeight: 1.65, margin: 0 }}>{text}</p>
               </div>
             ))}
           </div>
