@@ -96,12 +96,48 @@ const TESTIMONIALS_INTL = [
 ];
 
 
-// ── Hero blog cards ───────────────────────────────────────────────────────────
-const HERO_BLOGS = [
-  { category: "Spaced Repetition", accent: SECONDARY, title: "Spaced repetition explained", excerpt: "Why reviewing on a schedule beats rereading, and how the FSRS-5 scheduler picks your next card.", author: "FORKSAI Team", readTime: 9, path: "/blog/spaced-repetition", rotate: -8, side: "left",   hoverTransform: "rotate(5deg) translateY(-34px) scale(1.09)", hoverTransition: "transform 0.38s cubic-bezier(0.34, 1.9, 0.64, 1), box-shadow 0.3s ease, opacity 0.3s ease" },
-  { category: "Study Science",     accent: "#f59e0b", title: "Active recall: the study technique that works", excerpt: "Pulling an answer out of your head is the work. Here is how to build study sessions around that.", author: "FORKSAI Team", readTime: 8, path: "/blog/active-recall", rotate: 0, side: "center", hoverTransform: "rotate(0deg) translateY(-42px) scale(1.11)",  hoverTransition: "transform 0.4s cubic-bezier(0.34, 2.1, 0.64, 1),  box-shadow 0.3s ease, opacity 0.3s ease" },
-  { category: "Exam Prep",         accent: "#10b981", title: "The best AI study modes for exam prep", excerpt: "A walk through every study mode in FORKSAI and which one to reach for in the week before a paper.", author: "FORKSAI Team", readTime: 7, path: "/blog/study-modes", rotate: 8, side: "right",  hoverTransform: "rotate(-6deg) translateY(-36px) scale(1.08)", hoverTransition: "transform 0.5s cubic-bezier(0.28, 1.75, 0.5, 1),   box-shadow 0.35s ease, opacity 0.3s ease" },
+
+// ── Where students study ─────────────────────────────────────────────────────
+// Read out of the institutions report in the admin panel: 401 students across
+// 189 institutions in 42 countries, counting only rows that resolved to a real
+// institution. The 82 free-text entries people typed ("High school", "Home")
+// are excluded, and the export was truncated, so these figures are the floor
+// rather than the ceiling.
+//
+// Ordered by student count and not edited for prestige. Manipal leads because
+// it genuinely does; Harvard sits mid-list on five. Reordering this to put the
+// famous names first is the thing that would make it read as a stock logo wall,
+// and it is a claim about other people's institutions, so it stays checkable.
+//
+// Institution is self-reported at onboarding, which is why the copy says
+// students told us where they study rather than implying any endorsement.
+const INSTITUTION_COUNT = 189;
+const COUNTRY_COUNT = 42;
+const STUDENT_COUNT = 401;
+
+const INSTITUTIONS = [
+  "Manipal University",
+  "KU Leuven",
+  "Hogeschool Gent",
+  "University College London",
+  "ASE Bucharest",
+  "Harvard University",
+  "Universiteit Antwerpen",
+  "Vrije Universiteit Amsterdam",
+  "Arab Academy for Science & Technology",
+  "Australian Catholic University",
+  "De La Salle University",
+  "Hogeschool van Amsterdam",
+  "Singapore Institute of Technology",
+  "University of Glasgow",
+  "University of Trinidad and Tobago",
+  "Utrecht University",
+  "Vrije Universiteit Brussel",
+  "Aston University",
+  "Auckland University of Technology",
+  "University of Otago",
 ];
+
 
 const HERO_POPPERS = [
   { e: "🎉", tx: "-130px", ty: "-70px",  rot: "220deg",  delay: "0s"    },
@@ -134,7 +170,6 @@ export default function GizmoLanding() {
   const navigate = (path) => router.push(path);
   const [showEarnPrompt, setShowEarnPrompt] = useState(false);
   const [cycle, setCycle] = useState("monthly");
-  const [hoveredBlog, setHoveredBlog] = useState(null);
   const [popperKey, setPopperKey] = useState(0);
   const [showPoppers, setShowPoppers] = useState(false);
   // Load fonts
@@ -329,71 +364,40 @@ export default function GizmoLanding() {
           </div>
         </div>
 
-        {/* Blog card fan */}
-        <div className="hero-blog-fan" style={{ position: "relative", zIndex: 5, width: "100%", maxWidth: 1240, padding: "0 40px", flex: 1, display: "flex", alignItems: "flex-end", justifyContent: "center", minHeight: 380 }}>
-          {HERO_BLOGS.map((blog, i) => {
-            const isHovered = hoveredBlog === i;
-            const isDimmed = hoveredBlog !== null && !isHovered;
-            const defaultTransform = blog.rotate !== 0 ? `rotate(${blog.rotate}deg) translateY(12px)` : "none";
-            const posStyle = blog.side === "left"
-              ? { position: "absolute", left: "1%", bottom: 0, width: "34%" }
-              : blog.side === "right"
-              ? { position: "absolute", right: "1%", bottom: 0, width: "34%" }
-              : { position: "relative", width: "41%" };
-            return (
-              <div
-                key={i}
-                onClick={() => navigate(blog.path)}
-                onMouseEnter={() => setHoveredBlog(i)}
-                onMouseLeave={() => setHoveredBlog(null)}
-                style={{
-                  ...posStyle,
-                  borderRadius: R.card,
-                  background: "#fff",
-                  overflow: "hidden",
-                  boxShadow: isHovered ? "0 36px 90px rgba(17,0,46,0.32)" : blog.side === "center" ? "0 24px 64px rgba(17,0,46,0.22)" : "0 16px 48px rgba(17,0,46,0.18)",
-                  border: `2.5px solid ${PRIMARY}`,
-                  transform: isHovered ? blog.hoverTransform : isDimmed ? "scale(0.93)" : defaultTransform,
-                  transition: isHovered ? blog.hoverTransition : "transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease",
-                  opacity: isDimmed ? 0.68 : 1,
-                  zIndex: isHovered ? 10 : blog.side === "center" ? 3 : blog.side === "right" ? 2 : 1,
-                  cursor: "pointer",
-                }}
-              >
-                {/* Card header: category pill + read time */}
-                <div style={{ padding: "22px 22px 0", display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
-                  <span style={{ fontFamily: FONT_MONO, fontSize: TYPE.label, fontWeight: 800, color: blog.accent, border: `1.5px solid ${blog.accent}`, borderRadius: R.pill, padding: "5px 12px", letterSpacing: "0.06em" }}>
-                    {blog.category}
-                  </span>
-                  <span style={{ fontFamily: FONT_BODY, fontSize: TYPE.small, color: "rgba(17,0,46,0.4)", display: "flex", alignItems: "center", gap: 5 }}>
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    {blog.readTime} min
-                  </span>
-                </div>
+        {/* Where students study.
+            Three tilted blog cards used to sit here: three feature cards in a
+            row, in three different accent colours, offering articles to read at
+            the exact moment a visitor is deciding whether to sign up. This says
+            who already uses it instead, out of the institutions report rather
+            than out of nowhere. */}
+        <div style={{ position: "relative", zIndex: 5, width: "100%", maxWidth: 1240, padding: "48px 24px 0", textAlign: "center" }}>
+          <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.lead, color: PRIMARY, margin: "0 0 4px", opacity: 0.85 }}>
+            Students at{" "}
+            <strong style={{ fontWeight: 800 }}>{INSTITUTION_COUNT} institutions</strong>{" "}
+            across{" "}
+            <strong style={{ fontWeight: 800 }}>{COUNTRY_COUNT} countries</strong>{" "}
+            study with FORKSAI
+          </p>
+          <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, color: ON_SURFACE_VAR, margin: "0 0 22px", opacity: 0.75 }}>
+            Where they told us they study, in order of how many
+          </p>
 
-                {/* Title + excerpt */}
-                <div style={{ padding: "0 22px 18px" }}>
-                  <p style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.lead, fontWeight: 800, color: PRIMARY, lineHeight: 1.35, margin: "0 0 12px" }}>{blog.title}</p>
-                  <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color: "rgba(17,0,46,0.5)", lineHeight: 1.6, margin: 0, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{blog.excerpt}</p>
-                </div>
-
-                {/* Divider */}
-                <div style={{ height: 1, background: "rgba(17,0,46,0.08)", margin: "0 22px" }} />
-
-                {/* Footer: author + arrow */}
-                <div style={{ padding: "14px 22px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(17,0,46,0.35)" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    <span style={{ fontFamily: FONT_BODY, fontSize: TYPE.small, color: "rgba(17,0,46,0.4)" }}>{blog.author}</span>
-                  </div>
-                  <div style={{ width: 36, height: 36, borderRadius: R.control, background: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <span style={{ fontSize: TYPE.lead, color: PRIMARY, fontWeight: 900 }}>→</span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          <div style={{ overflow: "hidden", maskImage: "linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)" }}>
+            <div className="inst-marquee" aria-hidden="true">
+              {[...INSTITUTIONS, ...INSTITUTIONS].map((name, i) => (
+                <span key={i} style={{ flexShrink: 0, fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 700, color: PRIMARY, opacity: 0.55, letterSpacing: "0.04em", textTransform: "uppercase", marginRight: 34, whiteSpace: "nowrap" }}>
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
+          {/* The marquee is decorative and duplicated, so it is hidden from
+              assistive tech; this carries the same list once, in reading order. */}
+          <p className="sr-only">
+            {`Students study with FORKSAI at ${INSTITUTIONS.join(", ")}, and ${INSTITUTION_COUNT - INSTITUTIONS.length} other institutions.`}
+          </p>
         </div>
+
 
         {/* Video, overlapping into the section below */}
         <div className="hero-video-wrap" style={{ position: "relative", zIndex: 10, width: "100%", maxWidth: 1100, margin: "48px auto -200px", padding: "0 32px" }}>
@@ -410,6 +414,12 @@ export default function GizmoLanding() {
         .marquee-left  { animation: marquee-left  32s linear infinite; display: flex; width: max-content; }
         .marquee-right { animation: marquee-right 28s linear infinite; display: flex; width: max-content; }
         .marquee-slow  { animation: marquee-left  46s linear infinite; display: flex; width: max-content; }
+        .inst-marquee  { animation: marquee-left  60s linear infinite; display: flex; width: max-content; align-items: center; }
+        .inst-marquee:hover { animation-play-state: paused; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        @media (prefers-reduced-motion: reduce) {
+          .marquee-left, .marquee-right, .marquee-slow, .inst-marquee { animation: none; }
+        }
         .marquee-left:hover, .marquee-right:hover, .marquee-slow:hover { animation-play-state: paused; }
         @keyframes popperFly {
           0%   { transform: translate(-50%,-50%) scale(0.2) rotate(0deg); opacity: 1; }
@@ -697,7 +707,6 @@ export default function GizmoLanding() {
           /* Hero */
           .hero-h1 { letter-spacing: -1px !important; margin-bottom: 24px !important; }
           .hero-cta-btn { padding: 16px 32px !important; box-shadow: 5px 5px 0 #11002e !important; }
-          .hero-blog-fan { display: none !important; min-height: 0 !important; }
           .hero-video-wrap { margin: 32px auto -80px !important; padding: 0 16px !important; }
 
           /* Testimonials */
