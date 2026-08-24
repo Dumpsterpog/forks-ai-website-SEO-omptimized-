@@ -32,20 +32,40 @@ const FONT_DISPLAY = "'Lexend', sans-serif";
 const FONT_BODY    = "'Hanken Grotesk', sans-serif";
 const FONT_MONO    = "'JetBrains Mono', monospace";
 
+// ── Design tokens ────────────────────────────────────────────────────────────
+// Every style on this page was an inline literal, so each element invented its
+// own size and radius: 12 distinct font sizes and 8 distinct radii, none of
+// them chosen against the others. These are the values the page is allowed to
+// use. Sizes that sat a pixel apart have been merged into whichever neighbour
+// they were closest to.
+const TYPE = {
+  label: 11,   // mono eyebrows and tags
+  small: 12,   // metadata, handles
+  body: 13,    // list and card copy
+  lead: 15,    // buttons and intro copy
+  h3: 20,      // card headings
+  h2: 28,      // section headings (clamped larger)
+  hero: 54,    // the one display number
+};
+
+// 8 and 11 read identically to 12 at a glance; 50 and 100 are both just "pill".
+const R = { control: 12, card: 20, pill: 999 };
+
+
 // ── Testimonials ─────────────────────────────────────────────────────────────
 const TESTIMONIALS = [
-  { initials: "VN", handle: "@vedha_studies", name: "Vedha N 📚",  bg: "#f5f3ff",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 341, time: "2d ago",  text: "FORKSAI completely changed how I prep for board exams 😭🔥 the AI flashcards are insane, 100% recommend to everyone!!" },
-  { initials: "HN", handle: "@hrida_learns",  name: "Hrida N",      bg: "#f5f3ff",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 512, time: "1d ago",  text: "used forksai for my NEET prep and honestly the AI flashcards are insane... went from failing mocks to clearing them 😋✨" },
-  { initials: "AT", handle: "@atharva_codes", name: "Atharva",      bg: "#f5f3ff",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 88,  time: "5d ago",  text: "JEE preparation just got 10x easier with FORKSAI. the spaced repetition algorithm actually works unlike everything else I tried." },
-  { initials: "RK", handle: "@rohan_k",       name: "Rohan K",      bg: "#f5f3ff",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 203, time: "3d ago",  text: "My chemistry marks jumped from 54% to 89% in one month. FORKSAI flashcards + consistent revision = pure magic 💯🔥" },
-  { initials: "LM", handle: "@lena_munich",   name: "Lena M",       bg: "#f5f3ff",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 67,  time: "6d ago",  text: "I used FORKSAI for my Abitur and it was unbelievably good 😭 the AI actually understands what I need to learn!!" },
-  { initials: "MK", handle: "@matej_kro",     name: "Matej K 🇭🇷",  bg: "#f5f3ff",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 129, time: "1d ago",  text: "This is the best study app I have ever used!! I used it for my matura exams and the results were unbelievable 🔥🔥" },
-  { initials: "LV", handle: "@luka_zagreb",   name: "Luka V 🇭🇷",   bg: "#f5f3ff",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 445, time: "2d ago",  text: "FORKSAI saved my university exams 😭 I study twice as fast now and actually remember everything. every Croatian student needs this!!" },
-  { initials: "TO", handle: "@tomislav_st",   name: "Tomislav",     bg: "#f5f3ff",      color: PRIMARY,       border: ELECTRIC_LIME, likes: 38, time: "9d ago", text: "I used FORKSAI for my biology state exam and passed on the first attempt. The spaced repetition is genuinely brilliant. ✨" },
-  { initials: "EL", handle: "@emma_london",   name: "Emma L",       bg: "#f5f3ff",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 721, time: "1d ago",  text: "got 9 grade 9s with FORKSAI 😋 best study tool ever invented istg, my friends all use it now too!!" },
-  { initials: "MT", handle: "@marco_torino",  name: "Marco T 🇮🇹",  bg: "#f5f3ff",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 55,  time: "4d ago",  text: "FORKSAI is incredible for studying!! I used it for my final exams and scored 98/100 😭🔥 I recommend it to every student" },
-  { initials: "DV", handle: "@dev_mumbai",    name: "Dev V",        bg: "#f5f3ff",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 189, time: "3d ago",  text: "I was failing 3 subjects and someone told me to try FORKSAI. within 2 weeks my grades literally flipped. not joking 😭🙏" },
-  { initials: "IV", handle: "@ivan_split",    name: "Ivan V 🇭🇷",   bg: "#f5f3ff",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 93,  time: "7d ago",  text: "FORKSAI is a revolution in learning!! I use it every day and my grades have improved drastically. Recommend to everyone 🚀" },
+  { initials: "VN", handle: "@vedha_studies", name: "Vedha N 📚",  bg: "#fbfff0",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 341, time: "2d ago",  text: "FORKSAI completely changed how I prep for board exams 😭🔥 the AI flashcards are insane, 100% recommend to everyone!!" },
+  { initials: "HN", handle: "@hrida_learns",  name: "Hrida N",      bg: "#fbfff0",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 512, time: "1d ago",  text: "used forksai for my NEET prep and honestly the AI flashcards are insane... went from failing mocks to clearing them 😋✨" },
+  { initials: "AT", handle: "@atharva_codes", name: "Atharva",      bg: "#fbfff0",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 88,  time: "5d ago",  text: "JEE preparation just got 10x easier with FORKSAI. the spaced repetition algorithm actually works unlike everything else I tried." },
+  { initials: "RK", handle: "@rohan_k",       name: "Rohan K",      bg: "#fbfff0",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 203, time: "3d ago",  text: "My chemistry marks jumped from 54% to 89% in one month. FORKSAI flashcards + consistent revision = pure magic 💯🔥" },
+  { initials: "LM", handle: "@lena_munich",   name: "Lena M",       bg: "#fbfff0",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 67,  time: "6d ago",  text: "I used FORKSAI for my Abitur and it was unbelievably good 😭 the AI actually understands what I need to learn!!" },
+  { initials: "MK", handle: "@matej_kro",     name: "Matej K 🇭🇷",  bg: "#fbfff0",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 129, time: "1d ago",  text: "This is the best study app I have ever used!! I used it for my matura exams and the results were unbelievable 🔥🔥" },
+  { initials: "LV", handle: "@luka_zagreb",   name: "Luka V 🇭🇷",   bg: "#fbfff0",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 445, time: "2d ago",  text: "FORKSAI saved my university exams 😭 I study twice as fast now and actually remember everything. every Croatian student needs this!!" },
+  { initials: "TO", handle: "@tomislav_st",   name: "Tomislav",     bg: "#fbfff0",      color: PRIMARY,       border: ELECTRIC_LIME, likes: 38, time: "9d ago", text: "I used FORKSAI for my biology state exam and passed on the first attempt. The spaced repetition is genuinely brilliant. ✨" },
+  { initials: "EL", handle: "@emma_london",   name: "Emma L",       bg: "#fbfff0",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 721, time: "1d ago",  text: "got 9 grade 9s with FORKSAI 😋 best study tool ever invented istg, my friends all use it now too!!" },
+  { initials: "MT", handle: "@marco_torino",  name: "Marco T 🇮🇹",  bg: "#fbfff0",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 55,  time: "4d ago",  text: "FORKSAI is incredible for studying!! I used it for my final exams and scored 98/100 😭🔥 I recommend it to every student" },
+  { initials: "DV", handle: "@dev_mumbai",    name: "Dev V",        bg: "#fbfff0",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 189, time: "3d ago",  text: "I was failing 3 subjects and someone told me to try FORKSAI. within 2 weeks my grades literally flipped. not joking 😭🙏" },
+  { initials: "IV", handle: "@ivan_split",    name: "Ivan V 🇭🇷",   bg: "#fbfff0",      color: PRIMARY,      border: ELECTRIC_LIME, likes: 93,  time: "7d ago",  text: "FORKSAI is a revolution in learning!! I use it every day and my grades have improved drastically. Recommend to everyone 🚀" },
 ];
 
 // A third marquee row, from the reviews collected after the first two were
@@ -78,7 +98,7 @@ const TESTIMONIALS_INTL = [
 
 // ── Hero blog cards ───────────────────────────────────────────────────────────
 const HERO_BLOGS = [
-  { category: "Spaced Repetition", accent: "#c084fc", title: "Spaced repetition explained", excerpt: "Why reviewing on a schedule beats rereading, and how the FSRS-5 scheduler picks your next card.", author: "FORKSAI Team", readTime: 9, path: "/blog/spaced-repetition", rotate: -8, side: "left",   hoverTransform: "rotate(5deg) translateY(-34px) scale(1.09)", hoverTransition: "transform 0.38s cubic-bezier(0.34, 1.9, 0.64, 1), box-shadow 0.3s ease, opacity 0.3s ease" },
+  { category: "Spaced Repetition", accent: SECONDARY, title: "Spaced repetition explained", excerpt: "Why reviewing on a schedule beats rereading, and how the FSRS-5 scheduler picks your next card.", author: "FORKSAI Team", readTime: 9, path: "/blog/spaced-repetition", rotate: -8, side: "left",   hoverTransform: "rotate(5deg) translateY(-34px) scale(1.09)", hoverTransition: "transform 0.38s cubic-bezier(0.34, 1.9, 0.64, 1), box-shadow 0.3s ease, opacity 0.3s ease" },
   { category: "Study Science",     accent: "#f59e0b", title: "Active recall: the study technique that works", excerpt: "Pulling an answer out of your head is the work. Here is how to build study sessions around that.", author: "FORKSAI Team", readTime: 8, path: "/blog/active-recall", rotate: 0, side: "center", hoverTransform: "rotate(0deg) translateY(-42px) scale(1.11)",  hoverTransition: "transform 0.4s cubic-bezier(0.34, 2.1, 0.64, 1),  box-shadow 0.3s ease, opacity 0.3s ease" },
   { category: "Exam Prep",         accent: "#10b981", title: "The best AI study modes for exam prep", excerpt: "A walk through every study mode in FORKSAI and which one to reach for in the week before a paper.", author: "FORKSAI Team", readTime: 7, path: "/blog/study-modes", rotate: 8, side: "right",  hoverTransform: "rotate(-6deg) translateY(-36px) scale(1.08)", hoverTransition: "transform 0.5s cubic-bezier(0.28, 1.75, 0.5, 1),   box-shadow 0.35s ease, opacity 0.3s ease" },
 ];
@@ -196,7 +216,7 @@ export default function GizmoLanding() {
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, padding: "0 24px", transition: "padding 0.3s" }}>
         <nav ref={navRef} style={{ backdropFilter: "blur(14px)", background: "transparent", borderRadius: 0, transition: "all 0.35s cubic-bezier(0.4,0,0.2,1)" }}>
         <div style={{ padding: "0 24px", display: "flex", justifyContent: "space-between", alignItems: "center", height: 64 }}>
-          <Link href="/" style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 800, color: PRIMARY, textDecoration: "none", letterSpacing: -0.5 }}>FORKSAI</Link>
+          <Link href="/" style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.h3, fontWeight: 800, color: PRIMARY, textDecoration: "none", letterSpacing: -0.5 }}>FORKSAI</Link>
           <div className="hidden md:flex items-center gap-8">
             {/* In-page section links. These replace the Explore dropdown,
                 whose destinations were all elsewhere on the site and now live in
@@ -210,7 +230,7 @@ export default function GizmoLanding() {
               ["Free tools", "#free-tools"],
             ].map(([label, href]) => (
               <a key={href} href={href}
-                style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 600, color: ON_SURFACE_VAR, textDecoration: "none", padding: "8px 0", transition: "color 0.2s" }}
+                style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 600, color: ON_SURFACE_VAR, textDecoration: "none", padding: "8px 0", transition: "color 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.color = PRIMARY}
                 onMouseLeave={e => e.currentTarget.style.color = ON_SURFACE_VAR}
               >
@@ -223,9 +243,9 @@ export default function GizmoLanding() {
                 the set is desktop only, because the links plus the logo plus
                 the CTA wrap at 360px. Login hides here too: Get Started calls
                 the same goToDashboard() handoff, so nothing is lost. */}
-            <a href="#pricing" className="md:hidden" style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 700, color: ON_SURFACE_VAR, textDecoration: "none", padding: "8px 4px" }}>Pricing</a>
-            <button onClick={() => goLogin("nav")} className="hidden md:block" style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 600, color: PRIMARY, background: "none", border: "none", cursor: "pointer", padding: "8px 16px", borderRadius: 8, transition: "background 0.2s" }} onMouseEnter={e => e.currentTarget.style.background = "rgba(231,224,233,0.5)"} onMouseLeave={e => e.currentTarget.style.background = "none"}>Login</button>
-            <button onClick={() => goSignup("nav")} style={{ fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: 14, background: ELECTRIC_LIME, color: PRIMARY, border: "none", padding: "8px 20px", borderRadius: 8, cursor: "pointer", boxShadow: `4px 4px 0px 0px ${PRIMARY}`, transition: "transform 0.1s" }} onMouseDown={e => e.currentTarget.style.transform = "scale(0.97)"} onMouseUp={e => e.currentTarget.style.transform = "scale(1)"}>Get Started</button>
+            <a href="#pricing" className="md:hidden" style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 700, color: ON_SURFACE_VAR, textDecoration: "none", padding: "8px 4px" }}>Pricing</a>
+            <button onClick={() => goLogin("nav")} className="hidden md:block" style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 600, color: PRIMARY, background: "none", border: "none", cursor: "pointer", padding: "8px 16px", borderRadius: R.control, transition: "background 0.2s" }} onMouseEnter={e => e.currentTarget.style.background = "rgba(231,224,233,0.5)"} onMouseLeave={e => e.currentTarget.style.background = "none"}>Login</button>
+            <button onClick={() => goSignup("nav")} style={{ fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: TYPE.body, background: ELECTRIC_LIME, color: PRIMARY, border: "none", padding: "8px 20px", borderRadius: R.control, cursor: "pointer", boxShadow: `4px 4px 0px 0px ${PRIMARY}`, transition: "transform 0.1s" }} onMouseDown={e => e.currentTarget.style.transform = "scale(0.97)"} onMouseUp={e => e.currentTarget.style.transform = "scale(1)"}>Get Started</button>
           </div>
         </div>
       </nav>
@@ -255,7 +275,7 @@ export default function GizmoLanding() {
         <div style={{ position: "relative", zIndex: 1, maxWidth: 1280, width: "100%", margin: "0 auto", padding: "0 24px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
 
           {/* curved arch tagline */}
-          <svg width="100%" height="64" viewBox="0 0 520 64" style={{ overflow: "visible", marginBottom: -4, maxWidth: 520 }}>
+          <svg width="100%" height="64" viewBox="0 0 520 64" style={{ overflow: "visible", marginBottom: 10, maxWidth: 520 }}>
             <defs>
               <path id="heroArc" d="M 30,60 Q 260,-10 490,60" fill="none" />
             </defs>
@@ -284,7 +304,7 @@ export default function GizmoLanding() {
 
           <div style={{ position: "relative", display: "inline-block", marginBottom: 52 }}>
             {showPoppers && HERO_POPPERS.map((p, i) => (
-              <span key={`${popperKey}-${i}`} style={{ position: "absolute", top: "50%", left: "50%", fontSize: 22, pointerEvents: "none", zIndex: 20, "--tx": p.tx, "--ty": p.ty, "--rot": p.rot, animation: `popperFly 0.85s ease-out ${p.delay} forwards` }}>
+              <span key={`${popperKey}-${i}`} style={{ position: "absolute", top: "50%", left: "50%", fontSize: TYPE.h3, pointerEvents: "none", zIndex: 20, "--tx": p.tx, "--ty": p.ty, "--rot": p.rot, animation: `popperFly 0.85s ease-out ${p.delay} forwards` }}>
                 {p.e}
               </span>
             ))}
@@ -294,9 +314,10 @@ export default function GizmoLanding() {
               style={{
                 fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: "clamp(17px,2vw,22px)",
                 background: ELECTRIC_LIME, color: PRIMARY, border: "none",
-                padding: "22px 52px", borderRadius: 18, cursor: "pointer",
+                padding: "22px 52px", borderRadius: R.card, cursor: "pointer",
                 boxShadow: `8px 8px 0px 0px ${PRIMARY}`,
                 transition: "transform 0.15s, box-shadow 0.15s",
+                position: "relative", zIndex: 4,
               }}
               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; setShowPoppers(true); setPopperKey(k => k + 1); }}
               onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; }}
@@ -327,7 +348,7 @@ export default function GizmoLanding() {
                 onMouseLeave={() => setHoveredBlog(null)}
                 style={{
                   ...posStyle,
-                  borderRadius: 20,
+                  borderRadius: R.card,
                   background: "#fff",
                   overflow: "hidden",
                   boxShadow: isHovered ? "0 36px 90px rgba(17,0,46,0.32)" : blog.side === "center" ? "0 24px 64px rgba(17,0,46,0.22)" : "0 16px 48px rgba(17,0,46,0.18)",
@@ -341,10 +362,10 @@ export default function GizmoLanding() {
               >
                 {/* Card header: category pill + read time */}
                 <div style={{ padding: "22px 22px 0", display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
-                  <span style={{ fontFamily: FONT_MONO, fontSize: 10, fontWeight: 800, color: blog.accent, border: `1.5px solid ${blog.accent}`, borderRadius: 100, padding: "5px 12px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                  <span style={{ fontFamily: FONT_MONO, fontSize: TYPE.label, fontWeight: 800, color: blog.accent, border: `1.5px solid ${blog.accent}`, borderRadius: R.pill, padding: "5px 12px", letterSpacing: "0.06em" }}>
                     {blog.category}
                   </span>
-                  <span style={{ fontFamily: FONT_BODY, fontSize: 12, color: "rgba(17,0,46,0.4)", display: "flex", alignItems: "center", gap: 5 }}>
+                  <span style={{ fontFamily: FONT_BODY, fontSize: TYPE.small, color: "rgba(17,0,46,0.4)", display: "flex", alignItems: "center", gap: 5 }}>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                     {blog.readTime} min
                   </span>
@@ -352,8 +373,8 @@ export default function GizmoLanding() {
 
                 {/* Title + excerpt */}
                 <div style={{ padding: "0 22px 18px" }}>
-                  <p style={{ fontFamily: FONT_DISPLAY, fontSize: 17, fontWeight: 800, color: PRIMARY, lineHeight: 1.35, margin: "0 0 12px" }}>{blog.title}</p>
-                  <p style={{ fontFamily: FONT_BODY, fontSize: 13, color: "rgba(17,0,46,0.5)", lineHeight: 1.6, margin: 0, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{blog.excerpt}</p>
+                  <p style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.lead, fontWeight: 800, color: PRIMARY, lineHeight: 1.35, margin: "0 0 12px" }}>{blog.title}</p>
+                  <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color: "rgba(17,0,46,0.5)", lineHeight: 1.6, margin: 0, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{blog.excerpt}</p>
                 </div>
 
                 {/* Divider */}
@@ -363,10 +384,10 @@ export default function GizmoLanding() {
                 <div style={{ padding: "14px 22px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(17,0,46,0.35)" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    <span style={{ fontFamily: FONT_BODY, fontSize: 12, color: "rgba(17,0,46,0.4)" }}>{blog.author}</span>
+                    <span style={{ fontFamily: FONT_BODY, fontSize: TYPE.small, color: "rgba(17,0,46,0.4)" }}>{blog.author}</span>
                   </div>
-                  <div style={{ width: 36, height: 36, borderRadius: 11, background: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <span style={{ fontSize: 16, color: PRIMARY, fontWeight: 900 }}>→</span>
+                  <div style={{ width: 36, height: 36, borderRadius: R.control, background: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <span style={{ fontSize: TYPE.lead, color: PRIMARY, fontWeight: 900 }}>→</span>
                   </div>
                 </div>
               </div>
@@ -376,7 +397,7 @@ export default function GizmoLanding() {
 
         {/* Video, overlapping into the section below */}
         <div className="hero-video-wrap" style={{ position: "relative", zIndex: 10, width: "100%", maxWidth: 1100, margin: "48px auto -200px", padding: "0 32px" }}>
-          <div style={{ borderRadius: 20, overflow: "hidden", boxShadow: "0 8px 60px rgba(17,0,46,0.22), 0 0 0 1px rgba(17,0,46,0.08)", lineHeight: 0 }}>
+          <div style={{ borderRadius: R.card, overflow: "hidden", boxShadow: "0 8px 60px rgba(17,0,46,0.22), 0 0 0 1px rgba(17,0,46,0.08)", lineHeight: 0 }}>
             <video src="/forksgothroughlanding.mp4" autoPlay muted loop playsInline style={{ width: "100%", display: "block" }} />
           </div>
         </div>
@@ -413,7 +434,7 @@ export default function GizmoLanding() {
         {/* Square grid overlay */}
         <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", backgroundImage: ["linear-gradient(rgba(17,0,46,0.06) 1px, transparent 1px)", "linear-gradient(90deg, rgba(17,0,46,0.06) 1px, transparent 1px)"].join(", "), backgroundSize: "44px 44px" }} />
         <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <p style={{ fontFamily: FONT_MONO, fontSize: 11, fontWeight: 600, color: SECONDARY, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 12 }}>Student love</p>
+          <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 800, color: PRIMARY, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 14 }}>Student love</p>
           <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(28px,4vw,48px)", fontWeight: 900, color: PRIMARY, margin: 0 }}>Loved by Students</h2>
         </div>
 
@@ -421,15 +442,15 @@ export default function GizmoLanding() {
         <div style={{ overflow: "hidden", marginBottom: 20 }}>
           <div className="marquee-left">
             {[...TESTIMONIALS, ...TESTIMONIALS].map(({ initials, handle, name, bg, color, border, likes, time, text }, i) => (
-              <div key={i} style={{ flexShrink: 0, width: 320, marginRight: 20, background: "#fff", border: `1.5px solid ${border}`, borderRadius: 20, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
+              <div key={i} style={{ flexShrink: 0, width: 320, minHeight: 168, marginRight: 20, background: "#fff", border: `1.5px solid ${border}`, borderRadius: R.card, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: PRIMARY, color: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, flexShrink: 0 }}>{initials}</div>
+                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: PRIMARY, color: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: TYPE.body, flexShrink: 0 }}>{initials}</div>
                   <div>
-                    <p style={{ fontFamily: FONT_DISPLAY, fontSize: 14, fontWeight: 800, color: PRIMARY, margin: 0 }}>{name}</p>
-                    <p style={{ fontFamily: FONT_MONO, fontSize: 11, color: ON_SURFACE_VAR, margin: 0, opacity: 0.8 }}>{handle}</p>
+                    <p style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.body, fontWeight: 800, color: PRIMARY, margin: 0 }}>{name}</p>
+                    <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.label, color: ON_SURFACE_VAR, margin: 0, opacity: 0.8 }}>{handle}</p>
                   </div>
                 </div>
-                <p style={{ fontFamily: FONT_BODY, fontSize: 13, color: PRIMARY, lineHeight: 1.65, margin: 0 }}>{text}</p>
+                <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color: PRIMARY, lineHeight: 1.65, margin: 0 }}>{text}</p>
               </div>
             ))}
           </div>
@@ -439,15 +460,15 @@ export default function GizmoLanding() {
         <div style={{ overflow: "hidden" }}>
           <div className="marquee-right">
             {[...TESTIMONIALS.slice().reverse(), ...TESTIMONIALS.slice().reverse()].map(({ initials, handle, name, bg, color, border, likes, time, text }, i) => (
-              <div key={i} style={{ flexShrink: 0, width: 320, marginRight: 20, background: bg, borderRadius: 20, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
+              <div key={i} style={{ flexShrink: 0, width: 320, minHeight: 168, marginRight: 20, background: bg, borderRadius: R.card, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: PRIMARY, color: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, flexShrink: 0 }}>{initials}</div>
+                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: PRIMARY, color: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: TYPE.body, flexShrink: 0 }}>{initials}</div>
                   <div>
-                    <p style={{ fontFamily: FONT_DISPLAY, fontSize: 13, fontWeight: 700, color, margin: 0 }}>{name}</p>
-                    <p style={{ fontFamily: FONT_MONO, fontSize: 10, color, opacity: 0.7, margin: 0 }}>{handle}</p>
+                    <p style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.body, fontWeight: 700, color, margin: 0 }}>{name}</p>
+                    <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.label, color, opacity: 0.7, margin: 0 }}>{handle}</p>
                   </div>
                 </div>
-                <p style={{ fontFamily: FONT_BODY, fontSize: 13, color, lineHeight: 1.65, margin: 0 }}>{text}</p>
+                <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color, lineHeight: 1.65, margin: 0 }}>{text}</p>
               </div>
             ))}
           </div>
@@ -458,17 +479,17 @@ export default function GizmoLanding() {
         <div style={{ overflow: "hidden", marginTop: 20 }}>
           <div className="marquee-slow">
             {[...TESTIMONIALS_INTL, ...TESTIMONIALS_INTL].map(({ initials, handle, name, country, text }, i) => (
-              <div key={i} style={{ flexShrink: 0, width: 320, marginRight: 20, background: "#fff", border: `1.5px solid ${ELECTRIC_LIME}`, borderRadius: 20, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
+              <div key={i} style={{ flexShrink: 0, width: 320, minHeight: 168, marginRight: 20, background: "#fff", border: `1.5px solid ${ELECTRIC_LIME}`, borderRadius: R.card, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: PRIMARY, color: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, flexShrink: 0 }}>{initials}</div>
+                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: PRIMARY, color: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: TYPE.body, flexShrink: 0 }}>{initials}</div>
                   <div style={{ minWidth: 0 }}>
-                    <p style={{ fontFamily: FONT_DISPLAY, fontSize: 14, fontWeight: 800, color: PRIMARY, margin: 0 }}>{name}</p>
-                    <p style={{ fontFamily: FONT_MONO, fontSize: 11, color: ON_SURFACE_VAR, margin: 0, opacity: 0.8 }}>
+                    <p style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.body, fontWeight: 800, color: PRIMARY, margin: 0 }}>{name}</p>
+                    <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, color: ON_SURFACE_VAR, margin: 0, opacity: 0.9 }}>
                       {handle}{country ? ` · ${country}` : ""}
                     </p>
                   </div>
                 </div>
-                <p style={{ fontFamily: FONT_BODY, fontSize: 13, color: PRIMARY, lineHeight: 1.65, margin: 0 }}>{text}</p>
+                <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color: PRIMARY, lineHeight: 1.65, margin: 0 }}>{text}</p>
               </div>
             ))}
           </div>
@@ -490,13 +511,14 @@ export default function GizmoLanding() {
 
         <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
           <div style={{ textAlign: "center", marginBottom: 44 }}>
-            <p style={{ fontFamily: FONT_MONO, fontSize: 11, fontWeight: 700, color: SECONDARY, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>Pricing</p>
+            <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.label, fontWeight: 700, color: SECONDARY, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>Pricing</p>
             <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(28px,4vw,48px)", fontWeight: 900, color: PRIMARY, margin: "0 0 26px", lineHeight: 1.08 }}>Start free. Upgrade only if you need to.</h2>
 
-            <div style={{ display: "inline-flex", border: `2.5px solid ${PRIMARY}`, borderRadius: 12, background: "#fff", boxShadow: `4px 4px 0 ${PRIMARY}`, overflow: "hidden" }}>
+            <div role="radiogroup" aria-label="Billing cycle" style={{ display: "inline-flex", border: `2.5px solid ${PRIMARY}`, borderRadius: R.control, background: "#fff", boxShadow: `4px 4px 0 ${PRIMARY}`, overflow: "hidden" }}>
               {PRICING_CYCLE_ORDER.map((val, i) => (
                 <button key={val} onClick={() => setCycle(val)}
-                  style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 800, padding: "11px 22px", border: "none", cursor: "pointer", background: cycle === val ? ELECTRIC_LIME : "#fff", color: PRIMARY, borderRight: i < PRICING_CYCLE_ORDER.length - 1 ? `2.5px solid ${PRIMARY}` : "none" }}>
+                  role="radio" aria-checked={cycle === val}
+                  style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 800, padding: "11px 22px", border: "none", cursor: "pointer", background: cycle === val ? ELECTRIC_LIME : "#fff", color: PRIMARY, borderRight: i < PRICING_CYCLE_ORDER.length - 1 ? `2.5px solid ${PRIMARY}` : "none" }}>
                   {PRICING_CYCLES[val].label}
                 </button>
               ))}
@@ -506,13 +528,13 @@ export default function GizmoLanding() {
           <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22, alignItems: "stretch" }}>
 
             {/* Free */}
-            <div style={{ background: "#fff", border: `2.5px solid ${PRIMARY}`, borderRadius: 20, boxShadow: `6px 6px 0 ${PRIMARY}`, padding: "30px 28px 32px", display: "flex", flexDirection: "column" }}>
-              <p style={{ fontFamily: FONT_MONO, fontSize: 11, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: ON_SURFACE_VAR, margin: "0 0 14px" }}>Free</p>
+            <div style={{ background: "#fff", border: `2.5px solid ${PRIMARY}`, borderRadius: R.card, boxShadow: `6px 6px 0 ${PRIMARY}`, padding: "30px 28px 32px", display: "flex", flexDirection: "column" }}>
+              <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.label, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: ON_SURFACE_VAR, margin: "0 0 14px" }}>Free</p>
               <div style={{ display: "flex", alignItems: "flex-start", lineHeight: 1, marginBottom: 4 }}>
-                <span style={{ fontFamily: FONT_DISPLAY, fontSize: 24, fontWeight: 900, color: PRIMARY, marginTop: 6 }}>$</span>
-                <span style={{ fontFamily: FONT_DISPLAY, fontSize: 54, fontWeight: 900, color: PRIMARY }}>0</span>
+                <span style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.h3, fontWeight: 900, color: PRIMARY, marginTop: 6 }}>$</span>
+                <span style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.hero, fontWeight: 900, color: PRIMARY }}>0</span>
               </div>
-              <p style={{ fontFamily: FONT_BODY, fontSize: 13, color: "rgba(17,0,46,0.55)", margin: "0 0 24px" }}>forever, no card needed</p>
+              <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color: "rgba(17,0,46,0.55)", margin: "0 0 24px" }}>forever, no card needed</p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 11, marginBottom: 28 }}>
                 {[
@@ -527,30 +549,30 @@ export default function GizmoLanding() {
                     <span style={{ marginTop: 2, width: 17, height: 17, borderRadius: "50%", background: ELECTRIC_LIME, border: `1.5px solid ${PRIMARY}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                       <Check size={10} strokeWidth={3.5} color={PRIMARY} />
                     </span>
-                    <span style={{ fontFamily: FONT_BODY, fontSize: 13.5, color: PRIMARY, lineHeight: 1.5 }}>{f}</span>
+                    <span style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color: PRIMARY, lineHeight: 1.5 }}>{f}</span>
                   </div>
                 ))}
               </div>
 
               <button onClick={() => goSignup("pricing_free")}
-                style={{ marginTop: "auto", width: "100%", fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: 15, background: ELECTRIC_LIME, color: PRIMARY, border: `2.5px solid ${PRIMARY}`, borderRadius: 12, padding: "13px 0", cursor: "pointer", boxShadow: `4px 4px 0 ${PRIMARY}` }}>
+                style={{ marginTop: "auto", width: "100%", fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: TYPE.lead, background: "transparent", color: PRIMARY, border: `2.5px solid ${PRIMARY}`, borderRadius: R.control, padding: "13px 0", cursor: "pointer" }}>
                 Get started free
               </button>
             </div>
 
             {/* Premium */}
-            <div style={{ background: PRIMARY, border: `2.5px solid ${PRIMARY}`, borderRadius: 20, boxShadow: `6px 6px 0 ${ELECTRIC_LIME}`, padding: "30px 28px 32px", display: "flex", flexDirection: "column" }}>
-              <p style={{ fontFamily: FONT_MONO, fontSize: 11, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: ELECTRIC_LIME, margin: "0 0 14px" }}>
+            <div style={{ background: PRIMARY, border: `2.5px solid ${ELECTRIC_LIME}`, borderRadius: R.card, boxShadow: `6px 6px 0 ${ELECTRIC_LIME}`, padding: "30px 28px 32px", display: "flex", flexDirection: "column" }}>
+              <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.label, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: ELECTRIC_LIME, margin: "0 0 14px" }}>
                 {PRICING_CYCLES[cycle].name}
               </p>
               <div style={{ display: "flex", alignItems: "flex-start", lineHeight: 1, marginBottom: 4 }}>
-                <span style={{ fontFamily: FONT_DISPLAY, fontSize: 24, fontWeight: 900, color: "#fff", marginTop: 6 }}>$</span>
-                <span style={{ fontFamily: FONT_DISPLAY, fontSize: 54, fontWeight: 900, color: "#fff" }}>{PRICING_CYCLES[cycle].price}</span>
+                <span style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.h3, fontWeight: 900, color: "#fff", marginTop: 6 }}>$</span>
+                <span style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.hero, fontWeight: 900, color: "#fff" }}>{PRICING_CYCLES[cycle].price}</span>
               </div>
-              <p style={{ fontFamily: FONT_BODY, fontSize: 13, color: "rgba(255,255,255,0.55)", margin: "0 0 20px" }}>
+              <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color: "rgba(255,255,255,0.55)", margin: "0 0 20px" }}>
                 {PRICING_CYCLES[cycle].note}
               </p>
-              <p style={{ fontFamily: FONT_MONO, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.5)", margin: "0 0 14px", letterSpacing: "0.06em" }}>EVERYTHING IN FREE, PLUS</p>
+              <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 700, color: "rgba(255,255,255,0.66)", margin: "0 0 14px", letterSpacing: "0.04em" }}>Everything in Free, plus</p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 11, marginBottom: 28 }}>
                 {[
@@ -565,16 +587,16 @@ export default function GizmoLanding() {
                     <span style={{ marginTop: 2, width: 17, height: 17, borderRadius: "50%", background: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                       <Check size={10} strokeWidth={3.5} color={PRIMARY} />
                     </span>
-                    <span style={{ fontFamily: FONT_BODY, fontSize: 13.5, color: "rgba(255,255,255,0.88)", lineHeight: 1.5 }}>{f}</span>
+                    <span style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color: "rgba(255,255,255,0.88)", lineHeight: 1.5 }}>{f}</span>
                   </div>
                 ))}
               </div>
 
               <button onClick={() => goSignup("pricing_premium")}
-                style={{ marginTop: "auto", width: "100%", fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: 15, background: ELECTRIC_LIME, color: PRIMARY, border: `2.5px solid ${ELECTRIC_LIME}`, borderRadius: 12, padding: "13px 0", cursor: "pointer" }}>
+                style={{ marginTop: "auto", width: "100%", fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: TYPE.lead, background: ELECTRIC_LIME, color: PRIMARY, border: `2.5px solid ${ELECTRIC_LIME}`, borderRadius: R.control, padding: "13px 0", cursor: "pointer" }}>
                 Get Premium
               </button>
-              <p style={{ fontFamily: FONT_MONO, fontSize: 10.5, color: "rgba(255,255,255,0.4)", textAlign: "center", margin: "12px 0 0" }}>Start on Free first, upgrade later</p>
+              <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.label, color: "rgba(255,255,255,0.4)", textAlign: "center", margin: "12px 0 0" }}>Start on Free first, upgrade later</p>
             </div>
           </div>
         </div>
@@ -591,7 +613,7 @@ export default function GizmoLanding() {
         <div className="max-w-6xl mx-auto px-6 pt-16 pb-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-6 gap-10 pb-12 border-b border-white/10">
             <div className="lg:col-span-2">
-              <div style={{ fontFamily: FONT_DISPLAY, fontSize: 22, fontWeight: 900, color: ELECTRIC_LIME, marginBottom: 12, letterSpacing: -0.5 }}>FORKSAI</div>
+              <div style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.h3, fontWeight: 900, color: ELECTRIC_LIME, marginBottom: 12, letterSpacing: -0.5 }}>FORKSAI</div>
               <p className="text-white/40 text-sm leading-relaxed max-w-xs mb-6">The AI study platform that turns your material into mastery. Built for students who want results, not just revision.</p>
               <div style={{ display: "flex", gap: 12 }}>
                 {[Globe, MessageCircle, AtSign].map((Icon, i) => (
@@ -615,7 +637,7 @@ export default function GizmoLanding() {
                 ["AI Podcasts", "/blog/ai-podcasts"],
                 ["Import from Quizlet", "/blog/quizlet-alternative"],
                 ["Spaced Repetition", "/blog/spaced-repetition"],
-                ["Pomodoro and study modes", "/blog/study-modes"],
+                ["Study modes", "/blog/study-modes"],
                 ["Import from Anki", "/blog/anki-alternative"],
                 ["Free student tools", "/tools"],
               ].map(([l, href]) => (
@@ -635,7 +657,7 @@ export default function GizmoLanding() {
               {[["Work with us", "/apply"], ["Creator Program", "/apply/creators"], ["Ambassador Program", "/apply/ambassadors"]].map(([l, href]) => (
                 <Link key={l} href={href} prefetch={false} className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</Link>
               ))}
-              <button onClick={() => setShowEarnPrompt(true)} className="block text-left text-sm font-bold mb-2 transition-colors hover:opacity-80" style={{ color: ELECTRIC_LIME }}>
+              <button onClick={() => setShowEarnPrompt(true)} className="block text-left text-sm text-white/40 hover:text-white transition-colors mb-2 bg-transparent border-0 p-0 cursor-pointer">
                 Earn with FORKSAI
               </button>
             </div>
