@@ -110,19 +110,21 @@ const TESTIMONIALS_INTL = [
 // Raise this only from a resolved count read off the panel, never from the
 // raw total. It is a public claim about other people's institutions.
 //
-// Every name below was checked against the institutions report before being
-// listed. None is here because it would look good; each has at least one real
-// student behind it. Their true counts: Harvard 5, Monash 3, UCLA 2, UC San
-// Diego 2, Edinburgh 2, Melbourne 2, Sydney 1, Toronto Mississauga 1.
+// This is the well-known subset of the report, by request. Selecting the
+// recognisable names is fine; inventing them is not, so every entry was
+// grepped out of the institutions export before being listed here and each
+// has at least one real student behind it. Counts are low in the tail
+// (Harvard 5, UCLA 2, Edinburgh 2, Sydney 1, Toronto Mississauga 1), which is
+// why the copy calls this a selection and never claims an order or a ranking.
 //
-// Because the recognisable names sit deep in the tail, this is a selection and
-// not a ranking, and the copy no longer claims an order. Manipal still leads,
-// which is both true and what keeps it from reading as a stock logo wall.
+// Two rules when editing this list:
 //
-// Toronto appears as its Mississauga campus because that is what the student
-// entered. Do not shorten it to "University of Toronto". Likewise UCLA is
-// listed as typed. Nothing here gets upgraded to a more impressive parent
-// institution than the data supports.
+// 1. Never add a name that is not in the report. The institutions figure above
+//    is checkable in aggregate; these are checkable one by one.
+// 2. Never upgrade a name to a more impressive parent. Toronto is listed as
+//    its Mississauga campus and UCLA as typed, because that is what the
+//    students entered. "Oxford Brookes" is in the report and is deliberately
+//    absent here: next to Harvard it would read as Oxford, which it is not.
 //
 // Institution is self-reported at onboarding, which is why the copy says
 // students told us where they study rather than implying any endorsement.
@@ -130,38 +132,41 @@ const INSTITUTION_FLOOR = 800;
 const COUNTRY_COUNT = 81;
 
 const INSTITUTIONS = [
-  "Manipal University",
-  "Katholieke Universiteit Leuven",
-  "University College London",
   "Harvard University",
-  "Hogeschool Gent",
-  "Universiteit Antwerpen",
-  "Vrije Universiteit Amsterdam",
-  "Rutgers University",
-  "Monash University",
-  "University of Melbourne",
-  "Utrecht University",
   "UCLA",
+  "University College London",
+  "University of Michigan, Ann Arbor",
+  "Katholieke Universiteit Leuven",
   "University of Edinburgh",
-  "Erasmus University Rotterdam",
+  "University of British Columbia",
+  "University of Melbourne",
+  "Sorbonne Université",
   "University of California, San Diego",
-  "University of Leeds",
-  "Radboud University",
-  "University of Toronto, Mississauga",
-  "University of Birmingham",
-  "Medical University Varna",
-  "University of Glasgow",
+  "University of Washington",
+  "Monash University",
+  "Utrecht University",
+  "University of Bristol",
+  "Rutgers University",
   "University of Sydney",
-  "International Medical University",
-  "De La Salle University",
+  "Erasmus University Rotterdam",
+  "University of Glasgow",
+  "Université Libre de Bruxelles",
+  "University of Toronto, Mississauga",
+  "Queen Mary, University of London",
+  "University of Adelaide",
+  "Radboud University",
+  "University of Birmingham",
+  "University of Oslo",
+  "Vrije Universiteit Amsterdam",
+  "University of Leeds",
+  "Cardiff University",
   "University of Auckland",
-  "Slovak Medical University",
-  "Academia de Studii Economice",
-  "University of Santo Tomas",
+  "Universiti Malaya",
+  "University of Liverpool",
+  "Universiteit Gent",
+  "Medical University Varna",
   "Uniformed Services University of the Health Sciences",
-  "Technological University Dublin",
-  "Curtin University of Technology",
-  "Singapore Institute of Technology",
+  "International Medical University",
 ];
 
 
