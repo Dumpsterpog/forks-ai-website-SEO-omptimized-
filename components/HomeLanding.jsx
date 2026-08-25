@@ -98,22 +98,25 @@ const TESTIMONIALS_INTL = [
 
 
 // ── Where students study ─────────────────────────────────────────────────────
-// Read out of the institutions report in the admin panel: 401 students across
-// 189 institutions in 42 countries, counting only rows that resolved to a real
-// institution. The 82 free-text entries people typed ("High school", "Home")
-// are excluded, and the export was truncated, so these figures are the floor
-// rather than the ceiling.
+// INSTITUTION_COUNT is the figure from the institutions report in the admin
+// panel, stated as a floor. An earlier pass read it as 189 off a copy of that
+// report that was truncated partway down: the copy held 271 rows totalling 401
+// students, but its own percentage column implies a real total near 1,400, so
+// 189 was a slice of the list rather than the length of it.
 //
-// Ordered by student count and not edited for prestige. Manipal leads because
-// it genuinely does; Harvard sits mid-list on five. Reordering this to put the
-// famous names first is the thing that would make it read as a stock logo wall,
-// and it is a claim about other people's institutions, so it stays checkable.
+// This is a public claim about other people's institutions, so keep it a floor
+// and re-read it from the panel rather than raising it from a partial export.
+// Country coverage was derived from the same truncated copy and is not stated
+// here for that reason.
+//
+// The names below are the top of that report, ordered by student count and not
+// edited for prestige. Manipal leads because it genuinely does; Harvard sits
+// mid-list on five. Reordering to put the famous names first is exactly what
+// would make this read as a stock logo wall.
 //
 // Institution is self-reported at onboarding, which is why the copy says
 // students told us where they study rather than implying any endorsement.
-const INSTITUTION_COUNT = 189;
-const COUNTRY_COUNT = 42;
-const STUDENT_COUNT = 401;
+const INSTITUTION_COUNT = 1100;
 
 const INSTITUTIONS = [
   "Manipal University",
@@ -372,10 +375,8 @@ export default function GizmoLanding() {
             than out of nowhere. */}
         <div style={{ position: "relative", zIndex: 5, width: "100%", maxWidth: 1240, padding: "48px 24px 0", textAlign: "center" }}>
           <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.lead, color: PRIMARY, margin: "0 0 4px", opacity: 0.85 }}>
-            Students at{" "}
-            <strong style={{ fontWeight: 800 }}>{INSTITUTION_COUNT} institutions</strong>{" "}
-            across{" "}
-            <strong style={{ fontWeight: 800 }}>{COUNTRY_COUNT} countries</strong>{" "}
+            Students at more than{" "}
+            <strong style={{ fontWeight: 800 }}>{INSTITUTION_COUNT.toLocaleString("en")} institutions</strong>{" "}
             study with FORKSAI
           </p>
           <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, color: ON_SURFACE_VAR, margin: "0 0 22px", opacity: 0.75 }}>
@@ -394,7 +395,7 @@ export default function GizmoLanding() {
           {/* The marquee is decorative and duplicated, so it is hidden from
               assistive tech; this carries the same list once, in reading order. */}
           <p className="sr-only">
-            {`Students study with FORKSAI at ${INSTITUTIONS.join(", ")}, and ${INSTITUTION_COUNT - INSTITUTIONS.length} other institutions.`}
+            {`Students study with FORKSAI at ${INSTITUTIONS.join(", ")}, and more than ${(INSTITUTION_COUNT - INSTITUTIONS.length).toLocaleString("en")} other institutions.`}
           </p>
         </div>
 
