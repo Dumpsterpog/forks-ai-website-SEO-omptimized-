@@ -97,6 +97,47 @@ const TESTIMONIALS_INTL = [
 
 
 
+// ── What it does ─────────────────────────────────────────────────────────────
+// The page ran hero -> testimonials -> pricing, so a visitor met strangers
+// praising the product and then a price without ever being told what it is.
+// The autoplay video was carrying that job alone, silent and uncaptioned.
+//
+// Numbered because this genuinely is a sequence: material goes in, cards come
+// out, the schedule runs, the exam date pulls it forward. Numbering something
+// that is not a sequence is decoration, so if a row stops being a step, drop
+// the number rather than keeping the look.
+//
+// Every claim below is a feature that exists in the app today. The detail line
+// is the specific, checkable half: name the algorithm, count the modes, list
+// the real inputs. Nothing here is aspirational.
+const STEPS = [
+  {
+    title: "Bring in what you already have",
+    body: "A lecture PDF, a YouTube link, a photo of your handwriting, or text you paste. It reads the material and writes the cards.",
+    detail: "PDF · YouTube · Images · Text · Quizlet and Anki import",
+  },
+  {
+    title: "Study on a schedule that adapts",
+    body: "Every card is tracked separately and comes back the day before you would have forgotten it, so time goes to what is actually slipping.",
+    detail: "FSRS-5 spaced repetition",
+  },
+  {
+    title: "Pick the mode that suits the material",
+    body: "Swipe through them, fill in the blanks, race a timer, sit a mock exam, or explain the answer in your own words and have it marked.",
+    detail: "11 study modes",
+  },
+  {
+    title: "Tell it when the exam is",
+    body: "It counts back from the date, works out what the schedule will not reach in time, and turns that into a number of cards a day.",
+    detail: "Exam planner",
+  },
+  {
+    title: "Study with other people",
+    body: "Live rooms of up to five, twelve seconds a card, with a leaderboard that updates as everyone answers.",
+    detail: "Study rooms",
+  },
+];
+
 // ── Where students study ─────────────────────────────────────────────────────
 // COUNTRY_COUNT is the panel's figure, printed as-is.
 //
@@ -291,6 +332,7 @@ export default function GizmoLanding() {
                 leave the page. Every href here must match an id that is still
                 rendered, so a link goes when its section goes. */}
             {[
+              ["How it works", "#how"],
               ["Reviews", "#reviews"],
               ["Pricing", "#pricing"],
               ["Free tools", "#free-tools"],
@@ -326,16 +368,6 @@ export default function GizmoLanding() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/herobg2.gif" alt="" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", minWidth: "100%", minHeight: "100%", width: "auto", height: "auto", opacity: 0.85 }} />
         </div>
-
-        {/* Square grid overlay, matching the sections below */}
-        <div style={{
-          position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none",
-          backgroundImage: [
-            "linear-gradient(rgba(255,255,255,0.18) 1.5px, transparent 1.5px)",
-            "linear-gradient(90deg, rgba(255,255,255,0.18) 1.5px, transparent 1.5px)",
-          ].join(", "),
-          backgroundSize: "44px 44px",
-        }} />
 
         {/* Text + CTA */}
         <div style={{ position: "relative", zIndex: 1, maxWidth: 1280, width: "100%", margin: "0 auto", padding: "0 24px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -438,6 +470,36 @@ export default function GizmoLanding() {
         </div>
       </section>
 
+      {/* ── WHAT IT DOES ───────────────────────────────────────────────────
+          Carries the hero video's -200px overlap, which is why the top padding
+          is large. Rows, not a card grid: a grid of three would say less and
+          would look like every other landing page. */}
+      <section id="how" style={{ background: BG, padding: "240px 0 96px", position: "relative" }} className="section-how">
+        <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ marginBottom: 52 }}>
+            <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.label, fontWeight: 700, color: SECONDARY, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>How it works</p>
+            <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(28px,4vw,48px)", fontWeight: 900, color: PRIMARY, margin: 0, lineHeight: 1.08, maxWidth: 620 }}>
+              Turn what you are already reading into something you remember.
+            </h2>
+          </div>
+
+          <ol style={{ listStyle: "none", margin: 0, padding: 0, borderTop: `2.5px solid ${PRIMARY}` }}>
+            {STEPS.map((step, i) => (
+              <li key={step.title} className="how-row" style={{ display: "grid", gridTemplateColumns: "64px 1fr", gap: 24, alignItems: "start", padding: "28px 0", borderBottom: `2.5px solid ${PRIMARY}` }}>
+                <span aria-hidden="true" style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 800, color: PRIMARY, background: ELECTRIC_LIME, border: `2.5px solid ${PRIMARY}`, borderRadius: R.control, padding: "6px 0", textAlign: "center", letterSpacing: "0.04em" }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.h3, fontWeight: 800, color: PRIMARY, margin: "0 0 8px", lineHeight: 1.2 }}>{step.title}</h3>
+                  <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color: ON_SURFACE_VAR, margin: "0 0 10px", lineHeight: 1.55, maxWidth: 620 }}>{step.body}</p>
+                  <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 700, color: SECONDARY, margin: 0, letterSpacing: "0.03em" }}>{step.detail}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       {/* ── TESTIMONIALS ───────────────────────────────────────────────────── */}
       <style>{`
         @keyframes marquee-left  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -471,11 +533,9 @@ export default function GizmoLanding() {
         @keyframes heroStar { 0%, 100% { opacity: 0.9; transform: scale(1) rotate(0deg); } 50% { opacity: 1; transform: scale(1.2) rotate(18deg); } }
         @media (max-width: 1100px) { .hero-float-left, .hero-float-right { display: none !important; } }
       `}</style>
-      <section id="reviews" className="section-testimonials" style={{ background: "#fafff4", padding: "240px 0 96px", position: "relative", overflow: "hidden" }}>
-        {/* Square grid overlay */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", backgroundImage: ["linear-gradient(rgba(17,0,46,0.06) 1px, transparent 1px)", "linear-gradient(90deg, rgba(17,0,46,0.06) 1px, transparent 1px)"].join(", "), backgroundSize: "44px 44px" }} />
+      <section id="reviews" className="section-testimonials" style={{ background: "#fafff4", padding: "96px 0 96px", position: "relative", overflow: "hidden" }}>
         <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 800, color: PRIMARY, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 14 }}>Student love</p>
+          <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 800, color: PRIMARY, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 14 }}>Reviews</p>
           <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(28px,4vw,48px)", fontWeight: 900, color: PRIMARY, margin: 0 }}>Loved by Students</h2>
         </div>
 
@@ -547,8 +607,7 @@ export default function GizmoLanding() {
           25 AI generations a week on weekly and 100 a month on the other two.
           Nothing on this page says unlimited, because only the lifetime plan is
           uncapped and it is not sold here. */}
-      <section id="pricing" style={{ background: "#fafff4", padding: "96px 0 104px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", backgroundImage: ["linear-gradient(rgba(17,0,46,0.06) 1px, transparent 1px)", "linear-gradient(90deg, rgba(17,0,46,0.06) 1px, transparent 1px)"].join(", "), backgroundSize: "44px 44px" }} />
+      <section id="pricing" style={{ background: "#fafff4", padding: "96px 0 104px", position: "relative", overflow: "hidden", borderTop: `2.5px solid ${PRIMARY}` }}>
 
         <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
           <div style={{ textAlign: "center", marginBottom: 44 }}>
@@ -741,7 +800,9 @@ export default function GizmoLanding() {
           .hero-video-wrap { margin: 32px auto -80px !important; padding: 0 16px !important; }
 
           /* Testimonials */
-          .section-testimonials { padding-top: 120px !important; }
+          .section-how { padding-top: 120px !important; }
+          .how-row { grid-template-columns: 1fr !important; gap: 12px !important; }
+          .how-row > span { justify-self: start; width: 52px; }
 
           /* Pricing */
           .pricing-grid { grid-template-columns: 1fr !important; }
