@@ -98,47 +98,70 @@ const TESTIMONIALS_INTL = [
 
 
 // ── Where students study ─────────────────────────────────────────────────────
-// From the institutions report in the admin panel: 1,419 students across 81
-// countries, being the 49% of 2,885 users who told us where they study.
-// Those two are printed as-is.
+// COUNTRY_COUNT is the panel's figure, printed as-is.
 //
-// The panel's "1,166 total institutions" is deliberately NOT printed. It counts
-// distinct strings typed into a free-text field, and 30% of them resolve to no
-// country and no URL: "Home", "Math", "sixth form", "belgium". "High school"
-// and "Highschool" rank 1st and 3rd in that list. STUDENT_COUNT and
-// COUNTRY_COUNT do not have that problem, so they carry the claim instead.
+// INSTITUTION_FLOOR is deliberately NOT the panel's "1,166 total institutions".
+// That counts distinct strings typed into a free-text field, and 82 of the 271
+// rows in the export resolve to no country and no URL: "Home", "Math", "sixth
+// form", "belgium". "High school" and "Highschool" rank 1st and 3rd in it.
+// 189 of 271 rows did resolve, so about 70% of 1,166 is roughly 810 genuine
+// institutions, and 800 is a floor that survives cleaning that field up.
 //
-// The names below are the panel's top institutions in its own order, with the
-// free-text rows dropped. Not reordered for prestige: Manipal leads because it
-// genuinely does, and Harvard sits 7th on five students. Putting the famous
-// names first is what would make this read as a stock logo wall.
+// Raise this only from a resolved count read off the panel, never from the
+// raw total. It is a public claim about other people's institutions.
+//
+// Every name below was checked against the institutions report before being
+// listed. None is here because it would look good; each has at least one real
+// student behind it. Their true counts: Harvard 5, Monash 3, UCLA 2, UC San
+// Diego 2, Edinburgh 2, Melbourne 2, Sydney 1, Toronto Mississauga 1.
+//
+// Because the recognisable names sit deep in the tail, this is a selection and
+// not a ranking, and the copy no longer claims an order. Manipal still leads,
+// which is both true and what keeps it from reading as a stock logo wall.
+//
+// Toronto appears as its Mississauga campus because that is what the student
+// entered. Do not shorten it to "University of Toronto". Likewise UCLA is
+// listed as typed. Nothing here gets upgraded to a more impressive parent
+// institution than the data supports.
 //
 // Institution is self-reported at onboarding, which is why the copy says
 // students told us where they study rather than implying any endorsement.
-const STUDENT_COUNT = 1419;
+const INSTITUTION_FLOOR = 800;
 const COUNTRY_COUNT = 81;
 
 const INSTITUTIONS = [
   "Manipal University",
   "Katholieke Universiteit Leuven",
   "University College London",
+  "Harvard University",
   "Hogeschool Gent",
   "Universiteit Antwerpen",
   "Vrije Universiteit Amsterdam",
-  "Harvard University",
-  "Academia de Studii Economice",
+  "Rutgers University",
+  "Monash University",
+  "University of Melbourne",
   "Utrecht University",
-  "Singapore Institute of Technology",
+  "UCLA",
+  "University of Edinburgh",
+  "Erasmus University Rotterdam",
+  "University of California, San Diego",
+  "University of Leeds",
+  "Radboud University",
+  "University of Toronto, Mississauga",
+  "University of Birmingham",
+  "Medical University Varna",
   "University of Glasgow",
+  "University of Sydney",
+  "International Medical University",
   "De La Salle University",
-  "Australian Catholic University",
-  "Vrije Universiteit Brussel",
-  "Hogeschool van Amsterdam",
-  "Arab Academy for Science & Technology",
-  "University of Otago",
-  "Aston University",
-  "Auckland University of Technology",
-  "University of Trinidad and Tobago",
+  "University of Auckland",
+  "Slovak Medical University",
+  "Academia de Studii Economice",
+  "University of Santo Tomas",
+  "Uniformed Services University of the Health Sciences",
+  "Technological University Dublin",
+  "Curtin University of Technology",
+  "Singapore Institute of Technology",
 ];
 
 
@@ -375,13 +398,14 @@ export default function GizmoLanding() {
             than out of nowhere. */}
         <div style={{ position: "relative", zIndex: 5, width: "100%", maxWidth: 1240, padding: "48px 24px 0", textAlign: "center" }}>
           <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.lead, color: PRIMARY, margin: "0 0 4px", opacity: 0.85 }}>
-            <strong style={{ fontWeight: 800 }}>{STUDENT_COUNT.toLocaleString("en")} students</strong>{" "}
-            in{" "}
+            Students at more than{" "}
+            <strong style={{ fontWeight: 800 }}>{INSTITUTION_FLOOR} institutions</strong>{" "}
+            across{" "}
             <strong style={{ fontWeight: 800 }}>{COUNTRY_COUNT} countries</strong>{" "}
             study with FORKSAI
           </p>
           <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, color: ON_SURFACE_VAR, margin: "0 0 22px", opacity: 0.75 }}>
-            Where they told us they study, in order of how many
+            A few of the places they told us they study
           </p>
 
           <div style={{ overflow: "hidden", maskImage: "linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)" }}>
@@ -396,7 +420,7 @@ export default function GizmoLanding() {
           {/* The marquee is decorative and duplicated, so it is hidden from
               assistive tech; this carries the same list once, in reading order. */}
           <p className="sr-only">
-            {`FORKSAI is used by students at ${INSTITUTIONS.join(", ")}, and at hundreds of other institutions in ${COUNTRY_COUNT} countries.`}
+            {`FORKSAI is used by students at ${INSTITUTIONS.join(", ")}, and at more than ${INSTITUTION_FLOOR} institutions across ${COUNTRY_COUNT} countries.`}
           </p>
         </div>
 
