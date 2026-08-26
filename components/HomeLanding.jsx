@@ -468,7 +468,7 @@ export default function GizmoLanding() {
         </div>
 
         {/* Row 1: scrolls left */}
-        <div style={{ overflow: "hidden", marginBottom: 20 }}>
+        <div style={{ overflow: "hidden", padding: "10px 0" }}>
           <div className="marquee-left">
             {[...TESTIMONIALS, ...TESTIMONIALS].map(({ initials, handle, name, bg, color, border, likes, time, text }, i) => (
               <div key={i} style={{ flexShrink: 0, width: 320, minHeight: 168, marginRight: 20, background: "#fff", border: `1.5px solid ${border}`, borderRadius: R.card, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
@@ -486,7 +486,7 @@ export default function GizmoLanding() {
         </div>
 
         {/* Row 2: scrolls right */}
-        <div style={{ overflow: "hidden" }}>
+        <div style={{ overflow: "hidden", padding: "10px 0" }}>
           <div className="marquee-right">
             {[...TESTIMONIALS.slice().reverse(), ...TESTIMONIALS.slice().reverse()].map(({ initials, handle, name, bg, color, border, likes, time, text }, i) => (
               <div key={i} style={{ flexShrink: 0, width: 320, minHeight: 168, marginRight: 20, background: bg, borderRadius: R.card, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
@@ -505,7 +505,7 @@ export default function GizmoLanding() {
 
         {/* Row 3: the international reviews, scrolling left and slower so the
             three rows never fall into step with each other. */}
-        <div style={{ overflow: "hidden", marginTop: 20 }}>
+        <div style={{ overflow: "hidden", padding: "10px 0" }}>
           <div className="marquee-slow">
             {[...TESTIMONIALS_INTL, ...TESTIMONIALS_INTL].map(({ initials, handle, name, country, text }, i) => (
               <div key={i} style={{ flexShrink: 0, width: 320, minHeight: 168, marginRight: 20, background: "#fff", border: `1.5px solid ${ELECTRIC_LIME}`, borderRadius: R.card, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
@@ -535,7 +535,7 @@ export default function GizmoLanding() {
           25 AI generations a week on weekly and 100 a month on the other two.
           Nothing on this page says unlimited, because only the lifetime plan is
           uncapped and it is not sold here. */}
-      <section id="pricing" style={{ background: "#fafff4", padding: "96px 0 104px", position: "relative", overflow: "hidden", borderTop: `2.5px solid ${PRIMARY}` }}>
+      <section id="pricing" style={{ background: "#fafff4", padding: "96px 0 104px", position: "relative", overflow: "hidden" }}>
 
         <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
           <div style={{ textAlign: "center", marginBottom: 44 }}>
