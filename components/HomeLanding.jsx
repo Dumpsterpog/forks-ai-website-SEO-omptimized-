@@ -128,7 +128,7 @@ const TESTIMONIALS_INTL = [
 //
 // Institution is self-reported at onboarding, which is why the copy says
 // students told us where they study rather than implying any endorsement.
-const INSTITUTION_FLOOR = 800;
+const INSTITUTION_FLOOR = 1100;
 const COUNTRY_COUNT = 81;
 
 const INSTITUTIONS = [
