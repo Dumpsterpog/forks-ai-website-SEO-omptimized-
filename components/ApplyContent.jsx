@@ -163,7 +163,7 @@ export default function ApplyContent() {
                       required
                       type="number"
                       name="age"
-                      min="13"
+                      min="16"
                       value={formData.age}
                       onChange={handleChange}
                       className="w-full bg-[#FAFAFA] border-2 border-black rounded-xl px-3 py-2.5 text-sm font-medium outline-none focus:ring-4 focus:ring-black/10 transition-all font-mono"
