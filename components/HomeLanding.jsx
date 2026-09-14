@@ -569,7 +569,7 @@ export default function GizmoLanding() {
                   "1 AI-generated deck, for life, with no card limit",
                   "Unlimited manual decks and folders",
                   "7 of the 12 study modes, including FSRS-5 spaced repetition",
-                  "1 Quick Study session a week",
+                  "2 Quick Study sessions a week",
                   "Live Study Rooms",
                   "The full public deck library",
                 ].map((f) => (
