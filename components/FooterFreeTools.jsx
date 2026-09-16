@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { STUDENT_AUDIENCES } from "@/lib/studentAudiences";
 import { TOOL_GROUPS } from "@/app/tools/toolGroups";
 
 // Every free tool, listed in the footer. Grouped the way /tools groups them so
@@ -45,6 +46,9 @@ export default function FooterFreeTools({
           See all free tools
         </Link>
       </div>
+      <nav aria-label="Study by student audience" className="flex flex-wrap gap-x-5 gap-y-2 mt-6">
+        {STUDENT_AUDIENCES.map(a => <Link key={a.slug} href={"/for/"+a.slug} prefetch={false} className={s.link}>{a.label}</Link>)}
+      </nav>
       <div className={s.grid}>
         {groups.map((group) => (
           <div key={group.id} className="break-inside-avoid mb-7">

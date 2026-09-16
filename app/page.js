@@ -4,12 +4,12 @@ import { SOFTWARE_OFFERS } from "@/lib/pricing";
 const TITLE =
   "Free AI Flashcards - Quizlet & Anki Alternative | FORKSAI";
 const DESCRIPTION =
-  "Free AI flashcard generator and the best Quizlet & Anki alternative. Turn any PDF, notes, or video into a study-ready deck in seconds. No credit card required.";
+  "Free AI flashcard generator and a Quizlet & Anki alternative. Turn any PDF, notes, or video into a study-ready deck in seconds. No credit card required.";
 const OG_DESCRIPTION =
-  "The Quizlet and Anki alternative that builds your deck for you. Generate customizable AI flashcards from any PDF, notes, slides, YouTube video, or image - set difficulty, question types, and card count. Join 100,000+ students studying smarter with FORKSAI.";
+  "The Quizlet and Anki alternative that builds your deck for you. Generate customizable AI flashcards from any PDF, notes, slides, YouTube video, or image - set difficulty, question types, and card count. Build a deck you can edit and review with FORKSAI.";
 
 export const metadata = {
-  title: TITLE,
+  title: { absolute: TITLE },
   description: DESCRIPTION,
   keywords:
     "AI flashcards, quizlet alternative, anki alternative, best alternative to quizlet, best alternative to anki, how to make anki cards, customizable AI flashcard generator, configurable flashcard maker, AI notes summarizer, PDF summarizer, Cornell notes generator, outline notes, flashcards from PDF, flashcards from notes, flashcards from YouTube, flashcards from images OCR, PPT to flashcards, AI study tools, spaced repetition, FSRS-5, exam preparation, active recall learning",

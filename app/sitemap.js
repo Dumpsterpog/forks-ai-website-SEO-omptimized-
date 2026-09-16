@@ -2,6 +2,8 @@ import { TOOLS_HUB } from "@/lib/studentTools";
 import { ALL_TOOLS } from "@/app/tools/toolGroups";
 import { COMPARE_PAGES } from "@/lib/comparePages";
 
+import { STUDENT_AUDIENCES } from "@/lib/studentAudiences";
+
 const BASE_URL = "https://forksai.app";
 
 // Derived from the same groups the hub renders, so the sitemap and the hub
@@ -45,17 +47,17 @@ const LEGAL_PAGES = ["/faq", "/docs", "/privacy-policy", "/terms", "/refund-poli
 const APPLY_PAGES = ["/apply", "/apply/ambassadors", "/apply/creators"];
 
 export default function sitemap() {
-  const now = new Date();
+  // Omit unknown modification dates instead of reporting each build as a content update.
 
   const entry = (path, { changeFrequency, priority }) => ({
     url: `${BASE_URL}${path}`,
-    lastModified: now,
     changeFrequency,
     priority,
   });
 
   return [
     entry("/", { changeFrequency: "weekly", priority: 1.0 }),
+    ...STUDENT_AUDIENCES.map(a => ({ url: `${BASE_URL}/for/${a.slug}`, lastModified: "2026-09-16" })),
     ...FEATURE_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.9 })),
     ...COMPARISON_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.8 })),
     entry(TOOLS_HUB, { changeFrequency: "monthly", priority: 0.8 }),
