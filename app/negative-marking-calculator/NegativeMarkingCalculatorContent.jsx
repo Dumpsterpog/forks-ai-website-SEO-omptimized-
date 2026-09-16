@@ -123,7 +123,7 @@ export default function NegativeMarkingCalculatorContent() {
             </div>
             <p className="text-xs text-[#666] leading-relaxed mb-4">
               These are common patterns offered as starting points, not any
-              particular exam board's official rule. Schemes vary between papers
+              particular exam board’s official rule. Schemes vary between papers
               and between sessions, so type in whatever your own instruction
               sheet states.
             </p>
@@ -246,6 +246,13 @@ export default function NegativeMarkingCalculatorContent() {
         </p>
       </ToolSection>
 
+      <ToolSection title="What do 1/3 and 1/4 negative marking mean?">
+        <p>A fractional penalty is a fraction of the marks for one correct answer. With 1/3 negative marking, the deduction per wrong answer is marks per correct answer divided by 3. With 1/4 negative marking, divide by 4. Enter that deduction in the penalty field and check your paper’s instructions.</p>
+        <FormulaBlock>penalty per wrong = marks per correct x penalty fraction</FormulaBlock>
+        <p>If a correct answer earns 3 marks and the penalty is 1/3, a wrong answer deducts 1 mark. With 20 correct answers and 6 wrong answers, the score is (20 x 3) - (6 x 1) = 54 marks. If a correct answer earns 1 mark, the same 1/3 scheme deducts one third of a mark instead.</p>
+        <p>Under 1/4 negative marking with 4 marks per correct answer, each wrong answer deducts 1 mark. Under a scheme worth 1 mark per correct answer, each wrong answer deducts 0.25. Do not enter 0.25 for every 1/4 scheme: the value depends on the marks awarded for a correct answer.</p>
+      </ToolSection>
+
       <ToolSection title="The point where guessing stops paying">
         <p>
           Guessing is worth it exactly when the marks you expect to gain beat
@@ -266,10 +273,13 @@ export default function NegativeMarkingCalculatorContent() {
           same to sit even though the numbers look different.
         </p>
         <p>
-          The practical reading is that eliminating even one option out of four
-          usually pushes you past break even, while a pure blind guess on four
-          options sits right on it. This is arithmetic about the scheme you
-          typed in, not advice about any particular exam.
+          A blind guess among four equally likely options has a 25% hit rate.
+          That is above the 20% break-even rate in the 4-with-1 and
+          1-with-0.25 examples, but exactly at break even under a
+          one-third penalty scheme. Eliminating options can improve the hit
+          rate. This model assumes one correct option, zero marks for skipped
+          questions, and the scheme you entered; it is not a guarantee about
+          your score or any particular exam.
         </p>
       </ToolSection>
 

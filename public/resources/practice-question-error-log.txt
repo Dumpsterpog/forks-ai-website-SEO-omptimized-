@@ -1,0 +1,18 @@
+PRACTICE-QUESTION ERROR LOG — FORKSAI
+Copy this block for each question worth revisiting.
+
+Date:
+Course and topic:
+Question reference (avoid patient-identifiable information):
+My answer and reasoning:
+Checked answer and source section:
+Specific gap (knowledge, interpretation, calculation or unclear prompt):
+Why my original reasoning failed:
+Correction in my own words:
+Follow-up task:
+Review date:
+Result on retry:
+
+Verify corrections against your course sources. Do not copy unverified AI output.
+Free to copy, adapt and redistribute. Attribution is optional.
+Source: https://forksai.app/resources/student-study-kit

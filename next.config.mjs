@@ -3,6 +3,30 @@ const nextConfig = {
   turbopack: {
     root: import.meta.dirname,
   },
+  async redirects() {
+    return [
+  {
+    "source": "/spaced-repetition",
+    "destination": "/blog/spaced-repetition",
+    "permanent": true
+  },
+  {
+    "source": "/notes-maker",
+    "destination": "/notes",
+    "permanent": true
+  },
+  {
+    "source": "/blog/remnote-alternative",
+    "destination": "/remnote-alternative",
+    "permanent": true
+  },
+  {
+    "source": "/blog/ai-summarizer-for-students",
+    "destination": "/ai-summarizer",
+    "permanent": true
+  }
+];
+  },
   async rewrites() {
     // Multi-zone fallback: any path not owned by this app (the dashboard SPA,
     // /login, /api/*, /assets/*) proxies through to the existing Vite app.

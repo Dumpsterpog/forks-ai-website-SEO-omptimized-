@@ -9,6 +9,7 @@ import { ArrowRight, Check, ChevronRight, Zap, Brain, FileText, Target, Repeat, 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import AuthModal from "@/components/AuthModal";
+import StudyResourceLinks from "@/components/StudyResourceLinks";
 import FooterFreeTools from "@/components/FooterFreeTools";
 
 const FontLoader = () => {
@@ -346,6 +347,7 @@ export default function AIFlashcardsPage() {
             </div>
           </div>
         </section>
+        <StudyResourceLinks dark />
       </main>
 
       {/* FOOTER */}

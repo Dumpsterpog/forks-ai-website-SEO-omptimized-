@@ -1,3 +1,4 @@
+import { SEARCH_OPPORTUNITY_POSTS } from "@/lib/searchOpportunityPosts";
 import BlogsIndexContent from "@/components/BlogsIndexContent";
 
 export const metadata = {
@@ -27,6 +28,7 @@ export const metadata = {
 };
 
 const POSTS = [
+  ...SEARCH_OPPORTUNITY_POSTS.map(p => ({title:p.title,url:"/blog/"+p.slug})),
   { title: "Active recall: the study technique that actually works", url: "/blog/active-recall" },
   { title: "How to prepare for any exam in 2 weeks", url: "/blog/exam-prep" },
   { title: "Why your study schedule keeps falling apart", url: "/blog/study-schedule" },

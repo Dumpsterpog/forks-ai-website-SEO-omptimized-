@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { goToDashboard } from "@/lib/goToDashboard";
 import { trackSignupClick } from "@/lib/track";
+import StudyResourceLinks from "@/components/StudyResourceLinks";
 import FooterFreeTools from "@/components/FooterFreeTools";
 import { Globe, MessageCircle, AtSign, ArrowRight, Check } from "lucide-react";
 
@@ -637,6 +638,8 @@ export default function GizmoLanding() {
           again. The only changes are the brand colours (#11002e / lime instead
           of #111 / yellow) and three extra Product links, which carry the
           destinations the removed mobile hamburger used to hold. */}
+      <StudyResourceLinks />
+
       <footer className="site-footer text-white" style={{ background: PRIMARY, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div className="max-w-6xl mx-auto px-6 pt-16 pb-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-6 gap-10 pb-12 border-b border-white/10">
@@ -675,7 +678,7 @@ export default function GizmoLanding() {
 
             <div>
               <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Resources</div>
-              {[["Blog", "/blogs"], ["FAQ", "/faq"], ["Docs", "/docs"], ["RemNote alternative", "/remnote-alternative"], ["FORKSAI vs RemNote", "/forksai-vs-remnote"], ["FORKSAI vs Notion", "/forksai-vs-notion"], ["Flashcards and notes in one app", "/flashcards-and-notes-app"], ["Attendance Calculator", "/attendance-calculator"], ["AI Flashcards Guide", "/blog/flashcards"]].map(([l, href]) => (
+              {[["Blog", "/blogs"], ["Student study kit", "/resources/student-study-kit"], ["ClipStudio", "/clipstudio"], ["FAQ", "/faq"], ["Docs", "/docs"], ["RemNote alternative", "/remnote-alternative"], ["FORKSAI vs RemNote", "/forksai-vs-remnote"], ["FORKSAI vs Notion", "/forksai-vs-notion"], ["Flashcards and notes in one app", "/flashcards-and-notes-app"], ["Attendance Calculator", "/attendance-calculator"], ["AI Flashcards Guide", "/blog/flashcards"]].map(([l, href]) => (
                 <Link key={l} href={href} prefetch={false} className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</Link>
               ))}
             </div>

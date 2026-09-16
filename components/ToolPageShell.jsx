@@ -9,6 +9,7 @@ import { trackSignupClick } from "@/lib/track";
 import { TOOLS } from "@/lib/studentTools";
 import { TOOL_GROUPS } from "@/app/tools/toolGroups";
 import { COMPARE_PAGES } from "@/lib/comparePages";
+import StudyResourceLinks from "@/components/StudyResourceLinks";
 import FooterFreeTools from "@/components/FooterFreeTools";
 
 // The four free calculators share a nav, a footer, a cross-link strip and one
@@ -237,7 +238,7 @@ export default function ToolPageShell({ children }) {
   return (
     <div className="min-h-screen font-sans" style={{ background: PAGE_BG, color: INK }}>
       <ToolNav />
-      <main className="pt-8 pb-4">{children}</main>
+      <main className="pt-8 pb-4">{children}<StudyResourceLinks /></main>
       <ToolFooter />
     </div>
   );

@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { SEARCH_OPPORTUNITY_POSTS } from "@/lib/searchOpportunityPosts";
 import { goToDashboard } from "@/lib/goToDashboard";
 
 import { useState, useEffect } from "react";
@@ -30,6 +32,7 @@ function CategoryBadge({ label }) {
 }
 
 const BLOGS = [
+  ...SEARCH_OPPORTUNITY_POSTS.map(p => ({title:p.title,desc:p.description,link:"/blog/"+p.slug,category:p.category,author:"FORKSAI Team",date:"September 2026",readTime:p.readTime})),
   {
     title: "Active recall: the study technique that actually works",
     desc: "Testing yourself is the single most effective study method science has found. Here is what active recall is, why it works, and how to do it properly.",
@@ -179,18 +182,18 @@ export default function BlogsIndexContent() {
       {/* ── NAVBAR ── */}
       <nav className="border-b-2 border-black bg-white sticky top-0 z-50">
         <div className="w-full px-4 h-16 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2 shrink-0">
+          <Link href="/" className="flex items-center gap-2 shrink-0">
             <img src="/forks-logo.png" alt="FORKSAI" className="h-7 w-auto" />
             <span className="font-serif font-black text-xl text-[#111] tracking-tight">FORKSAI</span>
-          </a>
+          </Link>
           <div className="flex items-center gap-2 sm:gap-3">
-            <a href="/#pricing" className="hidden sm:block text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
+            <Link href="/#pricing" className="hidden sm:block text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
               Pricing
-            </a>
+            </Link>
             {user ? (
-              <a href="/dashboard" className="text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
+              <Link href="/dashboard" className="text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
                 Dashboard
-              </a>
+              </Link>
             ) : (
               <button onClick={goSignup} className="text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
                 Sign In
@@ -341,7 +344,7 @@ export default function BlogsIndexContent() {
             <div>
               <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Product</div>
               {["Dashboard", "AI Flashcards", "Study Modes", "Study Rooms", "Public Decks"].map(l => (
-                <a key={l} href="/dashboard" className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
+                <Link key={l} href="/dashboard" className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</Link>
               ))}
             </div>
             <div>

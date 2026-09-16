@@ -6,9 +6,9 @@ import { TOOL_OG_IMAGE } from "@/lib/studentTools";
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
   // brand in mixed case. House style is FORKSAI in caps.
-  title: { absolute: "Negative Marking Calculator: Score and Accuracy | FORKSAI" },
+  title: { absolute: "Negative Marking Calculator: 1/3, 1/4 and Custom Penalties | FORKSAI" },
   description:
-    "Free negative marking calculator. Enter questions attempted, correct answers and the marking scheme to get your projected score, accuracy and the accuracy at which guessing breaks even.",
+    "Calculate your exam score with 1/3, 1/4 or custom negative marking. Enter attempted and correct answers, marks per correct and the penalty per wrong answer.",
   alternates: {
     canonical: "https://forksai.app/negative-marking-calculator",
   },

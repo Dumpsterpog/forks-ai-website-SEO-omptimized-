@@ -1,0 +1,21 @@
+FLASHCARD QUALITY CHECKLIST — FORKSAI
+Check each drafted or AI-generated card before studying it.
+
+[ ] The prompt asks one clear, answerable question.
+[ ] I can understand the prompt without guessing what it means.
+[ ] The answer is checked against a course source.
+[ ] Units, exceptions and terminology are correct where relevant.
+[ ] I can identify the source section if I need context later.
+[ ] The answer is short enough to mark against my attempted answer.
+[ ] A multi-part card is split when the parts test different facts.
+[ ] It adds useful knowledge rather than repeating an existing card.
+[ ] Patient-identifiable information is not present.
+[ ] My study routine also includes application exercises where needed.
+
+Card or topic:
+Changes required:
+Checked source:
+Keep, revise or discard:
+
+Free to copy, adapt and redistribute. Attribution is optional.
+Source: https://forksai.app/resources/student-study-kit

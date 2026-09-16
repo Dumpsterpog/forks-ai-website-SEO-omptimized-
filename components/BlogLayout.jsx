@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import StudyResourceLinks from "@/components/StudyResourceLinks";
+import { SEARCH_OPPORTUNITY_POSTS } from "@/lib/searchOpportunityPosts";
 import { goToDashboard } from "@/lib/goToDashboard";
 
 import { useState, useEffect } from "react";
@@ -19,6 +22,7 @@ const CAT_STYLES = {
 
 // Grouped by category so circular neighbors below are topically related too.
 const ALL_POSTS = [
+  ...SEARCH_OPPORTUNITY_POSTS.map(p => ({title:p.title,link:"/blog/"+p.slug,category:p.category})),
   { title: "Active recall: the study technique that actually works", link: "/blog/active-recall", category: "Study Science" },
   { title: "FSRS-5 vs SM-2: the algorithm upgrade that actually matters", link: "/blog/fsrs-vs-sm2", category: "Study Science" },
   { title: "The problem with rereading the textbook", link: "/blog/study-modes", category: "Study Science" },
@@ -45,11 +49,10 @@ export default function BlogLayout({
 
   const cat = CAT_STYLES[category] || CAT_STYLES["AI Tools"];
 
-  // Circular window (next 3 by array position) guarantees every post gets
-  // exactly 3 inbound related-article links, regardless of category size.
+  // Prioritize guides in the same category before other study articles.
   const selfIndex = ALL_POSTS.findIndex(p => p.title === title);
-  const n = ALL_POSTS.length;
-  const related = selfIndex === -1 ? [] : [1, 2, 3].map(offset => ALL_POSTS[(selfIndex + offset) % n]);
+  const candidates = ALL_POSTS.filter(p => p.title !== title);
+  const related = selfIndex === -1 ? [] : [...candidates.filter(p => p.category === category), ...candidates.filter(p => p.category !== category)].slice(0, 3);
 
   return (
     <div className="min-h-screen font-sans" style={{ background: "#EEEEE8", color: "#111111" }}>
@@ -65,18 +68,18 @@ export default function BlogLayout({
       {/* ── NAVBAR ── */}
       <nav className="border-b-2 border-black bg-white sticky top-0 z-50">
         <div className="w-full px-4 h-16 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2 shrink-0">
+          <Link href="/" className="flex items-center gap-2 shrink-0">
             <img src="/forks-logo.png" alt="FORKSAI" className="h-7 w-auto" />
             <span className="font-serif font-black text-xl text-[#111] tracking-tight">FORKSAI</span>
-          </a>
+          </Link>
           <div className="flex items-center gap-2 sm:gap-3">
-            <a href="/blogs" className="hidden sm:block text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
+            <Link href="/blogs" className="hidden sm:block text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
               Blog
-            </a>
+            </Link>
             {user ? (
-              <a href="/dashboard" className="text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
+              <Link href="/dashboard" className="text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
                 Dashboard
-              </a>
+              </Link>
             ) : (
               <button onClick={() => setShowAuth(true)} className="text-sm font-bold text-[#111] border-2 border-black rounded-xl px-4 py-2 bg-white shadow-[3px_3px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5">
                 Sign In
@@ -97,12 +100,12 @@ export default function BlogLayout({
       <main className="max-w-3xl mx-auto px-4 sm:px-6 py-14">
 
         {/* Back link */}
-        <a
+        <Link
           href="/blogs"
           className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-[#555] border-2 border-black rounded-xl px-3 py-1.5 bg-white shadow-[2px_2px_0_#111] transition-all hover:shadow-[1px_1px_0_#111] hover:translate-x-0.5 hover:translate-y-0.5 mb-10"
         >
           <ArrowLeft size={11} /> Back to articles
-        </a>
+        </Link>
 
         {/* Article header */}
         <header className="mb-10">
@@ -130,6 +133,8 @@ export default function BlogLayout({
         <div className="space-y-6 text-[17px] leading-relaxed text-[#444]">
           {children}
         </div>
+
+        <StudyResourceLinks />
 
         {/* CTA box */}
         <div className="mt-16 bg-white border-2 border-black rounded-xl shadow-[4px_4px_0_#111] p-8 text-center">
@@ -174,7 +179,7 @@ export default function BlogLayout({
             <div>
               <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Product</div>
               {["Dashboard", "AI Flashcards", "Study Modes", "Study Rooms"].map(l => (
-                <a key={l} href="/dashboard" className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</a>
+                <Link key={l} href="/dashboard" className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</Link>
               ))}
             </div>
             <div>

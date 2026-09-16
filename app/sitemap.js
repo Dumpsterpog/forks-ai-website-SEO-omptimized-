@@ -1,3 +1,4 @@
+import { SEARCH_OPPORTUNITY_POSTS } from "@/lib/searchOpportunityPosts";
 import { TOOLS_HUB } from "@/lib/studentTools";
 import { ALL_TOOLS } from "@/app/tools/toolGroups";
 import { COMPARE_PAGES } from "@/lib/comparePages";
@@ -56,12 +57,14 @@ export default function sitemap() {
   });
 
   return [
+    {url: `${BASE_URL}/resources/student-study-kit`,lastModified:"2026-09-16"},
     entry("/", { changeFrequency: "weekly", priority: 1.0 }),
     ...STUDENT_AUDIENCES.map(a => ({ url: `${BASE_URL}/for/${a.slug}`, lastModified: "2026-09-16" })),
     ...FEATURE_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.9 })),
     ...COMPARISON_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.8 })),
     entry(TOOLS_HUB, { changeFrequency: "monthly", priority: 0.8 }),
     ...TOOL_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.8 })),
+    ...SEARCH_OPPORTUNITY_POSTS.map(p => ({url: `${BASE_URL}/blog/${p.slug}`,lastModified:"2026-09-16"})),
     entry("/blogs", { changeFrequency: "weekly", priority: 0.7 }),
     ...BLOG_POSTS.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.6 })),
     ...APPLY_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.5 })),

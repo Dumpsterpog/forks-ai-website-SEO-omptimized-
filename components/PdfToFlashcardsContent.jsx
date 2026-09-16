@@ -9,6 +9,7 @@ import { ArrowRight, Check, ChevronRight, Upload, Sparkles, Target, TrendingUp, 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import AuthModal from "@/components/AuthModal";
+import StudyResourceLinks from "@/components/StudyResourceLinks";
 import FooterFreeTools from "@/components/FooterFreeTools";
 
 const FontLoader = () => {
@@ -360,6 +361,7 @@ export default function PDFToFlashcardsPage() {
             </div>
           </div>
         </section>
+        <StudyResourceLinks dark />
       </main>
 
       <footer className="border-t border-white/5 px-6 md:px-12 py-10">
