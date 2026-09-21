@@ -633,7 +633,7 @@ export default function GizmoLanding() {
 
       {/* ── FOOTER ─────────────────────────────────────────────────────────
           Ported wholesale from the previous landing page. It is load-bearing SEO: the four link
-          columns plus <FooterFreeTools />, which renders all 41 free tools out
+          columns plus <FooterFreeTools />, which renders the complete free-tool list
           of TOOL_GROUPS so a new tool reaches every footer without being typed
           again. The only changes are the brand colours (#11002e / lime instead
           of #111 / yellow) and three extra Product links, which carry the

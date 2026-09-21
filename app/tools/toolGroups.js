@@ -39,7 +39,7 @@ export const TOOL_GROUPS = [
     id: "study",
     title: "Study calculators",
     intro:
-      "Attendance, final grades, GPA conversion, and notes turned into flashcards by pattern matching.",
+      "Attendance, final grades, weighted GPA, study planning, focus timing, and notes turned into flashcards.",
     // Longer copy per card than the other groups, so these get two columns
     // rather than three.
     wide: true,

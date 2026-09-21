@@ -44,6 +44,9 @@ Use these tools directly on the FORKSAI website:
 | [Marks percentage calculator](https://forksai.app/marks-percentage-calculator) | Convert marks into a percentage |
 | [Negative marking calculator](https://forksai.app/negative-marking-calculator) | Estimate exam scores and understand guessing thresholds |
 | [Text to flashcards](https://forksai.app/text-to-flashcards) | Prepare flashcards from text |
+| [GPA calculator](https://forksai.app/gpa-calculator) | Calculate a credit-weighted GPA |
+| [Pomodoro study timer](https://forksai.app/pomodoro-timer) | Run adjustable focus and break intervals |
+| [Exam study planner](https://forksai.app/study-planner) | Turn an exam date into a daily revision target |
 | [Word counter](https://forksai.app/word-counter) | Check the length of an assignment or draft |
 | [Merge PDF](https://forksai.app/merge-pdf) | Combine documents for easier organization |
 

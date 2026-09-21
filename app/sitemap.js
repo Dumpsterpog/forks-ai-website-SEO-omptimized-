@@ -64,7 +64,10 @@ export default function sitemap() {
     ...COMPARISON_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.8 })),
     entry(TOOLS_HUB, { changeFrequency: "monthly", priority: 0.8 }),
     ...TOOL_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.8 })),
-    ...SEARCH_OPPORTUNITY_POSTS.map(p => ({url: `${BASE_URL}/blog/${p.slug}`,lastModified:"2026-09-16"})),
+    ...SEARCH_OPPORTUNITY_POSTS.map(p => ({
+      url: `${BASE_URL}/blog/${p.slug}`,
+      lastModified: p.datePublished || "2026-09-16",
+    })),
     entry("/blogs", { changeFrequency: "weekly", priority: 0.7 }),
     ...BLOG_POSTS.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.6 })),
     ...APPLY_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.5 })),
