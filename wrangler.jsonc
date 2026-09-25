@@ -16,5 +16,11 @@
   // next/image goes through Cloudflare Images (free up to 5,000 unique
   // transformations a month; cached ones keep serving past that).
   "images": { "binding": "IMAGES" },
+  // www redirects to forksai.app in next.config.mjs. The dashboard Worker
+  // takes forksai.app/api/* and /assets/* through routes of its own.
+  "routes": [
+    { "pattern": "forksai.app", "custom_domain": true },
+    { "pattern": "www.forksai.app", "custom_domain": true }
+  ],
   "observability": { "enabled": true }
 }

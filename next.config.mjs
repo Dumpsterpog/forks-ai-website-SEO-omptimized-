@@ -5,6 +5,14 @@ const nextConfig = {
   },
   async redirects() {
     return [
+  // One address for every page. Vercel did this at its edge; on Cloudflare
+  // both names reach the same Worker, so the app does it.
+  {
+    "source": "/:path*",
+    "has": [{ "type": "host", "value": "www.forksai.app" }],
+    "destination": "https://forksai.app/:path*",
+    "permanent": true
+  },
   {
     "source": "/spaced-repetition",
     "destination": "/blog/spaced-repetition",
