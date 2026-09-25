@@ -7,6 +7,14 @@ const nextConfig = {
     return [
   // One address for every page. Vercel did this at its edge; on Cloudflare
   // both names reach the same Worker, so the app does it.
+  // The home page on its own: with no path to fill in, the catch-all below
+  // sent `:path*` through literally on Cloudflare.
+  {
+    "source": "/",
+    "has": [{ "type": "host", "value": "www.forksai.app" }],
+    "destination": "https://forksai.app/",
+    "permanent": true
+  },
   {
     "source": "/:path*",
     "has": [{ "type": "host", "value": "www.forksai.app" }],
