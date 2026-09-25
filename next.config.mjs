@@ -33,6 +33,15 @@ const nextConfig = {
     // See: docs/multi-zones.md — "Incremental adoption of Next.js"
     const oldAppOrigin = process.env.OLD_APP_ORIGIN || "http://localhost:5173";
     return {
+      // AI agents that ask for markdown get llms.txt at the home page. This
+      // was proxy.js, but Node middleware does not run on Cloudflare Workers.
+      beforeFiles: [
+        {
+          source: "/",
+          has: [{ type: "header", key: "accept", value: ".*text/markdown.*" }],
+          destination: "/llms.txt",
+        },
+      ],
       fallback: [
         {
           source: "/:path*",

@@ -19,8 +19,7 @@
 // The event log is append-only on purpose. A record that can be overwritten
 // proves nothing about what was agreed before it changed.
 
-import { FieldValue } from "firebase-admin/firestore";
-import { getDb } from "@/lib/firebaseAdmin";
+import { FieldValue, getDb } from "@/lib/firebaseAdmin";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

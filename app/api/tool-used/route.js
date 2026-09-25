@@ -11,8 +11,7 @@
 // The request is not even parsed beyond the slug.
 
 import { ALL_TOOLS } from "@/app/tools/toolGroups";
-import { FieldValue } from "firebase-admin/firestore";
-import { getDb } from "@/lib/firebaseAdmin";
+import { FieldValue, getDb } from "@/lib/firebaseAdmin";
 
 // The Admin SDK is not edge-compatible.
 export const runtime = "nodejs";

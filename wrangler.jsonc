@@ -1,0 +1,20 @@
+// The marketing site on Cloudflare Workers through OpenNext. Build and deploy
+// with `npm run cf:deploy`; Vercel keeps building with `next build` as before.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "forksai-marketing",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    { "binding": "WORKER_SELF_REFERENCE", "service": "forksai-marketing" }
+  ],
+  // next/image goes through Cloudflare Images (free up to 5,000 unique
+  // transformations a month; cached ones keep serving past that).
+  "images": { "binding": "IMAGES" },
+  "observability": { "enabled": true }
+}
