@@ -20,7 +20,11 @@
   // takes forksai.app/api/* and /assets/* through routes of its own.
   "routes": [
     { "pattern": "forksai.app", "custom_domain": true },
-    { "pattern": "www.forksai.app", "custom_domain": true }
+    { "pattern": "www.forksai.app", "custom_domain": true },
+    // This site's own API routes. More specific than the app Worker's
+    // forksai.app/api/*, so they win.
+    { "pattern": "forksai.app/api/consent*", "zone_name": "forksai.app" },
+    { "pattern": "forksai.app/api/tool-used*", "zone_name": "forksai.app" }
   ],
   "observability": { "enabled": true }
 }
