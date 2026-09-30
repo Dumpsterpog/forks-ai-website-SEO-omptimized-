@@ -31,7 +31,7 @@ const JOBS = [
   {
     job: "What else you can do with a deck",
     forksai:
-      "Eleven modes besides spaced repetition, including Weak Spot Trainer, Memory Sprint, MCQ practice, Exam Simulator, Explain Back, an AI tutor with Socratic mode, image occlusion, Pomodoro and live study rooms.",
+      "Eleven modes besides spaced repetition, including Weak Spot Trainer, Memory Sprint, MCQ practice, Exam Simulator, Explain Back, an AI tutor with Socratic mode, image occlusion and Pomodoro.",
   },
   {
     job: "How notes fit in",
@@ -46,7 +46,7 @@ const JOBS = [
   {
     job: "Studying with other people",
     forksai:
-      "Live study rooms with a timer per card, a speed bonus, reactions and a real-time leaderboard, plus a public decks library you can search by subject, difficulty and card text.",
+      "Share a deck with classmates to edit it together, and search a public decks library by subject, difficulty and card text.",
   },
 ];
 

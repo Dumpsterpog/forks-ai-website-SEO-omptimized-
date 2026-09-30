@@ -43,11 +43,6 @@ const JOBS = [
     forksai:
       "Nested folders, tags, search across titles and card text, grid or list view, bulk move and bulk delete.",
   },
-  {
-    job: "Revise with other people",
-    forksai:
-      "Live study rooms on a shared deck with a per-card timer, speed bonus, reactions and a real-time leaderboard.",
-  },
 ];
 
 export default function ForksaiVsNotionContent() {

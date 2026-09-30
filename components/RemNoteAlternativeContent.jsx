@@ -106,8 +106,7 @@ export default function RemNoteAlternativeContent() {
           Memory Sprint, MCQ practice, Explain Back where you type an answer in
           your own words and the AI grades it and hints, an AI tutor with
           evaluation, explanation, hint and Socratic modes, image occlusion for
-          diagrams, a Pomodoro mode, and live study rooms where a small group
-          revises the same deck against a shared leaderboard.
+          diagrams, and a Pomodoro mode.
         </p>
       </ToolSection>
 

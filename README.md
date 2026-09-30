@@ -23,7 +23,7 @@ Start with one topic. Create your cards, check them against your source material
 | Practise with learning modes | [Learning tools](https://forksai.app/learn) |
 | Organize your study notes | [Notes](https://forksai.app/notes) |
 
-The free plan includes one AI-generated deck, unlimited manual decks, seven non-AI study modes, and two Quick Study sessions per week. See [current plans and limits](https://forksai.app/#pricing) for paid options.
+The free plan includes one AI-generated deck a week, one set of AI notes, unlimited manual decks, seven non-AI study modes, and two Quick Study sessions per week. See [current plans and limits](https://forksai.app/#pricing) for paid options.
 
 AI-generated material can contain errors. Check important facts against your course materials. Medical study content is for education and revision; it is not clinical guidance.
 

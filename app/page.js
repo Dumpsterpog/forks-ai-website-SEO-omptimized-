@@ -115,7 +115,7 @@ const faqSchema = {
       name: "Is FORKSAI free?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. The free plan includes one AI-generated flashcard deck with no cap on how many cards it holds, unlimited manual deck creation, 7 of the 12 study modes, FSRS-5 spaced repetition, 2 Quick Study sessions a week, and progress tracking. The free deck is a one-time unlock rather than a monthly allowance. Premium adds 100 AI flashcard generations a month on the monthly and yearly plans, or 25 a week on the weekly plan at $4.99 which renews weekly and can be cancelled anytime, plus the 5 AI study modes. No credit card is required to start.",
+        text: "Yes. The free plan includes one AI-generated flashcard deck every week (up to 20 cards each), one set of AI notes, unlimited manual deck creation, 7 of the 12 study modes, FSRS-5 spaced repetition, 2 Quick Study sessions a week, and progress tracking. The free deck renews every week. Premium adds 100 AI flashcard generations a month on the monthly and yearly plans, or 25 a week on the weekly plan at $4.99 which renews weekly and can be cancelled anytime, plus the 5 AI study modes. No credit card is required to start.",
       },
     },
   ],

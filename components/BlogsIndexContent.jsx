@@ -343,7 +343,7 @@ export default function BlogsIndexContent() {
             </div>
             <div>
               <div className="text-xs font-bold text-white/50 uppercase tracking-widest mb-4">Product</div>
-              {["Dashboard", "AI Flashcards", "Study Modes", "Study Rooms", "Public Decks"].map(l => (
+              {["Dashboard", "AI Flashcards", "Study Modes", "Public Decks"].map(l => (
                 <Link key={l} href="/dashboard" className="block text-sm text-white/40 hover:text-white transition-colors mb-2 no-underline">{l}</Link>
               ))}
             </div>

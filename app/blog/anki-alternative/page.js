@@ -89,7 +89,7 @@ export default function BlogAnkiAlternativePage() {
           You still get control where it matters: difficulty level, question type, card count, and Smart Focus tags that tell the AI which topics to prioritize. What you do not get is a blank note-type editor staring back at you before you have reviewed a single card.
         </p>
         <p>
-          It also adds things Anki does not have natively, like live Study Rooms to review a deck with classmates, a Weak Spot Trainer that automatically drills what you keep missing, and an Exam Simulator for full timed mock tests.
+          It also adds things Anki does not have natively, like a Weak Spot Trainer that automatically drills what you keep missing, and an Exam Simulator for full timed mock tests.
         </p>
 
         <h3 className="font-serif font-black text-2xl text-[#111] mt-10 mb-2">Migrating your habit, not just your cards</h3>

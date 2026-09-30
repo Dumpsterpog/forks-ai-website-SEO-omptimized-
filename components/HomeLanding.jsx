@@ -567,11 +567,11 @@ export default function GizmoLanding() {
 
               <div style={{ display: "flex", flexDirection: "column", gap: 11, marginBottom: 28 }}>
                 {[
-                  "1 AI-generated deck, for life, with no card limit",
+                  "1 AI-generated deck every week",
+                  "1 set of AI notes",
                   "Unlimited manual decks and folders",
                   "7 of the 12 study modes, including FSRS-5 spaced repetition",
                   "2 Quick Study sessions a week",
-                  "Live Study Rooms",
                   "The full public deck library",
                 ].map((f) => (
                   <div key={f} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>

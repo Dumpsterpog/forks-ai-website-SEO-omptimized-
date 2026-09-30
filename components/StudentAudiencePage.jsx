@@ -15,7 +15,7 @@ export default function StudentAudiencePage({ audience }) {
       <h1 className="text-4xl sm:text-5xl font-extrabold mb-6">{audience.title}</h1>
       <p className="text-lg leading-relaxed mb-6">{audience.intro}</p>
       <Link href="/ai-flashcards" className="inline-block bg-black text-white px-6 py-4 font-bold rounded-lg">Create your first flashcard deck</Link>
-      <p className="text-sm mt-4">The free plan includes one AI-generated deck, unlimited manual decks, and seven non-AI study modes. Paid plans add AI generations.</p>
+      <p className="text-sm mt-4">The free plan includes one AI-generated deck a week, unlimited manual decks, and seven non-AI study modes. Paid plans add AI generations.</p>
       {audience.sections.map(([heading, ...paragraphs]) => <section key={heading} className="mt-12"><h2 className="text-2xl font-bold mb-4">{heading}</h2>{paragraphs.map(p=><p key={p} className="leading-relaxed mb-4">{p}</p>)}</section>)}
       <section className="mt-12"><h2 className="text-2xl font-bold mb-4">Tools and guides for your next study session</h2><ul className="space-y-3">{audience.tools.map(([href,label])=><li key={href}><Link href={href} className="underline">{label}</Link></li>)}</ul></section>
       <section className="mt-12"><h2 className="text-2xl font-bold mb-4">Study guides for other students</h2><ul className="space-y-3">{STUDENT_AUDIENCES.filter(a=>a.slug!==audience.slug).map(a=><li key={a.slug}><Link href={"/for/"+a.slug} className="underline">{a.title}</Link></li>)}</ul></section>
