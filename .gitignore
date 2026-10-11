@@ -44,3 +44,6 @@ next-env.d.ts
 .open-next
 .wrangler
 .dev.vars
+
+# Earlier builds moved aside before a fresh opennext build
+.open-next-*

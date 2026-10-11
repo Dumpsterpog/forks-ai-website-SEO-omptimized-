@@ -1,4 +1,16 @@
 import HomeLanding from "@/components/HomeLanding";
+import { DM_Sans, DM_Serif_Display } from "next/font/google";
+import MaintenancePage from "@/components/maintenance/MaintenancePage";
+
+// While the new dashboard is being pushed and tested in production, the home
+// page shows the maintenance page instead of the landing page. Set this back
+// to false to bring the landing page back; nothing else needs to change. The
+// title, description and schema below stay as they are, so search results
+// keep describing FORKSAI rather than the maintenance notice.
+const MAINTENANCE = false;
+
+const mnSerif = DM_Serif_Display({ variable: "--font-mn-serif", weight: "400", subsets: ["latin"], display: "swap" });
+const mnSans = DM_Sans({ variable: "--font-mn-sans", subsets: ["latin"], display: "swap" });
 import { SOFTWARE_OFFERS } from "@/lib/pricing";
 
 const TITLE =
@@ -122,6 +134,7 @@ const faqSchema = {
 };
 
 export default function Home() {
+  if (MAINTENANCE) return <MaintenancePage fontClass={`${mnSerif.variable} ${mnSans.variable}`} />;
   return (
     <>
       <script
