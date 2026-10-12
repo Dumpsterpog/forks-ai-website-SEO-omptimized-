@@ -99,7 +99,7 @@ const TESTIMONIALS_INTL = [
 
 
 // ── Where students study ─────────────────────────────────────────────────────
-// COUNTRY_COUNT is the panel's figure, printed as-is.
+// COUNTRY_COUNT is the panel's figure, rounded down to a floor.
 //
 // INSTITUTION_FLOOR is deliberately NOT the panel's "1,166 total institutions".
 // That counts distinct strings typed into a free-text field, and 82 of the 271
@@ -129,8 +129,12 @@ const TESTIMONIALS_INTL = [
 //
 // Institution is self-reported at onboarding, which is why the copy says
 // students told us where they study rather than implying any endorsement.
-const INSTITUTION_FLOOR = 1100;
-const COUNTRY_COUNT = 81;
+// Shown as floors with a plus: the panel read 1,577 institutions and 92
+// countries in Oct 2026.
+const INSTITUTION_FLOOR = 1500;
+const COUNTRY_COUNT = 90;
+const INSTITUTIONS_LABEL = `${INSTITUTION_FLOOR.toLocaleString("en-US")}+`;
+const COUNTRIES_LABEL = `${COUNTRY_COUNT}+`;
 
 const INSTITUTIONS = [
   "Harvard University",
@@ -384,6 +388,13 @@ export default function GizmoLanding() {
               Start studying for free
             </button>
           </div>
+          <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.lead, color: PRIMARY, margin: "-30px 0 40px", opacity: 0.85 }}>
+            Students at{" "}
+            <strong style={{ fontWeight: 800 }}>{INSTITUTIONS_LABEL} institutions</strong>{" "}
+            across{" "}
+            <strong style={{ fontWeight: 800 }}>{COUNTRIES_LABEL} countries</strong>{" "}
+            study with FORKSAI
+          </p>
         </div>
 
         {/* Where students study.
@@ -393,13 +404,6 @@ export default function GizmoLanding() {
             who already uses it instead, out of the institutions report rather
             than out of nowhere. */}
         <div style={{ position: "relative", zIndex: 5, width: "100%", maxWidth: 1240, padding: "48px 24px 0", textAlign: "center" }}>
-          <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.lead, color: PRIMARY, margin: "0 0 4px", opacity: 0.85 }}>
-            Students at more than{" "}
-            <strong style={{ fontWeight: 800 }}>{INSTITUTION_FLOOR} institutions</strong>{" "}
-            across{" "}
-            <strong style={{ fontWeight: 800 }}>{COUNTRY_COUNT} countries</strong>{" "}
-            study with FORKSAI
-          </p>
           <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, color: ON_SURFACE_VAR, margin: "0 0 22px", opacity: 0.75 }}>
             A few of the places they told us they study
           </p>
@@ -416,7 +420,7 @@ export default function GizmoLanding() {
           {/* The marquee is decorative and duplicated, so it is hidden from
               assistive tech; this carries the same list once, in reading order. */}
           <p className="sr-only">
-            {`FORKSAI is used by students at ${INSTITUTIONS.join(", ")}, and at more than ${INSTITUTION_FLOOR} institutions across ${COUNTRY_COUNT} countries.`}
+            {`FORKSAI is used by students at ${INSTITUTIONS.join(", ")}, and at ${INSTITUTIONS_LABEL} institutions across ${COUNTRIES_LABEL} countries.`}
           </p>
         </div>
 
