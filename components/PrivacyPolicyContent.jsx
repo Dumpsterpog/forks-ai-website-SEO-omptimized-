@@ -43,6 +43,7 @@ const sections = [
       <ul className="space-y-4 text-sm text-zinc-400">
         {[
           ["Account & Profile Data", "Your name, email address, profile photo (if signing in via Google), and authentication tokens."],
+          ["Age", "The age you enter during onboarding, used only to confirm you are old enough to use FORKSAI. It is stored with your profile and never shown to other students."],
           ["Authentication Emails", "Your email address used to send verification links, password reset emails, and essential account security notifications."],
           ["Study Session Data", "Start time, end time, and duration of each study timer session - used to calculate daily and weekly study totals shown on your dashboard."],
           ["Flashcard & Deck Data", "All flashcard decks you create - whether AI-generated or manual - including card content, deck titles, creation timestamps, and source type."],
@@ -312,7 +313,7 @@ const sections = [
     title: "Children's Privacy",
     content: (
       <p className="text-sm text-zinc-400 leading-relaxed">
-        FORKSAI is not intended for users under 13 (or the applicable minimum age in your jurisdiction). We do not knowingly collect or store data from minors. If we become aware of such collection, we delete it promptly. If you believe a minor has created an account, please contact us at <a href="mailto:team.forksai@gmail.com" className="text-[#b5ff4d] hover:underline underline-offset-4">team.forksai@gmail.com</a>.
+        FORKSAI is for students aged 13 and over (or the minimum age in your jurisdiction, if higher). During onboarding we ask for your age, and onboarding cannot be completed by anyone who enters an age under 13. A younger student can use FORKSAI only with a parent or legal guardian’s approval: the parent or guardian emails <a href="mailto:team.forksai@gmail.com" className="text-[#b5ff4d] hover:underline underline-offset-4">team.forksai@gmail.com</a>, and we reply with what that involves. We do not knowingly collect data from children under 13 without that approval. If we learn that we have, we delete it promptly. If you believe a child under 13 has created an account, please contact us at the same address.
       </p>
     ),
   },
@@ -499,7 +500,7 @@ const sections = [
         <p className="text-sm text-zinc-400 leading-relaxed">
           We may update this Privacy Policy from time to time to reflect product changes, new features, or legal requirements. Major updates will be communicated through in-app notifications, email, or website banners. The most recent revision date will always appear at the top of this page.
         </p>
-        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: August 23, 2026 (v12.2)</p>
+        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: October 17, 2026 (v12.3)</p>
       </>
     ),
   },
@@ -594,7 +595,7 @@ export default function PrivacyPolicyContent() {
             <p className="text-zinc-500 text-sm max-w-xl leading-relaxed">
               This policy explains how FORKSAI collects, uses, and protects your information across the platform - including the study dashboard, AI tools, and payment features.
             </p>
-            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: August 23, 2026 · v12.2</p>
+            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: October 17, 2026 · v12.3</p>
           </motion.div>
 
           {/* Two-column layout */}

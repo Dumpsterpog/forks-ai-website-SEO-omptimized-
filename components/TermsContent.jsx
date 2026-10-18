@@ -22,7 +22,7 @@ const sections = [
     content: (
       <ul className="space-y-3 text-sm text-zinc-400">
         {[
-          "You must be at least 13 years old to use the Service. If you are under the age of majority in your jurisdiction, you may use the Service only with the involvement and consent of a parent or legal guardian.",
+          "You must be at least 13 years old to use the Service. We ask for your age during onboarding, and it cannot be completed with an age under 13. A younger student may use the Service only if a parent or legal guardian approves it by emailing team.forksai@gmail.com. If you are under the age of majority in your jurisdiction, you may use the Service only with the involvement and consent of a parent or legal guardian.",
           "You agree to provide accurate, current, and complete information when creating an account.",
           "Accounts are created using Google Sign-In (Google OAuth). By signing in, you authorize us to access basic profile information (such as your name, email address, and profile photo) as described in our Privacy Policy.",
           "You are responsible for maintaining the security of your Google account and for all activity that occurs under your FORKSAI account.",
@@ -288,7 +288,7 @@ const sections = [
         <p className="text-sm text-zinc-400 leading-relaxed">
           We may update these Terms from time to time to reflect changes in the Service, new features, or legal requirements. Major updates will be communicated through in-app notifications, email, or website banners. Continued use of the Service after updates take effect constitutes your acceptance of the revised Terms.
         </p>
-        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: August 23, 2026 (v12.2)</p>
+        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: October 17, 2026 (v12.3)</p>
       </>
     ),
   },
@@ -538,7 +538,7 @@ export default function TermsContent() {
             <p className="text-zinc-500 text-sm max-w-xl leading-relaxed">
               These terms apply to all products and services under FORKSAI - including the study dashboard, AI tools, Premium subscriptions, and all related features.
             </p>
-            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: August 23, 2026 · v12.2</p>
+            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: October 17, 2026 · v12.3</p>
           </motion.div>
 
           {/* Two-column layout */}
