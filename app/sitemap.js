@@ -4,6 +4,7 @@ import { ALL_TOOLS } from "@/app/tools/toolGroups";
 import { COMPARE_PAGES } from "@/lib/comparePages";
 
 import { STUDENT_AUDIENCES } from "@/lib/studentAudiences";
+import { getPublicDecks } from "@/lib/publicDecks";
 
 const BASE_URL = "https://forksai.app";
 
@@ -47,7 +48,13 @@ const LEGAL_PAGES = ["/faq", "/docs", "/privacy-policy", "/terms", "/refund-poli
 
 const APPLY_PAGES = ["/apply", "/apply/ambassadors", "/apply/creators"];
 
-export default function sitemap() {
+// Built once with the site, like every other page here.
+export const dynamic = "force-static";
+
+export default async function sitemap() {
+  // The shared decks, read from the app at build time like their pages.
+  const decks = await getPublicDecks();
+
   // Omit unknown modification dates instead of reporting each build as a content update.
 
   const entry = (path, { changeFrequency, priority }) => ({
@@ -72,5 +79,12 @@ export default function sitemap() {
     ...BLOG_POSTS.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.6 })),
     ...APPLY_PAGES.map((p) => entry(p, { changeFrequency: "monthly", priority: 0.5 })),
     ...LEGAL_PAGES.map((p) => entry(p, { changeFrequency: "yearly", priority: 0.3 })),
+    entry("/flashcard-decks", { changeFrequency: "weekly", priority: 0.7 }),
+    ...decks.map((d) => ({
+      url: `${BASE_URL}/flashcard-decks/${d.slug}`,
+      ...(d.updatedAt ? { lastModified: d.updatedAt.slice(0, 10) } : {}),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    })),
   ];
 }
