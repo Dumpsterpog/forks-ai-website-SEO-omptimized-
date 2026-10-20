@@ -1,6 +1,7 @@
 import Script from "next/script";
 import ConsentedAnalytics from "../components/ConsentedAnalytics";
 import ConsentBanner from "../components/ConsentBanner";
+import SourceCapture from "../components/SourceCapture";
 import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -80,6 +81,7 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         {children}
+        <SourceCapture />
         <ConsentedAnalytics />
         <ConsentBanner />
 
