@@ -1352,12 +1352,12 @@ export default function LandingPage() {
             <div className="flex items-start leading-none mb-1">
               {isPinkDay && (
                 <span className="font-black text-xl text-[#aaa] mt-2 mr-1.5 line-through">
-                  ${cycle === "monthly" ? "7.99" : "23.99"}
+                  ${cycle === "monthly" ? "6.99" : "14.99"}
                 </span>
               )}
               <span className="font-black text-2xl text-[#111] mt-1.5 mr-0.5">$</span>
               <span className="font-serif font-black text-5xl text-[#111]">
-                {cycle === "monthly" ? (isPinkDay ? "7.19" : "7.99") : (isPinkDay ? "21.59" : "23.99")}
+                {cycle === "monthly" ? (isPinkDay ? "6.29" : "6.99") : (isPinkDay ? "13.49" : "14.99")}
               </span>
             </div>
             <div className="text-sm text-[#555] mb-4">

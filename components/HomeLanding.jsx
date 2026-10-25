@@ -195,8 +195,8 @@ const HERO_POPPERS = [
 // better per-day rate than the 100 a month the other cycles give.
 const PRICING_CYCLES = {
   weekly:  { label: "Weekly",  name: "Premium weekly",  price: "4.99",  note: "per week, renews weekly, cancel anytime",   gens: "25 AI generations a week" },
-  monthly: { label: "Monthly", name: "Premium",         price: "7.99",  note: "per month, renews monthly, cancel anytime", gens: "100 AI generations a month" },
-  yearly:  { label: "Yearly",  name: "Premium yearly",  price: "23.99", note: "per year, renews yearly, cancel anytime",   gens: "100 AI generations a month" },
+  monthly: { label: "Monthly", name: "Premium",         price: "6.99",  note: "per month, renews monthly, cancel anytime", gens: "100 AI generations a month" },
+  yearly:  { label: "Yearly",  name: "Premium yearly",  price: "14.99", note: "per year, renews yearly, cancel anytime",   gens: "100 AI generations a month" },
 };
 const PRICING_CYCLE_ORDER = ["weekly", "monthly", "yearly"];
 
@@ -536,7 +536,7 @@ export default function GizmoLanding() {
 
       {/* ── PRICING ────────────────────────────────────────────────────────
           Numbers here are the ones the live landing page carries, reconciled
-          against the product code: $4.99 a week, $7.99 a month, $23.99 a year,
+          against the product code: $4.99 a week, $6.99 a month, $14.99 a year,
           25 AI generations a week on weekly and 100 a month on the other two.
           Nothing on this page says unlimited, because only the lifetime plan is
           uncapped and it is not sold here. */}
