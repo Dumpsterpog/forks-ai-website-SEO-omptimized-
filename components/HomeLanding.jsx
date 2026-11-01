@@ -17,6 +17,8 @@ import { goToDashboard } from "@/lib/goToDashboard";
 import { trackSignupClick } from "@/lib/track";
 import StudyResourceLinks from "@/components/StudyResourceLinks";
 import FooterFreeTools from "@/components/FooterFreeTools";
+import HeroCanvas from "@/components/HeroCanvas";
+import Miso from "@/components/maintenance/Miso";
 import { Globe, MessageCircle, AtSign, ArrowRight, Check } from "lucide-react";
 
 // ── Colors ───────────────────────────────────────────────────────────────────
@@ -175,28 +177,18 @@ const INSTITUTIONS = [
 ];
 
 
-const HERO_POPPERS = [
-  { e: "🎉", tx: "-130px", ty: "-70px",  rot: "220deg",  delay: "0s"    },
-  { e: "🎊", tx: "130px",  ty: "-70px",  rot: "-220deg", delay: "0.04s" },
-  { e: "🎉", tx: "-70px",  ty: "-140px", rot: "130deg",  delay: "0.08s" },
-  { e: "⭐", tx: "70px",   ty: "-140px", rot: "-130deg", delay: "0.06s" },
-  { e: "💫", tx: "-155px", ty: "-20px",  rot: "170deg",  delay: "0.12s" },
-  { e: "🌟", tx: "155px",  ty: "-20px",  rot: "-170deg", delay: "0.1s"  },
-  { e: "🎈", tx: "-40px",  ty: "-165px", rot: "90deg",   delay: "0.16s" },
-  { e: "🎉", tx: "40px",   ty: "-165px", rot: "-90deg",  delay: "0.14s" },
-  { e: "🎈", tx: "5px",    ty: "-175px", rot: "20deg",   delay: "0.07s" },
-  { e: "🎊", tx: "-110px", ty: "-50px",  rot: "280deg",  delay: "0.09s" },
-  { e: "🎉", tx: "110px",  ty: "-50px",  rot: "-280deg", delay: "0.05s" },
-];
-
 // Every Premium cycle here is a recurring subscription, so each one states its
 // renewal next to its price rather than leaving it to the terms page. The
 // weekly plan is $4.99 a week with 25 AI generations a week, deliberately not a
 // better per-day rate than the 100 a month the other cycles give.
+//
+// Yearly is shown as what it costs a week ($14.99 / 52), with the amount that
+// is actually billed right under it, so the cheapest plan reads as cheap
+// without hiding the charge. Monthly carries its weekly cost as a side note.
 const PRICING_CYCLES = {
-  weekly:  { label: "Weekly",  name: "Premium weekly",  price: "4.99",  note: "per week, renews weekly, cancel anytime",   gens: "25 AI generations a week" },
-  monthly: { label: "Monthly", name: "Premium",         price: "6.99",  note: "per month, renews monthly, cancel anytime", gens: "100 AI generations a month" },
-  yearly:  { label: "Yearly",  name: "Premium yearly",  price: "14.99", note: "per year, renews yearly, cancel anytime",   gens: "100 AI generations a month" },
+  weekly:  { label: "Weekly",  name: "Premium weekly",  price: "4.99",  per: "/week",  note: "billed weekly, cancel anytime",                         gens: "25 AI generations a week" },
+  monthly: { label: "Monthly", name: "Premium",         price: "6.99",  per: "/month", note: "about $1.61 a week, renews monthly, cancel anytime",   gens: "100 AI generations a month" },
+  yearly:  { label: "Yearly",  name: "Premium yearly",  price: "0.29",  per: "/week",  note: "billed $14.99 once a year, renews yearly, cancel anytime", gens: "100 AI generations a month", tag: "82%" },
 };
 const PRICING_CYCLE_ORDER = ["weekly", "monthly", "yearly"];
 
@@ -205,9 +197,9 @@ export default function GizmoLanding() {
   const router = useRouter();
   const navigate = (path) => router.push(path);
   const [showEarnPrompt, setShowEarnPrompt] = useState(false);
-  const [cycle, setCycle] = useState("monthly");
-  const [popperKey, setPopperKey] = useState(0);
-  const [showPoppers, setShowPoppers] = useState(false);
+  const [cycle, setCycle] = useState("yearly");
+  // Miso beside the logo: idle, cheering while the logo is hovered.
+  const [logoMood, setLogoMood] = useState("idle");
   // Load fonts
   useEffect(() => {
     const link = document.createElement("link");
@@ -287,7 +279,10 @@ export default function GizmoLanding() {
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, padding: "0 24px", transition: "padding 0.3s" }}>
         <nav ref={navRef} style={{ backdropFilter: "blur(14px)", background: "transparent", borderRadius: 0, transition: "all 0.35s cubic-bezier(0.4,0,0.2,1)" }}>
         <div style={{ padding: "0 24px", display: "flex", justifyContent: "space-between", alignItems: "center", height: 64 }}>
-          <Link href="/" style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.h3, fontWeight: 800, color: PRIMARY, textDecoration: "none", letterSpacing: -0.5 }}>FORKSAI</Link>
+          <Link href="/" onMouseEnter={() => setLogoMood("cheer")} onMouseLeave={() => setLogoMood("idle")} onFocus={() => setLogoMood("cheer")} onBlur={() => setLogoMood("idle")} style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: FONT_DISPLAY, fontSize: TYPE.h3, fontWeight: 800, color: PRIMARY, textDecoration: "none", letterSpacing: -0.5 }}>
+            <Miso mood={logoMood} size={38} title="" className="logo-miso" style={{ marginTop: -6 }} />
+            FORKSAI
+          </Link>
           <div className="hidden md:flex items-center gap-8">
             {/* In-page section links. These replace the Explore dropdown,
                 whose destinations were all elsewhere on the site and now live in
@@ -316,7 +311,7 @@ export default function GizmoLanding() {
                 the same goToDashboard() handoff, so nothing is lost. */}
             <a href="#pricing" className="md:hidden" style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 700, color: ON_SURFACE_VAR, textDecoration: "none", padding: "8px 4px" }}>Pricing</a>
             <button onClick={() => goLogin("nav")} className="hidden md:block" style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 600, color: PRIMARY, background: "none", border: "none", cursor: "pointer", padding: "8px 16px", borderRadius: R.control, transition: "background 0.2s" }} onMouseEnter={e => e.currentTarget.style.background = "rgba(231,224,233,0.5)"} onMouseLeave={e => e.currentTarget.style.background = "none"}>Login</button>
-            <button onClick={() => goSignup("nav")} style={{ fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: TYPE.body, background: ELECTRIC_LIME, color: PRIMARY, border: "none", padding: "8px 20px", borderRadius: R.control, cursor: "pointer", boxShadow: `4px 4px 0px 0px ${PRIMARY}`, transition: "transform 0.1s" }} onMouseDown={e => e.currentTarget.style.transform = "scale(0.97)"} onMouseUp={e => e.currentTarget.style.transform = "scale(1)"}>Get Started</button>
+            <button onClick={() => goSignup("nav")} style={{ whiteSpace: "nowrap", fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: TYPE.body, background: ELECTRIC_LIME, color: PRIMARY, border: "none", padding: "8px 20px", borderRadius: R.control, cursor: "pointer", boxShadow: `4px 4px 0px 0px ${PRIMARY}`, transition: "transform 0.1s" }} onMouseDown={e => e.currentTarget.style.transform = "scale(0.97)"} onMouseUp={e => e.currentTarget.style.transform = "scale(1)"}>Get Started</button>
           </div>
         </div>
       </nav>
@@ -326,10 +321,10 @@ export default function GizmoLanding() {
       {/* ── HERO ───────────────────────────────────────────────────────────── */}
       <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "clamp(80px,10vw,130px)", paddingBottom: 0, overflow: "visible", position: "relative" }}>
 
-        {/* GIF base layer */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/herobg2.gif" alt="" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", minWidth: "100%", minHeight: "100%", width: "auto", height: "auto", opacity: 0.85 }} />
+        {/* Background: a grid of cells drawn in code (HeroCanvas), fading
+            into the page at the bottom. It replaced a 2.8 MB GIF. */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", maskImage: "linear-gradient(180deg, #000 78%, transparent)", WebkitMaskImage: "linear-gradient(180deg, #000 78%, transparent)" }}>
+          <HeroCanvas style={{ opacity: 0.9 }} />
         </div>
 
         {/* Text + CTA */}
@@ -350,13 +345,7 @@ export default function GizmoLanding() {
           <h1 className="hero-h1" style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(36px,8.5vw,108px)", fontWeight: 900, color: PRIMARY, marginBottom: 18, lineHeight: 1.05, letterSpacing: -3 }}>
             Study everything
             <br />
-            <span style={{ display: "inline" }}>
-              {"in one place.".split("").map((char, i) => (
-                <span key={i} style={{ display: "inline-block", animation: `waveBounce 2s ease-in-out ${i * 0.055}s infinite`, whiteSpace: "pre" }}>
-                  {char}
-                </span>
-              ))}
-            </span>
+            in one place.
           </h1>
 
           <p className="hero-sub" style={{ fontFamily: FONT_BODY, fontSize: "clamp(15px,1.7vw,20px)", color: "rgba(17,0,46,0.62)", lineHeight: 1.5, maxWidth: 660, margin: "0 0 36px" }}>
@@ -364,11 +353,6 @@ export default function GizmoLanding() {
           </p>
 
           <div style={{ position: "relative", display: "inline-block", marginBottom: 52 }}>
-            {showPoppers && HERO_POPPERS.map((p, i) => (
-              <span key={`${popperKey}-${i}`} style={{ position: "absolute", top: "50%", left: "50%", fontSize: TYPE.h3, pointerEvents: "none", zIndex: 20, "--tx": p.tx, "--ty": p.ty, "--rot": p.rot, animation: `popperFly 0.85s ease-out ${p.delay} forwards` }}>
-                {p.e}
-              </span>
-            ))}
             <button
               onClick={() => goSignup("hero")}
               className="hero-cta-btn"
@@ -380,7 +364,7 @@ export default function GizmoLanding() {
                 transition: "transform 0.15s, box-shadow 0.15s",
                 position: "relative", zIndex: 4,
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; setShowPoppers(true); setPopperKey(k => k + 1); }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; }}
               onMouseDown={e => { e.currentTarget.style.transform = "translateY(2px)"; e.currentTarget.style.boxShadow = `4px 4px 0px 0px ${PRIMARY}`; }}
               onMouseUp={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = `8px 8px 0px 0px ${PRIMARY}`; }}
@@ -447,16 +431,6 @@ export default function GizmoLanding() {
           .marquee-left, .marquee-right, .marquee-slow, .inst-marquee { animation: none; }
         }
         .marquee-left:hover, .marquee-right:hover, .marquee-slow:hover { animation-play-state: paused; }
-        @keyframes popperFly {
-          0%   { transform: translate(-50%,-50%) scale(0.2) rotate(0deg); opacity: 1; }
-          70%  { opacity: 1; }
-          100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.3) rotate(var(--rot)); opacity: 0; }
-        }
-        @keyframes waveBounce {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          30%       { transform: translateY(-14px) rotate(-3deg); }
-          60%       { transform: translateY(-6px) rotate(2deg); }
-        }
         @keyframes featFloat {
           0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
           50%       { transform: translateY(-10px) rotate(var(--rot, 0deg)); }
@@ -553,6 +527,11 @@ export default function GizmoLanding() {
                   role="radio" aria-checked={cycle === val}
                   style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 800, padding: "11px 22px", border: "none", cursor: "pointer", background: cycle === val ? ELECTRIC_LIME : "#fff", color: PRIMARY, borderRight: i < PRICING_CYCLE_ORDER.length - 1 ? `2.5px solid ${PRIMARY}` : "none" }}>
                   {PRICING_CYCLES[val].label}
+                  {PRICING_CYCLES[val].tag && (
+                    <span style={{ marginLeft: 8, padding: "2px 6px", borderRadius: 6, fontSize: TYPE.label, whiteSpace: "nowrap", background: cycle === val ? PRIMARY : ELECTRIC_LIME, color: cycle === val ? ELECTRIC_LIME : PRIMARY }}>
+                      <span className="price-tag-word">Save </span><span className="price-tag-minus">-</span>{PRICING_CYCLES[val].tag}
+                    </span>
+                  )}
                 </button>
               ))}
             </div>
@@ -601,6 +580,7 @@ export default function GizmoLanding() {
               <div style={{ display: "flex", alignItems: "flex-start", lineHeight: 1, marginBottom: 4 }}>
                 <span style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.h3, fontWeight: 900, color: "#fff", marginTop: 6 }}>$</span>
                 <span style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.hero, fontWeight: 900, color: "#fff" }}>{PRICING_CYCLES[cycle].price}</span>
+                <span style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.h3, fontWeight: 800, color: "rgba(255,255,255,0.6)", alignSelf: "flex-end", margin: "0 0 8px 6px" }}>{PRICING_CYCLES[cycle].per}</span>
               </div>
               <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color: "rgba(255,255,255,0.55)", margin: "0 0 20px" }}>
                 {PRICING_CYCLES[cycle].note}
@@ -725,6 +705,7 @@ export default function GizmoLanding() {
            with its heading underneath it. */
         section[id], #free-tools { scroll-margin-top: 84px; }
         @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+        .price-tag-minus { display: none; }
         @media (max-width: 768px) {
           .bento-grid > *[style*="span 2"] { grid-column: span 1 !important; }
           .bento-grid { grid-template-columns: 1fr !important; }
@@ -732,6 +713,9 @@ export default function GizmoLanding() {
           /* Hero */
           .hero-h1 { letter-spacing: -1px !important; margin-bottom: 24px !important; }
           .hero-cta-btn { padding: 16px 32px !important; box-shadow: 5px 5px 0 #11002e !important; }
+          .price-tag-word { display: none; }
+          .logo-miso { zoom: 0.74; }
+          .price-tag-minus { display: inline !important; }
           .hero-video-wrap { margin: 32px auto -80px !important; padding: 0 16px !important; }
 
           /* Testimonials */
