@@ -281,6 +281,63 @@ const sections = [
     ),
   },
   {
+    id: "ai-tutor",
+    title: "AI Tutor",
+    isNew: true,
+    content: (
+      <>
+        <p className="text-sm text-zinc-400 leading-relaxed">
+          The AI Tutor teaches from the PDFs you give it, out loud and on a whiteboard. Like every AI feature, it can get things wrong: check anything important against your course material.
+        </p>
+        <p className="text-sm text-zinc-400 leading-relaxed mt-3">
+          Only upload material you have the right to use. Free accounts get a short free taste of the AI Tutor and the sample lessons; full use is part of Scholar, with fair-use limits per hour.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "study-music",
+    title: "Study Music",
+    isNew: true,
+    content: (
+      <>
+        <p className="text-sm text-zinc-400 leading-relaxed">
+          Study music plays Spotify&apos;s own player inside FORKSAI. Spotify&apos;s terms apply to it, and FORKSAI is not responsible for its content or availability. Full songs need you to be logged in to Spotify in your browser; otherwise Spotify plays short previews.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "emails-reminders",
+    title: "Emails & Reminders",
+    isNew: true,
+    content: (
+      <>
+        <p className="text-sm text-zinc-400 leading-relaxed">
+          We may email you about your studying (for example cards due for review) and about your account and plan. Every study email has a one-click unsubscribe; notices about a plan you pay for are still sent. Daily push reminders are only sent if you turn them on, and can be turned off in Settings.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "account-deletion",
+    title: "Deleting Your Account",
+    isNew: true,
+    content: (
+      <>
+        <p className="text-sm text-zinc-400 leading-relaxed">
+          You can delete your account from Settings. The deletion happens seven days after you ask: until then, signing in shows a Reactivate button that keeps everything. After that your account and content are deleted for good and cannot be restored.
+        </p>
+        <p className="text-sm text-zinc-400 leading-relaxed mt-3">
+          A paid plan is set not to renew while the deletion waits, and is cancelled when the account is deleted. Paid time is not refunded and cannot be moved to another account. If you only want to stop paying, cancel the plan instead and keep your account.
+        </p>
+        <p className="text-sm text-zinc-400 leading-relaxed mt-3">
+          You can also sign out of every device at once from Settings.
+        </p>
+      </>
+    ),
+  },
+  {
     id: "changes",
     title: "Changes to These Terms",
     content: (
@@ -288,7 +345,7 @@ const sections = [
         <p className="text-sm text-zinc-400 leading-relaxed">
           We may update these Terms from time to time to reflect changes in the Service, new features, or legal requirements. Major updates will be communicated through in-app notifications, email, or website banners. Continued use of the Service after updates take effect constitutes your acceptance of the revised Terms.
         </p>
-        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: October 17, 2026 (v12.3)</p>
+        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: November 6, 2026 (v13.0)</p>
       </>
     ),
   },
@@ -538,7 +595,16 @@ export default function TermsContent() {
             <p className="text-zinc-500 text-sm max-w-xl leading-relaxed">
               These terms apply to all products and services under FORKSAI - including the study dashboard, AI tools, Premium subscriptions, and all related features.
             </p>
-            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: October 17, 2026 · v12.3</p>
+            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: November 6, 2026 · v13.0</p>
+            <div className="mt-6 max-w-2xl border border-[#b5ff4d]/25 rounded-xl px-5 py-4">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#b5ff4d] mb-3">What changed on November 6, 2026 <span className="ml-2 inline-block align-middle text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-[#b5ff4d]/40 text-[#b5ff4d]">New</span></p>
+              <ul className="space-y-2 text-sm text-zinc-400">
+                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>New: the AI Tutor, including that its answers can be wrong.</span></li>
+                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>New: Study music, which plays through Spotify under Spotify&apos;s terms.</span></li>
+                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>New: the emails and reminders we may send, and how to stop them.</span></li>
+                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>New: deleting your account waits seven days, and what happens to a paid plan.</span></li>
+              </ul>
+            </div>
           </motion.div>
 
           {/* Two-column layout */}
@@ -555,7 +621,7 @@ export default function TermsContent() {
                         href={`#${s.id}`}
                         className="text-xs text-zinc-600 hover:text-[#b5ff4d] transition-colors leading-relaxed block"
                       >
-                        {s.title}
+                        {s.title}{s.isNew && <span className="ml-2 inline-block align-middle text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-[#b5ff4d]/40 text-[#b5ff4d]">New</span>}
                       </a>
                     </li>
                   ))}
@@ -583,7 +649,7 @@ export default function TermsContent() {
                       style={{ fontFamily: "var(--font-dm-serif-display), serif" }}
                       className="text-xl font-normal text-white"
                     >
-                      {section.title}
+                      {section.title}{section.isNew && <span className="ml-2 inline-block align-middle text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-[#b5ff4d]/40 text-[#b5ff4d]">New</span>}
                     </h2>
                   </div>
                   <div className="ml-10">

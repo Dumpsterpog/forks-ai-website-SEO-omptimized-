@@ -282,6 +282,24 @@ const sections = [
     ),
   },
   {
+    id: "account-deletion",
+    title: "Deleting Your Account & Your Plan",
+    isNew: true,
+    content: (
+      <>
+        <p className="text-sm text-zinc-400 leading-relaxed">
+          Deleting your account cancels your plan when the deletion happens, seven days after you ask. While it waits, the plan is set not to renew; if you reactivate, it carries on as before.
+        </p>
+        <p className="text-sm text-zinc-400 leading-relaxed mt-3">
+          Paid time is not refunded when you delete your account, and it cannot be moved to another account. If you only want to stop paying, cancel your plan instead: you keep Scholar until the end of the time you paid for.
+        </p>
+        <p className="text-sm text-zinc-400 leading-relaxed mt-3">
+          Paid but Scholar is not showing? Please contact us before deleting anything. We will put it right, or refund you if we cannot.
+        </p>
+      </>
+    ),
+  },
+  {
     id: "changes",
     title: "Changes to This Policy",
     content: (
@@ -289,7 +307,7 @@ const sections = [
         <p className="text-sm text-zinc-400 leading-relaxed">
           We may update this Refund Policy from time to time to reflect pricing changes, billing model updates, or legal requirements. The most recent revision date will always appear below.
         </p>
-        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: August 23, 2026 (v1.3)</p>
+        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: November 6, 2026 (v1.4)</p>
       </>
     ),
   },
@@ -382,7 +400,14 @@ export default function RefundPolicyContent() {
             <p className="text-zinc-500 text-sm max-w-xl leading-relaxed">
               This page explains how refunds, cancellations, and billing disputes are handled for FORKSAI Premium subscriptions.
             </p>
-            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: August 23, 2026 · v1.3</p>
+            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: November 6, 2026 · v1.4</p>
+            <div className="mt-6 max-w-2xl border border-[#b5ff4d]/25 rounded-xl px-5 py-4">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#b5ff4d] mb-3">What changed on November 6, 2026 <span className="ml-2 inline-block align-middle text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-[#b5ff4d]/40 text-[#b5ff4d]">New</span></p>
+              <ul className="space-y-2 text-sm text-zinc-400">
+                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>New: what happens to a paid plan when you delete your account.</span></li>
+                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>New: paid but Scholar is not showing? Contact us first; we will fix it or refund you.</span></li>
+              </ul>
+            </div>
           </motion.div>
 
           {/* Two-column layout */}
@@ -403,7 +428,7 @@ export default function RefundPolicyContent() {
                             : "text-zinc-600 hover:text-[#b5ff4d]"
                         }`}
                       >
-                        {s.title}
+                        {s.title}{s.isNew && <span className="ml-2 inline-block align-middle text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-[#b5ff4d]/40 text-[#b5ff4d]">New</span>}
                       </a>
                     </li>
                   ))}
@@ -432,7 +457,7 @@ export default function RefundPolicyContent() {
                       className={`text-xl font-normal ${section.id === "lifetime" ? "" : "text-white"}`}
                       {...(section.id === "lifetime" ? { style: { color: "#a882ff", fontFamily: "var(--font-dm-serif-display), serif" } } : {})}
                     >
-                      {section.title}
+                      {section.title}{section.isNew && <span className="ml-2 inline-block align-middle text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-[#b5ff4d]/40 text-[#b5ff4d]">New</span>}
                     </h2>
                   </div>
                   <div className="ml-10">

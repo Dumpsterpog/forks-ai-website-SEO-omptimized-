@@ -38,6 +38,7 @@ const sections = [
   },
   {
     id: "personal-data",
+    isNew: true,
     title: "Personal Data We Collect",
     content: (
       <ul className="space-y-4 text-sm text-zinc-400">
@@ -54,6 +55,11 @@ const sections = [
           ["Achievement Data", "Records of achievements unlocked based on your activity - stored per account to persist across sessions."],
           ["Subscription & Billing Data", "Subscription status, plan type (free or premium), billing cycle (weekly, monthly, yearly or lifetime), transaction identifiers, and payment confirmation timestamps. Card details are never stored on our servers."],
           ["Content Data", "Text you provide and the text extracted in your browser from PDFs you select, which is sent to our AI tools (PDF Summarizer, PDF-to-Notes, AI Flashcard Generator), and the outputs generated from them. The original PDF file is not uploaded to our servers."],
+          ["AI Tutor", "PDFs you give the AI Tutor are uploaded to our storage, with pictures of their pages, so Miso can teach from them and show their figures. The lessons planned for them, the marks you draw on the board, the answers you give and your progress through each section are saved to your account."],
+          ["Onboarding Material", "If you add a syllabus or study material when you join, we keep the file and its text so your exam plan and first deck can be made from them."],
+          ["Devices & Sign-in Locations", "For each browser you use FORKSAI on: the kind of device, its operating system and browser, the approximate city and country of the connection (read from the connection by our hosting provider; the IP address itself is not kept for this), when it first signed in and when it was last active. You can see this list, and sign out of every device, in Settings."],
+          ["Emails & Reminders", "Which study and account emails we have sent you and when, and whether you have unsubscribed. If you turn on daily study reminders, your browser's push subscription and the time to remind you."],
+          ["How You Found Us", "The website or link that brought you to FORKSAI when you signed up, such as a search engine or a campaign link, saved once with your account."],
           ["Usage & Device Data", "Feature activity, session logs, IP address, operating system, browser type, and device identifiers."],
           ["Cookies & Analytics", "Used to maintain sessions, measure engagement, and improve platform performance."],
         ].map(([term, def]) => (
@@ -199,6 +205,7 @@ const sections = [
   },
   {
     id: "retention",
+    isNew: true,
     title: "Retention & Deletion",
     content: (
       <>
@@ -207,7 +214,8 @@ const sections = [
         </p>
         <ul className="mt-4 space-y-3 text-sm text-zinc-400">
           {[
-            ["Account data", "Retained until the user deletes their account, with limited backup retention."],
+            ["Account data", "Retained until you delete your account, with limited backup retention. Deleting from Settings schedules the deletion seven days ahead: signing in during those days lets you reactivate the account. After that your account, your content and your sign-in are deleted, and any paid plan is cancelled."],
+            ["Devices list", "Each device is shown for 90 days after it was last active. Signing out of all devices clears the list."],
             ["Flashcard decks & summaries", "Stored until manually deleted by the user or removed as part of account deletion."],
             ["Study session records", "Retained to power your dashboard statistics. Deleted upon account deletion request."],
             ["Streak & achievement data", "Retained per account to persist across sessions. Deleted upon account deletion."],
@@ -397,6 +405,7 @@ const sections = [
   },
   {
     id: "third-parties",
+    isNew: true,
     title: "Third-Party Services",
     content: (
       <>
@@ -406,6 +415,11 @@ const sections = [
         <ul className="space-y-3 text-sm text-zinc-400">
           {[
             ["Firebase (Google)", "Authentication, real-time database, and secure storage for user accounts, flashcard decks, study sessions, and achievements."],
+            ["Google Gemini & Vertex AI", "Make flashcards, notes, AI Tutor lessons and the other AI features from the material you send. Input is processed to answer your request and is not used to train public models."],
+            ["ElevenLabs", "Turns the AI Tutor's lines into speech. Only the words Miso says are sent."],
+            ["Resend", "Sends our emails, such as study reminders, welcome emails and plan notices. It receives your email address, your first name and the email itself."],
+            ["Cloudflare", "Hosts and delivers FORKSAI, and gives us the approximate city and country of a connection."],
+            ["Spotify (Study music)", "If you use Study music, Spotify's own player is loaded from Spotify, which applies its own privacy policy and cookies. We send Spotify nothing about you and do not see what you play beyond the playlist or link you pick."],
             ["AI & processing APIs", "Large language model providers used for flashcard generation, PDF summarization, and quiz creation. Input is processed transiently and not used to train public models."],
             ["Dodo Payments", "Secure payment processing for Premium subscriptions."],
             ["Vercel Speed Insights", "Performance monitoring to measure page load times and platform reliability."],
@@ -500,7 +514,7 @@ const sections = [
         <p className="text-sm text-zinc-400 leading-relaxed">
           We may update this Privacy Policy from time to time to reflect product changes, new features, or legal requirements. Major updates will be communicated through in-app notifications, email, or website banners. The most recent revision date will always appear at the top of this page.
         </p>
-        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: October 17, 2026 (v12.3)</p>
+        <p className="mt-3 text-xs text-zinc-600 italic">Last updated: November 6, 2026 (v13.0)</p>
       </>
     ),
   },
@@ -595,7 +609,17 @@ export default function PrivacyPolicyContent() {
             <p className="text-zinc-500 text-sm max-w-xl leading-relaxed">
               This policy explains how FORKSAI collects, uses, and protects your information across the platform - including the study dashboard, AI tools, and payment features.
             </p>
-            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: October 17, 2026 · v12.3</p>
+            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: November 6, 2026 · v13.0</p>
+            <div className="mt-6 max-w-2xl border border-[#b5ff4d]/25 rounded-xl px-5 py-4">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#b5ff4d] mb-3">What changed on November 6, 2026 <span className="ml-2 inline-block align-middle text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-[#b5ff4d]/40 text-[#b5ff4d]">New</span></p>
+              <ul className="space-y-2 text-sm text-zinc-400">
+                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>What we keep for the AI Tutor: your uploaded PDFs and their page pictures, the lessons, your board marks and your progress.</span></li>
+                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>The devices you are signed in on, with their approximate city and country, now listed in Settings.</span></li>
+                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>Study emails and daily reminders, and your choice to unsubscribe.</span></li>
+                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>Deleting your account now waits seven days, so you can change your mind.</span></li>
+                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>New services we use: Google Gemini and Vertex AI, ElevenLabs, Resend, Cloudflare, and Spotify for Study music.</span></li>
+              </ul>
+            </div>
           </motion.div>
 
           {/* Two-column layout */}
@@ -612,7 +636,7 @@ export default function PrivacyPolicyContent() {
                         href={`#${s.id}`}
                         className="text-xs text-zinc-600 hover:text-[#b5ff4d] transition-colors leading-relaxed block"
                       >
-                        {s.title}
+                        {s.title}{s.isNew && <span className="ml-2 inline-block align-middle text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-[#b5ff4d]/40 text-[#b5ff4d]">New</span>}
                       </a>
                     </li>
                   ))}
@@ -640,7 +664,7 @@ export default function PrivacyPolicyContent() {
                       style={{ fontFamily: "var(--font-dm-serif-display), serif" }}
                       className="text-xl font-normal text-white"
                     >
-                      {section.title}
+                      {section.title}{section.isNew && <span className="ml-2 inline-block align-middle text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-[#b5ff4d]/40 text-[#b5ff4d]">New</span>}
                     </h2>
                   </div>
                   <div className="ml-10 text-zinc-400 leading-relaxed">
