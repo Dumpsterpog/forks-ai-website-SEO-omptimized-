@@ -18,6 +18,7 @@ import { trackSignupClick } from "@/lib/track";
 import StudyResourceLinks from "@/components/StudyResourceLinks";
 import FooterFreeTools from "@/components/FooterFreeTools";
 import HeroCanvas from "@/components/HeroCanvas";
+import ReviewWall from "@/components/ReviewWall";
 import Miso from "@/components/maintenance/Miso";
 import { Globe, MessageCircle, AtSign, ArrowRight, Check } from "lucide-react";
 
@@ -133,8 +134,8 @@ const TESTIMONIALS_INTL = [
 // students told us where they study rather than implying any endorsement.
 // Shown as floors with a plus: the panel read 1,577 institutions and 92
 // countries in Oct 2026.
-const INSTITUTION_FLOOR = 1500;
-const COUNTRY_COUNT = 90;
+const INSTITUTION_FLOOR = 1700;
+const COUNTRY_COUNT = 98;
 const INSTITUTIONS_LABEL = `${INSTITUTION_FLOOR.toLocaleString("en-US")}+`;
 const COUNTRIES_LABEL = `${COUNTRY_COUNT}+`;
 
@@ -441,71 +442,12 @@ export default function GizmoLanding() {
         @media (max-width: 1100px) { .hero-float-left, .hero-float-right { display: none !important; } }
       `}</style>
       <section id="reviews" className="section-testimonials" style={{ background: "#fafff4", padding: "240px 0 96px", position: "relative", overflow: "hidden" }}>
-        <div style={{ textAlign: "center", marginBottom: 64 }}>
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
           <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, fontWeight: 800, color: PRIMARY, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 14 }}>Reviews</p>
           <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(28px,4vw,48px)", fontWeight: 900, color: PRIMARY, margin: 0 }}>Loved by Students</h2>
         </div>
 
-        {/* Row 1: scrolls left */}
-        <div style={{ overflow: "hidden", padding: "10px 0" }}>
-          <div className="marquee-left">
-            {[...TESTIMONIALS, ...TESTIMONIALS].map(({ initials, handle, name, bg, color, border, likes, time, text }, i) => (
-              <div key={i} style={{ flexShrink: 0, width: 320, minHeight: 168, marginRight: 20, background: "#fff", border: `1.5px solid ${border}`, borderRadius: R.card, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: PRIMARY, color: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: TYPE.body, flexShrink: 0 }}>{initials}</div>
-                  <div>
-                    <p style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.body, fontWeight: 800, color: PRIMARY, margin: 0 }}>{name}</p>
-                    <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.label, color: ON_SURFACE_VAR, margin: 0, opacity: 0.8 }}>{handle}</p>
-                  </div>
-                </div>
-                <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color: PRIMARY, lineHeight: 1.65, margin: 0 }}>{text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Row 2: scrolls right */}
-        <div style={{ overflow: "hidden", padding: "10px 0" }}>
-          <div className="marquee-right">
-            {[...TESTIMONIALS.slice().reverse(), ...TESTIMONIALS.slice().reverse()].map(({ initials, handle, name, bg, color, border, likes, time, text }, i) => (
-              <div key={i} style={{ flexShrink: 0, width: 320, minHeight: 168, marginRight: 20, background: bg, borderRadius: R.card, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: PRIMARY, color: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: TYPE.body, flexShrink: 0 }}>{initials}</div>
-                  <div>
-                    <p style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.body, fontWeight: 700, color, margin: 0 }}>{name}</p>
-                    <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.label, color, opacity: 0.7, margin: 0 }}>{handle}</p>
-                  </div>
-                </div>
-                <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color, lineHeight: 1.65, margin: 0 }}>{text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Row 3: the international reviews, scrolling left and slower so the
-            three rows never fall into step with each other. */}
-        <div style={{ overflow: "hidden", padding: "10px 0" }}>
-          <div className="marquee-slow">
-            {[...TESTIMONIALS_INTL, ...TESTIMONIALS_INTL].map(({ initials, handle, name, country, text }, i) => (
-              <div key={i} style={{ flexShrink: 0, width: 320, minHeight: 168, marginRight: 20, background: "#fff", border: `1.5px solid ${ELECTRIC_LIME}`, borderRadius: R.card, padding: "24px 28px", boxShadow: "0 2px 16px rgba(17,0,46,0.07)" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: PRIMARY, color: ELECTRIC_LIME, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: TYPE.body, flexShrink: 0 }}>{initials}</div>
-                  <div style={{ minWidth: 0 }}>
-                    <p style={{ fontFamily: FONT_DISPLAY, fontSize: TYPE.body, fontWeight: 800, color: PRIMARY, margin: 0 }}>{name}</p>
-                    <p style={{ fontFamily: FONT_MONO, fontSize: TYPE.small, color: ON_SURFACE_VAR, margin: 0, opacity: 0.9 }}>
-                      {handle}{country ? ` · ${country}` : ""}
-                    </p>
-                  </div>
-                </div>
-                <p style={{ fontFamily: FONT_BODY, fontSize: TYPE.body, color: PRIMARY, lineHeight: 1.65, margin: 0 }}>{text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Fade edges */}
-        <div style={{ position: "absolute", top: 0, left: 0, width: 120, height: "100%", background: "linear-gradient(to right, #fafff4, transparent)", pointerEvents: "none", zIndex: 2 }} />
-        <div style={{ position: "absolute", top: 0, right: 0, width: 120, height: "100%", background: "linear-gradient(to left, #fafff4, transparent)", pointerEvents: "none", zIndex: 2 }} />
+        <ReviewWall reviews={TESTIMONIALS} moreReviews={TESTIMONIALS_INTL} />
       </section>
 
       {/* ── PRICING ────────────────────────────────────────────────────────

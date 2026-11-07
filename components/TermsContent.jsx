@@ -1,9 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Menu, X, Scale } from "lucide-react";
-import { dmSerifDisplay, dmSans } from "@/lib/fonts";
+import LegalShell from "@/components/legal/LegalShell";
 
 /* ── Section data ── */
 const sections = [
@@ -525,154 +522,22 @@ const sections = [
   },
 ];
 
-/* ── Component ── */
+// Drawn by LegalShell, shared with the other two legal pages.
 export default function TermsContent() {
-  const [navOpen, setNavOpen] = useState(false);
-
   return (
-    <div
-      className={`${dmSans.variable} ${dmSerifDisplay.variable} min-h-screen bg-[#080808] text-zinc-100`}
-      style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
-    >
-      {/* grain */}
-      <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.025]"
-        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "160px" }} />
-
-      {/* ── HEADER ── */}
-      <header className="fixed top-0 inset-x-0 z-40 bg-[#080808]/90 backdrop-blur-md border-b border-white/6">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2.5">
-            <img src="/forks-logo.png" alt="FORKSAI" className="h-6 w-auto" />
-            <div>
-              <p className="text-xs font-bold tracking-[0.2em] uppercase leading-none">FORKSAI</p>
-              <p className="text-[9px] uppercase tracking-widest text-zinc-600 mt-0.5">Terms & Conditions</p>
-            </div>
-          </a>
-
-          <nav className="hidden md:flex items-center gap-6 text-xs">
-            <a href="/" className="text-zinc-500 hover:text-white transition-colors">← Back home</a>
-            <a href="/docs" className="text-zinc-500 hover:text-white transition-colors">Docs</a>
-            <a href="/privacy-policy" className="text-zinc-500 hover:text-white transition-colors">Privacy</a>
-            <span className="text-[#b5ff4d] font-medium">Terms</span>
-          </nav>
-
-          <button onClick={() => setNavOpen(v => !v)} className="md:hidden p-1.5 border border-white/8 rounded-lg text-zinc-400">
-            {navOpen ? <X size={16} /> : <Menu size={16} />}
-          </button>
-        </div>
-
-        {navOpen && (
-          <div className="md:hidden border-t border-white/6 bg-[#080808]">
-            <div className="px-6 py-4 flex flex-col gap-3 text-sm">
-              <a href="/" onClick={() => setNavOpen(false)} className="text-zinc-400 hover:text-white transition-colors">← Back home</a>
-              <a href="/docs" onClick={() => setNavOpen(false)} className="text-zinc-400 hover:text-white transition-colors">Docs</a>
-              <a href="/privacy-policy" onClick={() => setNavOpen(false)} className="text-zinc-400 hover:text-white transition-colors">Privacy Policy</a>
-              <span className="text-[#b5ff4d] font-medium">Terms & Conditions</span>
-            </div>
-          </div>
-        )}
-      </header>
-
-      {/* ── MAIN ── */}
-      <main className="relative z-10 pt-24">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 py-12">
-
-          {/* Page header */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-            className="mb-14"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/8 rounded-full mb-6">
-              <Scale size={12} className="text-[#b5ff4d]" />
-              <span className="text-[10px] uppercase tracking-widest text-zinc-500">Legal Agreement</span>
-            </div>
-            <h1
-              style={{ fontFamily: "var(--font-dm-serif-display), serif" }}
-              className="text-[2.2rem] md:text-[2.8rem] font-normal leading-tight mb-3"
-            >
-              Terms & Conditions
-            </h1>
-            <p className="text-zinc-500 text-sm max-w-xl leading-relaxed">
-              These terms apply to all products and services under FORKSAI - including the study dashboard, AI tools, Premium subscriptions, and all related features.
-            </p>
-            <p className="text-xs text-zinc-700 mt-3 uppercase tracking-widest">Last updated: November 6, 2026 · v13.0</p>
-            <div className="mt-6 max-w-2xl border border-[#b5ff4d]/25 rounded-xl px-5 py-4">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#b5ff4d] mb-3">What changed on November 6, 2026 <span className="ml-2 inline-block align-middle text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-[#b5ff4d]/40 text-[#b5ff4d]">New</span></p>
-              <ul className="space-y-2 text-sm text-zinc-400">
-                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>New: the AI Tutor, including that its answers can be wrong.</span></li>
-                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>New: Study music, which plays through Spotify under Spotify&apos;s terms.</span></li>
-                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>New: the emails and reminders we may send, and how to stop them.</span></li>
-                <li className="flex gap-3"><span className="text-[#b5ff4d] shrink-0">-</span><span>New: deleting your account waits seven days, and what happens to a paid plan.</span></li>
-              </ul>
-            </div>
-          </motion.div>
-
-          {/* Two-column layout */}
-          <div className="grid md:grid-cols-[200px_1fr] gap-12">
-
-            {/* Sticky TOC */}
-            <aside className="hidden md:block">
-              <div className="sticky top-28">
-                <p className="text-[9px] uppercase tracking-[0.25em] text-zinc-700 mb-4">On this page</p>
-                <ul className="space-y-2">
-                  {sections.map(s => (
-                    <li key={s.id}>
-                      <a
-                        href={`#${s.id}`}
-                        className="text-xs text-zinc-600 hover:text-[#b5ff4d] transition-colors leading-relaxed block"
-                      >
-                        {s.title}{s.isNew && <span className="ml-2 inline-block align-middle text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-[#b5ff4d]/40 text-[#b5ff4d]">New</span>}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </aside>
-
-            {/* Content */}
-            <div className="divide-y divide-white/5">
-              {sections.map((section, i) => (
-                <motion.section
-                  key={section.id}
-                  id={section.id}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4 }}
-                  className="scroll-mt-28 py-10 first:pt-0"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <span className="text-[10px] font-mono text-zinc-700 pt-1 w-6 shrink-0">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h2
-                      style={{ fontFamily: "var(--font-dm-serif-display), serif" }}
-                      className="text-xl font-normal text-white"
-                    >
-                      {section.title}{section.isNew && <span className="ml-2 inline-block align-middle text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border border-[#b5ff4d]/40 text-[#b5ff4d]">New</span>}
-                    </h2>
-                  </div>
-                  <div className="ml-10">
-                    {section.content}
-                  </div>
-                </motion.section>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Footer strip */}
-        <div className="border-t border-white/5 px-6 md:px-12 py-8 mt-8">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-zinc-700">
-            <span>© {new Date().getFullYear()} FORKSAI. All rights reserved.</span>
-            <div className="flex items-center gap-5">
-              <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="mailto:team.forksai@gmail.com" className="hover:text-white transition-colors">Contact</a>
-              <a href="/refund-policy" className="hover:text-white transition-colors">Refund Policy</a>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
+    <LegalShell
+      page="terms"
+      title="Terms & Conditions"
+      intro="These terms apply to all products and services under FORKSAI - including the study dashboard, AI tools, Premium subscriptions, and all related features."
+      version="13.0"
+      updated="November 6, 2026"
+      changes={[
+        "New: the AI Tutor, including that its answers can be wrong.",
+        "New: Study music, which plays through Spotify under Spotify's terms.",
+        "New: the emails and reminders we may send, and how to stop them.",
+        "New: deleting your account waits seven days, and what happens to a paid plan.",
+      ]}
+      sections={sections}
+    />
   );
 }
