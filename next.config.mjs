@@ -51,7 +51,10 @@ const nextConfig = {
   // domain. The query (payment=success, billing=updated) carries over.
   { "source": "/dashboard", "has": [{ "type": "query", "key": "payment" }], "destination": "https://dashboard.forksai.app/", "permanent": false },
   { "source": "/settings", "destination": "https://dashboard.forksai.app/settings", "permanent": false },
-  { "source": "/paid-for-you", "destination": "https://dashboard.forksai.app/paid-for-you", "permanent": false }
+  { "source": "/paid-for-you", "destination": "https://dashboard.forksai.app/paid-for-you", "permanent": false },
+  // Sign-up is the Google sign-in on /login; /signup answered a server error.
+  { "source": "/signup", "destination": "/login", "permanent": true },
+  { "source": "/register", "destination": "/login", "permanent": true }
 ];
   },
   async rewrites() {
