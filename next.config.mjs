@@ -40,7 +40,12 @@ const nextConfig = {
     "source": "/blog/ai-summarizer-for-students",
     "destination": "/ai-summarizer",
     "permanent": true
-  }
+  },
+  // Short policy addresses, as older emails and people type them. /privacy
+  // fell through to the app fallback and answered a server error.
+  { "source": "/privacy", "destination": "/privacy-policy", "permanent": true },
+  { "source": "/refund", "destination": "/refund-policy", "permanent": true },
+  { "source": "/terms-of-service", "destination": "/terms", "permanent": true }
 ];
   },
   async rewrites() {
