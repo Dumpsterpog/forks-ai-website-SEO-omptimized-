@@ -3,9 +3,9 @@ import { jsonLdHtml } from "@/lib/studentTools";
 import { comparisonJsonLd, TOOL_OG_IMAGE } from "@/lib/comparePages";
 import { REMNOTE_ALTERNATIVE_FAQS } from "@/lib/compareFaqs";
 
-const TITLE = "RemNote Alternative for Students | FORKSAI";
+const TITLE = "RemNote Alternative (2026): Cards From Your PDFs | FORKSAI";
 const DESC =
-  "Looking for a RemNote alternative? FORKSAI builds the flashcard deck from your PDF, notes or lecture instead of asking you to write cards inline. FSRS-5 review, 12 study modes, free plan.";
+  "Want a RemNote alternative that writes the cards for you? Upload a PDF, slides or notes and FORKSAI makes the deck, then schedules reviews with FSRS. Free plan, and where RemNote still wins.";
 
 export const metadata = {
   // Absolute rather than the root layout's title template, which spells the
@@ -30,7 +30,7 @@ const schemas = comparisonJsonLd({
   path: "/remnote-alternative",
   name: "RemNote alternative: FORKSAI",
   description:
-    "An honest look at replacing RemNote with FORKSAI, a study-first tool that generates flashcard decks and notes from PDFs, pasted text, YouTube lectures and images, reviews them with FSRS-5 spaced repetition, and imports existing Quizlet, Anki and CSV decks.",
+    "An honest look at replacing RemNote with FORKSAI, a study-first tool that generates flashcard decks and notes from PDFs, slides, documents, pasted text and photos of pages, reviews them with FSRS spaced repetition, and imports existing Quizlet, Anki and CSV decks.",
   faqs: REMNOTE_ALTERNATIVE_FAQS,
 });
 

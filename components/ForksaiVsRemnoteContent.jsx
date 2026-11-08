@@ -16,7 +16,7 @@ const JOBS = [
   {
     job: "Where a card comes from",
     forksai:
-      "From material you upload or paste: a PDF, a slide export, typed notes, a YouTube URL or a photo run through OCR. The AI reads it and writes the question and answer pairs.",
+      "From material you upload or paste: a PDF, a slide deck, typed notes or a photo run through OCR. The AI reads it and writes the question and answer pairs.",
   },
   {
     job: "What you have to learn first",
@@ -26,7 +26,7 @@ const JOBS = [
   {
     job: "How review is scheduled",
     forksai:
-      "FSRS-5, with confidence rated 1 to 4 on the number keys. Cards you rate low come back sooner, and each session ends with time, retention and weak spot analytics.",
+      "FSRS, with confidence rated 1 to 4 on the number keys. Cards you rate low come back sooner, and each session ends with time, retention and weak spot analytics.",
   },
   {
     job: "What else you can do with a deck",
@@ -69,7 +69,7 @@ export default function ForksaiVsRemnoteContent() {
         </p>
         <p>
           FORKSAI inverts that. The material is the input, not the output. You
-          upload a lecture PDF, paste a wall of text, drop in a YouTube link or
+          upload a lecture PDF or slides, paste a wall of text or
           photograph a page, and the deck is generated from it. The writing you
           did or did not do is irrelevant to whether the deck exists.
         </p>
@@ -177,7 +177,7 @@ export default function ForksaiVsRemnoteContent() {
           If you want to sanity check the scheduling before committing to
           anything, read{" "}
           <Link href="/blog/fsrs-vs-sm2" className="font-bold text-[#111] underline underline-offset-2">
-            FSRS-5 vs SM-2
+            FSRS vs SM-2
           </Link>{" "}
           and{" "}
           <Link href="/blog/spaced-repetition" className="font-bold text-[#111] underline underline-offset-2">

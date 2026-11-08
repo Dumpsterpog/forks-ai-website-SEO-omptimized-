@@ -19,9 +19,9 @@ const JOBS = [
       "Upload the file and pick a difficulty, the question types and roughly how many cards you want. The cards land one at a time as they generate, so you can see the shape of the deck before it finishes.",
   },
   {
-    job: "Turn a recorded lecture into cards",
+    job: "Turn lecture slides into cards",
     forksai:
-      "Paste the YouTube URL. FORKSAI pulls the transcript and builds the deck from it, the same way it would from a document.",
+      "Upload the PowerPoint, the slide PDF or a Word document. It is read in your browser and goes through the same generation step as any other file.",
   },
   {
     job: "Turn a photographed page into cards",
@@ -36,7 +36,7 @@ const JOBS = [
   {
     job: "Review on a proper schedule",
     forksai:
-      "FSRS-5 spaced repetition, rated 1 to 4 per card with the keyboard. Session analytics at the end cover time, retention and your weakest cards.",
+      "FSRS spaced repetition, rated 1 to 4 per card with the keyboard. Session analytics at the end cover time, retention and your weakest cards.",
   },
   {
     job: "Drill only the cards you keep failing",

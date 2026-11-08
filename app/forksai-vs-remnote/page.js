@@ -30,7 +30,7 @@ const schemas = comparisonJsonLd({
   path: "/forksai-vs-remnote",
   name: "FORKSAI vs RemNote",
   description:
-    "A comparison of FORKSAI and RemNote for students, framed by where your study material comes from. Covers deck generation from PDFs and lectures, FSRS-5 spaced repetition, twelve study modes, medical study features, and the cases where a notes-first tool is the better choice.",
+    "A comparison of FORKSAI and RemNote for students, framed by where your study material comes from. Covers deck generation from PDFs and slides, FSRS spaced repetition, twelve study modes, medical study features, and the cases where a notes-first tool is the better choice.",
   faqs: FORKSAI_VS_REMNOTE_FAQS,
 });
 
