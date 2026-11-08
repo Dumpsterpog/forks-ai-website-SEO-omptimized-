@@ -45,7 +45,13 @@ const nextConfig = {
   // fell through to the app fallback and answered a server error.
   { "source": "/privacy", "destination": "/privacy-policy", "permanent": true },
   { "source": "/refund", "destination": "/refund-policy", "permanent": true },
-  { "source": "/terms-of-service", "destination": "/terms", "permanent": true }
+  { "source": "/terms-of-service", "destination": "/terms", "permanent": true },
+  // Payment returns. Dodo sent students back here, where the app fallback
+  // answered a server error after they paid; the app is on the dashboard
+  // domain. The query (payment=success, billing=updated) carries over.
+  { "source": "/dashboard", "has": [{ "type": "query", "key": "payment" }], "destination": "https://dashboard.forksai.app/", "permanent": false },
+  { "source": "/settings", "destination": "https://dashboard.forksai.app/settings", "permanent": false },
+  { "source": "/paid-for-you", "destination": "https://dashboard.forksai.app/paid-for-you", "permanent": false }
 ];
   },
   async rewrites() {
