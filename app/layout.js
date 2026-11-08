@@ -30,7 +30,7 @@ export const metadata = {
   metadataBase: new URL("https://forksai.app"),
   title: {
     default: "AI Flashcards & AI Study Tools for Students | ForksAI",
-    template: "%s | ForksAI",
+    template: "%s | FORKSAI",
   },
   description:
     "ForksAI helps students generate AI flashcards, summaries, and study notes instantly. Turn notes, PDFs, or text into flashcards and study faster.",
