@@ -18,6 +18,7 @@ import { trackSignupClick } from "@/lib/track";
 import StudyResourceLinks from "@/components/StudyResourceLinks";
 import FooterFreeTools from "@/components/FooterFreeTools";
 import HeroCanvas from "@/components/HeroCanvas";
+import AndroidBetaHero from "@/components/AndroidBetaHero";
 import Miso from "@/components/maintenance/Miso";
 import { Globe, MessageCircle, AtSign, ArrowRight, Check } from "lucide-react";
 
@@ -379,6 +380,10 @@ export default function GizmoLanding() {
             <strong style={{ fontWeight: 800 }}>{COUNTRIES_LABEL} countries</strong>{" "}
             study with FORKSAI
           </p>
+
+          {/* The Android app, out in beta on Google Play: a QR code on a
+              computer, a button on a phone, iOS on its way. */}
+          <AndroidBetaHero />
         </div>
 
         {/* Where students study.

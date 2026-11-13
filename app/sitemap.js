@@ -27,6 +27,7 @@ const FEATURE_PAGES = [
   "/learn",
   "/notes",
   "/clipstudio",
+  "/android",
 ];
 
 const BLOG_POSTS = [
